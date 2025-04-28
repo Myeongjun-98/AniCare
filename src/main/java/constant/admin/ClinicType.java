@@ -1,5 +1,5 @@
-package constant.medical;
+package constant.admin;
 
-public enum PetSpecies {
+public enum ClinicType {
     DOG, CAT, PARROT, FERRET, HAMSTER, SQUIRREL, RABBIT, HEDGEHOG, MOUSE, TURTLE, FOX, MONKEY, PIG, DUCK, CHICKEN, COW, GUINEAPIG, CAMELEON, SNAKE, LIZARD, HORSE, MERCAT, SNAIL, FISH
 }
