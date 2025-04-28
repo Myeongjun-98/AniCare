@@ -12,7 +12,7 @@ public class ErrandBoard { //심부름 구인글 게시판을 분류 및 저장�
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="errand_id")
-    private Long errandId; //심부름 구인글 게시판 id
+    private Long Id; //심부름 구인글 게시판 id
 
     @ManyToOne
     @JoinColumn(name="board_id")

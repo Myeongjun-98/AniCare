@@ -11,7 +11,7 @@ public class MeetingBoard {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="meeting_id")
-    private Long meetingId; //모임 모집글 id
+    private Long Id; //모임 모집글 id
 
     @ManyToOne
     @JoinColumn(name="board_id")
