@@ -26,7 +26,8 @@ public class VetInfo {
     private String vetPassword;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private Long hospitalId;
+    @JoinColumn(name = "hospital_id")
+    private Hospital hospital;
 
     private ArrayList<PetSpecies> curingCapable;
 

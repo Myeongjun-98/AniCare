@@ -1,5 +1,6 @@
 package com.entity.medical;
 
+import com.entity.MainPage.Pet;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,7 +16,7 @@ public class Disease {
     private String diseaseName;
 
     @ManyToOne
-    @JoinColumn(nullable = false)
-    private Long petId;
+    @JoinColumn(name = "pet_id", nullable = false)
+    private Pet pet;
 
 }

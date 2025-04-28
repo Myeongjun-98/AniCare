@@ -1,7 +1,7 @@
 package com.entity.community;
 
 import com.constant.community.BoardType;
-import com.entity.entity.MainPage.User;
+import com.entity.MainPage.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

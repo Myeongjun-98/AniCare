@@ -15,12 +15,12 @@ public class Clinic {
     private Long clinicId;
 
     @OneToMany
-    @JoinColumn(nullable = false)
-    private Long scheduleId;
+    @JoinColumn(name = "schedule_id", nullable = false)
+    private Schedule schedule;
 
     @OneToMany
-    @JoinColumn(nullable = false)
-    private Long diagnosisInfoId;
+    @JoinColumn(name = "diagnosis_info_id", nullable = false)
+    private DiagnosisInfo diagnosisInfo;
 
     @Column(nullable = false)
     private String opinion;
