@@ -6,6 +6,7 @@ import com.entity.admin.Hospital;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -35,10 +36,10 @@ public class VetInfo {
 
     private String profileImage;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "VARCHAR(20) DEFAULT '퇴근'")
     @Enumerated(EnumType.STRING)
     private OnWork workStatus;
 
     private LocalTime onWorkTime;
-    private LocalTime offWorkTiem;
+    private LocalTime offWorkTime;
 }
