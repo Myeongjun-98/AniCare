@@ -1,5 +1,6 @@
 package com.entity.community;
 
+import com.entity.entity.MainPage.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
