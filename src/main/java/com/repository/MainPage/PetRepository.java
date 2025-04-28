@@ -1,6 +1,6 @@
-package repository.MainPage;
+package com.repository.MainPage;
 
-import entity.MainPage.Pet;
+import com.entity.entity.MainPage.Pet;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

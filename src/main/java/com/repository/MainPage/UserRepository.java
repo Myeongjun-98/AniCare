@@ -1,7 +1,6 @@
-package repository.MainPage;
+package com.repository.MainPage;
 
-import com.sun.tools.javac.Main;
-import entity.MainPage.User;
+import com.entity.entity.MainPage.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

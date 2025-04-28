@@ -1,4 +1,4 @@
-package repository.MainPage;
+package com.repository.MainPage;
 
 import com.sun.tools.javac.Main;
 import entity.medical.VetInfo;

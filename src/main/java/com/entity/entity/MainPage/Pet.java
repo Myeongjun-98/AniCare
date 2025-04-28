@@ -1,4 +1,4 @@
-package entity.MainPage;
+package com.entity.entity.MainPage;
 
 import jakarta.persistence.*;
 import lombok.Getter;
