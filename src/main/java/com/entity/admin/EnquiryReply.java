@@ -1,4 +1,5 @@
 package com.entity.admin;
+import com.entity.MainPage.Enquiry;
 import jakarta.persistence.*;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
