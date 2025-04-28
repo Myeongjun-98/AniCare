@@ -16,7 +16,7 @@ public class EnquiryReply {
     @Id@GeneratedValue(strategy = IDENTITY)
     private Long replyId;
     @OneToOne
-    private Enquiry enquiry;
+    private EnquiryReply enquiryReply;
     private String content;
     private LocalDate createDate;
 

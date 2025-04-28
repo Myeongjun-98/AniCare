@@ -1,4 +1,7 @@
 package com.repository.admin;
 
-public interface BlacklistRepository {
+import com.entity.admin.Blacklist;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface BlacklistRepository extends JpaRepository<Blacklist,Long> {
 }
