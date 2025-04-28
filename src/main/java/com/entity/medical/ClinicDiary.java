@@ -2,6 +2,7 @@ package com.entity.medical;
 
 import com.constant.medical.PetStatus;
 import com.entity.MainPage.Pet;
+import com.entity.admin.Hospital;
 import com.entity.community.Board;
 import jakarta.persistence.*;
 import lombok.Getter;

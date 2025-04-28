@@ -2,6 +2,7 @@ package com.entity.medical;
 
 import com.constant.medical.OnWork;
 import com.constant.medical.PetSpecies;
+import com.entity.admin.Hospital;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
