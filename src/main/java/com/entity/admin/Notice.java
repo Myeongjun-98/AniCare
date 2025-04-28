@@ -1,6 +1,6 @@
-package entity.admin;
+package com.entity.admin;
 
-import constant.admin.NoticeCategory;
+import com.constant.admin.NoticeCategory;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

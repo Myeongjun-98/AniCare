@@ -1,4 +1,4 @@
-package repository.admin;
+package com.repository.admin;
 
 public interface BlacklistRepository {
 }

@@ -1,5 +1,5 @@
-package entity.admin;
-import constant.admin.ClinicType;
+package com.entity.admin;
+import com.constant.admin.ClinicType;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

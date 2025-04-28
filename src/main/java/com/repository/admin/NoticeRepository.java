@@ -1,4 +1,4 @@
-package repository.admin;
+package com.repository.admin;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
