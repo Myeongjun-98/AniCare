@@ -15,9 +15,9 @@ public class DiagnosisInfo {
 
     @ElementCollection
     @CollectionTable(name = "diagnosis_disease", joinColumns = @JoinColumn(name = "diagnosis_info_id"))
-    private List<String> diseaseId;
+    private List<Disease> diseaseId;
 
     @ElementCollection
     @CollectionTable(name = "diagnosis_allergy", joinColumns = @JoinColumn(name = "diagnosis_info_id"))
-    private List<String> allergyId;
+    private List<Allergy> allergyId;
 }

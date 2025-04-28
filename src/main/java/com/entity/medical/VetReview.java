@@ -13,8 +13,8 @@ public class VetReview {
     private Long vetReviewId;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(nullable = false, unique = true)
-    private Long clinicId;
+    @JoinColumn(name = "clinic_id", nullable = false, unique = true)
+    private Clinic clinic;
 
     private float rating;
 

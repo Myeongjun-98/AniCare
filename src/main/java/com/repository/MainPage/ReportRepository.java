@@ -1,6 +1,6 @@
 package com.repository.MainPage;
 
-import com.entity.entity.MainPage.Report;
+import com.entity.MainPage.Report;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
