@@ -15,7 +15,8 @@ public class ClinicDiary {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long clinicDiaryId;
+    @Column(name = "clinic_diary_id")
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "board_id", nullable = false)

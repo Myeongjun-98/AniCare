@@ -12,13 +12,14 @@ public class Clinic {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long clinicId;
+    @Column(name = "clinic_id")
+    private Long id;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "schedule_id", nullable = false)
     private Schedule schedule;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "diagnosis_info_id", nullable = false)
     private DiagnosisInfo diagnosisInfo;
 
