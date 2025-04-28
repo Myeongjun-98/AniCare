@@ -11,7 +11,8 @@ public class Checkup {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long checkupId;
+    @Column(name = "checkup_id")
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "pet_id", nullable = false)
