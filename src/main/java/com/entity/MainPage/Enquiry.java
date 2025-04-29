@@ -1,5 +1,6 @@
 package com.entity.MainPage;
 
+import com.constant.MainPage.EnquiryType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
@@ -29,7 +30,7 @@ public class Enquiry {
     private LocalDate EnquiryDate; // 문의사항 작성일
 
     private String enquiryFile; // 문의사항 첨부파일
-    
+    private EnquiryType enquiryType; // 문의사항 유형
 
 
 }
