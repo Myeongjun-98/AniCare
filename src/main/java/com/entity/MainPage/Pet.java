@@ -32,7 +32,6 @@ public class Pet {
     private PetSex petSex; // 반려동물 성별
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
     private PetSpecies petSpecies; // 반려동물 종류 (묘종 or 견종)
 
 

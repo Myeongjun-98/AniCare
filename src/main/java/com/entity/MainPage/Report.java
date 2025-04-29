@@ -31,7 +31,6 @@ public class Report {
     private LocalDate reportDate; // 신고 일시
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
     private ReportType reportType; // 신고유형
 
 
