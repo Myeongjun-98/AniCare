@@ -32,7 +32,7 @@ public class Enquiry {
     private String enquiryFile; // 문의사항 첨부파일
 
     @Enumerated(EnumType.STRING)
-
+    @Column(nullable = false)
     private EnquiryType enquiryType; // 문의사항 유형
 
 
