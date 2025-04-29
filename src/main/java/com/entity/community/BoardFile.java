@@ -10,7 +10,7 @@ public class BoardFile { //게시글에 첨부되는 첨부파일을 저장하�
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="file_id")
+    @Column(name="bfile_id")
     private Long id; //파일 아이디
 
     private String fileOriginalname; //파일 원본 이름

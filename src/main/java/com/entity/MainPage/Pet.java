@@ -28,6 +28,7 @@ public class Pet {
     private String petName;  // 반려동물 이름
     private String petBreed; // 반려동물 품종 
     private int petAge; //반려동물 나이
+
     @Enumerated(EnumType.STRING)
     private PetSex petSex; // 반려동물 성별
 

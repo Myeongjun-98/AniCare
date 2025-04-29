@@ -25,8 +25,10 @@ public class Enquiry {
 
     @Column(nullable = false)
     private String enquiryTitle; // 문의사항 제목
+
     @Column(nullable = false)
     private String enquiryContent; // 문의사항 내용
+
     private LocalDate EnquiryDate; // 문의사항 작성일
 
     private String enquiryFile; // 문의사항 첨부파일

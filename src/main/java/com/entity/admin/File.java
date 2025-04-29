@@ -10,15 +10,20 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @Setter
 @Getter
 public class File {
-    @Id @GeneratedValue(strategy = IDENTITY)
+    @Id
+    @GeneratedValue(strategy = IDENTITY)
     private Long fileId;
+
     @ManyToOne
     @JoinColumn(name="notice_id")
     private Notice notice;
+
     @Column(nullable = false)
-    private Long fileOriginalName;
+    private String fileOriginalName;
+
     @Column(nullable = false)
     private Long fileSaveName;
+
     @Column(nullable = false)
     private String fileUrl;
 

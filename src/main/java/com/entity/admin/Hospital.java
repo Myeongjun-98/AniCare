@@ -12,13 +12,17 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 public class Hospital {
     @Id @GeneratedValue(strategy = IDENTITY)
     private Long hospitalId;
+
     @Column(nullable = false)
     private String hospitalName;
+
     @Column(nullable = false)
     private String hospitalTel;
     private String hospitalImage;
+
     @Column(nullable = false)
     private String hospitalVetId;
+
     private String device;
     private String operating;
 
