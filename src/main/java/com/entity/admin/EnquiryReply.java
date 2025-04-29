@@ -17,6 +17,10 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 public class EnquiryReply {
     @Id@GeneratedValue(strategy = IDENTITY)
     private Long replyId;
+
+
+
+
     @OneToOne
     @JoinColumn(name="enquiry_id")
     private Enquiry enquiry;
