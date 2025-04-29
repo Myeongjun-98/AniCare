@@ -2,9 +2,11 @@ package com.entity.medical;
 
 import com.constant.medical.OnWork;
 import com.constant.medical.PetSpecies;
+import com.entity.admin.Hospital;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -14,7 +16,8 @@ public class VetInfo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long vetInfoId;
+    @Column(name = "vet_info_id")
+    private Long id;
 
     @Column(nullable = false)
     private String vetId;
@@ -33,10 +36,10 @@ public class VetInfo {
 
     private String profileImage;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "VARCHAR(20) DEFAULT '퇴근'")
     @Enumerated(EnumType.STRING)
     private OnWork workStatus;
 
     private LocalTime onWorkTime;
-    private LocalTime offWorkTiem;
+    private LocalTime offWorkTime;
 }

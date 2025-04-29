@@ -10,7 +10,8 @@ import java.time.LocalDateTime;
 public class VetReview {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long vetReviewId;
+    @Column(name = "vet_review_id")
+    private Long id;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "clinic_id", nullable = false, unique = true)

@@ -6,12 +6,15 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter @Setter @Entity
 public class Checkup {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long checkupId;
+    @Column(name = "checkup_id")
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "pet_id", nullable = false)
@@ -20,6 +23,6 @@ public class Checkup {
     private String etcSymptom;
 
     @Enumerated(EnumType.STRING)
-    private Symptom symptom;
+    private List<Symptom> symptom;
 
 }

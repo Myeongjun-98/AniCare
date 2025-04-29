@@ -11,13 +11,16 @@ public class DiagnosisInfo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long diagnosisInfoId;
+    @Column(name = "diagnosis_info_id")
+    private Long id;
 
     @ElementCollection
     @CollectionTable(name = "diagnosis_disease", joinColumns = @JoinColumn(name = "diagnosis_info_id"))
-    private List<Disease> diseaseId;
+    @Column(name = "disease")
+    private List<Disease> diseases;
 
     @ElementCollection
     @CollectionTable(name = "diagnosis_allergy", joinColumns = @JoinColumn(name = "diagnosis_info_id"))
-    private List<Allergy> allergyId;
+    @Column(name = "allergy")
+    private List<Allergy> allergies;
 }

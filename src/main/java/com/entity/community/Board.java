@@ -14,7 +14,7 @@ public class Board { //게시글 정보를 저장하는 Entity
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="board_id")
-    private Long boardId; //게시글 아이디
+    private Long id; //게시글 아이디
 
     @Column(nullable=false)
     private String boardTitle; //게시글 제목
