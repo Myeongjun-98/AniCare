@@ -7,7 +7,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Entity
 @Getter @Setter
@@ -29,7 +28,7 @@ public class Board { //게시글 정보를 저장하는 Entity
 
     private int boardHit; //게시글 조회수
 
-    private LocalDateTime boardWriteDate; //게시글 작성일
+    private LocalDate boardWriteDate; //게시글 작성일
 
     @Enumerated(EnumType.STRING)
     private BoardType boardType; //게시판 타입
