@@ -13,7 +13,7 @@ public class Comment { //덧글 정보를 저장하는 Entity
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="comment_id")
-    private Long Id; //덧글 아이기
+    private Long id; //덧글 아이기
 
     @ManyToOne
     @JoinColumn(name="board_id")

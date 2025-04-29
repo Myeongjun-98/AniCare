@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter @Setter
@@ -14,7 +15,7 @@ public class Board { //게시글 정보를 저장하는 Entity
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="board_id")
-    private Long Id; //게시글 아이디
+    private Long id; //게시글 아이디
 
     @Column(nullable=false)
     private String boardTitle; //게시글 제목
@@ -28,7 +29,7 @@ public class Board { //게시글 정보를 저장하는 Entity
 
     private int boardHit; //게시글 조회수
 
-    private LocalDate boardWriteDate; //게시글 작성일
+    private LocalDateTime boardWriteDate; //게시글 작성일
 
     @Enumerated(EnumType.STRING)
     private BoardType boardType; //게시판 타입
