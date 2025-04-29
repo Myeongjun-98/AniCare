@@ -32,6 +32,8 @@ public class User {
     private String userAddress; // 유저 주소
 
     private String userTel; // 유저 전화번호
+
+    @Enumerated(EnumType.STRING)
     private Authorization authorization; // 권한 (사용자 or 관리자)
 
 
