@@ -1,5 +1,6 @@
 package com.entity.community;
 
+import com.entity.MainPage.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,7 +13,7 @@ public class Comment { //덧글 정보를 저장하는 Entity
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="comment_id")
-    private Long commentId; //덧글 아이기
+    private Long id; //덧글 아이기
 
     @ManyToOne
     @JoinColumn(name="board_id")

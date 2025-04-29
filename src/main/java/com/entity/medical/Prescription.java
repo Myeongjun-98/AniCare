@@ -11,11 +11,12 @@ public class Prescription {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long prescriptionId;
+    @Column(name = "prescription_id")
+    private Long id;
 
     @ManyToOne
-    @JoinColumn(nullable = false)
-    private Long clinicId;
+    @JoinColumn(name = "clinic_id", nullable = false)
+    private Clinic clinic;
 
     private List<String> medicine;
     private List<Integer> amount;

@@ -1,5 +1,6 @@
 package com.entity.medical;
 
+import com.entity.MainPage.Pet;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,13 +10,14 @@ public class Disease {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long diseaseId;
+    @Column(name = "disease_id")
+    private Long id;
 
     @Column(nullable = false)
     private String diseaseName;
 
     @ManyToOne
-    @JoinColumn(nullable = false)
-    private Long petId;
+    @JoinColumn(name = "pet_id", nullable = false)
+    private Pet pet;
 
 }

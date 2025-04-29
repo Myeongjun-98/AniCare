@@ -1,6 +1,7 @@
 package com.entity.medical;
 
 import com.constant.medical.Symptom;
+import com.entity.MainPage.Pet;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,11 +11,12 @@ public class Checkup {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long checkupId;
+    @Column(name = "checkup_id")
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(nullable = false)
-    private Long petId;
+    @JoinColumn(name = "pet_id", nullable = false)
+    private Pet pet;
 
     private String etcSymptom;
 

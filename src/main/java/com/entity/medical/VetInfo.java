@@ -2,6 +2,7 @@ package com.entity.medical;
 
 import com.constant.medical.OnWork;
 import com.constant.medical.PetSpecies;
+import com.entity.admin.Hospital;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,7 +15,8 @@ public class VetInfo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long vetInfoId;
+    @Column(name = "vet_info_id")
+    private Long id;
 
     @Column(nullable = false)
     private String vetId;
@@ -26,7 +28,8 @@ public class VetInfo {
     private String vetPassword;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private Long hospitalId;
+    @JoinColumn(name = "hospital_id")
+    private Hospital hospital;
 
     private ArrayList<PetSpecies> curingCapable;
 

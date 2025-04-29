@@ -3,6 +3,7 @@ package com.entity.medical;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Check;
 
 import java.time.LocalDateTime;
 
@@ -11,17 +12,18 @@ public class Schedule {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long scheduleId;
+    @Column(name = "schedule_id")
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(nullable = false)
-    private Long vetInfoId;
+    @JoinColumn(name = "vet_info_id", nullable = false)
+    private VetInfo vetInfo;
 
     private LocalDateTime requestDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(nullable = false)
-    private Long checkupId;
+    @JoinColumn(name = "checkup_id", nullable = false)
+    private Checkup checkup;
 
     @Column(nullable = false)
     private LocalDateTime scheduleTime;
