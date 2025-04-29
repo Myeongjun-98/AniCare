@@ -19,6 +19,7 @@ public class Notice {
     private Long noticeId;
     @Column(nullable = false,columnDefinition = "TEXT")
     private String noticeTitle;
+    @Column(nullable = false)
     private LocalDate noticeDate;
     @Column(nullable = false,columnDefinition = "TEXT")
     private String noticeBody;
