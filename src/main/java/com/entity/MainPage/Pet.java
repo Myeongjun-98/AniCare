@@ -1,5 +1,7 @@
 package com.entity.MainPage;
 
+import com.constant.medical.PetSex;
+import com.constant.medical.PetSpecies;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,11 +21,13 @@ public class Pet {
     @JoinColumn(name = "user_id")
     @ManyToOne
     private User user;
-    
+
+    private String petImage; // 반려동물 프로필 사진
     private String petName;  // 반려동물 이름
     private String petBreed; // 반려동물 품종 
     private int petAge; //반려동물 나이
-
+    private PetSex petSex; // 반려동물 성별
+    private PetSpecies petSpecies; // 반려동물 종류 (묘종 or 견종)
 
 
 }

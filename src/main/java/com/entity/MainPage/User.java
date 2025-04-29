@@ -16,6 +16,8 @@ public class User {
     @Column(name = "user_id")
     private Long userId;
 
+    private String userImage; // 유저 프로필 사진
+
     @Column(nullable = false)
     private String userName; // 유저이릉
 
