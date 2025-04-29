@@ -22,9 +22,9 @@ public class Enquiry {
     @ManyToOne
     private User user;
 
-    @NotEmpty
+    @Column(nullable = false)
     private String enquiryTitle; // 문의사항 제목
-    @NotEmpty
+    @Column(nullable = false)
     private String enquiryContent; // 문의사항 내용
     private LocalDate EnquiryDate; // 문의사항 작성일
 

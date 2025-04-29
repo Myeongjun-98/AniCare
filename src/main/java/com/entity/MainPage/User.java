@@ -16,14 +16,18 @@ public class User {
     @Column(name = "user_id")
     private Long userId;
 
-    @NotEmpty
+    @Column(nullable = false)
     private String userName; // 유저이릉
-    @NotEmpty
+
+    @Column(nullable = false)
     private String userPassword; // 유저 비밀번호
-    @NotEmpty
+
+    @Column(nullable = false)
     private String userEmail; // 유저 이메일
-    @NotEmpty
+
+    @Column(nullable = false)
     private String userAddress; // 유저 주소
+
     private String userTel; // 유저 전화번호
 
 
