@@ -11,7 +11,7 @@ public class MeetingBoard {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="meeting_id")
-    private Long Id; //모임 모집글 id
+    private Long id; //모임 모집글 id
 
     @ManyToOne
     @JoinColumn(name="board_id")
@@ -19,4 +19,5 @@ public class MeetingBoard {
 
     @Enumerated(EnumType.STRING)
     private MeetingCategory meetingCategory; //모임 모집글 카테고리
+
 }
