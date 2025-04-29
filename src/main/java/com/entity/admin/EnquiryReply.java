@@ -17,15 +17,18 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 public class EnquiryReply {
     @Id@GeneratedValue(strategy = IDENTITY)
     private Long replyId;
+
+
+
+
     @OneToOne
-
-    @JoinColumn(name="user_id")
+    @JoinColumn(name="enquiry_id")
     private Enquiry enquiry;
-
     private String content;
 
     @Column(nullable = false)
     private LocalDate createDate;
+
 
 
 }
