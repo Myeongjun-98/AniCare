@@ -30,5 +30,6 @@ public class Enquiry {
 
     private String enquiryFile; // 문의사항 첨부파일
     
-    
+
+
 }
