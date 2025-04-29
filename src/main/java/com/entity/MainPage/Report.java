@@ -1,4 +1,4 @@
-package com.entity.entity.MainPage;
+package com.entity.MainPage;
 
 import com.entity.community.Board;
 import jakarta.persistence.*;
