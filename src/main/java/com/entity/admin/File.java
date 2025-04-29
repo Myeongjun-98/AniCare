@@ -11,7 +11,7 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @Getter
 public class File {
     @Id @GeneratedValue(strategy = IDENTITY)
-    private Long filedId;
+    private Long fileId;
     @ManyToOne
     @JoinColumn(name="notice_id")
     private Notice notice;
