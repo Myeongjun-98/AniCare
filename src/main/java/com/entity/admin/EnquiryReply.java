@@ -1,5 +1,6 @@
 package com.entity.admin;
 import com.entity.MainPage.Enquiry;
+import com.entity.MainPage.User;
 import jakarta.persistence.*;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -17,6 +18,8 @@ public class EnquiryReply {
     @Id@GeneratedValue(strategy = IDENTITY)
     private Long replyId;
     @OneToOne
+
+    @JoinColumn(name="user_id")
     private Enquiry enquiry;
     private String content;
     private LocalDate createDate;
