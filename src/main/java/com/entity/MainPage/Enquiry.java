@@ -30,6 +30,8 @@ public class Enquiry {
     private LocalDate EnquiryDate; // 문의사항 작성일
 
     private String enquiryFile; // 문의사항 첨부파일
+
+    @Enumerated(EnumType.STRING)
     private EnquiryType enquiryType; // 문의사항 유형
 
 
