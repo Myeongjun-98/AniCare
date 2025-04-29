@@ -12,7 +12,7 @@ public class BoardLike { //게시글의 좋아요 기록을 저장하는 Entity
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="like_id")
-    private Long Id; //좋아요 아이디
+    private Long id; //좋아요 아이디
 
     @ManyToOne
     @JoinColumn(name="user_id")
