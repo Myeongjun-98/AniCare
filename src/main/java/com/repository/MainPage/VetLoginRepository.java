@@ -1,7 +1,6 @@
 package com.repository.MainPage;
 
 import com.entity.medical.VetInfo;
-import com.sun.tools.javac.Main;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

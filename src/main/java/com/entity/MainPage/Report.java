@@ -29,4 +29,5 @@ public class Report {
 
     private LocalDate reportDate;
 
+
 }

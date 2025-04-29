@@ -1,6 +1,7 @@
 package com.entity.MainPage;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,11 +21,15 @@ public class Enquiry {
     @JoinColumn(name = "user_id")
     @ManyToOne
     private User user;
-    
+
+    @NotEmpty
     private String enquiryTitle; // 문의사항 제목
+    @NotEmpty
     private String enquiryContent; // 문의사항 내용
     private LocalDate EnquiryDate; // 문의사항 작성일
+
     private String enquiryFile; // 문의사항 첨부파일
     
-    
+
+
 }
