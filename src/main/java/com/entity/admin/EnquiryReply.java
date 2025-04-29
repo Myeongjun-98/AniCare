@@ -21,6 +21,7 @@ public class EnquiryReply {
     @JoinColumn(name="enquiry_id")
     private Enquiry enquiry;
 
+
     private String content;
 
     @Column(nullable = false)
