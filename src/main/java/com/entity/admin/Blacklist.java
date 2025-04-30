@@ -13,18 +13,13 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @Getter
 public class Blacklist {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "bl_id")
-    private Long id;
+    @GeneratedValue(strategy = IDENTITY)
+    private Long blId;
 
     @ManyToOne
     @JoinColumn(name="user_id")
     private User user;
-
-    @Column(nullable = false)
     private LocalDate blDate;
-
-    @Column(nullable = false)
     private String blReason;
 
 }
