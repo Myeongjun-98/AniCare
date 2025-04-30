@@ -11,8 +11,36 @@
 </head>
 <div layout:fragment="main" id="main">
 
-<h1> 확인 </h1>
 
+  <!-- 버튼 -->
+  <div class="btn_field" style="display:flex; justify-content:center;">
+    <button
+            type="button"
+            class="btn btn-custom btn-lg m-3"
+            style="background-color: rgb(219, 219, 219)"
+    >
+      모임 모집글
+    </button>
+    <button
+            type="button"
+            class="btn btn-custom btn-lg m-3"
+            style="background-color: rgb(219, 219, 219)"
+    >
+      심부름 구인글
+    </button>
+  </div>
+  <!-- 버튼 끝 -->
+
+  <div class="popular-meeting">
+    <span class="popular-meeting-text">모임 모집글 인기글</span>
+      <div class="popular-meeting-list-wrap">
+        <ul class="popular-meeting-list">
+          <li class="popluar-meeting-board"></li>
+        </ul>
+      </div>
+  </div>
 </div>
+
+<!--모임 모집글 인기글 -->
 
 </html>
