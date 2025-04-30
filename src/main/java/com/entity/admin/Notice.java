@@ -14,8 +14,9 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @Entity
 public class Notice {
     @Id
-    @GeneratedValue(strategy=IDENTITY)
-    private Long noticeId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="notice_id")
+    private Long id;
 
     @Column(nullable = false,columnDefinition = "TEXT")
     private String noticeTitle;

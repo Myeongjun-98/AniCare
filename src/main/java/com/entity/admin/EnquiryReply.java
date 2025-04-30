@@ -16,8 +16,9 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @Setter
 public class EnquiryReply {
     @Id
-    @GeneratedValue(strategy = IDENTITY)
-    private Long replyId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "reply_id")
+    private Long id;
 
     @OneToOne
     @JoinColumn(name="enquiry_id")

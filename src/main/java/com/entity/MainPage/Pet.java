@@ -17,7 +17,7 @@ public class Pet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "pet_id")
-    private Long petId;
+    private Long id;
 
     // 유저 테이블 아이디
     @JoinColumn(name = "user_id")

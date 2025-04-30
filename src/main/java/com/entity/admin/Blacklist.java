@@ -13,9 +13,9 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @Getter
 public class Blacklist {
     @Id
-    @GeneratedValue(strategy = IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "bl_id")
-    private Long blId;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name="user_id")

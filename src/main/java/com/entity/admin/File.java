@@ -11,8 +11,9 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @Getter
 public class File {
     @Id
-    @GeneratedValue(strategy = IDENTITY)
-    private Long fileId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="file_id")
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name="notice_id")
@@ -22,7 +23,7 @@ public class File {
     private String fileOriginalName;
 
     @Column(nullable = false)
-    private Long fileSaveName;
+    private String fileSaveName;
 
     @Column(nullable = false)
     private String fileUrl;

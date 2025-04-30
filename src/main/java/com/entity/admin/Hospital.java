@@ -1,5 +1,6 @@
 package com.entity.admin;
 import com.constant.admin.ClinicType;
+import com.entity.medical.VetInfo;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,18 +11,21 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @Getter
 @Entity
 public class Hospital {
-    @Id @GeneratedValue(strategy = IDENTITY)
-    private Long hospitalId;
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "hospital_id")
+    private Long id;
 
     @Column(nullable = false)
     private String hospitalName;
 
     @Column(nullable = false)
     private String hospitalTel;
+
     private String hospitalImage;
 
-    @Column(nullable = false)
-    private String hospitalVetId;
+    @OneToOne
+    @JoinColumn(name = "vet_info_id")
+    private VetInfo vetInfoId;
 
     private String device;
     private String operating;

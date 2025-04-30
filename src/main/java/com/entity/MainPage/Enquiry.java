@@ -16,7 +16,8 @@ public class Enquiry {
     // 공지사항 테이블 아이디
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long enquiryId;
+    @Column(name="enquiry_id")
+    private Long id;
     
     // 유저테이블 아이디
     @JoinColumn(name = "user_id")

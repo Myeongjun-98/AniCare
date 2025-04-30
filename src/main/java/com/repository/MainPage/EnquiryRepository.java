@@ -10,8 +10,8 @@ import java.util.List;
 public interface EnquiryRepository extends JpaRepository<Enquiry, Long> {
 
     // 사용자가 작성했던 문의사항 목록을 보여주기 위한 쿼리 동작 메서드
-    List<Enquiry> findAllByOrderByEnquiryIdDesc(Long id);
+    List<Enquiry> findAllByOrderByIdDesc();
 
     // 문의사항 상세보기를 위한 쿼리 동작 메서드
-    Enquiry findByEnquiryId(Long id);
+//    Enquiry findByEnquiryId(Long id);
 }

@@ -7,6 +7,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface HospitalRepository extends JpaRepository<Hospital,Long> {
-    Optional<Hospital> findById(Long hospitalId);
-    List<Hospital> findAll();
+//    Optional<Hospital> findById(Long hospitalId);
+//    List<Hospital> findAll();
 }

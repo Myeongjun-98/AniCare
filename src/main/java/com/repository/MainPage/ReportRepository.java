@@ -10,8 +10,8 @@ import java.util.List;
 public interface ReportRepository extends JpaRepository<Report, Long> {
 
     // 사용자가 작성한 신고내용의 리스트를 관리자에게 띄우기 위한 쿼리 동작 메서드
-    List<Report> findAllByOrderByReportDesc(Long id);
+    List<Report> findAllByOrderByIdDesc();
 
     // 사용자가 작성한 신고내용의 상세보기를 위한 쿼리 동작 메서드
-    Report findByReportId(Long id);
+//    Report findByReportId(Long id);
 }
