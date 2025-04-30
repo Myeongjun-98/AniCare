@@ -25,7 +25,7 @@ public class Hospital {
 
     @OneToOne
     @JoinColumn(name = "vet_info_id")
-    private VetInfo vetInfoId;
+    private VetInfo vetInfo;
 
     private String device;
     private String operating;
