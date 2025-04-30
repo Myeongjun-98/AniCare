@@ -15,7 +15,7 @@
   </th:block>
   <th:block layout:fragment="script"></th:block>
 </head>
-<div layout:fragment="main" id="main">
+<div layout:fragment="main" id="main">  <!-- ▼ main ▼ -->
 
 
   <!-- ▼ 버튼 ▼ -->
@@ -57,6 +57,7 @@
   <!-- ▲ 모임 모집글 인기글 끝 ▲ -->
 
   <!-- ▼ 심부름 구인글 인기글 ▼ -->
+  <br>
   <h3>심부름 구인글 인기글</h3>
   <br>
   <div th:each="eboard : ${boardListMainDtos}" class="popular-errand">
@@ -81,7 +82,7 @@
   </div>
   <!-- ▲ 심부름 구인글 인기글 끝 ▲ -->
 
-</div>
+</div> <!-- ▲ main 끝 ▲ -->
 
 
 </html>

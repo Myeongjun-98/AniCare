@@ -23,4 +23,10 @@ public class CommunityController {
 
         return "community/commain";
     }
+
+    @GetMapping("/community/comsearch")
+    public String comsearch(Model model){
+
+        return "community/comsearch";
+    }
 }

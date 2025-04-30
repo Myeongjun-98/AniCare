@@ -23,7 +23,7 @@ public class CommunityMainService {
     public List<BoardListMainDto> getBoardList(){
         List<BoardListMainDto> boardListMainDtos = new ArrayList<>();
 
-        List<Board> boards = boardRepository.findAllByOrderByIdDesc();
+        List<Board> boards = boardRepository.findAllByOrderByBoardHitDesc();
 
         for(Board board : boards){
             BoardListMainDto boardListMainDto = BoardListMainDto.of(board);
