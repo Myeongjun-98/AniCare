@@ -1,5 +1,6 @@
 package com.entity.MainPage;
 
+import com.constant.MainPage.Authorization;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
@@ -14,7 +15,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
-    private Long userId;
+    private Long id;
 
     private String userImage; // 유저 프로필 사진
 
@@ -31,6 +32,10 @@ public class User {
     private String userAddress; // 유저 주소
 
     private String userTel; // 유저 전화번호
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Authorization authorization; // 권한 (사용자 or 관리자)
 
 
 }

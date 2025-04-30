@@ -1,5 +1,6 @@
 package com.entity.MainPage;
 
+import com.constant.MainPage.ReportType;
 import com.entity.community.Board;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -15,7 +16,8 @@ public class Report {
     // 신고 테이블 아이디
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long reportId;
+    @Column(name = "report_id")
+    private Long id;
 
     // 게시글 아이디
     @JoinColumn(name = "board_id")
@@ -25,9 +27,13 @@ public class Report {
     // 신고자 아이디
     @JoinColumn(name = "user_id")
     @ManyToOne
-    private User user;
+    private User user; // user 테이블 id
 
-    private LocalDate reportDate;
+    private LocalDate reportDate; // 신고 일시
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private ReportType reportType; // 신고유형
 
 
 }

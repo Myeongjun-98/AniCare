@@ -19,9 +19,7 @@ public class Blacklist {
     @ManyToOne
     @JoinColumn(name="user_id")
     private User user;
-    @Column(nullable = false)
     private LocalDate blDate;
-    @Column(nullable = false)
     private String blReason;
 
 }
