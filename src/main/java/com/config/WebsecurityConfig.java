@@ -17,6 +17,8 @@ public class WebsecurityConfig {
                 ar -> ar
                         .requestMatchers("/community/**")
                         .permitAll()
+                        .requestMatchers( "/css/**", "/javascript/**", "/error")
+                        .permitAll()
         );
 
 

@@ -49,10 +49,12 @@
   </div>
 
     <!-- ▼ 검색결과 게시글 리스트 ▼ -->
- <div class="result-list-wrap">
-    <p>작성일</p> <!-- 게시글 작성일 -->
-    <p>0</p> <!-- 게시글 좋아요 수 -->
-
+ <div th:each="board : ${boardListSubDtos}" class="result-list-wrap">
+   <div th:unless="${board.boardType.name() == 'CLINICDIARY'}" class="result-list">
+     <p th:text="${board.boardTitle}"></p> <!-- 게시글 제목 -->
+     <p th:text="${board.boardWriteDate}"></p> <!-- 게시글 작성일 -->
+    <p th:text="${board.likeCount}"></p> <!-- 게시글 좋아요 수 -->
+   </div>
   </div>
     <!-- ▲ 검색결과 게시글 리스트 끝 ▲ -->
 
