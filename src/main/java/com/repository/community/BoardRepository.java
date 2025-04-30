@@ -12,7 +12,7 @@ public interface BoardRepository extends JpaRepository<Board, Long> { //board �
 
 
     //게시글 최신순으로 모두 불러오기
-    List<Board> findAllByOrderByIdDesc(Pageable pageable);
+    List<Board> findAllByOrderByIdDesc();
 
     //검색 기능
     List<Board> findByBoardTitleContaining(String keyword);
