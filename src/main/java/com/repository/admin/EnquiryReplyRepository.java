@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface EnquiryReplyRepository extends JpaRepository<EnquiryReply,Long> {
-        List<EnquiryReply> findByEnquiryId(Long enquiryId);
+//        List<EnquiryReply> findByEnquiryId(Long enquiryId);
 }

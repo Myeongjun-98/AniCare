@@ -13,5 +13,5 @@ public interface PetRepository extends JpaRepository<Pet, Long> {
 //    Pet findByPetId(Long id);
 
     // 사용자가 키우는 반려동물 정보를 가져오기 위한 쿼리 동작 메서드
-    List<Pet> findAllByUserId(Long id);
+//    List<Pet> findAllByUserId(Long id);
 }

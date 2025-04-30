@@ -1,0 +1,84 @@
+<!-- Medical Main 페이지 -->
+
+<!DOCTYPE html>
+<html
+  lang="ko"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{fragment/default}"
+>
+  <head>
+    <th:block layout:fragment="css"> </th:block>
+    <th:block layout:fragment="script"> </th:block>
+  </head>
+
+  <div layout:fragment="main" id="main">
+    <h1>메디컬 메인페이지 작업중입니다.</h1>
+
+    <!-- bootstrap 이미지슬라이드 -->
+    <div
+      id="carouselExampleInterval"
+      class="carousel slide"
+      data-bs-ride="carousel"
+      style="display: none"
+    >
+      <div class="carousel-inner">
+        <div class="carousel-item active" data-bs-interval="10000">
+          <img
+            src="medicalImages/puppy1.jpg"
+            class="d-block w-100"
+            alt="예시이미지1"
+          />
+        </div>
+        <div class="carousel-item" data-bs-interval="2000">
+          <img
+            src="medicalImages/puppy2.jpg"
+            class="d-block w-100"
+            alt="예시이미지2"
+          />
+        </div>
+        <div class="carousel-item">
+          <img
+            src="medicalImages/puppy3.jpg"
+            class="d-block w-100"
+            alt="예시이미지3"
+          />
+        </div>
+      </div>
+      <button
+        class="carousel-control-prev"
+        type="button"
+        data-bs-target="#carouselExampleInterval"
+        data-bs-slide="prev"
+      >
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button
+        class="carousel-control-next"
+        type="button"
+        data-bs-target="#carouselExampleInterval"
+        data-bs-slide="next"
+      >
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+    <!-- bootstrap 이미지슬라이드 -->
+
+    <!-- 검색창 -->
+    <div>
+      <input type="text" name="" id="" placeholder="검색어를 입력해주세요" />
+      <button>검색</button>
+    </div>
+    <!-- 검색창 -->
+
+    <div>
+      <!-- 링크 이동용 버튼 -->
+      <button>예약 진료 이동</button>
+      <button>진료수첩</button>
+      <button>진단받기</button>
+      <!-- 링크 이동용 버튼 -->
+    </div>
+  </div>
+</html>

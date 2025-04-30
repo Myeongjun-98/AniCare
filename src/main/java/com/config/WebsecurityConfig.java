@@ -15,7 +15,7 @@ public class WebsecurityConfig {
 
         http.authorizeHttpRequests(
                 ar -> ar
-                        .requestMatchers("/community/**")
+                        .requestMatchers("/community/**", "/medical/**")
                         .permitAll()
         );
 

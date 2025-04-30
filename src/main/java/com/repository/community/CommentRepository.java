@@ -10,8 +10,8 @@ import java.util.List;
 public interface CommentRepository extends JpaRepository<Comment, Long> { //Comment 테이블 데이터를 다루는 Repo
 
     //해당 게시글의 덧글 목록 불러오기
-    List<Comment> findByBoardId(Long boardId);
+//    List<Comment> findByBoardId(Long boardId);
 
     //해당 게시글의 덧글 수 가져오기
-    int countAllByBoardId(Long boardId);
+//    int countAllByBoardId(Long boardId);
 }
