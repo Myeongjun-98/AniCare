@@ -29,7 +29,9 @@ public class Report {
     private User user; // user 테이블 id
 
     private LocalDate reportDate; // 신고 일시
+
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private ReportType reportType; // 신고유형
 
 
