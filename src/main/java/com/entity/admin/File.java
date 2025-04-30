@@ -16,9 +16,9 @@ public class File {
     @JoinColumn(name="notice_id")
     private Notice notice;
     @Column(nullable = false)
-    private Long fileOriginalName;
+    private String fileOriginalName;
     @Column(nullable = false)
-    private Long fileSaveName;
+    private String fileSaveName;
     @Column(nullable = false)
     private String fileUrl;
 
