@@ -16,7 +16,8 @@ public class Report {
     // 신고 테이블 아이디
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long reportId;
+    @Column(name = "report_id")
+    private Long id;
 
     // 게시글 아이디
     @JoinColumn(name = "board_id")
