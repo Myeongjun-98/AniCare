@@ -15,20 +15,19 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @Getter
 @Setter
 public class EnquiryReply {
-    @Id@GeneratedValue(strategy = IDENTITY)
-    private Long replyId;
-
-
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "reply_id")
+    private Long id;
 
     @OneToOne
     @JoinColumn(name="enquiry_id")
     private Enquiry enquiry;
+
     private String content;
 
     @Column(nullable = false)
     private LocalDate createDate;
-
 
 
 }
