@@ -20,7 +20,7 @@ public class EnquiryReply {
     private Long replyId;
 
     @OneToOne
-    @JoinColumn(name="user_id")
+    @JoinColumn(name="enquiry_id")
     private Enquiry enquiry;
 
     private String content;

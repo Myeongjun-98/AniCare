@@ -11,7 +11,7 @@ import java.util.List;
 public interface BoardRepository extends JpaRepository<Board, Long> { //board 테이블 데이터를 다루는 Repo
 
     //boardId와 관련된 게시글 조회 메서드
-    Board findByBoardId(Long boardId);
+    Board findByBoardId(Long Id);
 
     //게시글 최신순으로 모두 불러오기
     List<Board> findAllByOrderByBoardIdDesc(Pageable pageable);

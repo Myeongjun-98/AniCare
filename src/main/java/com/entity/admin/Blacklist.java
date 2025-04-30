@@ -14,6 +14,7 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 public class Blacklist {
     @Id
     @GeneratedValue(strategy = IDENTITY)
+    @Column(name = "bl_id")
     private Long blId;
 
     @ManyToOne
