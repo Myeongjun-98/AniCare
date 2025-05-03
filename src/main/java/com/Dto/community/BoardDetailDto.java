@@ -1,8 +1,10 @@
 package com.Dto.community;
 
 import com.constant.community.BoardType;
+import com.entity.community.Board;
 import lombok.Getter;
 import lombok.Setter;
+import org.modelmapper.ModelMapper;
 
 import java.time.LocalDate;
 //import java.time.LocalDateTime;
@@ -23,4 +25,15 @@ public class BoardDetailDto {
     private String userAddress; //게시글 작성자 주소
 
     private List<CommentViewDto> commentList; //게시글 덧글 목록
+
+    public static ModelMapper modelMapper = new ModelMapper();
+
+    //entity -> dto
+    public static BoardDetailDto of(Board board, List<CommentViewDto> commentList){
+        BoardDetailDto boardDetailDto = modelMapper.map(board, BoardDetailDto.class);
+        boardDetailDto.setCommentList(commentList);
+        return boardDetailDto;
+    }
+
+
 }

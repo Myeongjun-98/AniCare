@@ -9,6 +9,54 @@
 </head>
 <div layout:fragment="main" id="main">
 
+  <div class="board-detail-wrap">  <!-- ▼ 게시글 상세보기 ▼ -->
+
+    <h3 class="board-detail-title" th:text="${board.boardTitle}"></h3>
+    <p class="board-detail-writeDate" th:text="${board.boardWriteDate}"></p>
+    <p class="board-detail-boardType" th:text="${board.boardType}"></p>
+    <p class="board-detail-boardHit" th:text="${board.boardHit}"></p>
+
+    <br>
+
+    <p class="board-detail-boardContent" th:text="${board.boardContent}"></p>
+
+    <h5 class="board-detail-userName" th:text="${board.userName}"></h5>
+    <p class="board-detail-userAddress" th:text="${board.userAddress}"></p>
+
+
+
+  </div> <!-- ▲ 게시글 상세보기 끝 ▲ -->
+
+<!--  &lt;!&ndash; ▼ 덧글 작성 input ▼ &ndash;&gt;-->
+<!--  <form th:object="${commentForm}" method="get" action="/board/commentSave">-->
+<!--    <div class="comment-write">-->
+<!--      <div class="input-group mb-3">-->
+<!--        <input type="hidden" th:field="*{boardId}">-->
+<!--        <input type="text"-->
+<!--             th:field="*{content}" class="form-control" placeholder="덧글을 작성해주세요."-->
+<!--               aria-label="Recipient's username"-->
+<!--               aria-describedby="button-addon2">-->
+<!--        <button class="btn btn-outline-secondary" type="button" id="button-addon2">작성</button>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </form>&lt;!&ndash; ▲ 덧글 작성 input 끝 ▲ &ndash;&gt;-->
+
+  <!-- ▼ 덧글 목록 ▼ -->
+  <div class="commentList-wrap">
+    <ul class="commentList">
+
+      <li th:each="comment : ${board.commentList}" class="comments">
+        <div class="comment-wrap">
+          <span th:text="${comment.userName}"></span>
+          <span th:text="${comment.commentWriteDate}"></span>
+          <span th:text="${comment.commentContent}"></span>
+        <!-- 본인의 덧글일 시 수정, 삭제 기능 버튼 보이게 -->
+        </div>
+
+      </li>
+    </ul>
+  </div> <!-- ▲ 덧글 목록 끝 ▲ -->
+
 </div>
 
 </html>

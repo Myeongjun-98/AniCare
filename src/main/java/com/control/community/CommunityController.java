@@ -1,5 +1,6 @@
 package com.control.community;
 
+import com.Dto.community.BoardDetailDto;
 import com.Dto.community.BoardListMainDto;
 import com.Dto.community.BoardListSubDto;
 import com.service.community.BoardService;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -45,9 +47,10 @@ public class CommunityController {
         return "community/board/boardList";
     }
 
-    @GetMapping("/community/board/boardDetail")
-    public String boardDetailPage(Model model){
+    @GetMapping("/community/board/boardDetail/{boardId}")
+    public String boardDetailPage(@PathVariable("boardId")Long id, Model model) {
 
+        model.addAttribute("board", boardService.getBoardDetail(id));
         return "community/board/boardDetail";
     }
 }
