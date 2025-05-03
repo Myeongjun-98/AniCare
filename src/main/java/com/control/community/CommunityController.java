@@ -2,6 +2,7 @@ package com.control.community;
 
 import com.Dto.community.BoardListMainDto;
 import com.Dto.community.BoardListSubDto;
+import com.service.community.BoardService;
 import com.service.community.CommunityMainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,8 @@ public class CommunityController {
 
     @Autowired
     private CommunityMainService communityMainService;
+    @Autowired
+    private BoardService boardService;
 
     @GetMapping("/community/commain")
     public String commainPage(Model model){
@@ -28,9 +31,23 @@ public class CommunityController {
     @GetMapping("/community/comsearch")
     public String comsearch(Model model){
 
-        List<BoardListSubDto> boardListSubDtos = communityMainService.getBoardSubList();
+        List<BoardListSubDto> boardListSubDtos = communityMainService.getBoardSearchList();
 
         model.addAttribute("boardListSubDtos", boardListSubDtos);
         return "community/comsearch";
+    }
+
+    @GetMapping("/community/board/boardList")
+    public String boardPage(Model model){
+        List<BoardListMainDto> boardListDtos = boardService.getBoardList();
+        model.addAttribute("boardListDtos", boardListDtos);
+
+        return "community/board/boardList";
+    }
+
+    @GetMapping("/community/board/boardDetail")
+    public String boardDetailPage(Model model){
+
+        return "community/board/boardDetail";
     }
 }

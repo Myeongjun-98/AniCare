@@ -18,7 +18,8 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class CommunityMainService {
+public class
+CommunityMainService {
 
     private final BoardRepository boardRepository;
     private final BoardFileRepository boardFileRepository;
@@ -33,7 +34,7 @@ public class CommunityMainService {
         List<Board> boards = boardRepository.findAllByOrderByBoardHitDesc();
 
         for(Board board : boards){
-            BoardListMainDto boardListMainDto = BoardListMainDto.of(board);
+            BoardListMainDto boardListMainDto = BoardListMainDto.to(board);
             boardListMainDtos.add(boardListMainDto);
 
         }
@@ -42,7 +43,7 @@ public class CommunityMainService {
     }
 
     //커뮤니티 검색결과 페이지 리스트 가져오기
-    public List<BoardListSubDto> getBoardSubList(){
+    public List<BoardListSubDto> getBoardSearchList(){
         List<BoardListSubDto> boardListSubDtos = new ArrayList<>();
 
         List<Board> boards = boardRepository.findAllByOrderByIdDesc();

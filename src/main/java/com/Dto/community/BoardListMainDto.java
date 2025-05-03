@@ -1,6 +1,7 @@
 package com.Dto.community;
 
 import com.constant.community.BoardType;
+import com.entity.MainPage.User;
 import com.entity.community.Board;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,12 +25,14 @@ public class BoardListMainDto {
 
     private int boardHit; //게시글 조회수
 
-//    private String userName; //게시글 작성자
+//    private String userFile; //작성자 프로필이미지
 
-//    private String userAddress; //작성자 주소
+    private String userName; //게시글 작성자
+
+    private String userAddress; //작성자 주소
 
     //
-public static BoardListMainDto of(Board board){
+public static BoardListMainDto to(Board board){
     BoardListMainDto boardListMainDto = new BoardListMainDto();
 
     boardListMainDto.setId(board.getId());

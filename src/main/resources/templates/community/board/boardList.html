@@ -9,6 +9,26 @@
 </head>
 <div layout:fragment="main" id="main">
 
+    <div class="orderBtn">
+        <p style="display: inline;">인기순</p>
+        <p style="display: inline;"> | </p>
+        <p style="display: inline;">최신순</p>
+    </div>
+
+    <div th:each="board : ${boardListDtos}" class="board-list">
+        <div th:unless="${board.boardType.name() == 'CLINICDIARY'}" class="board-card">
+
+            <!-- ▼ 게시글 리스트 목록 ▼ -->
+            <div class="board-card-body">
+                <h3 class="board-card-userName" th:text="${board.userName}"></h3> <!-- 작성자 이름 -->
+                <p class="board-card-writeDate" th:text="${board.boardWriteDate}"></p> <!-- 게시글 작성일 -->
+                <p class="board-card-boardHit" th:text="${board.boardHit}"></p> <!-- 게시글 조회수 -->
+                <p class="board-card-content" th:text="${board.boardContent}"></p> <!-- 게시글 내용 -->
+            </div> <!-- ▲ 게시글 리스트 목록 끝 ▲ -->
+
+        </div>
+    </div>
+
 </div>
 
 </html>
