@@ -15,10 +15,11 @@ public class WebsecurityConfig {
 
         http.authorizeHttpRequests(
                 ar -> ar
-                        .requestMatchers("/community/**")
+                        .requestMatchers("/", "/community/**")
                         .permitAll()
                         .requestMatchers( "/css/**", "/javascript/**", "/error")
                         .permitAll()
+
         );
 
 
