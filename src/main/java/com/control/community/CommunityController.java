@@ -1,9 +1,6 @@
 package com.control.community;
 
-import com.Dto.community.BoardDetailDto;
-import com.Dto.community.BoardListMainDto;
-import com.Dto.community.BoardListSubDto;
-import com.Dto.community.CommentForm;
+import com.Dto.community.*;
 import com.entity.community.Comment;
 import com.service.community.BoardService;
 import com.service.community.CommentService;
@@ -28,7 +25,7 @@ public class CommunityController {
     @Autowired
     private CommentService commentService;
 
-    //커뮤니티 메인 페이지
+    // ================ 커뮤니티 메인 페이지 ================
     @GetMapping("/community/commain")
     public String commainPage(Model model){
 
@@ -38,7 +35,7 @@ public class CommunityController {
         return "community/commain";
     }
 
-    //커뮤니티 검색결과 페이지
+    // ================ 커뮤니티 검색결과 페이지 ================
     @GetMapping("/community/comsearch")
     public String comsearch(Model model){
 
@@ -48,7 +45,7 @@ public class CommunityController {
         return "community/comsearch";
     }
 
-    //커뮤니티 게시판(모임, 심부름) 페이지
+    // ================ 커뮤니티 게시판 페이지 ================
     @GetMapping("/community/board/boardList")
     public String boardPage(Model model){
         List<BoardListMainDto> boardListDtos = boardService.getBoardList();
@@ -57,7 +54,7 @@ public class CommunityController {
         return "community/board/boardList";
     }
 
-    //게시글 상세보기
+    // ================ 커뮤니티 게시글 상세보기 페이지 ================
     @GetMapping("/community/board/boardDetail/{boardId}")
     public String boardDetailPage(@PathVariable("boardId")Long id, Model model) {
 
@@ -70,7 +67,7 @@ public class CommunityController {
         return "community/board/boardDetail";
     }
 
-    //게시글 덧글 저장 요청
+    // ================ 커뮤니티 덧글 저장 요청 ================
     @GetMapping("/community/board/boardDetail/commentSave")
     public String commentSave(@Valid CommentForm commentForm,
                                 BindingResult bindingResult,
@@ -90,4 +87,15 @@ public class CommunityController {
 
         return "redirect:/community/board/boardDetail/"+commentForm.getBoardId();
     }
+
+    // ================ 커뮤니티 게시글 작성 페이지 ================
+    @GetMapping("/community/board/boardWrite")
+    public String boardWritePage(Model model){
+        BoardForm boardForm = new BoardForm();
+
+        return "/community/board/boardWrite";
+    }
+
+
+
 }
