@@ -17,7 +17,10 @@ public class BoardListSubDto {
     private LocalDate boardWriteDate; //게시글 작성일
     private int likeCount; //좋아요 수
 
+    private String Category; //게시글 카테고리
 
+
+    //entity -> dto
 public static BoardListSubDto to(Board board, int likeCount){
     BoardListSubDto boardListSubDto = new BoardListSubDto();
 

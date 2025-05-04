@@ -7,13 +7,14 @@
   <th:block layout:fragment="css"></th:block>
   <th:block layout:fragment="script"></th:block>
 </head>
-<div layout:fragment="main" id="main">
+<div layout:fragment="main" id="main"> <!-- ▼ main ▼ -->
 
   <div class="board-detail-wrap">  <!-- ▼ 게시글 상세보기 ▼ -->
 
     <h3 class="board-detail-title" th:text="${board.boardTitle}"></h3>
     <p class="board-detail-writeDate" th:text="${board.boardWriteDate}"></p>
     <p class="board-detail-boardType" th:text="${board.boardType}"></p>
+    <p class="board-detail-category" th:text="${board.category}"></p>
     <p class="board-detail-boardHit" th:text="${board.boardHit}"></p>
 
     <br>
@@ -24,6 +25,20 @@
     <p class="board-detail-userAddress" th:text="${board.userAddress}"></p>
 
 
+    <div class="count-box">
+      <div class="board-detail-likeCount-box">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
+        </svg>
+        <p class="board-detail-likeCount" th:text="${board.likeCount}"></p>
+      </div>
+      <div class="board-detail-commentCount-box">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-left" viewBox="0 0 16 16">
+          <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
+        </svg>
+        <p class="board-detail-commentCount" th:text="${board.commentCount}"></p>
+      </div>
+    </div>
 
   </div> <!-- ▲ 게시글 상세보기 끝 ▲ -->
 
@@ -58,6 +73,6 @@
     </ul>
   </div> <!-- ▲ 덧글 목록 끝 ▲ -->
 
-</div>
+</div> <!-- ▲ main 끝 ▲ -->
 
 </html>

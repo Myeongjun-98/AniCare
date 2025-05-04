@@ -19,6 +19,8 @@ public class BoardListMainDto {
 
     private BoardType boardType; //게시글 타입
 
+    private String Category; //게시글 카테고리
+
     private String boardContent; //게시글 내용
 
     private LocalDate boardWriteDate; //게시글 작성일
@@ -31,7 +33,8 @@ public class BoardListMainDto {
 
     private String userAddress; //작성자 주소
 
-    //
+
+//entity -> dto
 public static BoardListMainDto to(Board board){
     BoardListMainDto boardListMainDto = new BoardListMainDto();
 

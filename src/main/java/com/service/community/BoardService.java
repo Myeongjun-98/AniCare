@@ -6,11 +6,10 @@ import com.Dto.community.CommentViewDto;
 import com.entity.MainPage.User;
 import com.entity.community.Board;
 import com.entity.community.Comment;
+import com.entity.community.ErrandBoard;
+import com.entity.community.MeetingBoard;
 import com.repository.MainPage.UserRepository;
-import com.repository.community.BoardFileRepository;
-import com.repository.community.BoardLikeRepository;
-import com.repository.community.BoardRepository;
-import com.repository.community.CommentRepository;
+import com.repository.community.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -23,12 +22,14 @@ public class BoardService {
 
     private final BoardRepository boardRepository;
     private final BoardFileRepository boardFileRepository;
-//    private final BoardLikeRepository boardLikeRepository;
+    private final MeetingBoardRepository meetingBoardRepository;
+    private final ErrandBoardRepository errandBoardRepository;
+    private final BoardLikeRepository boardLikeRepository;
     private final UserRepository userRepository;
     private final CommentRepository commentRepository;
 
 
-    //게시글 목록 불러오기 (미완성)
+    // ================ 게시글 목록 불러오기 (현재 첨부파일 미구현) ================
     public List<BoardListMainDto> getBoardList(){
         List<BoardListMainDto> boardListMainDtos = new ArrayList<>();
 
@@ -46,13 +47,27 @@ public class BoardService {
             //게시글 작성자 정보 가져오기
             boardListMainDto.setUserName(userInfo.getUserName());
             boardListMainDto.setUserAddress(userInfo.getUserAddress());
+
+            //게시글 카테고리 가져오기
+            if(board.getBoardType().name() == "MEETING") {
+                MeetingBoard mCategory = meetingBoardRepository.findByBoardId(board.getId());
+
+                boardListMainDto.setCategory(mCategory.getMeetingCategory().toString());
+
+            } else if(board.getBoardType().name() == "ERRAND"){
+                ErrandBoard eCategory = errandBoardRepository.findByBoardId(board.getId());
+
+                boardListMainDto.setCategory(eCategory.getErrandCategory().toString());
+            }
+
+            //가져온 데이터들 전부 넣어주기
             boardListMainDtos.add(boardListMainDto);
 
         }
         return boardListMainDtos;
     }
 
-    //게시글 상세정보 보기
+    // ================ 게시글 상세정보 보기 ================
     public BoardDetailDto getBoardDetail(Long boardId){
         //게시글 정보 불러오기
         Board board = boardRepository.findById(boardId).get();
@@ -71,9 +86,32 @@ public class BoardService {
         }
 
         BoardDetailDto boardDetailDto = BoardDetailDto.of(board, commentViewDtos);
+
         //게시글 작성자 정보 불러오기
         boardDetailDto.setUserName(userBoardInfo.getUserName());
         boardDetailDto.setUserAddress(userBoardInfo.getUserAddress());
+
+        //게시글 덧글, 좋아요 수 불러오기
+        int likeCount = boardLikeRepository.countByBoardId(boardId);
+        int comCount = commentRepository.countByBoardId(boardId);
+
+        boardDetailDto.setLikeCount(likeCount);
+        boardDetailDto.setCommentCount(comCount);
+
+
+        //게시글 카테고리 불러오기(모임 모집글)
+        if(boardDetailDto.getBoardType().name() == "MEETING")
+        boardDetailDto.setCategory(meetingBoardRepository
+                .findByBoardId(boardDetailDto.getBoardId())
+                .getMeetingCategory()
+                .toString());
+
+        //게시글 카테고리 불러오기(심부름 구인글)
+        if(boardDetailDto.getBoardType().name() == "ERRAND")
+            boardDetailDto.setCategory(errandBoardRepository
+                    .findByBoardId(boardDetailDto.getBoardId())
+                    .getErrandCategory()
+                    .toString());
 
         return boardDetailDto;
     }

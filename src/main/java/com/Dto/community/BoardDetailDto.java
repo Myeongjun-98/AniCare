@@ -17,6 +17,7 @@ public class BoardDetailDto {
 //    private List<BoardFileDto> boardFileDtos; //게시글 첨부파일
 
     private BoardType boardType; //게시글 타입
+    private String Category; //게시글 카테고리
     private String boardTitle; //게시글 제목
     private LocalDate boardWriteDate; //게시글 작성일
     private int boardHit; //게시글 조회수
@@ -25,6 +26,9 @@ public class BoardDetailDto {
     private String userAddress; //게시글 작성자 주소
 
     private List<CommentViewDto> commentList; //게시글 덧글 목록
+
+    private Integer likeCount; //좋아요 수
+    private Integer commentCount; //덧글 수
 
     public static ModelMapper modelMapper = new ModelMapper();
 
