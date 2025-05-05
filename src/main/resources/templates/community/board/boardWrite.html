@@ -84,25 +84,9 @@
     </div>
 
     <!-- 임시 방편 첨부파일 input -->
-    <div class="mb-3">
-      <label for="formFile1" class="form-label">첨부파일1</label>
+    <div class="mb-3" th:each="num : ${#numbers.sequence(1,5)}">
+      <label for="formFile1" class="form-label" th:text="파일+${num}"></label>
       <input class="form-control" type="file" id="formFile1">
-    </div>
-    <div class="mb-3">
-      <label for="formFile2" class="form-label">첨부파일2</label>
-      <input class="form-control" type="file" id="formFile2">
-    </div>
-    <div class="mb-3">
-      <label for="formFile3" class="form-label">첨부파일3</label>
-      <input class="form-control" type="file" id="formFile3">
-    </div>
-    <div class="mb-3">
-      <label for="formFile4" class="form-label">첨부파일4</label>
-      <input class="form-control" type="file" id="formFile4">
-    </div>
-    <div class="mb-3">
-      <label for="formFile5" class="form-label">첨부파일5</label>
-      <input class="form-control" type="file" id="formFile5">
     </div>
     <!-- 임시 방편 첨부파일 input -->
 
