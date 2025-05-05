@@ -13,7 +13,8 @@ public class WebsecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
 
-        http.authorizeHttpRequests(
+        http
+                .authorizeHttpRequests(
                 ar -> ar
                         .requestMatchers("/", "/community/**")
                         .permitAll()

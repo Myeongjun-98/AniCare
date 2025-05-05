@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
@@ -51,7 +52,7 @@ public class CommunityController {
         List<BoardListMainDto> boardListDtos = boardService.getBoardList();
         model.addAttribute("boardListDtos", boardListDtos);
 
-        return "community/board/boardList";
+        return "/community/board/boardList";
     }
 
     // ================ 커뮤니티 게시글 상세보기 페이지 ================
@@ -93,7 +94,23 @@ public class CommunityController {
     public String boardWritePage(Model model){
         BoardForm boardForm = new BoardForm();
 
+        model.addAttribute("boardForm", boardForm);
         return "/community/board/boardWrite";
+    }
+
+    // ================ 커뮤니티 게시글 작성 요청 ================
+    @PostMapping("/community/board/boardWrite/boardSave")
+    public String boardSave(@Valid BoardForm boardForm,
+                            BindingResult bindingResult,
+                            Model model, String category){
+
+        try {
+            boardService.boardSave(boardForm, category);
+        } catch(Exception e) {
+            return "/community/board/boardWrite";
+        }
+
+        return "/community/board/boardList";
     }
 
 

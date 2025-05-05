@@ -5,38 +5,82 @@
       layout:decorate="~{fragment/default}">
 <head>
   <th:block layout:fragment="css"></th:block>
-  <th:block layout:fragment="script"></th:block>
+  <th:block layout:fragment="script">
+
+    <script th:inline="javascript">
+      document.addEventListener("DOMContentLoaded", function(){
+
+      //boardType, Category를 js로 갖고 오기
+      const boardTypeSelect = document.getElementById("boardType");
+      const categorySelect = document.getElementById("category");
+
+      //선택된 boardType(MEETING, ERRAND)
+      boardTypeSelect.addEventListener("change", function(){
+        const selectedType = this.value;
+        const categoryOptions = categorySelect.querySelectorAll("option");
+
+        categoryOptions.forEach(option => {
+          const type = option.getAttribute("data-type");
+          if(!type) {
+            option.hidden = false;
+            return;
+        }
+        option.hidden = (type !== selectedType);
+
+      });
+
+      categorySelect.value = "";
+      });
+
+    });
+
+    </script>
+  </th:block>
 </head>
 <div layout:fragment="main" id="main"> <!-- ▼ main ▼ -->
 
   <!-- ▼ 게시글 작성 input ▼ -->
-<!--  <form th:object="${boardForm}" method="post" action="/community/board/boardSave">-->
+  <form   th:action="@{/community/board/boardWrite/boardSave}"
+          th:object="${boardForm}"
+          method="post">
+
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
   <div  class="board-write">
     <div class="board-select-wrap">
       <div class="board-boardType">
-        <select class="form-select" aria-label="Default select example">
-          <option selected>게시판 타입을 선택해주세요.</option>
-          <option value="1">모임 모집글</option>
-          <option value="2">심부름 구인글</option>
+        <select th:field="*{boardType}" class="form-select" aria-label="Default select example" id="boardType">
+          <!-- selected는 나중에 선택 후 submit 시 오류 뜨게해야함 -->
+          <option value="" selected>게시판 타입을 선택해주세요.</option>
+          <option value="MEETING">모임 모집글</option>
+          <option value="ERRAND">심부름 구인글</option>
         </select>
       </div>
+
+      <!-- 모임 모집글 소카테고리 -->
       <div class="board-boardCategory">
-        <select class="form-select" aria-label="Default select example">
-          <option selected>게시판 카테고리를 선택해주세요.</option>
-          <option value="1">카테고리1</option>
-          <option value="2">카테고리2</option>
-          <option value="3">카테고리3</option>
+        <select th:field="*{category}" class="form-select" aria-label="Default select example" id="category">
+          <!-- selected는 나중에 선택 후 submit 시 오류 뜨게해야함 -->
+          <option value="" selected>게시판 카테고리를 선택해주세요.</option>
+          <option value="VOLUNTEER" data-type="MEETING">봉사활동</option>
+          <option value="WALKING" data-type="MEETING">산책모임</option>
+          <option value="INFO" data-type="MEETING">교류모임</option>
+
+          <option value="WALKING" data-type="ERRAND">산책</option>
+          <option value="PETSITTER" data-type="ERRAND">펫시터</option>
+          <option value="ERRANDING" data-type="ERRAND">심부름</option>
         </select>
       </div>
+
     </div>
 
     <div class="mb-3">
       <label for="exampleFormControlInput1" class="form-label">글 제목</label>
-      <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="boardTitle">
+      <input th:field="*{boardTitle}" type="text" class="form-control" id="exampleFormControlInput1" placeholder="boardTitle">
     </div>
     <div class="mb-3">
       <label for="exampleFormControlTextarea1" class="form-label">작성 내용</label>
-      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+      <textarea th:field="*{boardContent}" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
     </div>
 
     <!-- 임시 방편 첨부파일 input -->
@@ -61,9 +105,10 @@
       <input class="form-control" type="file" id="formFile5">
     </div>
     <!-- 임시 방편 첨부파일 input -->
+
     <button class="btn btn-outline-secondary" type="submit" id="button-addon2">게시</button>
   </div>
-<!--  </form>--> <!-- ▲ 게시글 작성 input 끝 ▲ -->
+  </form>  <!-- ▲ 게시글 작성 input 끝 ▲ -->
 
 
 </div> <!-- ▲ main 끝 ▲ -->

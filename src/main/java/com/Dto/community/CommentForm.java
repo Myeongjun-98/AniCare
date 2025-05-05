@@ -21,6 +21,5 @@ public class CommentForm {
 
     private LocalDate commentWriteDate; //덧글 작성일
 
-    public static ModelMapper modelMapper = new ModelMapper();
 
 }

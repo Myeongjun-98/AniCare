@@ -1,8 +1,11 @@
 package com.service.community;
 
 import com.Dto.community.BoardDetailDto;
+import com.Dto.community.BoardForm;
 import com.Dto.community.BoardListMainDto;
 import com.Dto.community.CommentViewDto;
+import com.constant.community.ErrandCategory;
+import com.constant.community.MeetingCategory;
 import com.entity.MainPage.User;
 import com.entity.community.Board;
 import com.entity.community.Comment;
@@ -29,11 +32,11 @@ public class BoardService {
     private final CommentRepository commentRepository;
 
 
-    // ================ 게시글 목록 불러오기 (현재 첨부파일 미구현) ================
+    // ================ 커뮤니티 - 게시글 목록 불러오기 (현재 첨부파일 미구현) ================
     public List<BoardListMainDto> getBoardList(){
         List<BoardListMainDto> boardListMainDtos = new ArrayList<>();
 
-        List<Board> boards = boardRepository.findAllByOrderByBoardHitDesc();
+        List<Board> boards = boardRepository.findAllByOrderByIdDesc();
 
 
         for(Board board : boards){
@@ -67,7 +70,7 @@ public class BoardService {
         return boardListMainDtos;
     }
 
-    // ================ 게시글 상세정보 보기 ================
+    // ================ 커뮤니티 - 게시글 상세정보 보기 ================
     public BoardDetailDto getBoardDetail(Long boardId){
         //게시글 정보 불러오기
         Board board = boardRepository.findById(boardId).get();
@@ -115,4 +118,41 @@ public class BoardService {
 
         return boardDetailDto;
     }
+
+
+    // ================ 커뮤니티 - 게시글 작성 (현재 첨부파일 미구현) ================
+    public void boardSave(BoardForm boardForm, String category){
+
+        //board타입 제목, 내용 저장
+        Board board = boardForm.to();
+        ErrandBoard errandBoard = new ErrandBoard();
+        MeetingBoard meetingBoard = new MeetingBoard();
+
+        boardForm.setUserId(2L);
+        User user = userRepository.findById(boardForm.getUserId()).get();
+        board.setUser(user);
+
+        boardRepository.save(board);
+
+        //errand, meeting
+        if(boardForm.getBoardType().name() == "MEETING")
+        {
+            MeetingCategory meetingCategory = MeetingCategory.valueOf(boardForm.getCategory());
+            meetingBoard.setBoard(board);
+            meetingBoard.setMeetingCategory(meetingCategory);
+            meetingBoardRepository.save(meetingBoard);
+        }
+        else if(boardForm.getBoardType().name() == "ERRAND") {
+            ErrandCategory errandCategory = ErrandCategory.valueOf(boardForm.getCategory());
+            errandBoard.setBoard(board);
+            errandBoard.setErrandCategory(errandCategory);
+            errandBoardRepository.save(errandBoard);
+        }
+
+
+    }
+
+
+
+
 }

@@ -27,7 +27,7 @@ public class CommentService {
         commentForm.setUserId(3L); //입력 체크용 임시
 
         Board board = boardRepository.findById(commentForm.getBoardId()).get();
-        User user = userRepository.findById(commentForm.getUserId()).get();
+        User user = userRepository.findById(commentForm.getUserId()).get(); //입력 체크용 임시
 
         Comment comment = new Comment();
         comment.setBoard(board);
