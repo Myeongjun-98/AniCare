@@ -4,11 +4,62 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{fragment/default}">
 <head>
-  <th:block layout:fragment="css"></th:block>
+  <th:block layout:fragment="css">
+    <style>
+
+    </style>
+  </th:block>
   <th:block layout:fragment="script"></th:block>
 </head>
-<div layout:fragment="main" id="main">
+<div layout:fragment="main" id="main"> <!-- ▼ main ▼ -->
+  <div class="search-result-wrap">
 
-</div>
+    <!-- ▼ 검색 input ▼ -->
+    <div class="input-group mb-3">
+      <div class="input-group-text">
+        <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
+      </div>
+      <input type="text" class="form-control" aria-label="Text input with checkbox">
+    </div> <!-- ▲ 검색 input 끝 ▲ -->
+
+
+  <!-- ▼ 게시판 타입 ▼ -->
+    <div class="boardType" style="display=flex; justify-content=center;">
+      <h2 class="TOTAL"> TOTAL </h2>
+      <h2 class="MEETING"> MEETING </h2>
+      <h2 class="ERRAND"> ERRAND </h2>
+    </div> <!-- ▲ 게시판 타입 끝 ▲ -->
+
+
+    <!-- ▼ 게시판 카테고리 ▼ -->
+    <div class="boardCategory" style="display=flex; justify-content=center;">
+      <h4 class="total"> Total </h4>
+      <h4 class="total"> Category1 </h4>
+      <h4 class="total"> Category2 </h4>
+      <h4 class="total"> Category3 </h4>
+    </div> <!-- ▲ 게시판 카테고리 끝 ▲ -->
+
+
+  <p>"keyword"에 대한 검색 결과</p>
+
+  <div class="orderBtn">
+    <p style="display: inline;">인기순</p>
+    <p style="display: inline;"> | </p>
+    <p style="display: inline;">최신순</p>
+  </div>
+
+    <!-- ▼ 검색결과 게시글 리스트 ▼ -->
+ <div th:each="board : ${boardListSubDtos}" class="result-list-wrap">
+   <div th:unless="${board.boardType.name() == 'CLINICDIARY'}" class="result-list">
+     <p th:text="${board.boardTitle}"></p> <!-- 게시글 제목 -->
+     <p th:text="${board.boardWriteDate}"></p> <!-- 게시글 작성일 -->
+    <p th:text="${board.likeCount}"></p> <!-- 게시글 좋아요 수 -->
+   </div>
+  </div> <!-- ▲ 검색결과 게시글 리스트 끝 ▲ -->
+
+
+
+  </div>
+</div> <!-- ▲ main 끝 ▲ -->
 
 </html>
