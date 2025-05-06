@@ -8,21 +8,25 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class MedicalMainController {
 
     @GetMapping("/medical/medicalMain")
-    public String medicalMainPage(Model model){
+    public String medicalMainPage(Model model) {
         return "medical/medicalMain";
     }
 
     @GetMapping("/medical/checkupPage")
-    public String checkupPage(Model model){
+    public String checkupPage(Model model) {
         return "medical/checkupPage";
     }
 
     @GetMapping("/medical/vet/vetPage")
-    public String vetPage(Model model){
+    public String vetPage(Model model) {
         return "medical/vet/vetPage";
     }
 
-
+    // 개발용 로그인
+    @GetMapping("/loginmedi")
+    public String login() {
+        return "medical/loginmedi";
+    }
 
 
 }
