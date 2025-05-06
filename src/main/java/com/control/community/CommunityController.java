@@ -111,7 +111,7 @@ public class CommunityController {
                             ){
 
         try {
-            boardService.boardSave(boardForm, category, multipartFileList);
+            boardService.boardSave(boardForm, multipartFileList);
         } catch(Exception e) {
             return "/community/board/boardWrite";
         }

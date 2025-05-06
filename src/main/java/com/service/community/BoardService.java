@@ -61,12 +61,12 @@ public class BoardService {
 
 
             //게시글 카테고리 가져오기
-            if(board.getBoardType().name() == "MEETING") {
+            if(board.getBoardType().name().equals("MEETING")) {
                 MeetingBoard mCategory = meetingBoardRepository.findByBoardId(board.getId());
 
                 boardListMainDto.setCategory(mCategory.getMeetingCategory().toString());
 
-            } else if(board.getBoardType().name() == "ERRAND"){
+            } else if(board.getBoardType().name().equals("ERRAND")){
                 ErrandBoard eCategory = errandBoardRepository.findByBoardId(board.getId());
 
                 boardListMainDto.setCategory(eCategory.getErrandCategory().toString());
@@ -122,18 +122,18 @@ public class BoardService {
 
 
         //게시글 카테고리 불러오기(모임 모집글)
-        if(boardDetailDto.getBoardType().name() == "MEETING")
-        boardDetailDto.setCategory(meetingBoardRepository
+        if(boardDetailDto.getBoardType().name().equals("MEETING"))
+        { boardDetailDto.setCategory(meetingBoardRepository
                 .findByBoardId(boardId)
                 .getMeetingCategory()
-                .toString());
+                .toString()); }
 
         //게시글 카테고리 불러오기(심부름 구인글)
-        if(boardDetailDto.getBoardType().name() == "ERRAND")
-            boardDetailDto.setCategory(errandBoardRepository
+        if(boardDetailDto.getBoardType().name().equals("ERRAND"))
+        { boardDetailDto.setCategory(errandBoardRepository
                     .findByBoardId(boardId)
                     .getErrandCategory()
-                    .toString());
+                    .toString()); }
 
 
         return boardDetailDto;
@@ -141,7 +141,7 @@ public class BoardService {
 
 
     // ================ 커뮤니티 - 게시글 업로드 ================
-    public void boardSave(BoardForm boardForm, String category,
+    public void boardSave(BoardForm boardForm,
                           List<MultipartFile> multipartFileList)
         throws Exception{
 
@@ -158,14 +158,14 @@ public class BoardService {
         boardRepository.save(board);
 
         //errand, meeting 테이블에 저장
-        if(boardForm.getBoardType().name() == "MEETING")
+        if(boardForm.getBoardType().name().equals("MEETING"))
         {
             MeetingCategory meetingCategory = MeetingCategory.valueOf(boardForm.getCategory());
             meetingBoard.setBoard(board);
             meetingBoard.setMeetingCategory(meetingCategory);
             meetingBoardRepository.save(meetingBoard);
         }
-        else if(boardForm.getBoardType().name() == "ERRAND") {
+        else if(boardForm.getBoardType().name().equals("ERRAND")) {
             ErrandCategory errandCategory = ErrandCategory.valueOf(boardForm.getCategory());
             errandBoard.setBoard(board);
             errandBoard.setErrandCategory(errandCategory);
