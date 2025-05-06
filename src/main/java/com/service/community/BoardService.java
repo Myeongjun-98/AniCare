@@ -1,20 +1,15 @@
 package com.service.community;
 
-import com.Dto.community.BoardDetailDto;
-import com.Dto.community.BoardForm;
-import com.Dto.community.BoardListMainDto;
-import com.Dto.community.CommentViewDto;
+import com.Dto.community.*;
 import com.constant.community.ErrandCategory;
 import com.constant.community.MeetingCategory;
 import com.entity.MainPage.User;
-import com.entity.community.Board;
-import com.entity.community.Comment;
-import com.entity.community.ErrandBoard;
-import com.entity.community.MeetingBoard;
+import com.entity.community.*;
 import com.repository.MainPage.UserRepository;
 import com.repository.community.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +25,8 @@ public class BoardService {
     private final BoardLikeRepository boardLikeRepository;
     private final UserRepository userRepository;
     private final CommentRepository commentRepository;
+
+    private final BoardFileService boardFileService;
 
 
     // ================ 커뮤니티 - 게시글 목록 불러오기 (현재 첨부파일 미구현) ================
@@ -72,6 +69,7 @@ public class BoardService {
 
     // ================ 커뮤니티 - 게시글 상세정보 보기 ================
     public BoardDetailDto getBoardDetail(Long boardId){
+
         //게시글 정보 불러오기
         Board board = boardRepository.findById(boardId).get();
         User userBoardInfo = userRepository.getById(board.getUser().getId());
@@ -88,7 +86,15 @@ public class BoardService {
             commentViewDtos.add(commentViewDto);
         }
 
-        BoardDetailDto boardDetailDto = BoardDetailDto.of(board, commentViewDtos);
+        //게시글 내 첨부파일 불러오기
+        List<BoardFile> boardFiles = boardFileRepository.findAllByBoardId(boardId);
+
+        List<BoardFileDto> boardFileDtos = new ArrayList<>();
+        for(BoardFile boardFile : boardFiles) {
+            boardFileDtos.add(BoardFileDto.from(boardFile));
+        }
+
+        BoardDetailDto boardDetailDto = BoardDetailDto.of(board, commentViewDtos, boardFileDtos);
 
         //게시글 작성자 정보 불러오기
         boardDetailDto.setUserName(userBoardInfo.getUserName());
@@ -105,36 +111,40 @@ public class BoardService {
         //게시글 카테고리 불러오기(모임 모집글)
         if(boardDetailDto.getBoardType().name() == "MEETING")
         boardDetailDto.setCategory(meetingBoardRepository
-                .findByBoardId(boardDetailDto.getBoardId())
+                .findByBoardId(boardId)
                 .getMeetingCategory()
                 .toString());
 
         //게시글 카테고리 불러오기(심부름 구인글)
         if(boardDetailDto.getBoardType().name() == "ERRAND")
             boardDetailDto.setCategory(errandBoardRepository
-                    .findByBoardId(boardDetailDto.getBoardId())
+                    .findByBoardId(boardId)
                     .getErrandCategory()
                     .toString());
+
 
         return boardDetailDto;
     }
 
 
     // ================ 커뮤니티 - 게시글 작성 (현재 첨부파일 미구현) ================
-    public void boardSave(BoardForm boardForm, String category){
+    public void boardSave(BoardForm boardForm, String category,
+                          List<MultipartFile> multipartFileList)
+        throws Exception{
 
         //board타입 제목, 내용 저장
         Board board = boardForm.to();
         ErrandBoard errandBoard = new ErrandBoard();
         MeetingBoard meetingBoard = new MeetingBoard();
 
+        //임시방편(로그인 기능 구현된 후 수정할 것)
         boardForm.setUserId(2L);
         User user = userRepository.findById(boardForm.getUserId()).get();
         board.setUser(user);
 
         boardRepository.save(board);
 
-        //errand, meeting
+        //errand, meeting 테이블에 저장
         if(boardForm.getBoardType().name() == "MEETING")
         {
             MeetingCategory meetingCategory = MeetingCategory.valueOf(boardForm.getCategory());
@@ -147,6 +157,31 @@ public class BoardService {
             errandBoard.setBoard(board);
             errandBoard.setErrandCategory(errandCategory);
             errandBoardRepository.save(errandBoard);
+        }
+
+        //이미지 업로드 -> board_file 테이블 저장
+        for(int i=0; i< multipartFileList.size(); i++){
+
+            //첨부파일 배열에 빈칸이 있다면 데이터 저장 X
+            MultipartFile file = multipartFileList.get(i);
+
+            if(file.isEmpty()){
+                return;
+            }
+
+            BoardFile boardFile = new BoardFile();
+            boardFile.setBoard(board); //board_file의 board(board_id)값 지정해주기
+
+            //썸네일 이미지 정해주기
+            if(i==0)
+                boardFile.setThumbnailYn("Y");
+            else
+                boardFile.setThumbnailYn("N");
+
+
+            //BoardFileService 메서드 호출
+            //테이블 저장 작업이 이루어지는 코드
+            boardFileService.saveFile(boardFile, multipartFileList.get(i));
         }
 
 

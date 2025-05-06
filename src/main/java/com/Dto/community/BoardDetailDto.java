@@ -14,7 +14,7 @@ import java.util.List;
 public class BoardDetailDto {
     private Long boardId; //게시글 아이디
 
-//    private List<BoardFileDto> boardFileDtos; //게시글 첨부파일
+    private List<BoardFileDto> boardFileDtos; //게시글 첨부파일
 
     private BoardType boardType; //게시글 타입
     private String Category; //게시글 카테고리
@@ -33,9 +33,11 @@ public class BoardDetailDto {
     public static ModelMapper modelMapper = new ModelMapper();
 
     //entity -> dto
-    public static BoardDetailDto of(Board board, List<CommentViewDto> commentList){
+    public static BoardDetailDto of(Board board, List<CommentViewDto> commentList,
+                                    List<BoardFileDto> boardFileDtos){
         BoardDetailDto boardDetailDto = modelMapper.map(board, BoardDetailDto.class);
         boardDetailDto.setCommentList(commentList);
+        boardDetailDto.setBoardFileDtos(boardFileDtos);
         return boardDetailDto;
     }
 

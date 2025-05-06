@@ -6,8 +6,12 @@
 <head>
   <th:block layout:fragment="css"></th:block>
   <th:block layout:fragment="script">
+  <script th:src="@{/javascript/boardFile/boardFile.js}"></script>
 
     <script th:inline="javascript">
+      //boardType로 '모임 모집글'선택 시 모임 모집글 소카테고리만,
+      //  '심부름 구인글' 선택 시 심부름 구인글 소카테고리만 보이게 하는 js
+
       document.addEventListener("DOMContentLoaded", function(){
 
       //boardType, Category를 js로 갖고 오기
@@ -30,8 +34,8 @@
       });
 
       categorySelect.value = "";
-      });
 
+      });
     });
 
     </script>
@@ -42,9 +46,10 @@
   <!-- ▼ 게시글 작성 input ▼ -->
   <form   th:action="@{/community/board/boardWrite/boardSave}"
           th:object="${boardForm}"
+          enctype="multipart/form-data"
           method="post">
 
-    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+<!--    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />-->
 
   <div  class="board-write">
     <div class="board-select-wrap">
@@ -83,10 +88,10 @@
       <textarea th:field="*{boardContent}" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
     </div>
 
-    <!-- 임시 방편 첨부파일 input -->
+    <!-- 임시 첨부파일 input -->
     <div class="mb-3" th:each="num : ${#numbers.sequence(1,5)}">
-      <label for="formFile1" class="form-label" th:text="파일+${num}"></label>
-      <input class="form-control" type="file" id="formFile1">
+      <label for="formFile" class="form-label" th:text="파일+${num}"></label>
+      <input class="form-control" type="file" id="formFile" name="boardFile">
     </div>
     <!-- 임시 방편 첨부파일 input -->
 

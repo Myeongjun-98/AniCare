@@ -7,12 +7,15 @@ import com.service.community.CommentService;
 import com.service.community.CommunityMainService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -56,6 +59,7 @@ public class CommunityController {
     }
 
     // ================ 커뮤니티 게시글 상세보기 페이지 ================
+
     @GetMapping("/community/board/boardDetail/{boardId}")
     public String boardDetailPage(@PathVariable("boardId")Long id, Model model) {
 
@@ -102,10 +106,12 @@ public class CommunityController {
     @PostMapping("/community/board/boardWrite/boardSave")
     public String boardSave(@Valid BoardForm boardForm,
                             BindingResult bindingResult,
-                            Model model, String category){
+                            @RequestParam("boardFile") List<MultipartFile> multipartFileList,
+                            Model model, String category
+                            ){
 
         try {
-            boardService.boardSave(boardForm, category);
+            boardService.boardSave(boardForm, category, multipartFileList);
         } catch(Exception e) {
             return "/community/board/boardWrite";
         }

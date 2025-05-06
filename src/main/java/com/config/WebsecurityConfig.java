@@ -14,9 +14,10 @@ public class WebsecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
 
         http
+                .csrf(csrf -> csrf.disable()) //실제 테스트 때에는 비활성화할 것.
                 .authorizeHttpRequests(
                 ar -> ar
-                        .requestMatchers("/", "/community/**")
+                        .requestMatchers("/", "/community/**", "/anicareFile/**")
                         .permitAll()
                         .requestMatchers( "/css/**", "/javascript/**", "/error")
                         .permitAll()

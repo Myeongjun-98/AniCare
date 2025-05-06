@@ -13,7 +13,7 @@ public interface BoardFileRepository extends JpaRepository<BoardFile, Long> { //
     BoardFile findByBoardIdAndThumbnailYn(Long id, String y);
 
     //해당 게시글의 이미지 전부 불러오기
-    List<BoardFile> findByBoardId(Long id);
+    List<BoardFile> findAllByBoardId(Long id);
 
     //게시글 이미지 삭제
     void deleteByBoardId(Long id);
