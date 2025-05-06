@@ -21,6 +21,7 @@
 
             <a th:href="@{ '/community/board/boardDetail/'+${board.id} }">
             <div class="board-card-body">
+                <img th:src="${board.fileUrl}" class="board-card-thumbnailFile" width="400" height="400" style="object-fit:cover;">
                 <h3 class="board-card-userName" th:text="${board.userName}"></h3> <!-- 작성자 이름 -->
                 <p class="board-card-writeDate" th:text="${board.boardWriteDate}"></p> <!-- 게시글 작성일 -->
                 <p class="board-card-boardHit" th:text="${board.boardHit}"></p> <!-- 게시글 조회수 -->

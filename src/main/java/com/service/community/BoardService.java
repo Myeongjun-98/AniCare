@@ -29,14 +29,15 @@ public class BoardService {
     private final BoardFileService boardFileService;
 
 
-    // ================ 커뮤니티 - 게시글 목록 불러오기 (현재 첨부파일 미구현) ================
+    // ================ 커뮤니티 - 게시판 페이지 - 게시글 목록 불러오기 ================
     public List<BoardListMainDto> getBoardList(){
+
         List<BoardListMainDto> boardListMainDtos = new ArrayList<>();
 
         List<Board> boards = boardRepository.findAllByOrderByIdDesc();
 
 
-        for(Board board : boards){
+        for(Board board : boards) {
 
             //게시글 작성자 관련 정보 갖고 오기
             User userInfo = userRepository.getById(board.getUser().getId());
@@ -47,6 +48,17 @@ public class BoardService {
             //게시글 작성자 정보 가져오기
             boardListMainDto.setUserName(userInfo.getUserName());
             boardListMainDto.setUserAddress(userInfo.getUserAddress());
+
+            //게시글 첨부파일 이미지 가져오기
+            BoardFile boardFile = boardFileRepository.findByBoardIdAndThumbnailYn(board.getId(), "Y");
+
+            //!!: 첨부파일이 없는 게시글에는 기본 이미지 세팅해주기
+            if (boardFile != null) {
+                boardListMainDto.setFileUrl(boardFile.getFileUrl());
+            } else {
+                boardListMainDto.setFileUrl("/anicareFile/default-thumbnail.png");
+            }
+
 
             //게시글 카테고리 가져오기
             if(board.getBoardType().name() == "MEETING") {
@@ -60,12 +72,13 @@ public class BoardService {
                 boardListMainDto.setCategory(eCategory.getErrandCategory().toString());
             }
 
-            //가져온 데이터들 전부 넣어주기
+            //가져온 데이터들 전부 dto에 넣어주기
             boardListMainDtos.add(boardListMainDto);
 
         }
         return boardListMainDtos;
     }
+
 
     // ================ 커뮤니티 - 게시글 상세정보 보기 ================
     public BoardDetailDto getBoardDetail(Long boardId){
@@ -86,7 +99,7 @@ public class BoardService {
             commentViewDtos.add(commentViewDto);
         }
 
-        //게시글 내 첨부파일 불러오기
+        //게시글 내 첨부파일 전부 불러오기
         List<BoardFile> boardFiles = boardFileRepository.findAllByBoardId(boardId);
 
         List<BoardFileDto> boardFileDtos = new ArrayList<>();
@@ -127,7 +140,7 @@ public class BoardService {
     }
 
 
-    // ================ 커뮤니티 - 게시글 작성 (현재 첨부파일 미구현) ================
+    // ================ 커뮤니티 - 게시글 업로드 ================
     public void boardSave(BoardForm boardForm, String category,
                           List<MultipartFile> multipartFileList)
         throws Exception{
@@ -164,7 +177,6 @@ public class BoardService {
 
             //첨부파일 배열에 빈칸이 있다면 데이터 저장 X
             MultipartFile file = multipartFileList.get(i);
-
             if(file.isEmpty()){
                 return;
             }

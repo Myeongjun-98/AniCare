@@ -13,7 +13,7 @@ public class BoardListMainDto {
 
     private Long id; //게시글 아이디
 
-//    private String fileUrl; //게시글 썸네일 이미지
+    private String fileUrl; //게시글 썸네일 이미지
 
     private String boardTitle; //게시글 제목
 
