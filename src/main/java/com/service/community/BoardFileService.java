@@ -54,7 +54,7 @@ public class BoardFileService {
         //확장자 추출 - .png, .jpg, .jpeg, .gif 등등...
         String ext = originalFileName.substring(originalFileName.lastIndexOf("."));
         //랜덤 문자열(uuid.toString()) + 업로드된 이미지의 확장자 로 새 파일 이름 생성
-        String savedName = uuid.toString() + ext;
+        String savedName = uuid + ext;
 
         //boardFileUrl = 저장 경로 + 새 파일 이름 : 첨부파일 저장경로 지정
         String fileUrl = uploadPath + "/" + savedName;
