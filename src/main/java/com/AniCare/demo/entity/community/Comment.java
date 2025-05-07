@@ -8,19 +8,20 @@ import lombok.Setter;
 import java.time.LocalDate;
 
 @Entity
-@Getter @Setter
+@Getter
+@Setter
 public class Comment { //덧글 정보를 저장하는 Entity
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="comment_id")
+    @Column(name = "comment_id")
     private Long id; //덧글 아이기
 
     @ManyToOne
-    @JoinColumn(name="board_id")
-    private  Board board; //게시글 아이디
+    @JoinColumn(name = "board_id")
+    private Board board; //게시글 아이디
 
     @ManyToOne
-    @JoinColumn(name="user_id")
+    @JoinColumn(name = "user_id")
     private User user; //유저 아이디
 
     @Column(nullable = false, length = 200)

@@ -7,7 +7,8 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 
-@Getter @Setter
+@Getter
+@Setter
 public class BoardListMainDto {
 
     private Long id; //게시글 아이디
@@ -35,20 +36,20 @@ public class BoardListMainDto {
     private Integer likeCount; //좋아요 수(정렬기준을 위함)
 
 
-//entity -> dto
-public static BoardListMainDto to(Board board){
-    BoardListMainDto boardListMainDto = new BoardListMainDto();
+    //entity -> dto
+    public static BoardListMainDto to(Board board) {
+        BoardListMainDto boardListMainDto = new BoardListMainDto();
 
-    boardListMainDto.setId(board.getId());
-    boardListMainDto.setBoardTitle(board.getBoardTitle());
-    boardListMainDto.setBoardType(board.getBoardType());
-    boardListMainDto.setBoardContent(board.getBoardContent());
-    boardListMainDto.setBoardWriteDate(board.getBoardWriteDate());
-    boardListMainDto.setBoardHit(board.getBoardHit());
+        boardListMainDto.setId(board.getId());
+        boardListMainDto.setBoardTitle(board.getBoardTitle());
+        boardListMainDto.setBoardType(board.getBoardType());
+        boardListMainDto.setBoardContent(board.getBoardContent());
+        boardListMainDto.setBoardWriteDate(board.getBoardWriteDate());
+        boardListMainDto.setBoardHit(board.getBoardHit());
 
 
-    return boardListMainDto;
-}
+        return boardListMainDto;
+    }
 
 
 }

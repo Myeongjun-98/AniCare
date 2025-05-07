@@ -1,4 +1,5 @@
 package com.AniCare.demo.entity.admin;
+
 import com.AniCare.demo.constant.admin.ClinicType;
 import com.AniCare.demo.entity.medical.VetInfo;
 import jakarta.persistence.*;
@@ -9,7 +10,8 @@ import lombok.Setter;
 @Getter
 @Entity
 public class Hospital {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "hospital_id")
     private Long id;
 
@@ -23,7 +25,7 @@ public class Hospital {
 
     @OneToOne
     @JoinColumn(name = "vet_info_id")
-    private VetInfo vetInfoId;
+    private VetInfo vetInfo;
 
     private String device;
     private String operating;
@@ -33,8 +35,6 @@ public class Hospital {
 
     @Column(nullable = false)
     private String hospitalAddress;
-
-
 
 
 }

@@ -6,7 +6,8 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 
-@Getter @Setter
+@Getter
+@Setter
 public class CommentForm {
     private Long commentId; //덧글 아이디
 

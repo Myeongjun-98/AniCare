@@ -6,7 +6,9 @@ import lombok.Setter;
 
 import java.util.List;
 
-@Entity @Setter @Getter
+@Entity
+@Setter
+@Getter
 public class Prescription {
 
     @Id

@@ -11,13 +11,13 @@ import java.time.LocalDate;
 @Getter
 @Setter
 public class Enquiry {
-    
+
     // 공지사항 테이블 아이디
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="enquiry_id")
+    @Column(name = "enquiry_id")
     private Long id;
-    
+
     // 유저테이블 아이디
     @JoinColumn(name = "user_id")
     @ManyToOne

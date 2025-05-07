@@ -13,16 +13,16 @@ import java.time.LocalDate;
 public class Notice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="notice_id")
+    @Column(name = "notice_id")
     private Long id;
 
-    @Column(nullable = false,columnDefinition = "TEXT")
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String noticeTitle;
 
     @Column(nullable = false)
     private LocalDate noticeDate;
 
-    @Column(nullable = false,columnDefinition = "TEXT")
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String noticeBody;
 
     @Enumerated(EnumType.STRING)

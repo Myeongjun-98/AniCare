@@ -5,7 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.modelmapper.ModelMapper;
 
-@Getter @Setter
+@Getter
+@Setter
 public class BoardFileDto {
 
     private Long fileId; //첨부파일 아이디

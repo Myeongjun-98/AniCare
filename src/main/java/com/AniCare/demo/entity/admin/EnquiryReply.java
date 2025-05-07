@@ -1,4 +1,5 @@
 package com.AniCare.demo.entity.admin;
+
 import com.AniCare.demo.entity.MainPage.Enquiry;
 import jakarta.persistence.*;
 import jakarta.persistence.Entity;
@@ -18,7 +19,7 @@ public class EnquiryReply {
     private Long id;
 
     @OneToOne
-    @JoinColumn(name="enquiry_id")
+    @JoinColumn(name = "enquiry_id")
     private Enquiry enquiry;
 
     private String content;

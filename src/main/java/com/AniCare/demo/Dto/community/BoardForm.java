@@ -9,10 +9,11 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 
-@Getter @Setter
+@Getter
+@Setter
 public class BoardForm {
     private Long boardId; //게시글 아이디
-    
+
     private Long userId; //작성자 아이디
 
     @NotNull(message = "게시판을 선택해주세요.")
@@ -27,7 +28,7 @@ public class BoardForm {
     @NotEmpty(message = "게시글 내용을 입력해주세요.")
     private String boardContent; //게시글 내용
 
-    public Board to(){
+    public Board to() {
         Board board = new Board();
         board.setBoardType(this.getBoardType());
         board.setBoardTitle(this.getBoardTitle());

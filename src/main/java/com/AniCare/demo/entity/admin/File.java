@@ -10,19 +10,14 @@ import lombok.Setter;
 public class File {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="file_id")
-    private Long id;
-
+    private Long fileId;
     @ManyToOne
-    @JoinColumn(name="notice_id")
+    @JoinColumn(name = "notice_id")
     private Notice notice;
-
     @Column(nullable = false)
     private String fileOriginalName;
-
     @Column(nullable = false)
     private String fileSaveName;
-
     @Column(nullable = false)
     private String fileUrl;
 
