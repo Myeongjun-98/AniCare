@@ -11,6 +11,15 @@
 
   <div class="board-detail-wrap">  <!-- ▼ 게시글 상세보기 ▼ -->
 
+    <!--  게시글 이미지 목록 보여주기  -->
+    <div th:each="file : ${board.boardFileDtos}">
+      <img th:if="${not #strings.isEmpty(file.fileUrl)}"
+           th:src="${file.fileUrl}"
+           class="boardFile"
+            width="700">
+    </div>
+
+    <!--  게시글 정보 상세보기  -->
     <h3 class="board-detail-title" th:text="${board.boardTitle}"></h3>
     <p class="board-detail-writeDate" th:text="${board.boardWriteDate}"></p>
     <p class="board-detail-boardType" th:text="${board.boardType}"></p>

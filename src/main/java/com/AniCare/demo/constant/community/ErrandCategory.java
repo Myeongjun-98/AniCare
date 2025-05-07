@@ -5,11 +5,6 @@ public enum ErrandCategory {
 
     private final String typeName;
 
-    ErrandCategory(String typeName) {
-        this.typeName = typeName;
-    }
-
-    public String getTypeName() {
-        return this.typeName;
-    }
+    ErrandCategory(String typeName) {this.typeName = typeName; }
+    public String getTypeName(){return this.typeName;}
 }

@@ -13,7 +13,7 @@ public class BoardListMainDto {
 
     private Long id; //게시글 아이디
 
-//    private String fileUrl; //게시글 썸네일 이미지
+    private String fileUrl; //게시글 썸네일 이미지
 
     private String boardTitle; //게시글 제목
 
@@ -32,6 +32,8 @@ public class BoardListMainDto {
     private String userName; //게시글 작성자
 
     private String userAddress; //작성자 주소
+
+    private Integer likeCount; //좋아요 수(정렬기준을 위함)
 
 
     //entity -> dto
