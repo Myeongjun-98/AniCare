@@ -11,8 +11,11 @@
 </head>
 <div id="main" layout:fragment="main">
     <div> <!-- 창 영역 -->
-        <div th:each="vetCard : ${vetInfoListDtos}"> <!-- 카드 -->
-
+        <div th:each=" vetCard : ${vetList} "> <!-- 수의사 리스트 카드 -->
+            <div th:style="${vetCard.profileImage}">프로필이미지</div>
+            <p th:text="${vetCard.vetName}"></p>
+            <p th:text="${vetCard.hospitalName}"></p>
+            <span th:each="PS : ${vetCard.curingCapable}" th:text="${PS}"></span>
         </div>
     </div>
 </div>
