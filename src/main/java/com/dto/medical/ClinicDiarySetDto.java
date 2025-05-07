@@ -1,4 +1,4 @@
-package com.dto.medical;
+package com.Dto.medical;
 
 import com.constant.medical.PetStatus;
 import com.entity.medical.Allergy;
@@ -11,7 +11,10 @@ import lombok.Setter;
 import java.time.LocalDate;
 import java.util.List;
 
-@Setter@NoArgsConstructor@AllArgsConstructor@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
 public class ClinicDiarySetDto {
 
     private LocalDate clinicDiaryRecordDate;    // 진료수첩 설정날짜

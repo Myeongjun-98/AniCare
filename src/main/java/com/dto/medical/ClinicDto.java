@@ -1,4 +1,4 @@
-package com.dto.medical;
+package com.Dto.medical;
 
 import com.constant.medical.PetSex;
 import com.constant.medical.PetSpecies;
@@ -10,7 +10,10 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@AllArgsConstructor@NoArgsConstructor@Setter@Getter
+@AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@Getter
 public class ClinicDto {
 
     private LocalDateTime clinicDate;   // 진료 날짜

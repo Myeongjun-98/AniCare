@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html
+        lang="ko"
+        layout:decorate="~{fragment/default}"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <th:block layout:fragment="css"></th:block>
+    <th:block layout:fragment="script"></th:block>
+</head>
+<div id="main" layout:fragment="main">
+    <div> <!-- 창 영역 -->
+        <div th:each="vetCard : ${vetInfoListDtos}"> <!-- 카드 -->
+
+        </div>
+    </div>
+</div>
+</html>

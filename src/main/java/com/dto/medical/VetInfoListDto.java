@@ -1,4 +1,4 @@
-package com.dto.medical;
+package com.Dto.medical;
 
 import com.constant.medical.PetSpecies;
 import lombok.AllArgsConstructor;
@@ -8,7 +8,10 @@ import lombok.Setter;
 
 import java.util.List;
 
-@Getter @Setter @NoArgsConstructor @AllArgsConstructor
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class VetInfoListDto {
 
     private Long vetInfoId; // 수의사 정보 아이디
