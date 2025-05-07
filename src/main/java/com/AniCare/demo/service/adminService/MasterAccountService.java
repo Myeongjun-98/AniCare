@@ -1,4 +1,4 @@
-package com.AniCare.demo.service;
+package com.AniCare.demo.service.adminService;
 
 import com.AniCare.demo.DTO.admin.MasterAccountDto;
 import com.AniCare.demo.entity.admin.MasterAccount;

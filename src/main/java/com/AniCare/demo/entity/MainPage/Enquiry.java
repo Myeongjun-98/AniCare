@@ -38,4 +38,6 @@ public class Enquiry {
     private EnquiryType enquiryType; // 문의사항 유형
 
 
+    public void setStatus(String 처리완료) {
+    }
 }

@@ -1,15 +1,16 @@
 package com.AniCare.demo.control.admin;
 
 import com.AniCare.demo.DTO.admin.*;
-import com.AniCare.demo.service.EnquiryService;
-import com.AniCare.demo.service.HospitalService;
-import com.AniCare.demo.service.MasterAccountService;
-import com.AniCare.demo.service.NoticeService;
+import com.AniCare.demo.service.adminService.EnquiryService;
+import com.AniCare.demo.service.adminService.HospitalService;
+import com.AniCare.demo.service.adminService.MasterAccountService;
+import com.AniCare.demo.service.adminService.NoticeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -37,7 +38,7 @@ public class AdminPageController {
     }
 
 
-    @PostMapping("/enquiryReply")
+    @PostMapping("ad/enquiryReply")
     public String replyToEnquiry(@RequestParam("id") Long enquiryId,
                                  @RequestParam("reply") String reply) {
         enquiryService.reply(enquiryId, reply);

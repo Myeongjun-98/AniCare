@@ -1,4 +1,4 @@
-package com.AniCare.demo.service;
+package com.AniCare.demo.service.adminService;
 
 import com.AniCare.demo.DTO.admin.NoticeDto;
 import com.AniCare.demo.DTO.admin.NoticeListDto;

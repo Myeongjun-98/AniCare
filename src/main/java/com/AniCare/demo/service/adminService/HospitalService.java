@@ -1,4 +1,4 @@
-package com.AniCare.demo.service;
+package com.AniCare.demo.service.adminService;
 
 import com.AniCare.demo.DTO.admin.HospitalDto;
 import com.AniCare.demo.repository.admin.HospitalRepository;

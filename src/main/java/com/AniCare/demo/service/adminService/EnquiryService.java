@@ -1,4 +1,4 @@
-package com.AniCare.demo.service;
+package com.AniCare.demo.service.adminService;
 
 import com.AniCare.demo.DTO.admin.EnquiryReplyViewDto;
 import com.AniCare.demo.entity.MainPage.Enquiry;
@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -42,13 +43,27 @@ public class EnquiryService {
         enquiryReplyRepository.save(reply);
     }
 
+
     /**
      * 문의 + 답변 리스트 조회
      */
     @Transactional(readOnly = true)
+
     public List<EnquiryReplyViewDto> findAll() {
-        return enquiryReplyRepository.findAll().stream()
-                .map(EnquiryReply::to) // EnquiryReply → EnquiryReplyViewDto 변환
-                .collect(Collectors.toList());
+
+        List<EnquiryReplyViewDto> enquiryReplyViewDtos = new ArrayList<>();
+
+        List<Enquiry> enquiries = enquiryRepository.findAll();
+
+        for(Enquiry enquiry : enquiries){
+            EnquiryReply enquiryReply = enquiryReplyRepository.findByEnquiryId(enquiry.getId()).orElse( new EnquiryReply());
+
+            EnquiryReplyViewDto dto = EnquiryReplyViewDto.of(enquiryReply,enquiry);
+            enquiryReplyViewDtos.add(dto);
+
+        }
+
+        return enquiryReplyViewDtos;
     }
 }
+
