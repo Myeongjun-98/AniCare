@@ -42,7 +42,7 @@ public class BoardService {
     }
 
 
-    // ================ 커뮤니티 - 게시판 페이지 - 게시글 목록 불러오기(최신순) ================
+    // ================ 커뮤니티 - 게시판 페이지 - 게시글 목록 불러오기 ================
     public List<BoardListMainDto> getBoardList(String type, String order){
 
         List<BoardListMainDto> boardListMainDtos = new ArrayList<>();
@@ -55,14 +55,10 @@ public class BoardService {
 
 
             //게시글 작성자 관련 정보 갖고 오기
-            User userInfo = userRepository.getById(board.getUser().getId());
+            User userInfo = userRepository.findById(board.getUser().getId()).orElse(null);
 
             //게시글 정보 가져오기
             BoardListMainDto boardListMainDto = BoardListMainDto.to(board);
-
-            //좋아요 수(정렬을 위함) 넣어주기
-            int likecount = boardLikeRepository.countByBoardId(board.getId());
-            boardListMainDto.setLikeCount(likecount);
 
 
             //게시글 작성자 정보 가져오기
@@ -98,6 +94,7 @@ public class BoardService {
 
         }
 
+        //인기순 정렬 기능
         if(order.equals("L")) {
             boardListMainDtos.sort(Comparator.comparing(l -> l.getLikeCount(), Comparator.reverseOrder()));
         }
@@ -139,11 +136,8 @@ public class BoardService {
         boardDetailDto.setUserName(userBoardInfo.getUserName());
         boardDetailDto.setUserAddress(userBoardInfo.getUserAddress());
 
-        //게시글 덧글, 좋아요 수 불러오기
-        int likeCount = boardLikeRepository.countByBoardId(boardId);
+        //게시글 덧글수 불러오기
         int comCount = commentRepository.countByBoardId(boardId);
-
-        boardDetailDto.setLikeCount(likeCount);
         boardDetailDto.setCommentCount(comCount);
 
 

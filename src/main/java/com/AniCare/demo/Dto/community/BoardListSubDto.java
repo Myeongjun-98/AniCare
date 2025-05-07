@@ -20,14 +20,13 @@ public class BoardListSubDto {
 
 
     //entity -> dto
-public static BoardListSubDto to(Board board, int likeCount){
+public static BoardListSubDto to(Board board){
     BoardListSubDto boardListSubDto = new BoardListSubDto();
 
     boardListSubDto.setId(board.getId());
     boardListSubDto.setBoardTitle(board.getBoardTitle());
     boardListSubDto.setBoardType(board.getBoardType());
     boardListSubDto.setBoardWriteDate(board.getBoardWriteDate());
-    boardListSubDto.setLikeCount(likeCount);
 
     return boardListSubDto;
 }

@@ -34,15 +34,15 @@
 
 
 <!-- ▼ 모임 모집글 인기글 ▼ -->
-  <h3>모임 모집글 인기글</h3>
+  <h2>모임 모집글 인기글</h2>
   <br>
-  <div th:each="mboard : ${boardListMainDtos}" class="popular-meeting">
-    <div th:if="${mboard.boardType.name() == 'MEETING'}" class="mb-card">
+  <div th:each="mboard : ${popMeeting}" class="popular-meeting">
+    <div class="mb-card">
 
         <a> <!-- a태그 th에 게시글 상세보기 링크 걸어두기. "@{'/coms/comdetail/' + ${board.id}" -->
           <!-- ▼ 리스트 이미지 ▼ -->
-          <div>
-
+          <div class="mb-card-thumbnailFile">
+            <img th:src="${mboard.fileUrl}" class="board-card-thumbnailFile" width="600" height="400" style="object-fit:cover;">
           </div> <!-- ▲ 리스트 이미지 끝 ▲ -->
 
 
@@ -51,7 +51,8 @@
             <p class="mb-card-boardType" th:text="${mboard.boardType}"></p> <!-- 게시글 타입 -->
             <p class="mb-card-category" th:text="${mboard.category}"></p> <!-- 게시글 카테고리 -->
             <h3 class="mb-card-boardName" th:text="${mboard.boardTitle}"></h3> <!-- 게시글 제목 -->
-            <p class="mb-card-boardContent" th:text="${mboard.boardContent}"></p> <!-- 게시글 내용 -->
+            <p class="mb-card-boardContent" th:text="${mboard.boardContent}"
+               style="white-space: nowrap; overflow:hidden; text-overflow: ellipsis; max-width:400px;"></p> <!-- 게시글 내용 -->
           </div> <!-- ▲ 게시글 리스트 목록 끝 ▲ -->
 
         </a>
@@ -62,15 +63,15 @@
 
   <!-- ▼ 심부름 구인글 인기글 ▼ -->
   <br>
-  <h3>심부름 구인글 인기글</h3>
+  <h2>심부름 구인글 인기글</h2>
   <br>
-  <div th:each="eboard : ${boardListMainDtos}" class="popular-errand">
-    <div th:if="${eboard.boardType.name() == 'ERRAND'}" class="eb-card">
+  <div th:each="eboard : ${popErrand}" class="popular-errand">
+    <div class="eb-card">
       <a> <!-- a태그 th에 게시글 상세보기 링크 걸어두기. "@{'/coms/comdetail/' + ${board.id}" -->
 
         <!-- ▼ 리스트 이미지 ▼ -->
-        <div>
-
+        <div class="eb-card-thumbnailFile">
+          <img th:src="${eboard.fileUrl}" class="board-card-thumbnailFile" width="600" height="400" style="object-fit:cover;">
         </div> <!-- ▲ 리스트 이미지 끝 ▲ -->
 
 
@@ -79,7 +80,8 @@
           <p class="eb-card-boardType" th:text="${eboard.boardType}"></p> <!-- 게시글 타입 -->
           <p class="eb-card-category" th:text="${eboard.category}"></p> <!-- 게시글 카테고리 -->
           <h3 class="eb-card-boardName" th:text="${eboard.boardTitle}"></h3> <!-- 게시글 제목 -->
-          <p class="eb-card-boardContent" th:text="${eboard.boardContent}"></p> <!-- 게시글 내용 -->
+          <p class="eb-card-boardContent" th:text="${eboard.boardContent}"
+             style="white-space: nowrap; overflow:hidden; text-overflow: ellipsis; max-width:400px;"></p> <!-- 게시글 내용 -->
         </div> <!-- ▲ 게시글 리스트 목록 끝 ▲ -->
 
       </a>

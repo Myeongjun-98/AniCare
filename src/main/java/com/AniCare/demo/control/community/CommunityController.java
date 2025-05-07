@@ -3,6 +3,7 @@ package com.AniCare.demo.control.community;
 import com.AniCare.demo.Dto.community.BoardListMainDto;
 import com.AniCare.demo.Dto.community.BoardListSubDto;
 import com.AniCare.demo.Dto.community.*;
+import com.AniCare.demo.constant.community.BoardType;
 import com.AniCare.demo.service.community.BoardService;
 import com.AniCare.demo.service.community.CommentService;
 import com.AniCare.demo.service.community.CommunityMainService;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class CommunityController {
@@ -34,7 +36,22 @@ public class CommunityController {
     public String commainPage(Model model){
 
         List<BoardListMainDto> boardListMainDtos = communityMainService.getBoardMainList();
-        model.addAttribute("boardListMainDtos", boardListMainDtos);
+
+        //모임 모집글 인기글 5개 가공
+        List<BoardListMainDto> popMeeting = boardListMainDtos.stream()
+                        .filter(board -> board.getBoardType() == BoardType.MEETING)
+                                .limit(5)
+                                        .toList();
+
+        //심부름 구인글 인기글 5개 가공
+        List<BoardListMainDto> popErrand = boardListMainDtos.stream()
+                .filter(board -> board.getBoardType() == BoardType.ERRAND)
+                .limit(5)
+                .toList();
+
+
+        model.addAttribute("popMeeting", popMeeting);
+        model.addAttribute("popErrand",popErrand);
 
         return "community/commain";
     }

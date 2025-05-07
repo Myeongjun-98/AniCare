@@ -3,6 +3,7 @@ package com.AniCare.demo.service.community;
 import com.AniCare.demo.Dto.community.BoardListMainDto;
 import com.AniCare.demo.Dto.community.BoardListSubDto;
 import com.AniCare.demo.entity.community.Board;
+import com.AniCare.demo.entity.community.BoardFile;
 import com.AniCare.demo.entity.community.ErrandBoard;
 import com.AniCare.demo.entity.community.MeetingBoard;
 import com.AniCare.demo.repository.MainPage.UserRepository;
@@ -31,11 +32,21 @@ CommunityMainService {
     public List<BoardListMainDto> getBoardMainList(){
         List<BoardListMainDto> boardListMainDtos = new ArrayList<>();
 
-        List<Board> boards = boardRepository.findAllByOrderByBoardHitDesc();
+        List<Board> boards = boardRepository.findAllByOrderByLikeCountDesc();
 
         for(Board board : boards){
             BoardListMainDto boardListMainDto = BoardListMainDto.to(board);
             boardListMainDtos.add(boardListMainDto);
+
+            //게시글 썸네일 이미지 가져오기
+            BoardFile boardFile = boardFileRepository.findByBoardIdAndThumbnailYn(board.getId(),"Y");
+
+            //!!: 첨부파일이 없는 게시글에는 기본 이미지 세팅해주기
+            if (boardFile != null) {
+                boardListMainDto.setFileUrl(boardFile.getFileUrl());
+            } else {
+                boardListMainDto.setFileUrl("/anicareFile/default-thumbnail.png");
+            }
 
             //게시글 카테고리 가져오기 (페이지에 표시해줄 것)
             if(board.getBoardType().name() == "MEETING") {
@@ -61,8 +72,7 @@ CommunityMainService {
         List<Board> boards = boardRepository.findAllByOrderByIdDesc();
 
         for(Board board : boards){
-            int likeCount = boardLikeRepository.countByBoardId(board.getId());
-            BoardListSubDto boardListSubDto = BoardListSubDto.to(board, likeCount);
+            BoardListSubDto boardListSubDto = BoardListSubDto.to(board);
             boardListSubDtos.add(boardListSubDto);
 
 

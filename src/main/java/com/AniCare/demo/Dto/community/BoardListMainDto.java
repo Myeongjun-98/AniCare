@@ -46,6 +46,7 @@ public class BoardListMainDto {
         boardListMainDto.setBoardContent(board.getBoardContent());
         boardListMainDto.setBoardWriteDate(board.getBoardWriteDate());
         boardListMainDto.setBoardHit(board.getBoardHit());
+        boardListMainDto.setLikeCount(board.getLikeCount());
 
 
         return boardListMainDto;

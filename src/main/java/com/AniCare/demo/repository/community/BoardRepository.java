@@ -11,8 +11,8 @@ import java.util.List;
 public interface BoardRepository extends JpaRepository<Board, Long> { //board 테이블 데이터를 다루는 Repo
 
 
-    //게시글 조회수 순으로 모두 불러오기
-    List<Board> findAllByOrderByBoardHitDesc();
+    //게시글 좋아요수 순으로 모두 불러오기
+    List<Board> findAllByOrderByLikeCountDesc();
 
     //게시글 최신순으로 모두 불러오기
     List<Board> findAllByOrderByIdDesc();
