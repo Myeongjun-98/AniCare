@@ -9,21 +9,22 @@ import lombok.Setter;
 import java.time.LocalDate;
 
 @Entity
-@Getter @Setter
+@Getter
+@Setter
 public class Board { //게시글 정보를 저장하는 Entity
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="board_id")
+    @Column(name = "board_id")
     private Long id; //게시글 아이디
 
-    @Column(nullable=false)
+    @Column(nullable = false)
     private String boardTitle; //게시글 제목
 
     @ManyToOne
-    @JoinColumn(name="user_id")
+    @JoinColumn(name = "user_id")
     private User user; //작성자 아이디
 
-    @Column(nullable=false, length = 500)
+    @Column(nullable = false, length = 500)
     private String boardContent; //게시글 내용
 
     private int boardHit; //게시글 조회수

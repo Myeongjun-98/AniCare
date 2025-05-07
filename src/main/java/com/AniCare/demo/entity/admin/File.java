@@ -8,10 +8,11 @@ import lombok.Setter;
 @Setter
 @Getter
 public class File {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long fileId;
     @ManyToOne
-    @JoinColumn(name="notice_id")
+    @JoinColumn(name = "notice_id")
     private Notice notice;
     @Column(nullable = false)
     private String fileOriginalName;

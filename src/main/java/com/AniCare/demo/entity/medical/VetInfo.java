@@ -10,7 +10,9 @@ import lombok.Setter;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
-@Getter @Setter @Entity
+@Getter
+@Setter
+@Entity
 public class VetInfo {
 
     @Id

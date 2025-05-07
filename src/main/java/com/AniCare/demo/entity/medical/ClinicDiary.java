@@ -10,7 +10,9 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 
-@Getter @Setter @Entity
+@Getter
+@Setter
+@Entity
 public class ClinicDiary {
 
     @Id

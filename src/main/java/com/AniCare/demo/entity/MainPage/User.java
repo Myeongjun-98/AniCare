@@ -10,27 +10,31 @@ import lombok.Setter;
 @Setter
 public class User {
 
+    // 유저테이블 아이디
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     private Long id;
 
-    @Column(nullable = false, unique = true)
-    private String loginId; // ✅ 추가된 필드
+    private String userImage; // 유저 프로필 사진
 
-    private String userImage;
     @Column(nullable = false)
-    private String userName;
-    @Column(nullable = false)
-    private String userPassword;
-    @Column(nullable = false)
-    private String userEmail;
-    @Column(nullable = false)
-    private String userAddress;
+    private String userName; // 유저이릉
 
-    private String userTel;
+    @Column(nullable = false)
+    private String userPassword; // 유저 비밀번호
+
+    @Column(nullable = false)
+    private String userEmail; // 유저 이메일
+
+    @Column(nullable = false)
+    private String userAddress; // 유저 주소
+
+    private String userTel; // 유저 전화번호
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Authorization authorization;
+    private Authorization authorization; // 권한 (사용자 or 관리자)
+
+
 }

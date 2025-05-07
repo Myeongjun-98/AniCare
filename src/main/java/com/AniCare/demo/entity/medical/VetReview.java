@@ -6,7 +6,9 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 
-@Getter @Setter @Entity
+@Getter
+@Setter
+@Entity
 public class VetReview {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

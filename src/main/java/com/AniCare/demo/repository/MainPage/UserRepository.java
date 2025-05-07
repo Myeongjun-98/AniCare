@@ -9,4 +9,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     // 로그인할때 필요한 쿼리 동작 메서드
 //    User findByUserId(Long id);
+
 }
