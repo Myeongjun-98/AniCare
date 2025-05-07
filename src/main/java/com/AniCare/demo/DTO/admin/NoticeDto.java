@@ -12,4 +12,6 @@ public class NoticeDto {
     private String title;
     private String body;
     private NoticeCategory category;
+    
+    /// / 그냥쓰는말
 }
