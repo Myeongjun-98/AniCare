@@ -32,6 +32,13 @@ public class BoardService {
 
     private final BoardFileService boardFileService;
 
+    // ================ 메인페이지에서 커뮤니티 인기글 불러오기 위한 메서드 =================
+    public List<Board> getAllboardList(){
+        List<Board> boards = boardRepository.findAll();
+
+        return boards;
+    }
+
 
     // ================ 커뮤니티 - 게시판 페이지 - 게시글 목록 불러오기(최신순) ================
     public List<BoardListMainDto> getBoardList(String order){
