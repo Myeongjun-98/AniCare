@@ -27,10 +27,25 @@ public class Board { //게시글 정보를 저장하는 Entity
     @Column(nullable = false, length = 500)
     private String boardContent; //게시글 내용
 
-    private int boardHit; //게시글 조회수
+    private int boardHit=0; //게시글 조회수
 
     private LocalDate boardWriteDate; //게시글 작성일
 
     @Enumerated(EnumType.STRING)
     private BoardType boardType; //게시판 타입
+
+    private Integer likeCount=0; //좋아요 개수
+
+
+    public void likeIncrease(){
+        this.likeCount++;
+    }
+
+    public void likeDecrease(){
+        this.likeCount--;
+    }
+
+    public void hitIncrease(){
+        this.boardHit++;
+    }
 }
