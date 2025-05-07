@@ -88,7 +88,7 @@ public class BoardService {
         }
 
         if(order.equals("L")) {
-            boardListMainDtos.sort(Comparator.comparingInt(l -> l.getLikeCount()));
+            boardListMainDtos.sort(Comparator.comparing(l -> l.getLikeCount(), Comparator.reverseOrder()));
         }
 
         return boardListMainDtos;

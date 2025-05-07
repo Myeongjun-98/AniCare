@@ -35,6 +35,8 @@ public class BoardController {
     // ================ 커뮤니티 게시판 페이지 ================
     @GetMapping("/community/board/boardList")
     public String boardPage(Model model, String order){
+        order = "I";
+
         List<BoardListMainDto> boardListDtos = boardService.getBoardList(order);
         model.addAttribute("boardListDtos", boardListDtos);
 
