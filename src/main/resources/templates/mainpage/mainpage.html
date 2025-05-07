@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragment/default}">
+
+
+<main layout:fragment="main">
+    <!-- 공지사항 배너 -->
+    <section class="notice-banner">
+        <h3>📢 공지사항</h3>
+        <p>시스템 점검 안내 (6/15 02:00~04:00)</p>
+        <a href="#">더보기</a>
+    </section>
+
+    <!-- 메디컬 추천 섹션 -->
+    <section class="recommend-section">
+        <h2>메디컬 추천 정보</h2>
+        <div class="card-slider">
+            <div class="card medical-card">
+                <img src="https://via.placeholder.com/150" alt="병원 이미지" />
+                <h3>강남 동물병원</h3>
+                <p>슬개골 탈구 전문</p>
+            </div>
+            <!-- 추가 카드들... -->
+        </div>
+    </section>
+
+    <!-- 커뮤니티 추천 섹션 -->
+    <section class="recommend-section">
+        <h2>커뮤니티 인기 글</h2>
+        <div class="card-slider">
+            <div th:each="community : ${communityList}" class="card community-card">
+                <img src="https://via.placeholder.com/150" alt="커뮤니티 이미지" />
+                <h3 th:text="${community.boardTitle}"></h3>
+                <p th:text="${community.boardContent}"></p>
+            </div>
+            <!-- 추가 카드들... -->
+        </div>
+    </section>
+</main>
+</html>

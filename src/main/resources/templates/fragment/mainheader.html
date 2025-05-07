@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<!-- 헤더 영역 -->
+<header th:fragment="header">
+    <div class="header-left">
+        <button id="sidebarToggle" class="hamburger">☰</button>
+        <h1 class="site-title">ANICARE</h1>
+        <h1 class="logo">
+            <span class="medical">메디컬</span> |
+            <span class="community">커뮤니티</span>
+        </h1>
+    </div>
+    <div class="search-container">
+        <input type="text" placeholder="검색어를 입력하세요 (해시태그 가능)" />
+        <button class="search-btn"><i class="material-icons">search</i></button>
+    </div>
+
+    <div class="auth-buttons">
+        <button class="login-btn">로그인</button>
+        <button class="signup-btn">회원가입</button>
+    </div>
+</header>

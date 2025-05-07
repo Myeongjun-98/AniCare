@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+
+
+<aside th:fragment="mainmypage" id="sidebar" class="sidebar">
+    <div class="sidebar-header">
+        <h2>마이페이지</h2>
+        <button id="closeSidebar" class="close-btn">×</button>
+    </div>
+
+    <!-- 로그인 상태 -->
+    <div class="user-info">
+        <img src="https://via.placeholder.com/80" alt="프로필 사진" />
+        <div class="user-details">
+            <h3>사용자닉네임</h3>
+            <p>user@example.com</p>
+            <p>서울시 강남구</p>
+        </div>
+        <button class="edit-btn">수정</button>
+    </div>
+    <div class="pet-slider">
+        <!-- 반려동물 정보 슬라이드 -->
+    </div>
+
+    <!-- 메뉴 카테고리 -->
+    <nav class="sidebar-menu">
+        <ul>
+            <li>
+                <details>
+                    <summary>진료 기록</summary>
+                    <ul>
+                        <li><a href="#">진료기록 보기</a></li>
+                        <li><a href="#">처방기록 보기</a></li>
+                    </ul>
+                </details>
+            </li>
+            <li>
+                <details>
+                    <summary>진료수첩</summary>
+                    <ul>
+                        <li><a href="#">진료수첩 전체 보기</a></li>
+                    </ul>
+                </details>
+            </li>
+            <li>
+                <details>
+                    <summary>커뮤니티</summary>
+                    <ul>
+                        <li><a href="#">커뮤니티 메인</a></li>
+                        <li><a href="#">모임 모집글</a></li>
+                    </ul>
+                </details>
+            </li>
+            <li>
+                <details>
+                    <summary>문의사항</summary>
+                    <ul>
+                        <li><a href="#">문의하기</a></li>
+                        <li><a href="#">내 문의사항</a></li>
+                    </ul>
+                </details>
+            </li>
+        </ul>
+    </nav>
+
+    <button class="logout-btn">로그아웃</button>
+</aside>
+
+
+</html>
