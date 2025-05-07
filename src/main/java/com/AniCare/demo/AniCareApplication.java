@@ -6,9 +6,9 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 
-@SpringBootApplication(scanBasePackages = "com")
-@EntityScan(basePackages = "com.entity")
-@EnableJpaRepositories(basePackages = "com.repository")
+@SpringBootApplication(scanBasePackages = "com.Anicare.demo")
+@EntityScan(basePackages = "com.Anicare.demo.entity")
+@EnableJpaRepositories(basePackages = "com.Anicare.demo.repository")
 public class AniCareApplication {
 
 	public static void main(String[] args) {
