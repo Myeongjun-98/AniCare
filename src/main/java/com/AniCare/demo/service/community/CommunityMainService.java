@@ -7,7 +7,7 @@ import com.AniCare.demo.entity.community.ErrandBoard;
 import com.AniCare.demo.entity.community.MeetingBoard;
 import com.AniCare.demo.repository.MainPage.UserRepository;
 import com.AniCare.demo.repository.community.*;
-import com.repository.community.*;
+import com.AniCare.demo.repository.community.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
