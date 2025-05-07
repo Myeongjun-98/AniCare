@@ -54,7 +54,7 @@ public class CommunityController {
     public String boardPage(@PathVariable("type") String type, @PathVariable("order") String order, Model model){
 
         List<BoardListMainDto> boardListDtos = boardService.getBoardList(type, order);
-        model.addAttribute("type", type);
+        model.addAttribute("boardType", type);
         model.addAttribute("boardListDtos", boardListDtos);
 
         return "/community/board/boardList";

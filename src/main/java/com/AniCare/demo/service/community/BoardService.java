@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Supplier;
 
 @Service
 @RequiredArgsConstructor
@@ -109,8 +110,8 @@ public class BoardService {
     public BoardDetailDto getBoardDetail(Long boardId){
 
         //게시글 정보 불러오기
-        Board board = boardRepository.findById(boardId).get();
-        User userBoardInfo = userRepository.getById(board.getUser().getId());
+        Board board = boardRepository.findById(boardId).orElse(null);
+        User userBoardInfo = userRepository.findById(board.getUser().getId()).orElse(null);
 
 
         //게시글 관련 덧글목록 불러오기
@@ -118,7 +119,7 @@ public class BoardService {
 
         List<CommentViewDto> commentViewDtos = new ArrayList<>();
         for(Comment comment : commentList) {
-            User userCommentInfo = userRepository.getById(comment.getUser().getId());
+            User userCommentInfo = userRepository.findById(comment.getUser().getId()).orElse(null);
             CommentViewDto commentViewDto = CommentViewDto.from(comment);
             commentViewDto.setUserName(userCommentInfo.getUserName());
             commentViewDtos.add(commentViewDto);
@@ -177,7 +178,7 @@ public class BoardService {
 
         //임시방편(로그인 기능 구현된 후 수정할 것)
         boardForm.setUserId(2L);
-        User user = userRepository.findById(boardForm.getUserId()).get();
+        User user = userRepository.findById(boardForm.getUserId()).orElse(null);
         board.setUser(user);
 
         boardRepository.save(board);
