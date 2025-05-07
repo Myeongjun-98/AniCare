@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko"
+      layout:decorate="~{fragment/default}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block layout:fragment="css"></th:block>
+    <th:block layout:fragment="script"></th:block>
+</head>
+<div id="main" layout:fragment="main">
+    <div> <!-- 수의사 상세정보 표시영역 -->
+        <div th:style="${vetSelect.profileImage}">프로필이미지</div>
+        <p th:text="${vetSelect.vetName}"></p>
+        <p th:text="${vetSelect.hospitalName}"></p>
+        <p th:text="${vetSelect.curingCapable}"></p>
+        <p th:text="${vetSelect.onWorkTime}"></p>
+        <p th:text="${vetSelect.offWorkTime}"></p>
+        <p th:text="${vetSelect.averageRating}"></p>
+    </div>
+
+    <div> <!-- 버튼(링크) 영역 -->
+        <button>1:1 상담하기</button>
+        <button>상담 예약하기</button>
+    </div>
+</div>
+
+</html>

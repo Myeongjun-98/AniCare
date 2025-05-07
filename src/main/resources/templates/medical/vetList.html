@@ -11,12 +11,14 @@
 </head>
 <div id="main" layout:fragment="main">
     <div> <!-- 창 영역 -->
-        <div th:each=" vetCard : ${vets} "> <!-- 수의사 리스트 카드 -->
-            <div th:style="${vetCard.profileImage}">프로필이미지</div>
-            <p th:text="${vetCard.vetName}"></p>
-            <p th:text="${vetCard.hospitalName}"></p>
-            <p th:text="${vetCard.curingCapable}"></p>
-            <p th:text="${vetCard.averageRating}"></p>
+        <div th:each=" vetCard : ${vets} "><!-- 수의사 리스트 카드 -->
+            <a th:href="@{/medical/vetList/{vetInfoId}(vetInfoId=${vetCard.vetInfoId})}">
+                <div th:style="${vetCard.profileImage}">프로필이미지</div>
+                <p th:text="${vetCard.vetName}"></p>
+                <p th:text="${vetCard.hospitalName}"></p>
+                <p th:text="${vetCard.curingCapable}"></p>
+                <p th:text="${vetCard.averageRating}"></p>
+            </a>
         </div>
     </div>
 </div>

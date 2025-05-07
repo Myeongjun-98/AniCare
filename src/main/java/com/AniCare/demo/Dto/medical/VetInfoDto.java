@@ -9,7 +9,10 @@ import lombok.Setter;
 import java.time.LocalTime;
 import java.util.List;
 
-@Getter @Setter @NoArgsConstructor @AllArgsConstructor
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class VetInfoDto {
 
     private Long vetInfoId; // 수의사 고유아이디
@@ -19,5 +22,5 @@ public class VetInfoDto {
     private List<PetSpecies> curingCapable; // 진료가능 동물종 리스트
     private LocalTime onWorkTime;   // 근무시간(시작)
     private LocalTime offWorkTime;  // 근무시간(끝)
-
+    private double averageRating;   // 별점
 }
