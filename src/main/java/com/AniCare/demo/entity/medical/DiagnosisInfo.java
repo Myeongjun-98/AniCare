@@ -6,7 +6,9 @@ import lombok.Setter;
 
 import java.util.List;
 
-@Getter @Setter @Entity
+@Getter
+@Setter
+@Entity
 public class DiagnosisInfo {
 
     @Id

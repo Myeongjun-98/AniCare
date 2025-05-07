@@ -1,10 +1,12 @@
-package com.AniCare.demo.entity.admin;
+package com.entity.admin;
 
-import com.AniCare.demo.entity.MainPage.User;
+import com.entity.MainPage.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import java.time.LocalDate;
+
+import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Setter
