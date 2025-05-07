@@ -34,7 +34,7 @@ public class BoardService {
 
     // ================ 메인페이지에서 커뮤니티 인기글 불러오기 위한 메서드 =================
     public List<Board> getAllboardList(){
-        List<Board> boards = boardRepository.findAll();
+        List<Board> boards = boardRepository.findTop5ByOrderByLikeCountDesc();
 
         return boards;
     }
