@@ -32,6 +32,8 @@ public class BoardListMainDto {
 
     private String userAddress; //작성자 주소
 
+    private Integer likeCount; //좋아요 수(정렬기준을 위함)
+
 
 //entity -> dto
 public static BoardListMainDto to(Board board){

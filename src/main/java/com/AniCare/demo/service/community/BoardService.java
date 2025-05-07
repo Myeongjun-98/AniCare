@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -33,20 +34,25 @@ public class BoardService {
 
 
     // ================ 커뮤니티 - 게시판 페이지 - 게시글 목록 불러오기(최신순) ================
-    public List<BoardListMainDto> getBoardList(){
+    public List<BoardListMainDto> getBoardList(String order){
 
         List<BoardListMainDto> boardListMainDtos = new ArrayList<>();
 
         List<Board> boards = boardRepository.findAllByOrderByIdDesc();
 
-
         for(Board board : boards) {
+
 
             //게시글 작성자 관련 정보 갖고 오기
             User userInfo = userRepository.getById(board.getUser().getId());
 
             //게시글 정보 가져오기
             BoardListMainDto boardListMainDto = BoardListMainDto.to(board);
+
+            //좋아요 수(정렬을 위함) 넣어주기
+            int likecount = boardLikeRepository.countByBoardId(board.getId());
+            boardListMainDto.setLikeCount(likecount);
+
 
             //게시글 작성자 정보 가져오기
             boardListMainDto.setUserName(userInfo.getUserName());
@@ -75,10 +81,16 @@ public class BoardService {
                 boardListMainDto.setCategory(eCategory.getErrandCategory().toString());
             }
 
+
             //가져온 데이터들 전부 dto에 넣어주기
             boardListMainDtos.add(boardListMainDto);
 
         }
+
+        if(order.equals("L")) {
+            boardListMainDtos.sort(Comparator.comparingInt(l -> l.getLikeCount()));
+        }
+
         return boardListMainDtos;
     }
 

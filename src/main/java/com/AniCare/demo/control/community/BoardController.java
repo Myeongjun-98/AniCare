@@ -34,16 +34,16 @@ public class BoardController {
 
     // ================ 커뮤니티 게시판 페이지 ================
     @GetMapping("/community/board/boardList")
-    public String boardPage(Model model){
-        List<BoardListMainDto> boardListDtos = boardService.getBoardList();
+    public String boardPage(Model model, String order){
+        List<BoardListMainDto> boardListDtos = boardService.getBoardList(order);
         model.addAttribute("boardListDtos", boardListDtos);
 
         return "/community/board/boardList";
     }
 
-    @GetMapping("/community/board/boardList/{orderBy}")
-    public String boardPageL(Model model){
-        List<BoardListMainDto> boardListDtos = boardService.getBoardList();
+    @GetMapping("/community/board/boardList/{order}")
+    public String boardPageL(@PathVariable("order") String order, Model model){
+        List<BoardListMainDto> boardListDtos = boardService.getBoardList(order);
         model.addAttribute("boardListDtos", boardListDtos);
 
         return "/community/board/boardList";
