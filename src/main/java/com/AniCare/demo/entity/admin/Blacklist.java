@@ -1,12 +1,11 @@
-package com.entity.admin;
+package com.AniCare.demo.entity.admin;
 
-import com.entity.MainPage.User;
+import com.AniCare.demo.entity.MainPage.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import java.time.LocalDate;
 
-import static jakarta.persistence.GenerationType.IDENTITY;
+import java.time.LocalDate;
 
 @Entity
 @Setter
@@ -18,7 +17,7 @@ public class Blacklist {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name="user_id")
+    @JoinColumn(name = "user_id")
     private User user;
 
     @Column(nullable = false)

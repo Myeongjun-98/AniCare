@@ -15,7 +15,7 @@ public class VetReview {
     @Column(name = "vet_review_id")
     private Long id;    // 수의사 리뷰테이블 아이디
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "clinic_id", nullable = false, unique = true)
     private Clinic clinic;  // 진료기록 정보
 

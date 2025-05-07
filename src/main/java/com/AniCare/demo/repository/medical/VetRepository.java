@@ -10,7 +10,10 @@ import java.util.List;
 @Repository
 public interface VetRepository extends JpaRepository<VetInfo, Long> {
 
-    // 진단 예약을 위해 수의사 리스트를 별점순으로 불러오기
-    @Query("SELECT v FROM VetInfo v JOIN FETCH v.curingCapable")
-    List<VetInfo> findAllWithCuringCapable();
+    // 진단 예약을 위해 수의사 리스트를 불러오기
+    @Query("SELECT DISTINCT v " +
+            "FROM VetInfo v " +
+            "JOIN FETCH v.hospital " +
+            "LEFT JOIN FETCH v.curingCapable")
+    List<VetInfo> findAllWithHospitalAndCuringCapable();
 }

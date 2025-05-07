@@ -19,6 +19,6 @@ public class VetInfoListDto {
     private String hospitalName;    // 병원 이름
     private String profileImage;    // 프로필 이미지
     private List<PetSpecies> curingCapable; // 진료 가능 동물종 리스트
-    private Float averageRating;
+    private double averageRating;
 
 }

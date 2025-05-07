@@ -5,9 +5,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter @Setter @NoArgsConstructor @AllArgsConstructor
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class VetAverageReviewDto {
     private Long vetInfoId; // 수의사 정보 아이디
-    private float averageRating;    // 별점 평균값
-    
+    private double averageRating;    // 별점 평균값
+
 }
