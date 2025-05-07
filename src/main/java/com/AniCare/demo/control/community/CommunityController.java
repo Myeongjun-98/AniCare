@@ -50,19 +50,11 @@ public class CommunityController {
     }
 
     // ================ 커뮤니티 게시판 페이지 ================
-    @GetMapping("/community/board/boardList")
-    public String boardPage(Model model, String order){
-        order = "I";
+    @GetMapping("/community/board/boardList/{type}/{order}")
+    public String boardPage(@PathVariable("type") String type, @PathVariable("order") String order, Model model){
 
-        List<BoardListMainDto> boardListDtos = boardService.getBoardList(order);
-        model.addAttribute("boardListDtos", boardListDtos);
-
-        return "/community/board/boardList";
-    }
-
-    @GetMapping("/community/board/boardList/{order}")
-    public String boardPageL(@PathVariable("order") String order, Model model){
-        List<BoardListMainDto> boardListDtos = boardService.getBoardList(order);
+        List<BoardListMainDto> boardListDtos = boardService.getBoardList(type, order);
+        model.addAttribute("type", type);
         model.addAttribute("boardListDtos", boardListDtos);
 
         return "/community/board/boardList";
@@ -112,7 +104,7 @@ public class CommunityController {
         return "/community/board/boardWrite";
     }
 
-    // ================ 커뮤니티 게시글 작성 요청 ================
+    // ================ 커뮤니티 게시글 작성 요청 (오류메시지 미구현) ================
     @PostMapping("/community/board/boardWrite/boardSave")
     public String boardSave(@Valid BoardForm boardForm,
                             BindingResult bindingResult,

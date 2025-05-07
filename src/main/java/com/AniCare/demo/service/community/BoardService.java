@@ -1,6 +1,7 @@
 package com.AniCare.demo.service.community;
 
 import com.AniCare.demo.Dto.community.*;
+import com.AniCare.demo.constant.community.BoardType;
 import com.AniCare.demo.entity.community.*;
 import com.AniCare.demo.repository.community.*;
 import com.AniCare.demo.Dto.community.*;
@@ -34,11 +35,13 @@ public class BoardService {
 
 
     // ================ 커뮤니티 - 게시판 페이지 - 게시글 목록 불러오기(최신순) ================
-    public List<BoardListMainDto> getBoardList(String order){
+    public List<BoardListMainDto> getBoardList(String type, String order){
 
         List<BoardListMainDto> boardListMainDtos = new ArrayList<>();
 
-        List<Board> boards = boardRepository.findAllByOrderByIdDesc();
+        BoardType boardType = BoardType.valueOf(type);
+
+        List<Board> boards = boardRepository.findAllByBoardTypeOrderByIdDesc(boardType);
 
         for(Board board : boards) {
 

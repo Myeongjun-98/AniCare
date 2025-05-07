@@ -10,9 +10,9 @@
 <div layout:fragment="main" id="main"> <!-- ▼ main ▼ -->
 
     <div class="orderBtn">
-        <a style="display: inline;" href="/community/board/boardList/L">인기순</a>
+        <a style="display: inline;" th:href="@{/community/board/boardList/ + ${type.type} + '/L'">인기순</a>
         <p style="display: inline;"> | </p>
-        <a style="display: inline;" href="/community/board/boardList/I">최신순</a>
+        <a style="display: inline;" th:href="@{'/community/board/boardList/' + ${type.type} + '/I'">최신순</a>
     </div>
 
     <!-- ▼ 게시글 리스트 목록 ▼ -->
