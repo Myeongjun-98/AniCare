@@ -11,26 +11,25 @@ import org.springframework.security.web.SecurityFilterChain;
 public class WebsecurityConfig {
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
 
         http
                 .authorizeHttpRequests(
-                        ar -> ar
-                                .requestMatchers("/", "/community/**")
-                                .permitAll()
-                                .requestMatchers("/css/**", "/javascript/**", "/error")
-                                .permitAll()
+                ar -> ar
+                        .requestMatchers("/", "/community/**")
+                        .permitAll()
+                        .requestMatchers( "/anicareFile/**", "/css/**", "/javascript/**", "/error")
+                        .permitAll()
 
-                );
+        );
+
 
 
         return http.build();
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+    public PasswordEncoder passwordEncoder() {return new BCryptPasswordEncoder();}
 
 
 }

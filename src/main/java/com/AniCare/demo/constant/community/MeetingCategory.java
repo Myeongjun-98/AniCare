@@ -5,11 +5,6 @@ public enum MeetingCategory {
 
     private final String typeName;
 
-    MeetingCategory(String typeName) {
-        this.typeName = typeName;
-    }
-
-    public String getTypeName() {
-        return this.typeName;
-    }
+    MeetingCategory(String typeName) {this.typeName = typeName; }
+    public String getTypeName(){return this.typeName;}
 }
