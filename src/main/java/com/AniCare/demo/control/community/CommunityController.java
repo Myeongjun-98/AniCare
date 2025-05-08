@@ -67,11 +67,17 @@ public class CommunityController {
     }
 
     // ================ 커뮤니티 게시판 페이지 ================
-    @GetMapping("/community/board/boardList/{type}/{order}")
-    public String boardPage(@PathVariable("type") String type, @PathVariable("order") String order, Model model){
+    @GetMapping("/community/board/boardList/{type}/{order}/{category}")
+    public String boardPage(@PathVariable("type") String type,
+                            @PathVariable("order") String order,
+                            @PathVariable("category") String category,
+                            Model model){
 
-        List<BoardListMainDto> boardListDtos = boardService.getBoardList(type, order);
-        model.addAttribute("boardType", type);
+        List<BoardListMainDto> boardListDtos = boardService.getBoardList(type, order, category);
+
+        model.addAttribute("type", type);
+        model.addAttribute("order", order);
+        model.addAttribute("category", category);
         model.addAttribute("boardListDtos", boardListDtos);
 
         return "/community/board/boardList";

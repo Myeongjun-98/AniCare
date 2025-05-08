@@ -43,11 +43,20 @@ public class BoardService {
 
 
     // ================ 커뮤니티 - 게시판 페이지 - 게시글 목록 불러오기 ================
-    public List<BoardListMainDto> getBoardList(String type, String order){
+    public List<BoardListMainDto> getBoardList(String type, String order, String category){
 
         List<BoardListMainDto> boardListMainDtos = new ArrayList<>();
 
+        //게시판 타입 구하기
         BoardType boardType = BoardType.valueOf(type);
+
+//        //게시판 카테고리 구하기
+//        if(boardType.name().equals("MEETING")) {
+//            MeetingCategory meetingCategory = MeetingCategory.valueOf(category);
+//            List<MeetingBoard> meetingBoards = meetingBoardRepository.findAllByMeetingCategory(meetingCategory);
+//        } else if(boardType.name().equals("ERRAND")) {
+//            ErrandCategory errandCategory = ErrandCategory.valueOf(category);
+//            List<ErrandBoard> errandBoards = errandBoardRepository.findAllByErrandCategory(errandCategory); }
 
         List<Board> boards = boardRepository.findAllByBoardTypeOrderByIdDesc(boardType);
 
