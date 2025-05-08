@@ -1,6 +1,7 @@
 package com.AniCare.demo.service.community;
 
 import com.AniCare.demo.Dto.community.*;
+import com.AniCare.demo.Dto.mainpage.CommunityPopuarListDto;
 import com.AniCare.demo.entity.community.*;
 import com.AniCare.demo.repository.community.*;
 import com.AniCare.demo.Dto.community.*;
@@ -33,10 +34,18 @@ public class BoardService {
     private final BoardFileService boardFileService;
 
     // ================ 메인페이지에서 커뮤니티 인기글 불러오기 위한 메서드 =================
-    public List<Board> getAllboardList(){
+    public List<CommunityPopuarListDto> getAllboardList(){
         List<Board> boards = boardRepository.findTop5ByOrderByLikeCountDesc();
+        List<CommunityPopuarListDto> communityPopuarListDtos = new ArrayList<>();
 
-        return boards;
+
+        for(Board  board: boards ){
+            BoardFile boardFile = boardFileRepository.findByBoardIdAndThumbnailYn(board.getId(),"Y");
+            if (boardFile == null) boardFile = new BoardFile();
+            CommunityPopuarListDto communityPopuarListDto = CommunityPopuarListDto.of (board, boardFile);
+            communityPopuarListDtos.add(communityPopuarListDto);
+        }
+        return communityPopuarListDtos;
     }
 
 

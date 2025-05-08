@@ -393,7 +393,8 @@ main.sidebar-open {
   object-fit: cover;
 }
 
-.card h3 {
+.card a {
+
   padding: 10px 10px 0;
   font-size: 16px;
   text-overflow: ellipsis;
