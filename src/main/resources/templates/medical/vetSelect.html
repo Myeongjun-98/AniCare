@@ -10,12 +10,12 @@
 <div id="main" layout:fragment="main">
     <div> <!-- 수의사 상세정보 표시영역 -->
         <div th:style="${vetSelect.profileImage}">프로필이미지</div>
-        <p th:text="${vetSelect.vetName}"></p>
-        <p th:text="${vetSelect.hospitalName}"></p>
-        <p th:text="${vetSelect.curingCapable}"></p>
-        <p th:text="${vetSelect.onWorkTime}"></p>
-        <p th:text="${vetSelect.offWorkTime}"></p>
-        <p th:text="${vetSelect.averageRating}"></p>
+        <p th:text="${'수의사명 : ' + vetSelect.vetName}"></p>
+        <p th:text="${'병원명 : ' + vetSelect.hospitalName}"></p>
+        <p th:text="${'치료 가능 : ' + vetSelect.curingCapable}"></p>
+        <p th:text="${'출근시간 : ' + vetSelect.onWorkTime}"></p>
+        <p th:text="${'퇴근시간 : ' + vetSelect.offWorkTime}"></p>
+        <p th:text="${'평점 : ' + vetSelect.averageRating}"></p>
     </div>
 
     <div> <!-- 버튼(링크) 영역 -->

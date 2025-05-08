@@ -40,7 +40,8 @@ public class WebsecurityConfig {
                 // << 개발용 유저
                 .authorizeHttpRequests(
                         ar -> ar
-                                .requestMatchers("/community/**", "/medical/**",
+                                .requestMatchers("/community/**",
+//                                        "/medical/**",      // 로그인 허용하게 하기 위해 활성화
                                         // >> (Medical)개발용 유저 등록을 위해 삽입
                                         // (Medical)로그인 페이지와 정적 리소스 모두 허용
                                         "/login", "/css/**", "/js/**", "/images/**")
@@ -67,11 +68,6 @@ public class WebsecurityConfig {
         return http.build();
     }
 
-    // 개발자 로그인을 위해 암호화 기능 정지
-//    @Bean
-//    public PasswordEncoder passwordEncoder() {
-//        return new BCryptPasswordEncoder();
-//    }
     // 개발자용 로그인을 위한 암호화 없이 로그인하기////////////////
     @Bean
     public PasswordEncoder passwordEncoder() {
