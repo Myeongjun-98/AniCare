@@ -1,6 +1,6 @@
 package com.AniCare.demo.Dto.community;
 
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,7 +15,7 @@ public class CommentForm {
 
     private Long userId; //덧글 작성자 아이디
 
-    @NotEmpty(message = "덧글 내용은 필수항목입니다.")
+    @NotBlank(message = "덧글 내용을 입력해주세요.")
     private String commentContent; //덧글 내용
 
     private LocalDate commentWriteDate; //덧글 작성일

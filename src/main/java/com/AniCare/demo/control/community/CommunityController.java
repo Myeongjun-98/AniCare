@@ -98,20 +98,25 @@ public class CommunityController {
     }
 
     // ================ 커뮤니티 덧글 저장 요청 ================
-    @GetMapping("/community/board/boardDetail/commentSave")
+    @PostMapping("/community/board/boardDetail/commentSave")
     public String commentSave(@Valid CommentForm commentForm,
                               BindingResult bindingResult,
                               Model model){
 
+        //dto에 지정해준 오류가 발생할 시:
         if(bindingResult.hasErrors()){
-            return "community/board/boardList";
+            BoardDetailDto board = boardService.getBoardDetail(commentForm.getBoardId());
+            model.addAttribute("board", board);
+            return "community/board/boardDetail";
         }
 
         try {
             commentService.saveComment(commentForm);
-        }catch(Exception e){
+        }catch(Exception e){ //덧글 저장 과정에서 오류 발생시:
+            BoardDetailDto board = boardService.getBoardDetail(commentForm.getBoardId());
+            model.addAttribute("board", board);
             model.addAttribute("commentError", "덧글 작성 실패");
-            return "community/board/boardList";
+            return "community/board/boardDetail";
 
         }
 
@@ -132,16 +137,20 @@ public class CommunityController {
     public String boardSave(@Valid BoardForm boardForm,
                             BindingResult bindingResult,
                             @RequestParam("boardFile") List<MultipartFile> multipartFileList,
-                            Model model, String category
-    ){
+                            Model model){
+
+        if(bindingResult.hasErrors()){
+            return "community/board/boardWrite";
+        }
 
         try {
             boardService.boardSave(boardForm, multipartFileList);
         } catch(Exception e) {
-            return "/community/board/boardWrite";
+            model.addAttribute("boardError", "게시글 작성 실패");
+            return "community/board/boardWrite";
         }
 
-        return "/community/board/boardList";
+        return "/community/board/boardList/" + boardForm.getBoardType().name() + "/I/" + boardForm.getCategory();
     }
 
 

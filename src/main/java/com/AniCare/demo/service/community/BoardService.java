@@ -50,14 +50,6 @@ public class BoardService {
         //게시판 타입 구하기
         BoardType boardType = BoardType.valueOf(type);
 
-//        //게시판 카테고리 구하기
-//        if(boardType.name().equals("MEETING")) {
-//            MeetingCategory meetingCategory = MeetingCategory.valueOf(category);
-//            List<MeetingBoard> meetingBoards = meetingBoardRepository.findAllByMeetingCategory(meetingCategory);
-//        } else if(boardType.name().equals("ERRAND")) {
-//            ErrandCategory errandCategory = ErrandCategory.valueOf(category);
-//            List<ErrandBoard> errandBoards = errandBoardRepository.findAllByErrandCategory(errandCategory); }
-
         List<Board> boards = boardRepository.findAllByBoardTypeOrderByIdDesc(boardType);
 
         for(Board board : boards) {
@@ -121,7 +113,7 @@ public class BoardService {
 
 
         //게시글 관련 덧글목록 불러오기
-        List<Comment> commentList = commentRepository.findByBoardId(boardId);
+        List<Comment> commentList = commentRepository.findByBoardIdOrderByIdDesc(boardId);
 
         List<CommentViewDto> commentViewDtos = new ArrayList<>();
         for(Comment comment : commentList) {
