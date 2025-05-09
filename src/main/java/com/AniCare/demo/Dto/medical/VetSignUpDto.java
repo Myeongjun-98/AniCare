@@ -1,11 +1,14 @@
-package com.AniCare.demo.Dto.medical;
+package com.AniCare.demo.DTO.medical;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter @Setter @AllArgsConstructor @NoArgsConstructor
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class VetSignUpDto {
 
     private String vetId;   // 수의사 아이디

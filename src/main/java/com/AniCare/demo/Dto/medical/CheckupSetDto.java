@@ -1,4 +1,4 @@
-package com.AniCare.demo.Dto.medical;
+package com.AniCare.demo.DTO.medical;
 
 import com.AniCare.demo.constant.medical.Symptom;
 import lombok.AllArgsConstructor;
@@ -8,7 +8,10 @@ import lombok.Setter;
 
 import java.util.List;
 
-@Getter@Setter@NoArgsConstructor@AllArgsConstructor
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class CheckupSetDto {
 
     private Long petId; // 반려동물 정보

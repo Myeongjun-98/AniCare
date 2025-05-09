@@ -1,4 +1,4 @@
-package com.AniCare.demo.Dto.medical;
+package com.AniCare.demo.DTO.medical;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,7 +7,10 @@ import lombok.Setter;
 
 import java.util.List;
 
-@AllArgsConstructor@NoArgsConstructor@Getter@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class PrescriptiionSetDto {
 
     private Long clinicId;  // 저장할 진료기록 아이디

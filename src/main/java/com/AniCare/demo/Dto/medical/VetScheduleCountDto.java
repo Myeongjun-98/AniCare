@@ -1,11 +1,14 @@
-package com.AniCare.demo.Dto.medical;
+package com.AniCare.demo.DTO.medical;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter @Setter @NoArgsConstructor @AllArgsConstructor
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class VetScheduleCountDto {
 
     private Long vetInfoId; // 수의사 식별용 아이디

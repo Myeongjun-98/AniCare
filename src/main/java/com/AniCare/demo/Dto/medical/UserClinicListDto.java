@@ -1,4 +1,4 @@
-package com.AniCare.demo.Dto.medical;
+package com.AniCare.demo.DTO.medical;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,7 +7,10 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 
-@AllArgsConstructor@NoArgsConstructor@Getter@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class UserClinicListDto {
 
     private Long clinicId;  // 진료기록 식별용 id

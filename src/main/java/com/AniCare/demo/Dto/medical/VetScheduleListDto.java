@@ -1,4 +1,4 @@
-package com.AniCare.demo.Dto.medical;
+package com.AniCare.demo.DTO.medical;
 
 import com.AniCare.demo.entity.medical.Schedule;
 import lombok.AllArgsConstructor;
@@ -8,7 +8,10 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 
-@Getter@Setter@NoArgsConstructor@AllArgsConstructor
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class VetScheduleListDto {
 
     private Schedule scheduleId;    // 스케쥴 아이디

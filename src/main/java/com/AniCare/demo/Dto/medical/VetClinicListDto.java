@@ -1,4 +1,4 @@
-package com.AniCare.demo.Dto.medical;
+package com.AniCare.demo.DTO.medical;
 
 import com.AniCare.demo.constant.medical.PetSex;
 import com.AniCare.demo.constant.medical.PetSpecies;
@@ -9,7 +9,10 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 
-@Getter@Setter@NoArgsConstructor@AllArgsConstructor
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class VetClinicListDto {
 
     private Long clinicId;      // 진료기록 식별용 id

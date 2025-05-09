@@ -1,6 +1,6 @@
 package com.AniCare.demo.service.community;
 
-import com.AniCare.demo.Dto.community.CommentForm;
+import com.AniCare.demo.DTO.community.CommentForm;
 import com.AniCare.demo.entity.MainPage.User;
 import com.AniCare.demo.entity.community.Board;
 import com.AniCare.demo.entity.community.Comment;

@@ -1,4 +1,4 @@
-package com.AniCare.demo.Dto.medical;
+package com.AniCare.demo.DTO.medical;
 
 import com.AniCare.demo.entity.medical.Checkup;
 import com.AniCare.demo.entity.medical.VetInfo;
@@ -9,7 +9,10 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 
-@AllArgsConstructor@NoArgsConstructor@Setter@Getter
+@AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@Getter
 public class UserScheduleSetDto {
 
     private VetInfo vetInfoId;     //선택한 수의사 고유 아이디

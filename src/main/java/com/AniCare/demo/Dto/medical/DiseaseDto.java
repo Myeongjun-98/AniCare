@@ -1,4 +1,4 @@
-package com.AniCare.demo.Dto.medical;
+package com.AniCare.demo.DTO.medical;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,10 +7,13 @@ import lombok.Setter;
 
 import java.util.List;
 
-@Setter@Getter@NoArgsConstructor@AllArgsConstructor
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class DiseaseDto {
-    
+
     private List<String> diseaseName;   // 저장할 병명
     private Long petId; // 반려동물 아이디
-    
+
 }

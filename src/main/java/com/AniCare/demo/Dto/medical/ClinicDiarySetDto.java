@@ -1,4 +1,4 @@
-package com.AniCare.demo.Dto.medical;
+package com.AniCare.demo.DTO.medical;
 
 import com.AniCare.demo.constant.medical.PetStatus;
 import com.AniCare.demo.entity.medical.Allergy;

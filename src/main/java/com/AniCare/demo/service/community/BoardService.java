@@ -1,9 +1,6 @@
 package com.AniCare.demo.service.community;
 
-import com.AniCare.demo.Dto.community.*;
-import com.AniCare.demo.entity.community.*;
-import com.AniCare.demo.repository.community.*;
-import com.AniCare.demo.Dto.community.*;
+import com.AniCare.demo.DTO.community.*;
 import com.AniCare.demo.constant.community.ErrandCategory;
 import com.AniCare.demo.constant.community.MeetingCategory;
 import com.AniCare.demo.entity.MainPage.User;
@@ -33,7 +30,7 @@ public class BoardService {
     private final BoardFileService boardFileService;
 
     // ================ 메인페이지에서 커뮤니티 인기글 불러오기 위한 메서드 =================
-    public List<Board> getAllboardList(){
+    public List<Board> getAllboardList() {
         List<Board> boards = boardRepository.findAll();
 
         return boards;
@@ -41,13 +38,13 @@ public class BoardService {
 
 
     // ================ 커뮤니티 - 게시판 페이지 - 게시글 목록 불러오기(최신순) ================
-    public List<BoardListMainDto> getBoardList(String order){
+    public List<BoardListMainDto> getBoardList(String order) {
 
         List<BoardListMainDto> boardListMainDtos = new ArrayList<>();
 
         List<Board> boards = boardRepository.findAllByOrderByIdDesc();
 
-        for(Board board : boards) {
+        for (Board board : boards) {
 
 
             //게시글 작성자 관련 정보 갖고 오기
@@ -77,12 +74,12 @@ public class BoardService {
 
 
             //게시글 카테고리 가져오기
-            if(board.getBoardType().name().equals("MEETING")) {
+            if (board.getBoardType().name().equals("MEETING")) {
                 MeetingBoard mCategory = meetingBoardRepository.findByBoardId(board.getId());
 
                 boardListMainDto.setCategory(mCategory.getMeetingCategory().toString());
 
-            } else if(board.getBoardType().name().equals("ERRAND")){
+            } else if (board.getBoardType().name().equals("ERRAND")) {
                 ErrandBoard eCategory = errandBoardRepository.findByBoardId(board.getId());
 
                 boardListMainDto.setCategory(eCategory.getErrandCategory().toString());
@@ -94,7 +91,7 @@ public class BoardService {
 
         }
 
-        if(order.equals("L")) {
+        if (order.equals("L")) {
             boardListMainDtos.sort(Comparator.comparing(l -> l.getLikeCount(), Comparator.reverseOrder()));
         }
 
@@ -103,7 +100,7 @@ public class BoardService {
 
 
     // ================ 커뮤니티 - 게시글 상세정보 보기 ================
-    public BoardDetailDto getBoardDetail(Long boardId){
+    public BoardDetailDto getBoardDetail(Long boardId) {
 
         //게시글 정보 불러오기
         Board board = boardRepository.findById(boardId).get();
@@ -114,7 +111,7 @@ public class BoardService {
         List<Comment> commentList = commentRepository.findByBoardId(boardId);
 
         List<CommentViewDto> commentViewDtos = new ArrayList<>();
-        for(Comment comment : commentList) {
+        for (Comment comment : commentList) {
             User userCommentInfo = userRepository.getById(comment.getUser().getId());
             CommentViewDto commentViewDto = CommentViewDto.from(comment);
             commentViewDto.setUserName(userCommentInfo.getUserName());
@@ -125,7 +122,7 @@ public class BoardService {
         List<BoardFile> boardFiles = boardFileRepository.findAllByBoardId(boardId);
 
         List<BoardFileDto> boardFileDtos = new ArrayList<>();
-        for(BoardFile boardFile : boardFiles) {
+        for (BoardFile boardFile : boardFiles) {
             boardFileDtos.add(BoardFileDto.from(boardFile));
         }
 
@@ -144,18 +141,20 @@ public class BoardService {
 
 
         //게시글 카테고리 불러오기(모임 모집글)
-        if(boardDetailDto.getBoardType().name().equals("MEETING"))
-        { boardDetailDto.setCategory(meetingBoardRepository
-                .findByBoardId(boardId)
-                .getMeetingCategory()
-                .toString()); }
+        if (boardDetailDto.getBoardType().name().equals("MEETING")) {
+            boardDetailDto.setCategory(meetingBoardRepository
+                    .findByBoardId(boardId)
+                    .getMeetingCategory()
+                    .toString());
+        }
 
         //게시글 카테고리 불러오기(심부름 구인글)
-        if(boardDetailDto.getBoardType().name().equals("ERRAND"))
-        { boardDetailDto.setCategory(errandBoardRepository
+        if (boardDetailDto.getBoardType().name().equals("ERRAND")) {
+            boardDetailDto.setCategory(errandBoardRepository
                     .findByBoardId(boardId)
                     .getErrandCategory()
-                    .toString()); }
+                    .toString());
+        }
 
 
         return boardDetailDto;
@@ -165,7 +164,7 @@ public class BoardService {
     // ================ 커뮤니티 - 게시글 업로드 ================
     public void boardSave(BoardForm boardForm,
                           List<MultipartFile> multipartFileList)
-        throws Exception{
+            throws Exception {
 
         //board타입 제목, 내용 저장
         Board board = boardForm.to();
@@ -180,14 +179,12 @@ public class BoardService {
         boardRepository.save(board);
 
         //errand, meeting 테이블에 저장
-        if(boardForm.getBoardType().name().equals("MEETING"))
-        {
+        if (boardForm.getBoardType().name().equals("MEETING")) {
             MeetingCategory meetingCategory = MeetingCategory.valueOf(boardForm.getCategory());
             meetingBoard.setBoard(board);
             meetingBoard.setMeetingCategory(meetingCategory);
             meetingBoardRepository.save(meetingBoard);
-        }
-        else if(boardForm.getBoardType().name().equals("ERRAND")) {
+        } else if (boardForm.getBoardType().name().equals("ERRAND")) {
             ErrandCategory errandCategory = ErrandCategory.valueOf(boardForm.getCategory());
             errandBoard.setBoard(board);
             errandBoard.setErrandCategory(errandCategory);
@@ -195,11 +192,11 @@ public class BoardService {
         }
 
         //이미지 업로드 -> board_file 테이블 저장
-        for(int i=0; i< multipartFileList.size(); i++){
+        for (int i = 0; i < multipartFileList.size(); i++) {
 
             //첨부파일 배열에 빈칸이 있다면 데이터 저장 X
             MultipartFile file = multipartFileList.get(i);
-            if(file.isEmpty()){
+            if (file.isEmpty()) {
                 return;
             }
 
@@ -207,7 +204,7 @@ public class BoardService {
             boardFile.setBoard(board); //board_file의 board(board_id)값 지정해주기
 
             //썸네일 이미지 정해주기
-            if(i==0)
+            if (i == 0)
                 boardFile.setThumbnailYn("Y");
             else
                 boardFile.setThumbnailYn("N");
@@ -220,8 +217,6 @@ public class BoardService {
 
 
     }
-
-
 
 
 }
