@@ -33,6 +33,15 @@
   </div> <!-- ▲ 버튼 끝 ▲ -->
 
 
+  <!-- ▼ 검색 input ▼ -->
+  <form method="get" role="search" th:object="${boardSearchForm}"
+        th:action="@{/community/comsearch}">
+    <div class="input-group-text">
+      <input type="text" th:field="*{keyword}" class="search-input" placeholder="검색어를 입력해주세요.">
+    </div>
+  </form><!-- ▲ 검색 input 끝 ▲ -->
+
+
 <!-- ▼ 모임 모집글 인기글 ▼ -->
   <h2>모임 모집글 인기글</h2>
   <br>

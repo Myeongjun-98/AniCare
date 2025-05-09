@@ -23,9 +23,11 @@ public interface BoardRepository extends JpaRepository<Board, Long> { //board �
     List<Board> findAllByBoardTypeOrderByIdDesc(BoardType type);
 
     //검색 기능
-    @Query("SELECT b FROM Board b WHERE b.boardType = :boardType AND (b.boardTitle LIKE %:keyword% OR b.boardContent LIKE %:keyword%)")
-    List<Board> searchByBoardTypeAndKeyword(@Param("boardType") BoardType boardType,
-                                            @Param("keyword") String keyword);
+    @Query("SELECT b " +
+            "FROM Board b " +
+            "WHERE (b.boardTitle LIKE %:keyword% " +
+                    "OR b.boardContent LIKE %:keyword%)")
+    List<Board> searchByBoardTypeAndKeyword(@Param("keyword") String keyword);
 
 
 }

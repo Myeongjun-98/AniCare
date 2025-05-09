@@ -11,6 +11,8 @@ public class BoardSearchForm {
 
     private BoardType boardType; //게시판 타입(모임 모집글, 심부름 구인글)
 
+    private String category; //게시판 카테고리
+
     private String boardTitle; //게시판 제목
 
     private String boardContent; //게시판 내용

@@ -2,6 +2,7 @@ package com.AniCare.demo.service.community;
 
 import com.AniCare.demo.Dto.community.BoardListMainDto;
 import com.AniCare.demo.Dto.community.BoardListSubDto;
+import com.AniCare.demo.Dto.community.BoardSearchForm;
 import com.AniCare.demo.entity.community.Board;
 import com.AniCare.demo.entity.community.BoardFile;
 import com.AniCare.demo.entity.community.ErrandBoard;
@@ -66,10 +67,10 @@ CommunityMainService {
     }
 
     // ================ 커뮤니티 검색결과 페이지-게시글 목록 불러오기 ================
-    public List<BoardListSubDto> getBoardSearchList(){
+    public List<BoardListSubDto> getBoardSearchList(BoardSearchForm boardSearchForm){
         List<BoardListSubDto> boardListSubDtos = new ArrayList<>();
 
-        List<Board> boards = boardRepository.findAllByOrderByIdDesc();
+        List<Board> boards = boardRepository.searchByBoardTypeAndKeyword(boardSearchForm.getKeyword());
 
         for(Board board : boards){
             BoardListSubDto boardListSubDto = BoardListSubDto.to(board);

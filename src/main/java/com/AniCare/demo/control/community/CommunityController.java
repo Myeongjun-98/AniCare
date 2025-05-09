@@ -12,10 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -33,7 +30,8 @@ public class CommunityController {
 
     // ================ 커뮤니티 메인 페이지 ================
     @GetMapping("/community/commain")
-    public String commainPage(Model model){
+    public String commainPage(@Valid BoardSearchForm boardSearchForm,
+                              Model model){
 
         List<BoardListMainDto> boardListMainDtos = communityMainService.getBoardMainList();
 
@@ -50,6 +48,7 @@ public class CommunityController {
                 .toList();
 
 
+        model.addAttribute("boardSearchForm", boardSearchForm);
         model.addAttribute("popMeeting", popMeeting);
         model.addAttribute("popErrand",popErrand);
 
@@ -57,15 +56,21 @@ public class CommunityController {
     }
 
     // ================ 커뮤니티 검색결과 페이지 ================
-    @GetMapping("/community/comsearch")
+    @GetMapping("community/comsearch")
     public String comsearch(@Valid BoardSearchForm boardSearchForm,
                             Model model){
 
-        List<BoardListSubDto> boardListSubDtos = communityMainService.getBoardSearchList();
+        List<BoardListSubDto> boardListSubDtos = communityMainService.getBoardSearchList(boardSearchForm);
 
         model.addAttribute("boardSearchForm", boardSearchForm);
         model.addAttribute("boardListSubDtos", boardListSubDtos);
         return "community/comsearch";
+    }
+
+    @GetMapping("/api/community/comsearch/json")
+    @ResponseBody
+    public List<BoardListSubDto> comsearchJson(@Valid BoardSearchForm boardSearchForm) {
+        return communityMainService.getBoardSearchList(boardSearchForm);
     }
 
     // ================ 커뮤니티 게시판 페이지 ================

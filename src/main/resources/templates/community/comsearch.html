@@ -4,51 +4,65 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{fragment/default}">
 <head>
-  <th:block layout:fragment="css">
-    <style>
+  <th:block layout:fragment="css"></th:block>
+  <th:block layout:fragment="script">
+    <script th:inline="javascript">
 
-    </style>
+      //JSON
+      fetch('/api/community/comsearch?type=meeting&order=desc')
+        .then(res => res.json()) //JSON 데이터 변환
+        .then(date => {
+          console.log(data); //JSON DATA 확인
+      })
+      .catch(error => console.error('Error:', error));
+
+    </script>
   </th:block>
-  <th:block layout:fragment="script"></th:block>
 </head>
 <div layout:fragment="main" id="main"> <!-- ▼ main ▼ -->
   <div class="search-result-wrap">
 
     <!-- ▼ 검색 input ▼ -->
-    <form method="get" role="search" th:objects="${boardSearchForm}"
-          th:action="@{/community/comsearch}"></form>
-      <div class="input-group mb-3">
+    <form method="get" role="search" th:object="${boardSearchForm}"
+          th:action="@{/community/comsearch}">
         <div class="input-group-text">
           <input type="text" th:field="*{keyword}" class="search-input" placeholder="검색어를 입력해주세요.">
+
+          <input type="hidden" th:field="*{boardType}">
+          <input type="hidden" th:field="*{category}">
         </div>
-
-        <select th:field="*{boardType}">
-          <option value="MEETING">모임 모집글</option>
-          <option value="ERRAND">심부름 구인글</option>
-        </select>
-
-      </div>
     </form><!-- ▲ 검색 input 끝 ▲ -->
 
 
   <!-- ▼ 게시판 타입 ▼ -->
     <div class="boardType" style="display=flex; justify-content=center;">
-      <a class="TOTAL"> TOTAL </a>
-      <a class="MEETING"> MEETING </a>
-      <a class="ERRAND"> ERRAND </a>
+      <a href="#" data-type="TOTAL"> TOTAL </a>
+      <a href="#" data-type="MEETING"> MEETING </a>
+      <a href="#" data-type="ERRAND"> ERRAND </a>
     </div> <!-- ▲ 게시판 타입 끝 ▲ -->
 
 
     <!-- ▼ 게시판 카테고리 ▼ -->
-    <div class="boardCategory" style="display=flex; justify-content=center;">
-      <h4 class="total"> Total </h4>
-      <h4 class="total"> Category1 </h4>
-      <h4 class="total"> Category2 </h4>
-      <h4 class="total"> Category3 </h4>
+    <div class="boardCategory-wrap">
+
+      <!-- 모임 모집글 카테고리 -->
+      <div th:if="${boardType.name()} == 'MEETING'" class="boardCategory" style="display=flex; justify-content:center;">
+        <a href="#" data-category="Total"> Total </a>
+        <a href="#" data-category="Category1"> Volunteer </a>
+        <a href="#" data-category="Category2"> Walking </a>
+        <a href="#" data-category="Category3"> Info </a>
+      </div>
+
+      <!-- 심부름 구인글 카테고리 -->
+      <div th:if="${boardType.name()} == 'ERRAND'" class="boardCategory" style="display=flex; justify-content:center;">
+        <a href="#" data-category="Total"> Total </a>
+        <a href="#" data-category="Category1"> Walking </a>
+        <a href="#" data-category="Category2"> Petsitter </a>
+        <a href="#" data-category="Category3"> Erranding </a>
+      </div>
     </div> <!-- ▲ 게시판 카테고리 끝 ▲ -->
 
-
-  <p>"keyword"에 대한 검색 결과</p>
+    <p th:text="${keyword}에 대한 검색 결과:">"keyword"에 대한 검색 결과</p>
 
   <div class="orderBtn">
     <p style="display: inline;">인기순</p>
