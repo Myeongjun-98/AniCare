@@ -184,6 +184,8 @@ header {
 }
 
 .user-info img {
+  width:60px;
+  height:60px;
   border-radius: 50%;
   margin-right: 15px;
 }
@@ -245,6 +247,7 @@ header {
 .pet-back {
   transform: rotateY(180deg);
   background-color: #ffecb3;
+  font-size: 14px;
 }
 
 .pet-card.flipped .pet-front {

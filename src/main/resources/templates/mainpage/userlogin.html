@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragment/default}">
+
+<th:block layout:fragment="css">
+    .error {
+            color: red;
+            font-size: 14px;
+    }
+</th:block>
+<th:block layout:fragment="script">
+    $(function () {
+          $("input[name=userEmail]").on("keyup", btEnable);
+          $("input[name=password]").on("keyup", btEnable);
+    });
+    function btEnable() {
+          var id = $("input[name=userEmail]").val();
+          var pw = $("input[name=password]").val();
+
+        if (id != "" && pw != "") {
+            $("#loginBt").attr("disabled", false);
+        } else {
+            $("#loginBt").attr("disabled", true);
+        }
+    }
+
+</th:block>
+<main layout:fragment="main">
+  <div layout:fragment="main" id="main">
+    <form method="post" action="/login" class="row g-3">
+      <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+
+      <div class="col-md-12">
+        <label for="inputEmail" class="form-label">이메일</label>
+        <input type="text" name="userEmail" class="form-control" id="inputEmail"/>
+      </div>
+
+      <div class="col-md-12">
+        <label for="inputPassword" class="form-control">비밀번호</label>
+        <input type="password" name="password" class="form-control" id="inputPassword"/>
+      </div>
+
+      <p th:if="${loginErrorMsg}" class="error mb-3" th:text="${loginErrorMsg}"></p>
+
+      <div class="col-12">
+        <button type="submit" class="btn btn-primary w-100" id="loginbt" disabled>로그인</button>
+      </div>
+    </form>
+
+    <div class="btn-group mt-4" role="group" aria-label="Basic outlined exemple">
+      <button type="button" class="btn btn-outline-priamary">아이디 찾기</button>
+      <button type="button" class="btn btn-outline-priamary">비밀번호 찾기</button>
+    </div>
+  </div>
+</main>
+</html>

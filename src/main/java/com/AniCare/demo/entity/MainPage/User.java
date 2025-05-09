@@ -1,5 +1,7 @@
 package com.AniCare.demo.entity.MainPage;
 
+import com.AniCare.demo.Dto.mainpage.UserDetailDto;
+import com.AniCare.demo.Dto.mainpage.UserInfoDto;
 import com.AniCare.demo.constant.MainPage.Authorization;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -14,7 +16,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
-    private Long id;
+    private Long userId;
 
     private String userImage; // 유저 프로필 사진
 
@@ -35,6 +37,11 @@ public class User {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Authorization authorization; // 권한 (사용자 or 관리자)
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="default_pet_id")
+    private Pet defaultPet; // 대표동물 설정
+
 
 
 }

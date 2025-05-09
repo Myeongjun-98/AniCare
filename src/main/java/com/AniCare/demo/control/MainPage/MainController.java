@@ -2,6 +2,7 @@ package com.AniCare.demo.control.MainPage;
 
 import com.AniCare.demo.entity.community.Board;
 import com.AniCare.demo.service.community.BoardService;
+import com.AniCare.demo.service.mainpage.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,16 +13,24 @@ import java.util.List;
 @Controller
 public class MainController {
 
-
+    @Autowired
+    private UserService userService;
     @Autowired
     private BoardService boardService;
+
 
     @GetMapping("/anicare")
     public String main(Model model){
 
+        // 메인페이지에 커뮤니티 정보글 띄우기
         model.addAttribute("communityList", boardService.getAllboardList());
 
+        // 마이페이지에 사용자 정보 띄우기
+        model.addAttribute("userDetailDto", userService.getUserDetail());
 
         return "mainpage/mainpage";
     }
+
+
+
 }

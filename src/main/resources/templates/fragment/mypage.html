@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
-
-
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragment/default}">
 
 <aside th:fragment="mainmypage" id="sidebar" class="sidebar">
     <div class="sidebar-header">
@@ -11,16 +11,30 @@
 
     <!-- 로그인 상태 -->
     <div class="user-info">
-        <img src="https://via.placeholder.com/80" alt="프로필 사진" />
+        <img th:src="${userDetailDto.userImg}" alt="프로필 사진" />
         <div class="user-details">
-            <h3>사용자닉네임</h3>
-            <p>user@example.com</p>
-            <p>서울시 강남구</p>
+        <h3 th:text="${userDetailDto.userName}"></h3>
+            <p th:text="${userDetailDto.userEmail}"></p>
+            <p th:text="${userDetailDto.userAddress}"></p>
         </div>
         <button class="edit-btn">수정</button>
     </div>
     <div class="pet-slider">
         <!-- 반려동물 정보 슬라이드 -->
+        <div class="pet-slider">
+            <div class="pet-card">
+                <div class="pet-front">
+                    <img src="https://via.placeholder.com/60" alt="반려동물">
+                    <h4>뽀삐</h4>
+                </div>
+                <div class="pet-back">
+                    <p>나이: 3세</p>
+                    <p>성별: 남</p>
+                    <p>종류: 강아지</p>
+                </div>
+            </div>
+            <button class="add-pet">+ 추가</button>
+        </div>
     </div>
 
     <!-- 메뉴 카테고리 -->
