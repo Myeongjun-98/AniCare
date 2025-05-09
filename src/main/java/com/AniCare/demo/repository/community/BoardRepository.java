@@ -3,6 +3,8 @@ package com.AniCare.demo.repository.community;
 import com.AniCare.demo.constant.community.BoardType;
 import com.AniCare.demo.entity.community.Board;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -21,7 +23,9 @@ public interface BoardRepository extends JpaRepository<Board, Long> { //board �
     List<Board> findAllByBoardTypeOrderByIdDesc(BoardType type);
 
     //검색 기능
-    List<Board> findByBoardTitleContaining(String keyword);
+    @Query("SELECT b FROM Board b WHERE b.boardType = :boardType AND (b.boardTitle LIKE %:keyword% OR b.boardContent LIKE %:keyword%)")
+    List<Board> searchByBoardTypeAndKeyword(@Param("boardType") BoardType boardType,
+                                            @Param("keyword") String keyword);
 
 
 }
