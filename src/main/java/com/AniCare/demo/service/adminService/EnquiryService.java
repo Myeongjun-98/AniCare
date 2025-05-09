@@ -1,6 +1,6 @@
 package com.AniCare.demo.service.adminService;
 
-import com.AniCare.demo.DTO.admin.EnquiryReplyViewDto;
+import com.AniCare.demo.dto.admin.EnquiryReplyViewDto;
 import com.AniCare.demo.entity.MainPage.Enquiry;
 import com.AniCare.demo.entity.admin.EnquiryReply;
 import com.AniCare.demo.repository.MainPage.EnquiryRepository;
@@ -13,7 +13,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -43,27 +42,22 @@ public class EnquiryService {
         enquiryReplyRepository.save(reply);
     }
 
-
     /**
      * 문의 + 답변 리스트 조회
      */
     @Transactional(readOnly = true)
-
     public List<EnquiryReplyViewDto> findAll() {
-
         List<EnquiryReplyViewDto> enquiryReplyViewDtos = new ArrayList<>();
-
         List<Enquiry> enquiries = enquiryRepository.findAll();
 
-        for(Enquiry enquiry : enquiries){
-            EnquiryReply enquiryReply = enquiryReplyRepository.findByEnquiryId(enquiry.getId()).orElse( new EnquiryReply());
+        for (Enquiry enquiry : enquiries) {
+            EnquiryReply enquiryReply = enquiryReplyRepository.findByEnquiryId(enquiry.getId())
+                    .orElse(new EnquiryReply());
 
-            EnquiryReplyViewDto dto = EnquiryReplyViewDto.of(enquiryReply,enquiry);
+            EnquiryReplyViewDto dto = EnquiryReplyViewDto.of(enquiryReply, enquiry);
             enquiryReplyViewDtos.add(dto);
-
         }
 
         return enquiryReplyViewDtos;
     }
 }
-

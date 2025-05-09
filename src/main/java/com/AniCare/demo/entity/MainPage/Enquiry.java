@@ -12,32 +12,29 @@ import java.time.LocalDate;
 @Setter
 public class Enquiry {
 
-    // 공지사항 테이블 아이디
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "enquiry_id")
     private Long id;
 
-    // 유저테이블 아이디
-    @JoinColumn(name = "user_id")
     @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
     @Column(nullable = false)
-    private String enquiryTitle; // 문의사항 제목
+    private String enquiryTitle;
 
     @Column(nullable = false)
-    private String enquiryContent; // 문의사항 내용
+    private String enquiryContent;
 
-    private LocalDate EnquiryDate; // 문의사항 작성일
+    private LocalDate enquiryDate;
 
-    private String enquiryFile; // 문의사항 첨부파일
+    private String enquiryFile;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private EnquiryType enquiryType; // 문의사항 유형
+    private EnquiryType enquiryType;
 
-
-    public void setStatus(String 처리완료) {
-    }
+    @Column(nullable = false)
+    private String status = "대기";
 }

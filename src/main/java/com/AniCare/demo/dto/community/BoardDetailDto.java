@@ -1,4 +1,4 @@
-package com.AniCare.demo.Dto.community;
+package com.AniCare.demo.dto.community;
 
 import com.AniCare.demo.constant.community.BoardType;
 import com.AniCare.demo.entity.community.Board;

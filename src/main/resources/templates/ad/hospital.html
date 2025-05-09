@@ -13,10 +13,11 @@
     <a href="/ad/notice" class="btn btn-outline-primary">공지</a>
     <a href="/ad/hospital" class="btn btn-outline-primary">병원등록</a>
     <a href="/ad/masterAd" class="btn btn-outline-primary">계정관리</a>
+    <a href="/ad/hospitalList" class="btn btn-outline-primary">병원목록</a>
     <a href="/logout" class="btn btn-outline-danger">로그아웃</a>
 </nav>
-
 <div class="container">
+
     <h2>병원 등록</h2>
     <form th:action="@{/ad/hospital}" method="post" th:object="${hospital}">
         <div class="mb-3">
@@ -33,6 +34,8 @@
         </div>
         <div class="mb-3">
             <label class="form-label">수의사 ID</label>
+
+
             <input type="text" th:field="*{vetInfoId}" class="form-control">
         </div>
         <div class="mb-3">
@@ -46,7 +49,7 @@
         <div class="mb-3">
             <label class="form-label">진료 유형</label>
             <select th:field="*{clinicType}" class="form-select">
-                <option th:each="type : ${T(com.constant.admin.ClinicType).values()}"
+                <option th:each="type : ${T(com.AniCare.demo.constant.admin.ClinicType).values()}"
                         th:value="${type}" th:text="${type}">진료 유형</option>
             </select>
         </div>

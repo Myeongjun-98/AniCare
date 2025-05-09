@@ -13,6 +13,7 @@
   <a href="/ad/notice" class="btn btn-outline-primary">공지</a>
   <a href="/ad/hospital" class="btn btn-outline-primary">병원등록</a>
   <a href="/ad/masterAd" class="btn btn-outline-primary">계정관리</a>
+  <a href="/ad/hospitalList" class="btn btn-outline-primary">병원목록</a>
   <a href="/logout" class="btn btn-outline-danger">로그아웃</a>
 </nav>
 
@@ -37,7 +38,7 @@
       <td th:text="${user.id}">1</td>
       <td th:text="${user.loginId}">아이디</td>
       <td th:text="${user.name}">이름</td>
-      <td th:text="${user.role}">역할</td>
+      <td th:text="${user.authorization}">역할</td>
       <td th:text="'정상'">상태</td>
       <td>
         <a th:href="@{/ad/masterAd/{id}/edit(id=${user.id})}" class="btn btn-sm btn-outline-primary">수정</a>

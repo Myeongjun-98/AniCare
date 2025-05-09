@@ -5,6 +5,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 @Entity
 @Getter
 @Setter
@@ -15,11 +18,13 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     private Long id;
+    private String LoginId;
 
     private String userImage; // 유저 프로필 사진
 
     @Column(nullable = false)
     private String userName; // 유저이릉
+
 
     @Column(nullable = false)
     private String userPassword; // 유저 비밀번호
@@ -35,6 +40,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Authorization authorization; // 권한 (사용자 or 관리자)
+
 
 
 }

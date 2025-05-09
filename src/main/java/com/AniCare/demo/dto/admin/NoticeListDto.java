@@ -1,4 +1,4 @@
-package com.AniCare.demo.DTO.admin;
+package com.AniCare.demo.dto.admin;
 
 
 import lombok.AllArgsConstructor;

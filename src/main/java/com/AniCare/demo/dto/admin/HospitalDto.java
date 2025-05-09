@@ -1,10 +1,12 @@
-package com.AniCare.demo.DTO.admin;
+package com.AniCare.demo.dto.admin;
 
 import com.AniCare.demo.entity.admin.Hospital;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor // ← 이 줄 추가
