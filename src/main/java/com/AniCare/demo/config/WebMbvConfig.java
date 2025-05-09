@@ -1,3 +1,4 @@
+/*
 package com.AniCare.demo.config;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -19,3 +20,4 @@ public class WebMbvConfig implements WebMvcConfigurer {
 
 
 }
+*/
