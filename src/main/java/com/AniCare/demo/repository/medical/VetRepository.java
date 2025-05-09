@@ -29,4 +29,3 @@ public interface VetRepository extends JpaRepository<VetInfo, Long> {
             """)
     Optional<VetInfo> findWithDetailById(@Param("id") Long id);
 }
-
