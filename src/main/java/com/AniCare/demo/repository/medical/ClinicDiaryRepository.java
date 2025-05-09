@@ -20,21 +20,19 @@ public interface ClinicDiaryRepository extends JpaRepository<ClinicDiary, Long> 
                 JOIN FETCH c.board
                 JOIN FETCH c.pet
                 LEFT JOIN FETCH c.hospital
-            WHERE c.pet.id = :id
+            WHERE c.pet.id = :petId
             """)
-    List<ClinicDiary> findAllByPetId(@Param("petId") Long id);
+    List<ClinicDiary> findAllByPetId(@Param("petId") Long petId);
 
     // (임시) 유저네임으로 펫 리스트 불러오기??
-    List<Pet> findByUser_UserName(String userName);
+    List<Pet> findByPet_User_UserName(String userName);
 
     // 진료수첩 정보 불러오기
     @Query("""
             SELECT DISTINCT c
             FROM ClinicDiary c
                 JOIN FETCH c.board
-                JOIN FETCH c.pet p
-                LEFT JOIN FETCH p.disease   d
-                LEFT JOIN FETCH p.allergy   a
+                JOIN FETCH c.pet
                 LEFT JOIN FETCH c.hospital
                 WHERE c.id = :id
             """)

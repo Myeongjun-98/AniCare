@@ -47,8 +47,8 @@ public class MedicalService {
     public ClinicDiaryDto viewClinicDiaryDetail(Long id) {
         ClinicDiary c = clinicDiaryRepository.findByClinicDiaryId(id).orElseThrow(() -> new NoSuchElementException(id + "를 찾을 수 없습니다."));
 
-        List<Disease> diseases = diseaseRepository.findByPet_PetId(c.getPet().getId());
-        List<Allergy> allergies = allergyRepository.findByPet_PetId(c.getPet().getId());
+        List<Disease> diseases = diseaseRepository.findByPet_id(c.getPet().getId());
+        List<Allergy> allergies = allergyRepository.findByPet_id(c.getPet().getId());
         List<BoardFile> boardFiles = boardFileRepository.findAllByBoardId(c.getBoard().getId());
 
         return new ClinicDiaryDto(
