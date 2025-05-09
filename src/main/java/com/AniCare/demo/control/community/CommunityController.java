@@ -58,10 +58,12 @@ public class CommunityController {
 
     // ================ 커뮤니티 검색결과 페이지 ================
     @GetMapping("/community/comsearch")
-    public String comsearch(Model model){
+    public String comsearch(@Valid BoardSearchForm boardSearchForm,
+                            Model model){
 
         List<BoardListSubDto> boardListSubDtos = communityMainService.getBoardSearchList();
 
+        model.addAttribute("boardSearchForm", boardSearchForm);
         model.addAttribute("boardListSubDtos", boardListSubDtos);
         return "community/comsearch";
     }

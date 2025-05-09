@@ -1,10 +1,13 @@
 package com.AniCare.demo.entity.admin;
 
 import com.AniCare.demo.constant.admin.ClinicType;
+import com.AniCare.demo.constant.medical.PetSpecies;
 import com.AniCare.demo.entity.medical.VetInfo;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
 
 @Setter
 @Getter
@@ -31,7 +34,7 @@ public class Hospital {
     private String operating;
 
     @Enumerated(EnumType.STRING)
-    private ClinicType clinicType;
+    private List<PetSpecies> petSpecies;
 
     @Column(nullable = false)
     private String hospitalAddress;

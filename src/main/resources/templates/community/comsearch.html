@@ -15,19 +15,27 @@
   <div class="search-result-wrap">
 
     <!-- ▼ 검색 input ▼ -->
-    <div class="input-group mb-3">
-      <div class="input-group-text">
-        <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
+    <form method="get" role="search" th:objects="${boardSearchForm}"
+          th:action="@{/community/comsearch}"></form>
+      <div class="input-group mb-3">
+        <div class="input-group-text">
+          <input type="text" th:field="*{keyword}" class="search-input" placeholder="검색어를 입력해주세요.">
+        </div>
+
+        <select th:field="*{boardType}">
+          <option value="MEETING">모임 모집글</option>
+          <option value="ERRAND">심부름 구인글</option>
+        </select>
+
       </div>
-      <input type="text" class="form-control" aria-label="Text input with checkbox">
-    </div> <!-- ▲ 검색 input 끝 ▲ -->
+    </form><!-- ▲ 검색 input 끝 ▲ -->
 
 
   <!-- ▼ 게시판 타입 ▼ -->
     <div class="boardType" style="display=flex; justify-content=center;">
-      <h2 class="TOTAL"> TOTAL </h2>
-      <h2 class="MEETING"> MEETING </h2>
-      <h2 class="ERRAND"> ERRAND </h2>
+      <a class="TOTAL"> TOTAL </a>
+      <a class="MEETING"> MEETING </a>
+      <a class="ERRAND"> ERRAND </a>
     </div> <!-- ▲ 게시판 타입 끝 ▲ -->
 
 
