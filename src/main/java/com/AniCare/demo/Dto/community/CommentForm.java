@@ -1,4 +1,4 @@
-package com.AniCare.demo.Dto.community;
+package com.AniCare.demo.DTO.community;
 
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;

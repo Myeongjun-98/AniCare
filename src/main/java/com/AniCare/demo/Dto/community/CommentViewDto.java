@@ -1,4 +1,4 @@
-package com.AniCare.demo.Dto.community;
+package com.AniCare.demo.DTO.community;
 
 import com.AniCare.demo.entity.community.Comment;
 import lombok.Getter;
