@@ -1,8 +1,8 @@
 package com.AniCare.demo.service.medical;
 
-import com.AniCare.demo.Dto.medical.VetAverageReviewDto;
-import com.AniCare.demo.Dto.medical.VetInfoDto;
-import com.AniCare.demo.Dto.medical.VetInfoListDto;
+import com.AniCare.demo.DTO.medical.VetAverageReviewDto;
+import com.AniCare.demo.DTO.medical.VetInfoDto;
+import com.AniCare.demo.DTO.medical.VetInfoListDto;
 import com.AniCare.demo.entity.medical.VetInfo;
 import com.AniCare.demo.repository.medical.VetRepository;
 import com.AniCare.demo.repository.medical.VetReviewRepository;

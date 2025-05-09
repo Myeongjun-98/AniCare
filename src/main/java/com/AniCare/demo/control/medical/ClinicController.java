@@ -1,7 +1,7 @@
 package com.AniCare.demo.control.medical;
 
-import com.AniCare.demo.Dto.medical.VetInfoDto;
-import com.AniCare.demo.Dto.medical.VetInfoListDto;
+import com.AniCare.demo.DTO.medical.VetInfoDto;
+import com.AniCare.demo.DTO.medical.VetInfoListDto;
 import com.AniCare.demo.service.medical.VetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
