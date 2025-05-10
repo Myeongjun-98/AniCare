@@ -1,27 +1,69 @@
 package com.AniCare.demo.control.medical;
 
+import com.AniCare.demo.DTO.medical.CheckupSetDto;
 import com.AniCare.demo.DTO.medical.VetInfoDto;
 import com.AniCare.demo.DTO.medical.VetInfoListDto;
+import com.AniCare.demo.constant.medical.PetSpecies;
+import com.AniCare.demo.entity.medical.Checkup;
+import com.AniCare.demo.service.medical.MedicalService;
 import com.AniCare.demo.service.medical.VetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
 @RequestMapping("/medical")
 public class ClinicController {
+
+    @Autowired
+    private MedicalService medicalService;
     @Autowired
     private VetService vetService;
 
+
     // 메디컬 진단받기 페이지
-    @GetMapping("/vetList")
+    @GetMapping("/checkupPage")
     public String checkupPage(Model model) {
-        List<VetInfoListDto> vets = vetService.getVetsWithRatings();
+
+        // 객체를 담을 껍데기 CheckSetDto를 담아서 페이지로 반환
+        model.addAttribute("checkupSetDto", new CheckupSetDto());
+
+        return "medical/checkupPage";
+    }
+
+    // 메디컬 진단받기 페이지에서 문진표 제출
+    @PostMapping("/checkupPage")
+    public String submitCheckup(
+            Principal principal,
+            @ModelAttribute CheckupSetDto checkupSetDto
+    ) {
+        Checkup saved = medicalService.saveCheckup(checkupSetDto, principal.getName());
+
+        // petSpecies 기준으로 vetList로 리다이렉트
+        String species = saved.getPet().getPetSpecies().name();
+        return "redirect:/medical/vetList?species=" + species;
+    }
+
+    // 메디컬 진단받기 페이지 이후 수의사 리스트 불러오기
+    @GetMapping("/vetList")
+    public String vetListViewPage(@RequestParam(required = false) String species, Model model) {
+        List<VetInfoListDto> vets;
+
+        // (임시)User에서 대표동물이 있을 시, 동물종에 일치하는 수의사 먼저 노출
+        if (species != null) {
+            PetSpecies petSpecies = PetSpecies.valueOf(species);
+            vets = vetService.getVetsBySpeciesFirst(petSpecies);
+
+        }
+        // 그렇지 않을 시 그냥 별점순으로 정렬
+        else {
+            vets = vetService.getVetsWithRatings();
+        }
+
         model.addAttribute("vets", vets);
 
         return "medical/vetList";

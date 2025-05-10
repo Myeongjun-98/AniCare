@@ -13,89 +13,71 @@
     <div>
         <!-- 문진표 구역 -->
         <div>
-            <form action="">
+            <div>펫 정보 슬라이드 구역</div>
+        </div>
+        <div>
+            <form method="post" th:action="@{/medical/checkupPage}" th:object="${checkupSetDto}">
                 <label>
                     탈모
-                    <input type="checkbox"/>
+                    <input th:field="*{symptom}" type="checkbox" value="탈모"/>
                 </label>
                 <label>
                     충혈
-                    <input type="checkbox"/>
+                    <input th:field="*{symptom}" type="checkbox" value="충혈"/>
                 </label>
                 <label>
                     가려움증
-                    <input type="checkbox"/>
+                    <input th:field="*{symptom}" type="checkbox" value="가려움증"/>
                 </label>
                 <label>
                     구토
-                    <input type="checkbox"/>
+                    <input th:field="*{symptom}" type="checkbox" value="구토"/>
                 </label>
                 <label>
                     발열
-                    <input type="checkbox"/>
+                    <input th:field="*{symptom}" type="checkbox" value="발열"/>
                 </label>
                 <label>
                     배변이상
-                    <input type="checkbox"/>
+                    <input th:field="*{symptom}" type="checkbox" value="배변이상"/>
                 </label>
                 <label>
                     상처
-                    <input type="checkbox"/>
+                    <input th:field="*{symptom}" type="checkbox" value="상처"/>
                 </label>
                 <label>
                     절단
-                    <input type="checkbox"/>
+                    <input th:field="*{symptom}" type="checkbox" value="절단"/>
                 </label>
                 <label>
                     뼈_관절이상
-                    <input type="checkbox"/>
+                    <input th:field="*{symptom}" type="checkbox" value="뼈_관절이상"/>
                 </label>
                 <label>
                     식음전폐
-                    <input type="checkbox"/>
+                    <input th:field="*{symptom}" type="checkbox" value="식음전폐"/>
                 </label>
                 <label>
                     콧물
-                    <input type="checkbox"/>
+                    <input th:field="*{symptom}" type="checkbox" value="콧물"/>
                 </label>
                 <label>
                     호흡이상
-                    <input type="checkbox"/>
+                    <input th:field="*{symptom}" type="checkbox" value="호흡이상"/>
                 </label>
                 <label>
                     기타 증상
-                    <input id="etc" type="checkbox"/>
-                    <input disabled id="etcSymptom" type="text"/>
+                    <input id="etcCheckbox" type="checkbox"/>
+                    <input disabled id="etcSymptom" placeholder="직접 입력" th:field="*{etcSymptom}" type="text"/>
                 </label>
+                <!-- 문진표 구역 -->
+                <button type="submit">비대면 진료 신청</button>
+                <button>병원예약(미구현)</button>
             </form>
         </div>
-        <!-- 문진표 구역 -->
     </div>
 
-    <div>
-        <!--문진표 제외 영역-->
-        <div>펫 정보 슬라이드 구역</div>
-
-        <button>비대면 진료 신청</button>
-        <button>병원예약(미구현)</button>
-        <!--문진표 제외 영역-->
-    </div>
-    <script>
-        const etc = document.getElementById("etc");
-        const etcSymptom = document.getElementById("etcSymptom");
-
-        etc.addEventListener("change", () => {
-            etcSymptom.disabled = !etc.checked;
-
-            if (etcCheckbox.checked) {
-                etcSymptom.disabled = false;
-                etcSymptom.focus();
-            }else {
-                etcSymptom.disabled = true;
-                etcSymptom.value = "";
-            }
-    });
-    </script>
+    <script th:src="@{/javascript/medical/checkupPage.js}"></script>
 </div>
 
 

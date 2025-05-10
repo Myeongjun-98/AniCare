@@ -3,16 +3,14 @@ package com.AniCare.demo.service.medical;
 import com.AniCare.demo.DTO.medical.VetAverageReviewDto;
 import com.AniCare.demo.DTO.medical.VetInfoDto;
 import com.AniCare.demo.DTO.medical.VetInfoListDto;
+import com.AniCare.demo.constant.medical.PetSpecies;
 import com.AniCare.demo.entity.medical.VetInfo;
 import com.AniCare.demo.repository.medical.VetRepository;
 import com.AniCare.demo.repository.medical.VetReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
-import java.util.NoSuchElementException;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -58,6 +56,28 @@ public class VetService {
         );
 
         return vets;
+    }
+
+    public List<VetInfoListDto> getVetsBySpeciesFirst(PetSpecies species) {
+
+        // 별점순으로 정렬된 수의사 리스트 가져오기
+        List<VetInfoListDto> all = getVetsWithRatings();
+
+        // 진료 가능한 수의사 그룹
+        List<VetInfoListDto> canCure = all.stream()
+                .filter(v -> v.getCuringCapable().contains(species))
+                .collect(Collectors.toList());
+
+        // 진료가능 목록에 해당하는 동물이 없는 수의사 그룹
+        List<VetInfoListDto> others = all.stream()
+                .filter(o -> !o.getCuringCapable().contains(species))
+                .collect(Collectors.toList());
+
+        List<VetInfoListDto> reordered = new ArrayList<>(canCure.size() + others.size());
+        reordered.addAll(canCure);
+        reordered.addAll(others);
+
+        return reordered;
     }
 
     // 수의사 상세정보 불러오기

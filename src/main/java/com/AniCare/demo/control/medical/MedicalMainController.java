@@ -13,12 +13,6 @@ public class MedicalMainController {
         return "medical/medicalMain";
     }
 
-    // 메디컬 진단받기 페이지
-    @GetMapping("/medical/checkupPage")
-    public String checkupPage(Model model) {
-        return "medical/checkupPage";
-    }
-
     // 메디컬 수의사페이지
     @GetMapping("/medical/vet/vetPage")
     public String vetPage(Model model) {

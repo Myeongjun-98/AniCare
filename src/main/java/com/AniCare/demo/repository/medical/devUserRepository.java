@@ -8,5 +8,6 @@ import java.util.Optional;
 
 public interface devUserRepository extends JpaRepository<User, Long> {
     Optional<User> findByUserName(String userName);
+
 }
 // << (medical) 개발자용 로그인레포지토리
