@@ -1,79 +1,102 @@
 <!DOCTYPE html>
 <html
-  lang="ko"
-  xmlns:th="http://www.thymeleaf.org"
-  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-  layout:decorate="~{fragment/default}"
+        lang="ko"
+        layout:decorate="~{fragment/default}"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        xmlns:th="http://www.thymeleaf.org"
 >
-  <head>
+<head>
     <th:block layout:fragment="css"></th:block>
     <th:block layout:fragment="script"></th:block>
-  </head>
-  <div layout:fragment="main" id="main">
+</head>
+<div id="main" layout:fragment="main">
     <div>
-      <!-- 문진표 구역 -->
-      <div>
-        <form action="">
-          <legend>
-            탈모
-            <input type="checkbox" />
-          </legend>
-          <legend>
-            충혈
-            <input type="checkbox" />
-          </legend>
-          <legend>
-            가려움증
-            <input type="checkbox" />
-          </legend>
-          <legend>
-            구토
-            <input type="checkbox" />
-          </legend>
-          <legend>
-            발열
-            <input type="checkbox" />
-          </legend>
-          <legend>
-            배변이상
-            <input type="checkbox" />
-          </legend>
-          <legend>
-            상처
-            <input type="checkbox" />
-          </legend>
-          <legend>
-            절단
-            <input type="checkbox" />
-          </legend>
-          <legend>
-            뼈_관절이상
-            <input type="checkbox" />
-          </legend>
-          <legend>
-            식음전폐
-            <input type="checkbox" />
-          </legend>
-          <legend>
-            콧물
-            <input type="checkbox" />
-          </legend>
-          <legend>
-            호흡이상
-            <input type="checkbox" />
-          </legend>
-        </form>
-      </div>
-      <!-- 문진표 구역 -->
+        <!-- 문진표 구역 -->
+        <div>
+            <form action="">
+                <label>
+                    탈모
+                    <input type="checkbox"/>
+                </label>
+                <label>
+                    충혈
+                    <input type="checkbox"/>
+                </label>
+                <label>
+                    가려움증
+                    <input type="checkbox"/>
+                </label>
+                <label>
+                    구토
+                    <input type="checkbox"/>
+                </label>
+                <label>
+                    발열
+                    <input type="checkbox"/>
+                </label>
+                <label>
+                    배변이상
+                    <input type="checkbox"/>
+                </label>
+                <label>
+                    상처
+                    <input type="checkbox"/>
+                </label>
+                <label>
+                    절단
+                    <input type="checkbox"/>
+                </label>
+                <label>
+                    뼈_관절이상
+                    <input type="checkbox"/>
+                </label>
+                <label>
+                    식음전폐
+                    <input type="checkbox"/>
+                </label>
+                <label>
+                    콧물
+                    <input type="checkbox"/>
+                </label>
+                <label>
+                    호흡이상
+                    <input type="checkbox"/>
+                </label>
+                <label>
+                    기타 증상
+                    <input id="etc" type="checkbox"/>
+                    <input disabled id="etcSymptom" type="text"/>
+                </label>
+            </form>
+        </div>
+        <!-- 문진표 구역 -->
     </div>
 
     <div>
-      <!--문진표 제외 영역-->
-      <div>펫 정보 슬라이드 구역</div>
+        <!--문진표 제외 영역-->
+        <div>펫 정보 슬라이드 구역</div>
 
-      <button>비대면 진료 신청</button>
-      <button>병원예약(미구현)</button>
-      <!--문진표 제외 영역-->
+        <button>비대면 진료 신청</button>
+        <button>병원예약(미구현)</button>
+        <!--문진표 제외 영역-->
     </div>
-  </div>
+    <script>
+        const etc = document.getElementById("etc");
+        const etcSymptom = document.getElementById("etcSymptom");
+
+        etc.addEventListener("change", () => {
+            etcSymptom.disabled = !etc.checked;
+
+            if (etcCheckbox.checked) {
+                etcSymptom.disabled = false;
+                etcSymptom.focus();
+            }else {
+                etcSymptom.disabled = true;
+                etcSymptom.value = "";
+            }
+    });
+    </script>
+</div>
+
+
 </html>
