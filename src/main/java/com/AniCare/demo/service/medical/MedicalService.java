@@ -90,6 +90,9 @@ public class MedicalService {
         c.setSymptom(setDto.getSymptom());
         c.setEtcSymptom(setDto.getEtcSymptom());
 
+        // 확인용..
+        System.out.println("문진표 정보 확인 : " + c.getSymptom());
+
         // 저장
         return checkupRepository.save(c);
     }
