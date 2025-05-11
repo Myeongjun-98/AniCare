@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 public class devUserService implements UserDetailsService {
     private final devUserRepository devUserRepository;
 
+    // (임시) 로그인상태의 유저이름으로 유저정보 불러오기
     @Override
     public UserDetails loadUserByUsername(String userName)
             throws UsernameNotFoundException {
