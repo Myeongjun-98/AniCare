@@ -1,4 +1,4 @@
-package com.AniCare.demo.DTO.medical;
+package com.AniCare.demo.Dto.medical;
 
 import com.AniCare.demo.entity.medical.Schedule;
 import lombok.AllArgsConstructor;

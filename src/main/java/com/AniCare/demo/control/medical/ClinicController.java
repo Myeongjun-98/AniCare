@@ -1,8 +1,8 @@
 package com.AniCare.demo.control.medical;
 
-import com.AniCare.demo.DTO.medical.CheckupSetDto;
-import com.AniCare.demo.DTO.medical.VetInfoDto;
-import com.AniCare.demo.DTO.medical.VetInfoListDto;
+import com.AniCare.demo.Dto.medical.CheckupSetDto;
+import com.AniCare.demo.Dto.medical.VetInfoDto;
+import com.AniCare.demo.Dto.medical.VetInfoListDto;
 import com.AniCare.demo.constant.medical.PetSpecies;
 import com.AniCare.demo.entity.medical.Checkup;
 import com.AniCare.demo.service.medical.MedicalService;

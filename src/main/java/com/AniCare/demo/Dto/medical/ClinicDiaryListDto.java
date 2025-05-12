@@ -1,4 +1,4 @@
-package com.AniCare.demo.DTO.medical;
+package com.AniCare.demo.Dto.medical;
 
 import com.AniCare.demo.constant.medical.PetStatus;
 import lombok.Getter;

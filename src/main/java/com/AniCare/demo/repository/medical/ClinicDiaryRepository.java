@@ -1,6 +1,6 @@
 package com.AniCare.demo.repository.medical;
 
-import com.AniCare.demo.DTO.medical.ClinicDiaryListDto;
+import com.AniCare.demo.Dto.medical.ClinicDiaryListDto;
 import com.AniCare.demo.entity.medical.ClinicDiary;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,7 +20,7 @@ public interface ClinicDiaryRepository extends JpaRepository<ClinicDiary, Long> 
      * 반려동물(petId) 기준 진료수첩 목록을 DTO로 페이징 조회
      */
     @Query("""
-              SELECT new com.AniCare.demo.DTO.medical.ClinicDiaryListDto(
+              SELECT new com.AniCare.demo.Dto.medical.ClinicDiaryListDto(
                 c.id,
                 c.clinicDiaryRecordDate,
                 c.board.boardTitle,

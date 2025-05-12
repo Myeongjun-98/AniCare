@@ -1,7 +1,7 @@
 package com.AniCare.demo.control.medical;
 
-import com.AniCare.demo.DTO.medical.ClinicDiaryListDto;
-import com.AniCare.demo.DTO.medical.ClinicDiaryPetInfoDto;
+import com.AniCare.demo.Dto.medical.ClinicDiaryListDto;
+import com.AniCare.demo.Dto.medical.ClinicDiaryPetInfoDto;
 import com.AniCare.demo.service.medical.MedicalService;
 import com.AniCare.demo.service.medical.devUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -46,6 +47,15 @@ public class ClinicDiaryController {
         model.addAttribute("clinicDiaryList", diaryPage);
 
         return "medical/clinicdiary";
+    }
+
+    // 진료수첩 상세페이지
+    @GetMapping("clinicdiary/{clinicDiaryId}")
+    public String viewClinicDiary(@PathVariable Long ClinicDiaryId, Model model) {
+
+        model.addAttribute("clinicDiaryDto", medicalService.viewClinicDiaryDetail(ClinicDiaryId));
+
+        return "medical/clinicdiaryDetail";
     }
 
 

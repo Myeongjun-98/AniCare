@@ -1,9 +1,9 @@
 package com.AniCare.demo.service.medical;
 
-import com.AniCare.demo.DTO.medical.CheckupSetDto;
-import com.AniCare.demo.DTO.medical.ClinicDiaryDto;
-import com.AniCare.demo.DTO.medical.ClinicDiaryListDto;
-import com.AniCare.demo.DTO.medical.ClinicDiaryPetInfoDto;
+import com.AniCare.demo.Dto.medical.CheckupSetDto;
+import com.AniCare.demo.Dto.medical.ClinicDiaryDto;
+import com.AniCare.demo.Dto.medical.ClinicDiaryListDto;
+import com.AniCare.demo.Dto.medical.ClinicDiaryPetInfoDto;
 import com.AniCare.demo.entity.MainPage.Pet;
 import com.AniCare.demo.entity.MainPage.User;
 import com.AniCare.demo.entity.community.BoardFile;
