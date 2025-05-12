@@ -4,19 +4,95 @@
       layout:decorate="~{fragment/default}">
 
 <th:block layout:fragment="css">
-
+<link rel="stylesheet" href="/static/css/enquiry.css">
 </th:block>
 <th:block layout:fragment="script">
+  <script>
 
+  document.addEventListener('DOMContentLoaded', function() {
+  // 실제 구현시 API 호출로 데이터 로딩
+  // fetch('/api/my-enquiries')
+  //     .then(response => response.json())
+  //     .then(data => renderEnquiries(data));
 
+  // 페이지네이션 버튼 이벤트
+  document.querySelectorAll('.page-btn:not(:disabled)').forEach(btn => {
+  btn.addEventListener('click', function() {
+  if (!this.classList.contains('active')) {
+  document.querySelector('.page-btn.active').classList.remove('active');
+  this.classList.add('active');
+  // 페이지 변경 로직 추가
+  }
+  });
+  });
+
+  // 문의글 클릭 이벤트 (테이블 행 전체 클릭 가능)
+  document.querySelectorAll('tbody tr').forEach(row => {
+  row.addEventListener('click', function() {
+  // 상세 페이지로 이동 (이미 HTML에 onclick 설정됨)
+  });
+  });
+
+  // 새 문의 작성 버튼 이벤트
+  document.querySelector('.new-enquiry-btn').addEventListener('click', function(e) {
+  // 이미 HTML에 href로 연결됨
+  });
+
+  // 로그아웃 버튼 이벤트
+  document.querySelector('.logout-btn').addEventListener('click', function() {
+  if (confirm('로그아웃 하시겠습니까?')) {
+  // 로그아웃 처리
+  window.location.href = 'index.html';
+  }
+  });
+  });
+
+  // (예시) 데이터 렌더링 함수
+  function renderEnquiries(data) {
+  const tbody = document.querySelector('tbody');
+  tbody.innerHTML = '';
+
+  data.forEach((enquiry, index) => {
+  const row = document.createElement('tr');
+  row.innerHTML = `
+  <td>${data.length - index}</td>
+  <td class="title-cell">${enquiry.title}</td>
+  <td>${new Date(enquiry.createdAt).toLocaleDateString()}</td>
+  <td><span class="status-badge ${getStatusClass(enquiry.status)}">${getStatusText(enquiry.status)}</span></td>
+  `;
+  row.addEventListener('click', () => {
+  window.location.href = `enquiry-detail.html?id=${enquiry.id}`;
+  });
+  tbody.appendChild(row);
+  });
+  }
+
+  function getStatusClass(status) {
+  switch(status) {
+  case 'completed': return 'completed';
+  case 'in_progress': return 'in-progress';
+  default: return 'pending';
+  }
+  }
+
+  function getStatusText(status) {
+  switch(status) {
+  case 'completed': return '완료';
+  case 'in_progress': return '처리중';
+  default: return '미완료';
+  }
+  }
+
+  </script>
 </th:block>
 <main layout:fragment="main">
+
   <main class="container my-5">
     <div class="d-flex justify-content-between align-items-center mb-4">
       <h2 class="fw-bold">
         <i class="fas fa-question-circle text-warning me-2"></i>내 문의사항
       </h2>
-      <a href="/inquiries/new" class="btn btn-warning">
+      <a href="/enquiries/new" class="btn btn-warning">
         <i class="fas fa-plus me-2"></i>새 문의 작성
       </a>
     </div>
@@ -34,20 +110,20 @@
           </tr>
           </thead>
           <tbody>
-          <tr th:each="inquiry, iter : ${inquiries.content}"
-              th:onclick="|location.href='/inquiries/' + ${inquiry.id}|">
-            <td th:text="${inquiries.totalElements - (inquiries.number * inquiries.size) - iter.index}">1</td>
-            <td th:text="${inquiry.title}">서비스 이용 문의</td>
-            <td th:text="${#temporals.format(inquiry.createdAt, 'yyyy.MM.dd')}">2023.10.15</td>
+          <tr th:each="enquiry, iter : ${enquiries.content}"
+              th:onclick="|location.href='/enquiries/' + ${enquiry.id}|">
+            <td th:text="${enquiries.totalElements - (enquiries.number * enquiries.size) - iter.index}">1</td>
+            <td th:text="${enquiry.enquiryTitle}">서비스 이용 문의</td>
+            <td th:text="${#temporals.format(enquiry.enquiryDate, 'yyyy.MM.dd')}">2023.10.15</td>
             <td>
-                                <span th:classappend="${inquiry.status == 'COMPLETED'} ? 'status-badge status-completed' : 'status-badge status-pending'"
-                                      th:text="${inquiry.status == 'COMPLETED'} ? '완료' : '미완료'">
-                                    미완료
-                                </span>
+                            <span th:classappend="${enquiry.enquiryStatus == 'COMPLETED'} ? 'status-badge status-completed' : 'status-badge status-pending'"
+                                  th:text="${enquiry.enquiryStatus == 'COMPLETED'} ? '완료' : '미완료'">
+                                미완료
+                            </span>
             </td>
           </tr>
           <!-- 문의가 없을 경우 -->
-          <tr th:if="${inquiries.content.isEmpty()}">
+          <tr th:if="${enquiries.content.isEmpty()}">
             <td colspan="4" class="text-center py-4 text-muted">
               등록된 문의사항이 없습니다.
             </td>
@@ -58,37 +134,35 @@
     </div>
 
     <!-- 페이지네이션 -->
-    <nav th:if="${inquiries.totalPages > 1}" class="mt-4">
+    <nav th:if="${enquiries?.totalPages > 1}" class="mt-4">
       <ul class="pagination justify-content-center">
         <li class="page-item" th:classappend="${currentPage == 1} ? 'disabled'">
-          <a class="page-link" th:href="@{/inquiries(page=1)}">
+          <a class="page-link" th:href="@{/enquiries(page=1)}">
             <i class="fas fa-angle-double-left"></i>
           </a>
         </li>
         <li class="page-item" th:classappend="${currentPage == 1} ? 'disabled'">
-          <a class="page-link" th:href="@{/inquiries(page=${currentPage - 1})}">
+          <a class="page-link" th:href="@{/enquiries(page=${currentPage - 1})}">
             <i class="fas fa-angle-left"></i>
           </a>
         </li>
-        <li th:each="page : ${#numbers.sequence(1, inquiries.totalPages)}"
+        <li th:each="page : ${#numbers.sequence(1, enquiries.totalPages)}"
             class="page-item" th:classappend="${page == currentPage} ? 'active'">
-          <a class="page-link" th:href="@{/inquiries(page=${page})}" th:text="${page}">1</a>
+          <a class="page-link" th:href="@{/enquiries(page=${page})}" th:text="${page}">1</a>
         </li>
-        <li class="page-item" th:classappend="${currentPage == inquiries.totalPages} ? 'disabled'">
-          <a class="page-link" th:href="@{/inquiries(page=${currentPage + 1})}">
+        <li class="page-item" th:classappend="${currentPage == enquiries.totalPages} ? 'disabled'">
+          <a class="page-link" th:href="@{/enquiries(page=${currentPage + 1})}">
             <i class="fas fa-angle-right"></i>
           </a>
         </li>
-        <li class="page-item" th:classappend="${currentPage == inquiries.totalPages} ? 'disabled'">
-          <a class="page-link" th:href="@{/inquiries(page=${inquiries.totalPages})}">
+        <li class="page-item" th:classappend="${currentPage == enquiries.totalPages} ? 'disabled'">
+          <a class="page-link" th:href="@{/enquiries(page=${enquiries.totalPages})}">
             <i class="fas fa-angle-double-right"></i>
           </a>
         </li>
       </ul>
     </nav>
   </main>
-
-
 
 </main>
 </html>

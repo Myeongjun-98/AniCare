@@ -251,6 +251,7 @@ header {
 }
 
 .pet-card.flipped .pet-front {
+    border:1px solid;
   transform: rotateY(180deg);
 }
 

@@ -18,7 +18,7 @@ public class WebsecurityConfig {
                 ar -> ar
                         .requestMatchers("/", "/community/**")
                         .permitAll()
-                        .requestMatchers( "/anicareFile/**", "/css/**", "/javascript/**", "/error","/anicare")
+                        .requestMatchers( "/anicareFile/**", "/css/**", "/javascript/**", "/error","/anicare/**")
                         .permitAll()
 
         );

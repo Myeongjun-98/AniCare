@@ -5,7 +5,6 @@ import com.AniCare.demo.constant.MainPage.EnquiryType;
 import com.AniCare.demo.entity.MainPage.Enquiry;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.security.web.header.writers.frameoptions.XFrameOptionsHeaderWriter;
 
 import java.time.LocalDate;
 
@@ -13,19 +12,27 @@ import java.time.LocalDate;
 @Setter
 public class EnquiryListDto {
 
+    private Long id;        // ✅ 상세보기용 ID 필드 추가
+    private String userName;
     private EnquiryType enquiryType;
     private String enquiryTitle;
     private LocalDate enquiryDate;
     private EnquiryStatus enquiryStatus;
 
-    public EnquiryListDto from (Enquiry enquiry){
-        EnquiryListDto enquiryListDto = new EnquiryListDto();
+    // ✅ static 변환 메서드
+    public static EnquiryListDto from(Enquiry enquiry) {
+        EnquiryListDto dto = new EnquiryListDto();
+        UserDetailDto userDetailDto = new UserDetailDto();
+        dto.setUserName(userDetailDto.getUserName());
+        dto.setId(enquiry.getId());                        // ✅ ID 설정 추가
+        dto.setEnquiryTitle(enquiry.getEnquiryTitle());
+        dto.setEnquiryType(enquiry.getEnquiryType());
+        dto.setEnquiryDate(enquiry.getEnquiryDate());
+        dto.setEnquiryStatus(enquiry.getEnquiryStatus());
+        return dto;
+    }
 
-        enquiryListDto.setEnquiryTitle(enquiry.getEnquiryTitle());
-        enquiryListDto.setEnquiryType(enquiry.getEnquiryType());
-        enquiryListDto.setEnquiryDate(enquiry.getEnquiryDate());
-        enquiryListDto.setEnquiryStatus(enquiry.getEnquiryStatus());
+    private void setUserName(String userName) {
 
-        return enquiryListDto;
     }
 }

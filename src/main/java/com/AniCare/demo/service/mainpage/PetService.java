@@ -14,8 +14,8 @@ import java.util.List;
 public class PetService {
     private final PetRepository petRepository;
 
-    public PetDetailDto getPetDetail(Long Id){
-        Pet petDetails = petRepository.findById();
+    public PetDetailDto getPetDetail(Long id){
+        Pet petDetails = petRepository.findById(id).get();
         List<PetDetailDto> petDetailDtos = new ArrayList<>();
 
         PetDetailDto petDetailDto = PetDetailDto.from(petDetails);

@@ -1,12 +1,11 @@
 package com.AniCare.demo.control.MainPage;
 
 import com.AniCare.demo.entity.MainPage.Enquiry;
-import com.AniCare.demo.entity.community.Board;
+import com.AniCare.demo.entity.MainPage.User;
 import com.AniCare.demo.service.community.BoardService;
-import com.AniCare.demo.service.mainpage.EnquiryService;
+import com.AniCare.demo.service.mainpage.MainEnquiryService;
 import com.AniCare.demo.service.mainpage.PetService;
 import com.AniCare.demo.service.mainpage.UserService;
-import jakarta.persistence.Id;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +21,7 @@ public class MainController {
     @Autowired
     private BoardService boardService;
     @Autowired
-    private EnquiryService enquiryService;
+    private MainEnquiryService mainEnquiryService;
     @Autowired
     private PetService petService;
 
@@ -34,10 +33,12 @@ public class MainController {
         model.addAttribute("communityList", boardService.getAllboardList());
 
         // 마이페이지에 사용자 정보 띄우기
+
         model.addAttribute("userDetailDto", userService.getUserDetail());
 
         // 마이페이지에 내 반려동물 정보 띄우기
-        model.addAttribute("petDetailDto", petService.getPetDetail());
+        model.addAttribute("petDetailDto", petService.getPetDetail(3l));
+
 
         return "mainpage/mainpage";
     }
