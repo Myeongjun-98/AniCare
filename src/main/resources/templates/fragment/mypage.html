@@ -2,16 +2,15 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
 
-
-<aside th:fragment="mainmypage" id="sidebar" class="sidebar">
+<aside class="sidebar" id="sidebar" th:fragment="mainmypage">
     <div class="sidebar-header">
         <h2>마이페이지</h2>
-        <button id="closeSidebar" class="close-btn">×</button>
+        <button class="close-btn" id="closeSidebar">×</button>
     </div>
 
     <!-- 로그인 상태 -->
     <div class="user-info">
-        <img src="https://via.placeholder.com/80" alt="프로필 사진" />
+        <img alt="프로필 사진" src="https://via.placeholder.com/80"/>
         <div class="user-details">
             <h3>사용자닉네임</h3>
             <p>user@example.com</p>
@@ -31,7 +30,6 @@
                     <summary>진료 기록</summary>
                     <ul>
                         <li><a href="#">진료기록 보기</a></li>
-                        <li><a href="#">처방기록 보기</a></li>
                     </ul>
                 </details>
             </li>
