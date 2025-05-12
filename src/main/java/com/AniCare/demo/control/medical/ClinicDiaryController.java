@@ -51,9 +51,9 @@ public class ClinicDiaryController {
 
     // 진료수첩 상세페이지
     @GetMapping("clinicdiary/{clinicDiaryId}")
-    public String viewClinicDiary(@PathVariable Long ClinicDiaryId, Model model) {
+    public String viewClinicDiary(@PathVariable Long clinicDiaryId, Model model) {
 
-        model.addAttribute("clinicDiaryDto", medicalService.viewClinicDiaryDetail(ClinicDiaryId));
+        model.addAttribute("clinicDiaryDto", medicalService.viewClinicDiaryDetail(clinicDiaryId));
 
         return "medical/clinicdiaryDetail";
     }

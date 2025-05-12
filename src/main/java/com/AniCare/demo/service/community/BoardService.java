@@ -1,6 +1,6 @@
 package com.AniCare.demo.service.community;
 
-import com.AniCare.demo.DTO.community.*;
+import com.AniCare.demo.Dto.community.*;
 import com.AniCare.demo.constant.community.ErrandCategory;
 import com.AniCare.demo.constant.community.MeetingCategory;
 import com.AniCare.demo.entity.MainPage.User;
@@ -103,16 +103,16 @@ public class BoardService {
     public BoardDetailDto getBoardDetail(Long boardId) {
 
         //게시글 정보 불러오기
-        Board board = boardRepository.findById(boardId).get();
-        User userBoardInfo = userRepository.getById(board.getUser().getId());
+        Board board = boardRepository.findById(boardId).orElse(null);
+        User userBoardInfo = userRepository.findById(board.getUser().getId()).orElse(null);
 
 
         //게시글 관련 덧글목록 불러오기
-        List<Comment> commentList = commentRepository.findByBoardId(boardId);
+        List<Comment> commentList = commentRepository.findByBoardIdOrderByIdDesc(boardId);
 
         List<CommentViewDto> commentViewDtos = new ArrayList<>();
         for (Comment comment : commentList) {
-            User userCommentInfo = userRepository.getById(comment.getUser().getId());
+            User userCommentInfo = userRepository.findById(comment.getUser().getId()).orElse(null);
             CommentViewDto commentViewDto = CommentViewDto.from(comment);
             commentViewDto.setUserName(userCommentInfo.getUserName());
             commentViewDtos.add(commentViewDto);
@@ -132,11 +132,8 @@ public class BoardService {
         boardDetailDto.setUserName(userBoardInfo.getUserName());
         boardDetailDto.setUserAddress(userBoardInfo.getUserAddress());
 
-        //게시글 덧글, 좋아요 수 불러오기
-        int likeCount = boardLikeRepository.countByBoardId(boardId);
+        //게시글 덧글수 불러오기
         int comCount = commentRepository.countByBoardId(boardId);
-
-        boardDetailDto.setLikeCount(likeCount);
         boardDetailDto.setCommentCount(comCount);
 
 

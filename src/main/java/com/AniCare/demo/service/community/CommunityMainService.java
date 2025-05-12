@@ -1,7 +1,7 @@
 package com.AniCare.demo.service.community;
 
-import com.AniCare.demo.DTO.community.BoardListMainDto;
-import com.AniCare.demo.DTO.community.BoardListSubDto;
+import com.AniCare.demo.Dto.community.BoardListMainDto;
+import com.AniCare.demo.Dto.community.BoardListSubDto;
 import com.AniCare.demo.entity.community.Board;
 import com.AniCare.demo.entity.community.ErrandBoard;
 import com.AniCare.demo.entity.community.MeetingBoard;

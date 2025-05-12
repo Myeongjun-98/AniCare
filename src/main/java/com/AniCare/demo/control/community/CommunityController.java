@@ -1,9 +1,9 @@
 package com.AniCare.demo.control.community;
 
-import com.AniCare.demo.DTO.community.BoardForm;
-import com.AniCare.demo.DTO.community.BoardListMainDto;
-import com.AniCare.demo.DTO.community.BoardListSubDto;
-import com.AniCare.demo.DTO.community.CommentForm;
+import com.AniCare.demo.Dto.community.BoardForm;
+import com.AniCare.demo.Dto.community.BoardListMainDto;
+import com.AniCare.demo.Dto.community.BoardListSubDto;
+import com.AniCare.demo.Dto.community.CommentForm;
 import com.AniCare.demo.service.community.BoardService;
 import com.AniCare.demo.service.community.CommentService;
 import com.AniCare.demo.service.community.CommunityMainService;

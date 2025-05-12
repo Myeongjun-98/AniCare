@@ -8,7 +8,50 @@
     <th:block layout:fragment="script"></th:block>
 </head>
 <div id="main" layout:fragment="main">
+    <div class="board-detail-wrap">  <!-- ▼ 게시글 상세보기 ▼ -->
 
+        <!--  게시글 이미지 목록 보여주기  -->
+        <div th:each="file : ${clinicDiaryDto.boardFiles}">
+            <img class="boardFile"
+                 th:if="${not #strings.isEmpty(file.fileUrl)}"
+                 th:src="${file.fileUrl}"
+                 width="700">
+        </div>
+
+        <!--  게시글 정보 상세보기  -->
+        <h3 class="board-detail-title" th:text="${clinicDiaryDto.boardTitle}"></h3>
+        <p class="board-detail-writeDate" th:text="${clinicDiaryDto.clinicDiaryRecordDate}"></p>
+        <!--        <p class="board-detail-boardType" th:text="${clinicDiaryDto.boardType}"></p>-->
+        <!--        <p class="board-detail-category" th:text="${clinicDiaryDto.category}"></p>-->
+        <p class="board-detail-boardHit" th:text="${clinicDiaryDto.boardHit}"></p>
+
+        <br>
+
+        <p class="board-detail-boardContent" th:text="${clinicDiaryDto.boardContent}"></p>
+
+        <!--        <h5 class="board-detail-userName" th:text="${clinicDiaryDto.userName}"></h5>-->
+        <!--        <p class="board-detail-userAddress" th:text="${clinicDiaryDto.userAddress}"></p>-->
+
+
+        <div class="count-box">
+            <div class="board-detail-likeCount-box">
+                <svg class="bi bi-heart-fill" fill="currentColor" height="16" viewBox="0 0 16 16"
+                     width="16" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"
+                          fill-rule="evenodd"/>
+                </svg>
+                <p class="board-detail-likeCount" th:text="${clinicDiaryDto.boardlikeCount}"></p>
+            </div>
+            <!--            <div class="board-detail-commentCount-box">-->
+            <!--                <svg class="bi bi-chat-left" fill="currentColor" height="16" viewBox="0 0 16 16"-->
+            <!--                     width="16" xmlns="http://www.w3.org/2000/svg">-->
+            <!--                    <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>-->
+            <!--                </svg>-->
+            <!--                <p class="board-detail-commentCount" th:text="${clinicDiaryDto.commentCount}"></p>-->
+            <!--            </div>-->
+        </div>
+
+    </div> <!-- ▲ 게시글 상세보기 끝 ▲ -->
 </div>
 
 </html>

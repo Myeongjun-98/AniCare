@@ -1,4 +1,4 @@
-package com.AniCare.demo.DTO.community;
+package com.AniCare.demo.Dto.community;
 
 import com.AniCare.demo.entity.community.BoardFile;
 import lombok.Getter;

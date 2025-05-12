@@ -116,7 +116,7 @@
             <td th:text="${dto.recordDate}">2025-05-11</td>
             <td th:text="${dto.status}">투병중</td>
             <td>
-                <a th:href="@{/medical/clinicdiary/{id}(id=${dto.clinicDiaryId})}"
+                <a th:href="@{/medical/clinicdiary/{clinicDiaryId}(clinicDiaryId=${dto.clinicDiaryId})}"
                    th:text="${dto.boardTitle}">제목</a>
             </td>
             <td th:text="${dto.boardHit}">123</td>
