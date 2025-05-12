@@ -21,7 +21,6 @@ public class Pet {
     @JoinColumn(name = "user_id")
     @ManyToOne
     private User user;
-
     private String petImage; // 반려동물 프로필 사진
     private String petName;  // 반려동물 이름
     private String petBreed; // 반려동물 품종 

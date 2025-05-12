@@ -1,5 +1,6 @@
 package com.AniCare.demo.entity.MainPage;
 
+import com.AniCare.demo.constant.MainPage.EnquiryStatus;
 import com.AniCare.demo.constant.MainPage.EnquiryType;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -36,6 +37,10 @@ public class Enquiry {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private EnquiryType enquiryType; // 문의사항 유형
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private EnquiryStatus enquiryStatus;
 
 
 }

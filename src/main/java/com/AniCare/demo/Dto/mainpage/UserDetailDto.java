@@ -17,6 +17,7 @@ public class UserDetailDto {
 
     public static UserDetailDto from(User user){
         UserDetailDto userDetailDto = new UserDetailDto();
+
         userDetailDto.setUserName(user.getUserName());
         userDetailDto.setUserEmail(user.getUserEmail());
         userDetailDto.setUserAddress(user.getUserAddress());
