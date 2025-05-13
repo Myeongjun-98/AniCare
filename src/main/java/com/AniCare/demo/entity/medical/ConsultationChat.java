@@ -40,6 +40,6 @@ public class ConsultationChat {
     private String content;
 
     @Column(nullable = false)
-    private boolean isRead;           // 읽음 여부
+    private boolean readFlag;           // 읽음 여부
 
 }

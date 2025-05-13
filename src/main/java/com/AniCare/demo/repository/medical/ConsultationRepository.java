@@ -5,9 +5,11 @@ import com.AniCare.demo.entity.medical.Consultation;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface ConsultationRepository extends JpaRepository<Consultation, Long> {
 
     /**
@@ -22,9 +24,9 @@ public interface ConsultationRepository extends JpaRepository<Consultation, Long
                false
             )
             FROM Consultation c
-            WHERE c.user.userName = :username
+            WHERE c.user.userName = :userName
             ORDER BY c.startedAt DESC
             """)
-    List<UserConsultationListDto> findMyConsultations(@Param("username") String username);
+    List<UserConsultationListDto> findMyConsultations(@Param("userName") String username);
 
 }

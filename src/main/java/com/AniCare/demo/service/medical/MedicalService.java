@@ -167,7 +167,7 @@ public class MedicalService {
         // 각 방마다 안읽은 메시지가 있는지 체크
         dtos.forEach(dto -> {
             boolean hasUnread = consultationChatRepository
-                    .existsByConsultationIdAndReadFalse(dto.getConsultationId());
+                    .existsByConsultationIdAndReadFlagFalse(dto.getConsultationId());
             dto.setExistUnreadMessage(hasUnread);
         });
 
@@ -185,7 +185,7 @@ public class MedicalService {
         u.setVetName(c.getVet().getVetName());
 
         // 안읽은 메시지 있는지 조회
-        boolean hasUnread = consultationChatRepository.existsByConsultation_IdAndReadFalse(roomId);
+        boolean hasUnread = consultationChatRepository.existsByConsultation_IdAndReadFlagFalse(roomId);
 
         u.setExistUnreadMessage(hasUnread);
         return u;
