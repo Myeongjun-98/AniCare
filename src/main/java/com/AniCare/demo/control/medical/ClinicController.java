@@ -45,7 +45,11 @@ public class ClinicController {
 
         // petSpecies 기준으로 vetList로 리다이렉트
         String species = saved.getPet().getPetSpecies().name();
-        return "redirect:/medical/vetList?species=" + species;
+
+        // 문진표 정보 담아서 리다이렉트
+        Long checkupId = saved.getId();
+
+        return "redirect:/medical/vetList?species=" + species + "&checkupId=" + checkupId;
     }
 
     // 메디컬 진단받기 페이지 이후 수의사 리스트 불러오기

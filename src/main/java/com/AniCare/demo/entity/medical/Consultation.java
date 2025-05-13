@@ -28,6 +28,10 @@ public class Consultation {
     @JoinColumn(name = "vet_id", foreignKey = @ForeignKey(name = "FK_CONSULT_VET"))
     private VetInfo vet;    // 수의사
 
+    @OneToOne(optional = false)
+    @JoinColumn(name = "checkup_id", foreignKey = @ForeignKey(name = "FK_CONSULT_CHECKUP"))
+    private Checkup checkup;
+
     private Boolean isEnd = false;  // 끝난 상담인지 여부
 
     @Column(nullable = false)   // 상담 시작 시간
