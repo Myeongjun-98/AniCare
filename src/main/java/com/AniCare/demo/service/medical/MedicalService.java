@@ -7,10 +7,7 @@ import com.AniCare.demo.Dto.medical.ClinicDiaryPetInfoDto;
 import com.AniCare.demo.entity.MainPage.Pet;
 import com.AniCare.demo.entity.MainPage.User;
 import com.AniCare.demo.entity.community.BoardFile;
-import com.AniCare.demo.entity.medical.Allergy;
-import com.AniCare.demo.entity.medical.Checkup;
-import com.AniCare.demo.entity.medical.ClinicDiary;
-import com.AniCare.demo.entity.medical.Disease;
+import com.AniCare.demo.entity.medical.*;
 import com.AniCare.demo.repository.community.BoardFileRepository;
 import com.AniCare.demo.repository.medical.*;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +16,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -31,6 +29,9 @@ public class MedicalService {
     private final DiseaseRepository diseaseRepository;
     private final BoardFileRepository boardFileRepository;
     private final CheckupRepository checkupRepository;
+    private final ConsultationRepository consultationRepository;
+    private final ConsultationChatRepository consultationChatRepository;
+    private final VetRepository vetRepository;
     // 임시 로그인 관련 레포지토리
     private final devUserRepository devUserRepository;
 
@@ -137,4 +138,28 @@ public class MedicalService {
         return checkupRepository.save(c);
     }
 
+    @Transactional
+    public Consultation createConsultation(String name, Long vetInfoId, Long checkupId) {
+
+        // ① User 조회
+        User user = devUserRepository.findByUserName(name)
+                .orElseThrow(() -> new NoSuchElementException("User not found"));
+
+        // ② VetInfo 조회
+        VetInfo vet = vetRepository.findById(vetInfoId)
+                .orElseThrow(() -> new NoSuchElementException("Vet not found"));
+
+        // ③ Checkup (문진표) 조회
+        Checkup checkup = checkupRepository.findById(checkupId)
+                .orElseThrow(() -> new NoSuchElementException("Checkup not found"));
+
+        // ④ Consultation 엔티티에 모두 연결해서 저장
+        Consultation con = new Consultation();
+        con.setUser(user);
+        con.setVet(vet);
+        con.setCheckup(checkup);            // ← 이전에 빠져 있던 부분
+        con.setStartedAt(LocalDateTime.now());
+        con.setIsEnd(false);
+        return consultationRepository.save(con);
+    }
 }

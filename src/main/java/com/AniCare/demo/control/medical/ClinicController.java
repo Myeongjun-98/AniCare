@@ -54,7 +54,9 @@ public class ClinicController {
 
     // 메디컬 진단받기 페이지 이후 수의사 리스트 불러오기
     @GetMapping("/vetList")
-    public String vetListViewPage(@RequestParam(required = false) String species, Model model) {
+    public String vetListViewPage(@RequestParam(required = false) String species,
+                                  @RequestParam(required = false) Long checkupId,
+                                  Model model) {
         List<VetInfoListDto> vets;
 
         // (임시)User에서 대표동물이 있을 시, 동물종에 일치하는 수의사 먼저 노출
@@ -69,19 +71,24 @@ public class ClinicController {
         }
 
         model.addAttribute("vets", vets);
+        model.addAttribute("checkupId", checkupId);
 
         return "medical/vetList";
     }
 
     // 수의사 선택 시
     @GetMapping("/vetList/{vetInfoId}")
-    public String clinicRequestPage(@PathVariable Long vetInfoId, Model model) {
+    public String clinicRequestPage(@PathVariable Long vetInfoId,
+                                    @RequestParam Long checkupId,
+                                    Model model) {
+
         VetInfoDto vetInfoDto = vetService.findVetById(vetInfoId);
+
         model.addAttribute("vetSelect", vetInfoDto);
+        model.addAttribute("checkupId", checkupId);
+
         return "medical/vetSelect";
     }
 
-    // 1:1상담하기 누를 시
-//    @GetMapping("")
 
 }
