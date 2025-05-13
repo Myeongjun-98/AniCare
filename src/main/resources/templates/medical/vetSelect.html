@@ -19,7 +19,7 @@
     </div>
 
     <div> <!-- 버튼(링크) 영역 -->
-        <form method="post" th:action="@{medical/consultation}">
+        <form method="post" th:action="@{/medical/consultation}">
             <input name="vetInfoId" th:value="${vetSelect.vetInfoId}" type="hidden">
             <input name="checkupId" th:value="${checkupId}" type="hidden">
             <button type="submit">1:1 상담하기</button>

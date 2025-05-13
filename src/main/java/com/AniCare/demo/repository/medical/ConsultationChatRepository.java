@@ -15,7 +15,9 @@ public interface ConsultationChatRepository extends JpaRepository<ConsultationCh
               SELECT new com.AniCare.demo.Dto.medical.ConsultationChatListDto(
                 cm.id,
                 c.id,
-                case when cm.senderUser is not null then com.AniCare.demo.dto.medical.SenderType.USER else com.AniCare.demo.dto.medical.SenderType.VET end,
+                case
+                  when cm.senderUser is not null then com.AniCare.demo.constant.MainPage.SenderType.USER else com.AniCare.demo.constant.MainPage.SenderType.VET
+                end,
                 coalesce(cm.senderUser.id, cm.senderVet.id),
                 coalesce(cm.senderUser.userName, cm.senderVet.vetName),
                 cm.content,
@@ -28,6 +30,7 @@ public interface ConsultationChatRepository extends JpaRepository<ConsultationCh
               ORDER BY cm.sendAt
             """)
     List<ConsultationChatListDto> findMessagesByConsultation(Long consultationId);
+
 
     // 안읽은 메시지가 있는지 조회(단수)
     boolean existsByConsultation_IdAndReadFlagFalse(Long roomId);

@@ -21,5 +21,5 @@ public class ConsultationChatListDto {
     private String senderName;        // 보내는 사람 이름 (optional)
     private String content;           // 메시지 본문
     private LocalDateTime sentAt;     // 전송 시각
-    private boolean read;             // 읽음 여부
+    private boolean isread;             // 읽음 여부
 }
