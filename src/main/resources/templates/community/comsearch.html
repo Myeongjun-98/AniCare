@@ -7,6 +7,10 @@
   <th:block layout:fragment="css"></th:block>
   <th:block layout:fragment="script">
     <script th:inline="javascript">
+      const boardJsonStr = /*[[${boardsJson}]]*/ [];
+      const boards = JSON.parse(boardJsonStr);
+
+      console.log("▶ boards:", boards);
 
     </script>
   </th:block>
@@ -64,7 +68,7 @@
 
     <!-- ▼ 검색결과 게시글 리스트 ▼ -->
  <div class="result-list-wrap" id="boardListWrap">
-<!--   <div th:unless="${board.boardType.name() == 'CLINICDIARY'}" class="result-list">-->
+<!--   <div class="result-list">-->
 <!--     <p th:text="${board.boardTitle}"></p> &lt;!&ndash; 게시글 제목 &ndash;&gt;-->
 <!--     <p th:text="${board.boardWriteDate}"></p> &lt;!&ndash; 게시글 작성일 &ndash;&gt;-->
 <!--    <p th:text="${board.likeCount}"></p> &lt;!&ndash; 게시글 좋아요 수 &ndash;&gt;-->
@@ -72,12 +76,6 @@
   </div> <!-- ▲ 검색결과 게시글 리스트 끝 ▲ -->
 
     <script th:inline="javascript">
-
-      const boardJsonStr = /*[[${boardsJson}]]*/ [];
-      const boards = JSON.parse(boardJsonStr);
-
-      console.log("▶ boards:", boards);
-
       let selectedBoardType = "";
       let selectedCategory = "";
 
@@ -93,6 +91,7 @@
             <p>${p.boardWriteDate}</p>
             <p>${p.likeCount}</p>
             `;
+
           boardListWrap.appendChild(el);
         });
       }
