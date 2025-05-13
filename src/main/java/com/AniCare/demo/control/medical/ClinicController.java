@@ -77,4 +77,7 @@ public class ClinicController {
         return "medical/vetSelect";
     }
 
+    // 1:1상담하기 누를 시
+//    @GetMapping("")
+
 }

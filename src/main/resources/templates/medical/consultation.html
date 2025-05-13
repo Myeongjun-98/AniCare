@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko"
+      layout:decorate="~{fragment/default}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <th:block layout:fragment="css"></th:block>
+    <th:block layout:fragment="script"></th:block>
+</head>
+<div id="main" layout:fragment="main">
+
+    <div>   <!-- 전체 컨테이너 -->
+        <div>   <!-- 채팅방 정보 -->
+            <h3>누구의 채팅방</h3>
+            <p>담당수의사 : 누구</p>
+        </div>
+
+
+        <div>   <!-- 채팅방 영역 -->
+            <div>
+                메세지 예시1
+                <br>
+                <span>시간</span>
+            </div>
+            <div>
+                메세지 예시2
+                <br>
+                <span>시간</span>
+            </div>
+        </div>
+
+        <form>  <!-- 메시지 입력 창 -->
+            <textarea placeholder="메시지를 입력해주세요.">
+
+            </textarea>
+            <button type="submit">전송</button>
+        </form>
+
+
+    </div>  <!-- 전체 컨테이너 끝 -->
+
+</div>
+
+</html>
