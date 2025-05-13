@@ -90,5 +90,4 @@ public class ClinicController {
         return "medical/vetSelect";
     }
 
-
 }

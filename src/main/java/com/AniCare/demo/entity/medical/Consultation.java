@@ -30,7 +30,7 @@ public class Consultation {
 
     @OneToOne(optional = false)
     @JoinColumn(name = "checkup_id", foreignKey = @ForeignKey(name = "FK_CONSULT_CHECKUP"))
-    private Checkup checkup;
+    private Checkup checkup;    // 문진표 정보
 
     private Boolean isEnd = false;  // 끝난 상담인지 여부
 

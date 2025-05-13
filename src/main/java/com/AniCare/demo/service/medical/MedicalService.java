@@ -1,9 +1,6 @@
 package com.AniCare.demo.service.medical;
 
-import com.AniCare.demo.Dto.medical.CheckupSetDto;
-import com.AniCare.demo.Dto.medical.ClinicDiaryDto;
-import com.AniCare.demo.Dto.medical.ClinicDiaryListDto;
-import com.AniCare.demo.Dto.medical.ClinicDiaryPetInfoDto;
+import com.AniCare.demo.Dto.medical.*;
 import com.AniCare.demo.entity.MainPage.Pet;
 import com.AniCare.demo.entity.MainPage.User;
 import com.AniCare.demo.entity.community.BoardFile;
@@ -157,9 +154,46 @@ public class MedicalService {
         Consultation con = new Consultation();
         con.setUser(user);
         con.setVet(vet);
-        con.setCheckup(checkup);            // ← 이전에 빠져 있던 부분
+        con.setCheckup(checkup);
         con.setStartedAt(LocalDateTime.now());
         con.setIsEnd(false);
         return consultationRepository.save(con);
+    }
+
+    // 채팅방리스트(여러 개) 불러오기    필요한가??
+    public List<UserConsultationListDto> loadChattingRooms(String userName) {
+        List<UserConsultationListDto> dtos = consultationRepository.findMyConsultations(userName);
+
+        // 각 방마다 안읽은 메시지가 있는지 체크
+        dtos.forEach(dto -> {
+            boolean hasUnread = consultationChatRepository
+                    .existsByConsultationIdAndReadFalse(dto.getConsultationId());
+            dto.setExistUnreadMessage(hasUnread);
+        });
+
+        return dtos;
+    }
+
+    // 채팅방정보(한 개) 불러오기
+    public UserConsultationListDto roomInfo(Long roomId) {
+        Consultation c = consultationRepository.findById(roomId).orElseThrow(() -> new NoSuchElementException(roomId + "를 찾을 수 없습니다."));
+        UserConsultationListDto u = new UserConsultationListDto();
+
+        u.setConsultationId(c.getId());
+        u.setUserName(c.getUser().getUserName());
+        u.setPetName(c.getCheckup().getPet().getPetName());
+        u.setVetName(c.getVet().getVetName());
+
+        // 안읽은 메시지 있는지 조회
+        boolean hasUnread = consultationChatRepository.existsByConsultation_IdAndReadFalse(roomId);
+
+        u.setExistUnreadMessage(hasUnread);
+        return u;
+    }
+
+    // 채팅로그 불러오기
+    public List<ConsultationChatListDto> loadMessages(Long roomId) {
+        List<ConsultationChatListDto> dtos = consultationChatRepository.findMessagesByConsultation(roomId);
+        return dtos;
     }
 }
