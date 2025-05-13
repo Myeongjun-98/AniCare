@@ -10,6 +10,7 @@ import lombok.Setter;
 @Setter
 public class UserInfoDto {
 
+    private String userImg;
     @NotEmpty(message = "이름은 필수 입력 사항입니다.")
     private String userName;
     @NotEmpty(message = "비밀번호는 필수 입력사항입니다.")

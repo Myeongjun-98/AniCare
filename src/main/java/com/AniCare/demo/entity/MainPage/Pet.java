@@ -34,4 +34,9 @@ public class Pet {
     private PetSpecies petSpecies; // 반려동물 종류 (묘종 or 견종)
 
 
+    public void getPetAge(Integer petAge) {
+    }
+
+    public void add(Pet pet) {
+    }
 }

@@ -24,7 +24,19 @@ header {
   top: 0;
   z-index: 100;
 }
+ul {
+   list-style-type: none;
+    padding-left:0;
+    margin-left:0;
+    display: inline;
+}
 
+li{
+    list-style-type: none;
+    padding-left:0;
+    margin-left:0;
+    display: inline;
+}
 .header-left {
   display: flex;
   align-items: center;
@@ -69,6 +81,7 @@ header {
 }
 .login-btn,
 .signup-btn {
+  display:inline-block;
   padding: 8px 15px;
   border-radius: 20px;
   font-weight: bold;
@@ -84,6 +97,7 @@ header {
   background-color: #fff9c4;
 }
 .signup-btn {
+
   background-color: #ffa500;
   border: 1px solid #ffa500;
   color: white;

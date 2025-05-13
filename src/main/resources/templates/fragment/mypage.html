@@ -8,6 +8,8 @@
         <h2>마이페이지</h2>
         <button id="closeSidebar" class="close-btn">×</button>
     </div>
+    <!--  로그인 산태일 때 보여줄 내용   -->
+    <div class="userInfo" th:if="${userDetailDto != null}">
 
     <!-- 로그인 상태 -->
     <div class="user-info">
@@ -62,7 +64,7 @@
                 <details>
                     <summary>커뮤니티</summary>
                     <ul>
-                        <li><a href="#">커뮤니티 메인</a></li>
+                        <li><a href="/communitymain">커뮤니티 메인</a></li>
                         <li><a href="#">모임 모집글</a></li>
                     </ul>
                 </details>
@@ -79,7 +81,16 @@
         </ul>
     </nav>
 
-    <button class="logout-btn">로그아웃</button>
+        <button class="logout-btn">로그아웃</button>
+</div>
+
+    <!--  비로그인시  -->
+    <div class="userInfo" th:unless="${userDetailDto != null}">
+        <p> 로그인이 필요합니다</p>
+        <button onclick="location.href='/mainpage/userlogin'">로그인</button>
+        <button onclick="location.href='/mainpage/usersignup'">회원가입</button>
+    </div>
+
 </aside>
 
 

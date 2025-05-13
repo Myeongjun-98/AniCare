@@ -1,14 +1,16 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+                xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <!-- 헤더 영역 -->
 <header th:fragment="header">
+
     <div class="header-left">
         <button id="sidebarToggle" class="hamburger">☰</button>
         <h1 class="site-title">ANICARE</h1>
         <h1 class="logo">
-            <span class="medical">메디컬</span> |
-            <span class="community">커뮤니티</span>
+            <li><a href="/medicalmain">메디컬</a></li> |
+            <li><a href="/commnuitymain">커뮤니티</a></li>
         </h1>
     </div>
     <div class="search-container">
@@ -16,8 +18,14 @@
         <button class="search-btn"><i class="material-icons">search</i></button>
     </div>
 
-    <div class="auth-buttons">
-        <button class="login-btn">로그인</button>
-        <button class="signup-btn">회원가입</button>
+    <!--  로그인 성공시 로그아웃 버튼으로 바뀜 -->
+    <div class="auth-buttons" sec:authorize="isAuthenticated()">
+        <button class="login-btn" onclick="location.href='/mainpage/userlogin'">로그인</button>
+        <button class="signup-btn" onclick="location.href='/mainpage/usersignup'">회원가입</button>
+    </div>
+
+    <div th:if="${userDetailDto != null}" sec:authorize="isAnonymous()">
+        <span th:text="${userDetailDto.userName} + '님 환영합니다'"></span>
+        <a href="/logout">로그아웃</a>
     </div>
 </header>
