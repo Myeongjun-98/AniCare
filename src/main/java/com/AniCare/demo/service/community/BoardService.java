@@ -53,46 +53,46 @@ public class BoardService {
         List<Board> boards = boardRepository.findAllByBoardTypeOrderByIdDesc(boardType);
 
         for(Board board : boards) {
+            if(board.getBoardType() != BoardType.CLINICDIARY) {
+
+                //게시글 작성자 관련 정보 갖고 오기
+                User userInfo = userRepository.findById(board.getUser().getId()).orElse(null);
+
+                //게시글 정보 가져오기
+                BoardListMainDto boardListMainDto = BoardListMainDto.to(board);
 
 
-            //게시글 작성자 관련 정보 갖고 오기
-            User userInfo = userRepository.findById(board.getUser().getId()).orElse(null);
+                //게시글 작성자 정보 가져오기
+                boardListMainDto.setUserName(userInfo.getUserName());
+                boardListMainDto.setUserAddress(userInfo.getUserAddress());
 
-            //게시글 정보 가져오기
-            BoardListMainDto boardListMainDto = BoardListMainDto.to(board);
+                //게시글 첨부파일 이미지 가져오기
+                BoardFile boardFile = boardFileRepository.findByBoardIdAndThumbnailYn(board.getId(), "Y");
+
+                //!!: 첨부파일이 없는 게시글에는 기본 이미지 세팅해주기
+                if (boardFile != null) {
+                    boardListMainDto.setFileUrl(boardFile.getFileUrl());
+                } else {
+                    boardListMainDto.setFileUrl("/anicareFile/default-thumbnail.png");
+                }
 
 
-            //게시글 작성자 정보 가져오기
-            boardListMainDto.setUserName(userInfo.getUserName());
-            boardListMainDto.setUserAddress(userInfo.getUserAddress());
+                //게시글 카테고리 가져오기
+                if (board.getBoardType().name().equals("MEETING")) {
+                    MeetingBoard mCategory = meetingBoardRepository.findByBoardId(board.getId());
 
-            //게시글 첨부파일 이미지 가져오기
-            BoardFile boardFile = boardFileRepository.findByBoardIdAndThumbnailYn(board.getId(), "Y");
+                    boardListMainDto.setCategory(mCategory.getMeetingCategory().toString());
 
-            //!!: 첨부파일이 없는 게시글에는 기본 이미지 세팅해주기
-            if (boardFile != null) {
-                boardListMainDto.setFileUrl(boardFile.getFileUrl());
-            } else {
-                boardListMainDto.setFileUrl("/anicareFile/default-thumbnail.png");
+                } else if (board.getBoardType().name().equals("ERRAND")) {
+                    ErrandBoard eCategory = errandBoardRepository.findByBoardId(board.getId());
+
+                    boardListMainDto.setCategory(eCategory.getErrandCategory().toString());
+                }
+
+
+                //가져온 데이터들 전부 dto에 넣어주기
+                boardListMainDtos.add(boardListMainDto);
             }
-
-
-            //게시글 카테고리 가져오기
-            if(board.getBoardType().name().equals("MEETING")) {
-                MeetingBoard mCategory = meetingBoardRepository.findByBoardId(board.getId());
-
-                boardListMainDto.setCategory(mCategory.getMeetingCategory().toString());
-
-            } else if(board.getBoardType().name().equals("ERRAND")){
-                ErrandBoard eCategory = errandBoardRepository.findByBoardId(board.getId());
-
-                boardListMainDto.setCategory(eCategory.getErrandCategory().toString());
-            }
-
-
-            //가져온 데이터들 전부 dto에 넣어주기
-            boardListMainDtos.add(boardListMainDto);
-
         }
 
         //인기순 정렬 기능

@@ -24,12 +24,12 @@
             type="button"
             class="btn btn-custom btn-lg m-3"
             style="background-color: rgb(219, 219, 219)"
-            href="/community/board/boardList/MEETING/I/ALL"> 모임 모집글 </a>
+            th:href="@{/community/board/boardList(type='MEETING', order='I', category='ALL')}"> 모임 모집글 </a>
     <a
             type="button"
             class="btn btn-custom btn-lg m-3"
             style="background-color: rgb(219, 219, 219)"
-            href="/community/board/boardList/ERRAND/I/ALL"> 심부름 구인글 </a>
+            th:href="@{/community/board/boardList(type='ERRAND', order='I', category='ALL')}"> 심부름 구인글 </a>
   </div> <!-- ▲ 버튼 끝 ▲ -->
 
 

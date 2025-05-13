@@ -11,9 +11,9 @@
 
     <!-- ▼ 정렬버튼 ▼ -->
     <div class="orderBtn">
-        <a style="display: inline;" th:href="@{/community/board/boardList/{type}/{order}/{category}(type=${type}, order='L', category=${category})}">인기순</a>
+        <a style="display: inline;" th:href="@{/community/board/boardList(type=${type}, order='L', category=${category})}">인기순</a>
         <p style="display: inline;"> | </p>
-        <a style="display: inline;" th:href="@{/community/board/boardList/{type}/{order}/{category}(type=${type}, order='I', category=${category})}">최신순</a>
+        <a style="display: inline;" th:href="@{/community/board/boardList(type=${type}, order='I', category=${category})}">최신순</a>
     </div> <!-- ▲ 정렬버튼 끝 ▲ -->
 
     <!-- ▼ 카테고리버튼 ▼ -->
@@ -21,31 +21,31 @@
         <!-- 모임 모집글 -->
         <div th:if="${type == 'MEETING'}" class="category-box">
             <a class="category-all"
-               th:href="@{/community/board/boardList/{type}/{order}/ALL(type=${type}, order=${order})}">
+               th:href="@{/community/board/boardList(type=${type}, order=${order}, category='ALL')}">
                 ALL</a>
             <a class="category-fst"
-               th:href="@{/community/board/boardList/{type}/{order}/VOLUNTEER(type=${type}, order=${order})}">
+               th:href="@{/community/board/boardList(type=${type}, order=${order}, category='VOLUNTEER')}">
                 VOLUNTEER</a>
             <a class="category-sec"
-               th:href="@{/community/board/boardList/{type}/{order}/WALKING(type=${type}, order=${order})}">
+               th:href="@{/community/board/boardList(type=${type}, order=${order}, category='WALKING')}">
                 WALKING</a>
             <a class="category-trd"
-               th:href="@{/community/board/boardList/{type}/{order}/INFO(type=${type}, order=${order})}">
+               th:href="@{/community/board/boardList(type=${type}, order=${order}, category='INFO')}">
                 INFO</a>
         </div>
 
         <div th:if="${type == 'ERRAND'}" class="category-box">
             <a class="category-all"
-               th:href="@{/community/board/boardList/{type}/{order}/ALL(type=${type}, order=${order})}">
+               th:href="@{/community/board/boardList(type=${type}, order=${order}, category='ALL')}">
                 ALL</a>
             <a class="category-fst"
-               th:href="@{/community/board/boardList/{type}/{order}/WALKING(type=${type}, order=${order})}">
+               th:href="@{/community/board/boardList(type=${type}, order=${order}, category='WALKING')}">
                 WALKING</a>
             <a class="category-sec"
-               th:href="@{/community/board/boardList/{type}/{order}/PETSITTER(type=${type}, order=${order})}">
+               th:href="@{/community/board/boardList(type=${type}, order=${order}, category='PETSITTER')}">
                 PETSITTER</a>
             <a class="category-trd"
-               th:href="@{/community/board/boardList/{type}/{order}/ERRANDING(type=${type}, order=${order})}">
+               th:href="@{/community/board/boardList(type=${type}, order=${order}, category='ERRANDING')}">
                 ERRANDING</a>
         </div>
 
@@ -53,7 +53,7 @@
 
     <!-- ▼ 게시글 리스트 목록 ▼ -->
     <div th:each="board : ${boardListDtos}" class="board-list">
-        <div th:unless="${board.boardType.name() == 'CLINICDIARY'}" class="board-card">
+        <div class="board-card">
 
             <div th:if="${category == 'ALL' or board.category == category}" class="board-card-body">
                 <a th:href="@{ '/community/board/boardDetail/'+${board.id} }">

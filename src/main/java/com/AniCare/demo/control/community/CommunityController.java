@@ -7,6 +7,8 @@ import com.AniCare.demo.constant.community.BoardType;
 import com.AniCare.demo.service.community.BoardService;
 import com.AniCare.demo.service.community.CommentService;
 import com.AniCare.demo.service.community.CommunityMainService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,10 +29,15 @@ public class CommunityController {
     private BoardService boardService;
     @Autowired
     private CommentService commentService;
+    @Autowired
+    private ObjectMapper objectMapper; //JSON 변환용
 
     // ================ 커뮤니티 메인 페이지 ================
     @GetMapping("/community/commain")
     public String commainPage(@Valid BoardSearchForm boardSearchForm,
+                              @RequestParam(name = "type", defaultValue = "MEETING") String type,
+                              @RequestParam(name = "order", defaultValue = "I") String order,
+                              @RequestParam(name = "category", defaultValue = "ALL") String category,
                               Model model){
 
         List<BoardListMainDto> boardListMainDtos = communityMainService.getBoardMainList();
@@ -48,6 +55,9 @@ public class CommunityController {
                 .toList();
 
 
+        model.addAttribute("type", type);
+        model.addAttribute("order", order);
+        model.addAttribute("category", category);
         model.addAttribute("boardSearchForm", boardSearchForm);
         model.addAttribute("popMeeting", popMeeting);
         model.addAttribute("popErrand",popErrand);
@@ -58,26 +68,21 @@ public class CommunityController {
     // ================ 커뮤니티 검색결과 페이지 ================
     @GetMapping("community/comsearch")
     public String comsearch(@Valid BoardSearchForm boardSearchForm,
-                            Model model){
+                            Model model) throws JsonProcessingException {
 
-        List<BoardListSubDto> boardListSubDtos = communityMainService.getBoardSearchList(boardSearchForm);
+        List<BoardListMainDto> boardListMainDtos = communityMainService.getBoardSearchList(boardSearchForm);
+        String boardsJson = objectMapper.writeValueAsString(boardListMainDtos);
 
         model.addAttribute("boardSearchForm", boardSearchForm);
-        model.addAttribute("boardListSubDtos", boardListSubDtos);
+        model.addAttribute("boardsJson", boardsJson);
         return "community/comsearch";
     }
 
-    @GetMapping("/api/community/comsearch/json")
-    @ResponseBody
-    public List<BoardListSubDto> comsearchJson(@Valid BoardSearchForm boardSearchForm) {
-        return communityMainService.getBoardSearchList(boardSearchForm);
-    }
-
     // ================ 커뮤니티 게시판 페이지 ================
-    @GetMapping("/community/board/boardList/{type}/{order}/{category}")
-    public String boardPage(@PathVariable("type") String type,
-                            @PathVariable("order") String order,
-                            @PathVariable("category") String category,
+    @GetMapping("/community/board/boardList")
+    public String boardPage(   @RequestParam("type") String type,
+                               @RequestParam("order") String order,
+                               @RequestParam("category") String category,
                             Model model){
 
         List<BoardListMainDto> boardListDtos = boardService.getBoardList(type, order, category);

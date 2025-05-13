@@ -8,14 +8,6 @@
   <th:block layout:fragment="script">
     <script th:inline="javascript">
 
-      //JSON
-      fetch('/api/community/comsearch?type=meeting&order=desc')
-        .then(res => res.json()) //JSON 데이터 변환
-        .then(date => {
-          console.log(data); //JSON DATA 확인
-      })
-      .catch(error => console.error('Error:', error));
-
     </script>
   </th:block>
 </head>
@@ -36,9 +28,9 @@
 
   <!-- ▼ 게시판 타입 ▼ -->
     <div class="boardType" style="display=flex; justify-content=center;">
-      <a href="#" data-type="TOTAL"> TOTAL </a>
-      <a href="#" data-type="MEETING"> MEETING </a>
-      <a href="#" data-type="ERRAND"> ERRAND </a>
+      <a href="#" data-board-type="" class="boardType-link"> TOTAL </a>
+      <a href="#" data-board-type="MEETING" class="boardType-link"> MEETING </a>
+      <a href="#" data-board-type="ERRAND" class="boardType-link"> ERRAND </a>
     </div> <!-- ▲ 게시판 타입 끝 ▲ -->
 
 
@@ -46,23 +38,23 @@
     <div class="boardCategory-wrap">
 
       <!-- 모임 모집글 카테고리 -->
-      <div th:if="${boardType.name()} == 'MEETING'" class="boardCategory" style="display=flex; justify-content:center;">
-        <a href="#" data-category="Total"> Total </a>
-        <a href="#" data-category="Category1"> Volunteer </a>
-        <a href="#" data-category="Category2"> Walking </a>
-        <a href="#" data-category="Category3"> Info </a>
+      <div class="boardCategory" style="display=flex; justify-content:center;">
+        <a href="#" data-category="" class="category-link"> Total </a>
+        <a href="#" data-category="Volunteer" class="category-link"> Volunteer </a>
+        <a href="#" data-category="Walking" class="category-link"> Walking </a>
+        <a href="#" data-category="Info" class="category-link"> Info </a>
       </div>
 
       <!-- 심부름 구인글 카테고리 -->
-      <div th:if="${boardType.name()} == 'ERRAND'" class="boardCategory" style="display=flex; justify-content:center;">
-        <a href="#" data-category="Total"> Total </a>
-        <a href="#" data-category="Category1"> Walking </a>
-        <a href="#" data-category="Category2"> Petsitter </a>
-        <a href="#" data-category="Category3"> Erranding </a>
+      <div class="boardCategory" style="display=flex; justify-content:center;">
+        <a href="#" data-category="" class="category-link"> Total </a>
+        <a href="#" data-category="Walking" class="category-link"> Walking </a>
+        <a href="#" data-category="Petsitter" class="category-link"> Petsitter </a>
+        <a href="#" data-category="Erranding" class="category-link"> Erranding </a>
       </div>
     </div> <!-- ▲ 게시판 카테고리 끝 ▲ -->
 
-    <p th:text="${keyword}에 대한 검색 결과:">"keyword"에 대한 검색 결과</p>
+    <p th:text="|${boardSearchForm.keyword}에 대한 검색 결과:|"></p>
 
   <div class="orderBtn">
     <p style="display: inline;">인기순</p>
@@ -71,15 +63,67 @@
   </div>
 
     <!-- ▼ 검색결과 게시글 리스트 ▼ -->
- <div th:each="board : ${boardListSubDtos}" class="result-list-wrap">
-   <div th:unless="${board.boardType.name() == 'CLINICDIARY'}" class="result-list">
-     <p th:text="${board.boardTitle}"></p> <!-- 게시글 제목 -->
-     <p th:text="${board.boardWriteDate}"></p> <!-- 게시글 작성일 -->
-    <p th:text="${board.likeCount}"></p> <!-- 게시글 좋아요 수 -->
-   </div>
+ <div class="result-list-wrap" id="boardListWrap">
+<!--   <div th:unless="${board.boardType.name() == 'CLINICDIARY'}" class="result-list">-->
+<!--     <p th:text="${board.boardTitle}"></p> &lt;!&ndash; 게시글 제목 &ndash;&gt;-->
+<!--     <p th:text="${board.boardWriteDate}"></p> &lt;!&ndash; 게시글 작성일 &ndash;&gt;-->
+<!--    <p th:text="${board.likeCount}"></p> &lt;!&ndash; 게시글 좋아요 수 &ndash;&gt;-->
+<!--   </div>-->
   </div> <!-- ▲ 검색결과 게시글 리스트 끝 ▲ -->
 
+    <script th:inline="javascript">
 
+      const boardJsonStr = /*[[${boardsJson}]]*/ [];
+      const boards = JSON.parse(boardJsonStr);
+
+      console.log("▶ boards:", boards);
+
+      let selectedBoardType = "";
+      let selectedCategory = "";
+
+      function render(list) {
+        const boardListWrap = document.getElementById("boardListWrap");
+        boardListWrap.innerHTML = "";
+        list.forEach(p => {
+          const el = document.createElement("div");
+          el.classList.add("result-list");
+
+          el.innerText = `
+            <p>${p.boardTitle}</p>
+            <p>${p.boardWriteDate}</p>
+            <p>${p.likeCount}</p>
+            `;
+          boardListWrap.appendChild(el);
+        });
+      }
+
+      function filterBoards() {
+        const filtered = boards.filter(p => {
+          return (!selectedBoardType || p.boardType === selectedBoardType) &&
+                 (!selectedCategory || p.category === selectedCategory);
+        });
+        render(filtered);
+      }
+
+      document.querySelectorAll(".boardType-link").forEach(link => {
+        link.addEventListener("click", function(e) {
+          e.preventDefault();
+          selectedBoardType = this.dataset.boardType;
+          filterBoards();
+        });
+      });
+
+      document.querySelectorAll(".category-link").forEach(link => {
+        link.addEventListener("click",function(e) {
+          e.preventDefault();
+          selectedCategory = this.dataset.category;
+          filterBoards();
+        });
+      });
+
+      //초기 렌더링
+      render(boards);
+    </script>
 
   </div>
 </div> <!-- ▲ main 끝 ▲ -->
