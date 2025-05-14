@@ -34,19 +34,6 @@ public class CommunityController {
     @Autowired
     private ObjectMapper objectMapper; //JSON 변환용
 
-    // ================ 커뮤니티 - 임시 로그인 기능 구현 ================
-
-    @GetMapping("/temp-login")
-    public String tempComLogin(HttpSession session) {
-        User tempUser = new User();
-        tempUser.setId(2L);
-        tempUser.setUserName("길은지");
-
-        session.setAttribute("tempComUser", tempUser);
-
-        return "redirect:/";
-    }
-
 
     // ================ 커뮤니티 메인 페이지 ================
     @GetMapping("/community/commain")
@@ -124,6 +111,11 @@ public class CommunityController {
 
         return "community/board/boardDetail";
     }
+
+    // -------- 커뮤니티: 좋아요 요청 --------
+
+
+    // -------- 커뮤니티: 좋아요 취소 요청 --------
 
     // ================ 커뮤니티 덧글 저장 요청 ================
     @PostMapping("/community/board/boardDetail/commentSave")

@@ -4,7 +4,17 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{fragment/default}">
 <head>
-  <th:block layout:fragment="css"></th:block>
+  <th:block layout:fragment="css">
+    <style>
+      .likeButton:hover {
+        background-color:#e3b32d;
+      }
+
+      .likeButton:active {
+          background-color:#c27919;
+      }
+    </style>
+  </th:block>
   <th:block layout:fragment="script"></th:block>
 </head>
 <div layout:fragment="main" id="main"> <!-- ▼ main ▼ -->
@@ -34,11 +44,15 @@
     <p class="board-detail-userAddress" th:text="${board.userAddress}"></p>
 
 
+    <!-- 좋아요 버튼 / 덧글 수 표시 -->
     <div class="count-box">
       <div class="board-detail-likeCount-box">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
-          <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
-        </svg>
+        <button role="button" class="likeButton" type="button" data-board-id="[[${board.id}]]" data-liked="[[${liked}]]"
+          style="border:0px; border-radius:30px; pointer-events:none;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+            <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
+          </svg>
+        </button>
         <p class="board-detail-likeCount" th:text="${board.likeCount}"></p>
       </div>
       <div class="board-detail-commentCount-box">
