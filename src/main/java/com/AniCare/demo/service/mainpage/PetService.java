@@ -21,15 +21,15 @@ public class PetService {
 
         User user = userRepository.findByUserEmail(userEmail).get();
 
-     //   Pet petDetails = petRepository.findByUser(user.getUserId());
+        Pet petDetails = petRepository.findByUserUserId(user.getUserId());
 
-     //   if(petDetails == null){
+        if(petDetails == null){
             return null;
-     //   }
-     //   List<PetDetailDto> petDetailDtos = new ArrayList<>();
+        }
+        List<PetDetailDto> petDetailDtos = new ArrayList<>();
 
-     //   PetDetailDto petDetailDto = PetDetailDto.from(petDetails);
+        PetDetailDto petDetailDto = PetDetailDto.from(petDetails);
 
-     //   return petDetailDto;
+        return petDetailDto;
     }
 }
