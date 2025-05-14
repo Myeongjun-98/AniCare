@@ -1,15 +1,11 @@
 package com.AniCare.demo.entity.MainPage;
 
-import com.AniCare.demo.Dto.mainpage.UserDetailDto;
 import com.AniCare.demo.Dto.mainpage.UserInfoDto;
 import com.AniCare.demo.constant.MainPage.Authorization;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-import javax.management.relation.Role;
 
 @Entity
 @Getter
@@ -43,9 +39,7 @@ public class User {
     private Authorization authorization; // 권한 (사용자 or 관리자)
 
 
-
-
-    public static User createUser(UserInfoDto userInfoDto, PasswordEncoder passwordEncoder){
+    public static User createUser(UserInfoDto userInfoDto, PasswordEncoder passwordEncoder) {
         User user = new User();
 
         user.setUserImage(userInfoDto.getUserImg());

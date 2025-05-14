@@ -17,13 +17,13 @@ public class PetService {
     private final PetRepository petRepository;
     private final UserRepository userRepository;
 
-    public PetDetailDto getPetDetail(String userEmail){
+    public PetDetailDto getPetDetail(String userEmail) {
 
         User user = userRepository.findByUserEmail(userEmail).get();
 
         Pet petDetails = petRepository.findByUserUserId(user.getUserId());
 
-        if(petDetails == null){
+        if (petDetails == null) {
             return null;
         }
         List<PetDetailDto> petDetailDtos = new ArrayList<>();

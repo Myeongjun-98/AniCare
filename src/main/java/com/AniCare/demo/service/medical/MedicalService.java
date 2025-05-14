@@ -6,6 +6,7 @@ import com.AniCare.demo.Dto.medical.UserConsultationListDto;
 import com.AniCare.demo.entity.MainPage.Pet;
 import com.AniCare.demo.entity.MainPage.User;
 import com.AniCare.demo.entity.medical.*;
+import com.AniCare.demo.repository.MainPage.UserRepository;
 import com.AniCare.demo.repository.medical.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -25,24 +26,15 @@ public class MedicalService {
     private final ConsultationRepository consultationRepository;
     private final ConsultationChatRepository consultationChatRepository;
     private final VetRepository vetRepository;
-    // 임시 로그인 관련 레포지토리
-    private final mediUserRepository mediUserRepository;
+    // 로그인 관련 레포지토리
+    private final UserRepository userRepository;
+    private final mediPetRepository mediPetRepository;
 
     // --------------메서드
 
-    // 로그인 된 유저 정보로 반려동물 정보 불러오기(리스트 X)
-    public Pet getDefaultPetFromUserName(String userName) {
-
-        // (임시) 로그인 된 유저 정보 불러오기
-        User user = mediUserRepository.findByUserName(userName)
-                .orElseThrow(() -> new IllegalStateException("로그인 유저를 찾을 수 없습니다."));
-
-        // 로그인된 유저의 대표동물 조회(임시)
-
-        if (user.getDefaultPet() == null) {
-            throw new IllegalStateException("대표 반려동물이 설정되어 있지 않습니다.");
-        }
-        return user.getDefaultPet();
+    // (임시) 로그인 유저 id로 반려동물 한 마리만 불러오기
+    public Pet getOnePet(String userEmail) {
+        return mediPetRepository.findByUserEmail(userEmail).stream().findFirst().orElseThrow(() -> new IllegalStateException("등록된 반려동물이 없습니다."));
     }
 
     // ----동물의 id로 질병/알러지 정보 불러오기
@@ -61,10 +53,10 @@ public class MedicalService {
 
     @Transactional
     // 문진표 정보 저장하기
-    public Checkup saveCheckup(CheckupSetDto setDto, String userName) {
+    public Checkup saveCheckup(CheckupSetDto setDto, String userEmail) {
 
         // (임시) 로그인정보(userName)으로 대표동물 정보 불러오기
-        Pet pet = getDefaultPetFromUserName(userName);
+        Pet pet = getOnePet(userEmail);
 
         // Checkup 엔티티에 " 증상 리스트 " , " 기타 증상 문자열 " 세팅
         Checkup c = new Checkup();
@@ -80,10 +72,10 @@ public class MedicalService {
     }
 
     @Transactional
-    public Consultation createConsultation(String name, Long vetInfoId, Long checkupId) {
+    public Consultation createConsultation(String Email, Long vetInfoId, Long checkupId) {
 
         // ① User 조회
-        User user = mediUserRepository.findByUserName(name)
+        User user = userRepository.findByUserEmail(Email)
                 .orElseThrow(() -> new NoSuchElementException("User not found"));
 
         // ② VetInfo 조회
@@ -105,8 +97,8 @@ public class MedicalService {
     }
 
     // 채팅방리스트(여러 개) 불러오기    필요한가??
-    public List<UserConsultationListDto> loadChattingRooms(String userName) {
-        List<UserConsultationListDto> dtos = consultationRepository.findMyConsultations(userName);
+    public List<UserConsultationListDto> loadChattingRooms(String userEmail) {
+        List<UserConsultationListDto> dtos = consultationRepository.findMyConsultations(userEmail);
 
         // 각 방마다 안읽은 메시지가 있는지 체크
         dtos.forEach(dto -> {

@@ -30,14 +30,14 @@ public class ClinicDiaryController {
     public String clinicDiaryPage(Principal principal,
                                   Model model,
                                   @RequestParam(name = "page", defaultValue = "0") int page) {
-        String userName = principal.getName();
+        String userEmail = principal.getName();
 
         //  로그인정보에서 유저 -> default(대표동물) 아이디로 pet정보 불러오기
         ClinicDiaryPetInfoDto pet = clinicDiaryService.petInfoDto(principal.getName());
         // 2) 진료수첩 페이징 리스트 (page 사이즈는 10개로 설정)
         Page<ClinicDiaryListDto> diaryPage =
                 clinicDiaryService.findClinicDiariesByPetId(
-                        medicalService.getDefaultPetFromUserName(userName).getId(),
+                        medicalService.getOnePet(userEmail).getId(),
                         page,
                         10
                 );
@@ -77,15 +77,15 @@ public class ClinicDiaryController {
         }
 
         try {
-            clinicDiaryService.clinicDiarySave(clinicDiarySetDto, clinicDiaryService.getDefaultPetFromUserName(principal.getName()).getId());
+            clinicDiaryService.clinicDiarySave(clinicDiarySetDto, clinicDiaryService.getOnePet(principal.getName()).getId());
         } catch (Exception e) {
             model.addAttribute("clinicDiaryUploadError", "진료수첩 작성 실패");
             return "medical/newClinicDiary";
         }
-        
+
         Long savedId = clinicDiaryService.clinicDiarySave(
                 clinicDiarySetDto,
-                clinicDiaryService.getDefaultPetFromUserName(principal.getName()).getId()
+                clinicDiaryService.getOnePet(principal.getName()).getId()
         );
 
         return "redirect:/medical/clinicdiary" + savedId;

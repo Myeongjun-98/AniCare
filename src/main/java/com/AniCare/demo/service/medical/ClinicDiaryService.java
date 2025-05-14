@@ -5,20 +5,20 @@ import com.AniCare.demo.Dto.medical.ClinicDiaryListDto;
 import com.AniCare.demo.Dto.medical.ClinicDiaryPetInfoDto;
 import com.AniCare.demo.Dto.medical.ClinicDiarySetDto;
 import com.AniCare.demo.entity.MainPage.Pet;
-import com.AniCare.demo.entity.MainPage.User;
 import com.AniCare.demo.entity.community.Board;
 import com.AniCare.demo.entity.community.BoardFile;
 import com.AniCare.demo.entity.medical.Allergy;
 import com.AniCare.demo.entity.medical.ClinicDiary;
 import com.AniCare.demo.entity.medical.Disease;
 import com.AniCare.demo.repository.MainPage.PetRepository;
+import com.AniCare.demo.repository.MainPage.UserRepository;
 import com.AniCare.demo.repository.admin.HospitalRepository;
 import com.AniCare.demo.repository.community.BoardFileRepository;
 import com.AniCare.demo.repository.community.BoardRepository;
 import com.AniCare.demo.repository.medical.AllergyRepository;
 import com.AniCare.demo.repository.medical.ClinicDiaryRepository;
 import com.AniCare.demo.repository.medical.DiseaseRepository;
-import com.AniCare.demo.repository.medical.mediUserRepository;
+import com.AniCare.demo.repository.medical.mediPetRepository;
 import com.AniCare.demo.service.community.BoardFileService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -39,26 +39,17 @@ public class ClinicDiaryService {
     private final AllergyRepository allergyRepository;
     private final DiseaseRepository diseaseRepository;
     private final HospitalRepository hospitalRepository;
-    private final mediUserRepository mediUserRepository;
     private final BoardFileRepository boardFileRepository;
     private final BoardFileService boardFileService;
     private final BoardRepository boardRepository;
+    private final UserRepository userRepository;
+    private final mediPetRepository mediPetRepository;
 
     // --------------메서드
 
-    // 로그인 된 유저 정보로 동물정보 불러오기   (임시)
-    public Pet getDefaultPetFromUserName(String userName) {
-
-        // (임시) 로그인 된 유저 정보 불러오기
-        User user = mediUserRepository.findByUserName(userName)
-                .orElseThrow(() -> new IllegalStateException("로그인 유저를 찾을 수 없습니다."));
-
-        // 로그인된 유저의 대표동물 조회(임시)
-
-        if (user.getDefaultPet() == null) {
-            throw new IllegalStateException("대표 반려동물이 설정되어 있지 않습니다.");
-        }
-        return user.getDefaultPet();
+    // (임시) 로그인 유저 id로 반려동물 한 마리만 불러오기
+    public Pet getOnePet(String userEmail) {
+        return mediPetRepository.findByUserEmail(userEmail).stream().findFirst().orElseThrow(() -> new IllegalStateException("등록된 반려동물이 없습니다."));
     }
 
     // ----동물의 id로 질병/알러지 정보 불러오기
@@ -77,8 +68,8 @@ public class ClinicDiaryService {
 
 
     // (임시)로그인 정보로 진료수첩 출력용 clinicDiaryPetInfoDto 정보 담기
-    public ClinicDiaryPetInfoDto petInfoDto(String userName) {
-        Pet pet = getDefaultPetFromUserName(userName);
+    public ClinicDiaryPetInfoDto petInfoDto(String userEmail) {
+        Pet pet = getOnePet(userEmail);
         return new ClinicDiaryPetInfoDto(
                 pet.getPetImage(),
                 pet.getPetName(),
