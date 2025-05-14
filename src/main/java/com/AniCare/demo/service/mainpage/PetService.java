@@ -2,7 +2,9 @@ package com.AniCare.demo.service.mainpage;
 
 import com.AniCare.demo.Dto.mainpage.PetDetailDto;
 import com.AniCare.demo.entity.MainPage.Pet;
+import com.AniCare.demo.entity.MainPage.User;
 import com.AniCare.demo.repository.MainPage.PetRepository;
+import com.AniCare.demo.repository.MainPage.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,13 +15,21 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PetService {
     private final PetRepository petRepository;
+    private final UserRepository userRepository;
 
-    public PetDetailDto getPetDetail(Long id){
-        Pet petDetails = petRepository.findById(id).get();
-        List<PetDetailDto> petDetailDtos = new ArrayList<>();
+    public PetDetailDto getPetDetail(String userEmail){
 
-        PetDetailDto petDetailDto = PetDetailDto.from(petDetails);
+        User user = userRepository.findByUserEmail(userEmail).get();
 
-        return petDetailDto;
+     //   Pet petDetails = petRepository.findByUser(user.getUserId());
+
+     //   if(petDetails == null){
+            return null;
+     //   }
+     //   List<PetDetailDto> petDetailDtos = new ArrayList<>();
+
+     //   PetDetailDto petDetailDto = PetDetailDto.from(petDetails);
+
+     //   return petDetailDto;
     }
 }

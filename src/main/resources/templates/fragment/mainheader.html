@@ -7,7 +7,7 @@
 
     <div class="header-left">
         <button id="sidebarToggle" class="hamburger">☰</button>
-        <h1 class="site-title">ANICARE</h1>
+        <h1 class="site-title" onclick="location.href='/aincare'">ANICARE</h1>
         <h1 class="logo">
             <li><a href="/medicalmain">메디컬</a></li> |
             <li><a href="/commnuitymain">커뮤니티</a></li>
@@ -19,12 +19,12 @@
     </div>
 
     <!--  로그인 성공시 로그아웃 버튼으로 바뀜 -->
-    <div class="auth-buttons" sec:authorize="isAuthenticated()">
+    <div class="auth-buttons" sec:authorize="isAnonymous()">
         <button class="login-btn" onclick="location.href='/mainpage/userlogin'">로그인</button>
         <button class="signup-btn" onclick="location.href='/mainpage/usersignup'">회원가입</button>
     </div>
 
-    <div th:if="${userDetailDto != null}" sec:authorize="isAnonymous()">
+    <div  sec:authorize="isAuthenticated()">
         <span th:text="${userDetailDto.userName} + '님 환영합니다'"></span>
         <a href="/logout">로그아웃</a>
     </div>

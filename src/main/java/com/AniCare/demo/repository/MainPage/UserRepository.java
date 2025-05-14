@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
@@ -17,5 +18,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
     // 회원정보 수정 및 마이페이지에 사용자 정보를 띄우기  위한 쿼리문
     User findByUserId(Long userId);
 
-    org.springframework.security.core.userdetails.User findByUserEmail(String email);
+
+    // 로그인용 메서드 (email 기준 조회)
+    Optional<User> findByUserEmail(String email);
+
 }

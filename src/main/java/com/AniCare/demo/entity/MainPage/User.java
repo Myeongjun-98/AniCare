@@ -6,6 +6,10 @@ import com.AniCare.demo.constant.MainPage.Authorization;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+import javax.management.relation.Role;
 
 @Entity
 @Getter
@@ -38,10 +42,23 @@ public class User {
     @Column(nullable = false)
     private Authorization authorization; // 권한 (사용자 or 관리자)
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="default_pet_id")
-    private Pet defaultPet; // 대표동물 설정
 
 
 
+    public static User createUser(UserInfoDto userInfoDto, PasswordEncoder passwordEncoder){
+        User user = new User();
+
+        user.setUserImage(userInfoDto.getUserImg());
+        user.setUserName(userInfoDto.getUserName());
+        user.setUserEmail(userInfoDto.getUserEmail());
+        user.setUserAddress(userInfoDto.getUserAddress());
+        user.setUserTel(userInfoDto.getUserTel());
+        user.setAuthorization(Authorization.USER);
+
+        String password = passwordEncoder.encode(userInfoDto.getUserPassword());
+        user.setUserPassword(password);
+
+        return user;
+
+    }
 }

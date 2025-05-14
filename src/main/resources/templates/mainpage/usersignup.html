@@ -61,8 +61,8 @@
                 <span th:text="${successMessage}"></span>
             </div>
 
-            <form th:action="@{/mainpage/usersignup}" th:object="${userInfo}" method="post">
-                <form th:action="@{/mainpage/usersignup}" method="post" enctype="multipart/form-data">
+            <form th:action="@{/mainpage/usersignup}" th:object="${userInfo}" method="post"enctype="multipart/form-data">
+
                 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
 
                 <!-- 사용자 프로필 사진-->
@@ -124,26 +124,27 @@
                          th:errors="*{userAddress}"></div>
                 </div>
 
-    <form th:action="@{/mainpage/usersignup}" th:object="${petInfo}" method="post">
+
     <h5 class="mt-4">반려동물 정보 (선택)</h5>
      <div class="mb-3">
         <label for="petImage" class="form-label">반려동물 사진</label>
-        <input type="file" class="form-control" id="petImage" name="petImage">
+        <input type="file" class="form-control" name="petImage">
      </div>
+
 
      <div class="mb-3">
         <label for="petName" class="form-label">이름</label>
-        <input type="text" class="form-control" id="petName" name="petName">
+        <input type="text" class="form-control" th:field="${petDetailDto.petName}">
     </div>
 
     <div class="mb-3">
         <label for="petAge" class="form-label">나이</label>
-        <input type="number" class="form-control" id="petAge" name="petAge">
+        <input type="number" class="form-control" th:field="${petDetailDto.petAge}">
     </div>
 
     <div class="mb-3">
         <label for="petSex" class="form-label">성별</label>
-        <select class="form-control" id="petSex" name="petSex">
+        <select class="form-control" th:field="${petDetailDto.petSex}">
             <option value="">선택</option>
             <option value="수컷">수컷</option>
             <option value="암컷">암컷</option>
@@ -154,12 +155,12 @@
 
     <div class="mb-3">
         <label for="petBreed" class="form-label">품종</label>
-        <input type="text" class="form-control" id="petBreed" name="petBreed">
+        <input type="text" class="form-control" th:field="${petDetailDto.petBreed}">
     </div>
 
     <div class="mb-3">
         <label for="petSpecies" class="form-label">종류</label>
-        <select class="form-control" id="petSpecies" name="petSpecies">
+        <select class="form-control" th:field="${petDetailDto.petSpecies}">
             <option value="">선택</option>
             <option value="DOG">개/강아지</option>
             <option value="CAT">고양이</option>
@@ -192,12 +193,13 @@
 
     <div class="mt-3 text-center">
         <span>이미 회원이신가요?</span>
-        <a th:href="@{/auth/login}" class="ms-2">로그인하기</a>
+        <a th:href="@{/mainpage/userlogin}" class="ms-2">로그인하기</a>
     </div>
 
     <!-- 제출 버튼 -->
     <button type="submit" class="btn btn-primary w-100 py-2">가입 완료</button>
     </form>
+
         </div>
     </div>
 </main>
