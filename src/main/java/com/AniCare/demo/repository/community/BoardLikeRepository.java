@@ -11,6 +11,4 @@ import java.util.Optional;
 @Repository
 public interface BoardLikeRepository extends JpaRepository<BoardLike, Long> { //boardLike 테이블 데이터를 다루는 Repo
 
-Optional<BoardLike> findByUserAndBoard(User user, Board board);
-boolean
 }
