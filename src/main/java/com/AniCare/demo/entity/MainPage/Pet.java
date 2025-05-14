@@ -1,5 +1,6 @@
 package com.AniCare.demo.entity.MainPage;
 
+import com.AniCare.demo.Dto.mainpage.PetDetailDto;
 import com.AniCare.demo.constant.medical.PetSex;
 import com.AniCare.demo.constant.medical.PetSpecies;
 import jakarta.persistence.*;
@@ -21,7 +22,6 @@ public class Pet {
     @JoinColumn(name = "user_id")
     @ManyToOne
     private User user;
-
     private String petImage; // 반려동물 프로필 사진
     private String petName;  // 반려동물 이름
     private String petBreed; // 반려동물 품종 
@@ -34,5 +34,17 @@ public class Pet {
     @Column(nullable = false)
     private PetSpecies petSpecies; // 반려동물 종류 (묘종 or 견종)
 
+    public static Pet createPet(PetDetailDto petDetailDto){
+       Pet pet = new Pet();
+
+       pet.setPetName(petDetailDto.getPetName());
+       pet.setPetSex(petDetailDto.getPetSex());
+       pet.setPetBreed(petDetailDto.getPetBreed());
+       pet.setPetSpecies(petDetailDto.getPetSpecies());
+       pet.setPetAge(petDetailDto.getPetAge());
+       pet.setPetImage(petDetailDto.getPetImg());
+
+       return pet;
+    }
 
 }

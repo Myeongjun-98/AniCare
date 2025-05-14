@@ -1,6 +1,7 @@
 package com.AniCare.demo.service.community;
 
 import com.AniCare.demo.Dto.community.*;
+import com.AniCare.demo.Dto.mainpage.CommunityPopuarListDto;
 import com.AniCare.demo.entity.community.*;
 import com.AniCare.demo.repository.community.*;
 import com.AniCare.demo.Dto.community.*;
@@ -33,10 +34,18 @@ public class BoardService {
     private final BoardFileService boardFileService;
 
     // ================ 메인페이지에서 커뮤니티 인기글 불러오기 위한 메서드 =================
-    public List<Board> getAllboardList(){
-        List<Board> boards = boardRepository.findAll();
+    public List<CommunityPopuarListDto> getAllboardList(){
+        List<Board> boards = boardRepository.findTop5ByOrderByLikeCountDesc();
+        List<CommunityPopuarListDto> communityPopuarListDtos = new ArrayList<>();
 
-        return boards;
+
+        for(Board  board: boards ){
+            BoardFile boardFile = boardFileRepository.findByBoardIdAndThumbnailYn(board.getId(),"Y");
+            if (boardFile == null) boardFile = new BoardFile();
+            CommunityPopuarListDto communityPopuarListDto = CommunityPopuarListDto.of (board, boardFile);
+            communityPopuarListDtos.add(communityPopuarListDto);
+        }
+        return communityPopuarListDtos;
     }
 
 
@@ -51,7 +60,7 @@ public class BoardService {
 
 
             //게시글 작성자 관련 정보 갖고 오기
-            User userInfo = userRepository.getById(board.getUser().getId());
+            User userInfo = userRepository.getById(board.getUser().getUserId());
 
             //게시글 정보 가져오기
             BoardListMainDto boardListMainDto = BoardListMainDto.to(board);
@@ -107,7 +116,7 @@ public class BoardService {
 
         //게시글 정보 불러오기
         Board board = boardRepository.findById(boardId).get();
-        User userBoardInfo = userRepository.getById(board.getUser().getId());
+        User userBoardInfo = userRepository.getById(board.getUser().getUserId());
 
 
         //게시글 관련 덧글목록 불러오기
@@ -115,7 +124,7 @@ public class BoardService {
 
         List<CommentViewDto> commentViewDtos = new ArrayList<>();
         for(Comment comment : commentList) {
-            User userCommentInfo = userRepository.getById(comment.getUser().getId());
+            User userCommentInfo = userRepository.getById(comment.getUser().getUserId());
             CommentViewDto commentViewDto = CommentViewDto.from(comment);
             commentViewDto.setUserName(userCommentInfo.getUserName());
             commentViewDtos.add(commentViewDto);
