@@ -33,17 +33,20 @@ public class MainController {
 
 
     @GetMapping("/anicare")
-    public String main(Principal principal, Model model){
+    public String main(Principal principal, Model model) {
 
         // 메인페이지에 커뮤니티 정보글 띄우기
         model.addAttribute("communityList", boardService.getAllboardList());
 
-        // 마이페이지에 사용자 정보 띄우기
-        model.addAttribute("userDetailDto", userService.getUserDetail(principal.getName()));
+        if (principal.getName() != null) {
 
-        // 마이페이지에 내 반려동물 정보 띄우기
-        model.addAttribute("petDetailDto", petService.getPetDetail(principal.getName()));
 
+            // 마이페이지에 사용자 정보 띄우기
+            model.addAttribute("userDetailDto", userService.getUserDetail(principal.getName()));
+
+            // 마이페이지에 내 반려동물 정보 띄우기
+            model.addAttribute("petDetailDto", petService.getPetDetail(principal.getName()));
+        }
 
         return "mainpage/mainpage";
     }

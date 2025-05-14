@@ -88,15 +88,7 @@ public class UserController {
 
     }
 
-    @PostMapping("/mainpage/userlogin")
-    public String processRegisration(@ModelAttribute UserInfoDto userInfoDto){
-        return "redirect:/anicare";
-    }
 
-    @PostMapping("mainpage/userlogout")
-    public String userlogout(Model model){
 
-        return "redirect:/anicare";
-    }
 
 }
