@@ -23,11 +23,11 @@
 
 </th:block>
 <main layout:fragment="main">
-    <form th:action="@{mainpage/userlogin}" method="post">
+
     <div class="container py-5">
         <div class="login-container bg-white">
             <h2 class="text-center mb-4">로그인</h2>
-    </form>
+
             <!-- 에러 메시지 표시 -->
             <div th:if="${param.error}" class="alert alert-danger">
                 <span th:text="${param.exception != null} ? ${param.exception} : '이메일 또는 비밀번호가 잘못되었습니다.'"></span>
