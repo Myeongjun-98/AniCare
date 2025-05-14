@@ -26,7 +26,8 @@ public interface BoardRepository extends JpaRepository<Board, Long> { //board í…
     @Query("SELECT b " +
             "FROM Board b " +
             "WHERE (b.boardTitle LIKE %:keyword% " +
-                    "OR b.boardContent LIKE %:keyword%)")
+                    "OR b.boardContent LIKE %:keyword%)" +
+                    "ORDER BY b.Id DESC")
     List<Board> searchByBoardTypeAndKeyword(@Param("keyword") String keyword);
 
 

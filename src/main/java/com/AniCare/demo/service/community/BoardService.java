@@ -97,7 +97,7 @@ public class BoardService {
 
         //인기순 정렬 기능
         if(order.equals("L")) {
-            boardListMainDtos.sort(Comparator.comparing(l -> l.getLikeCount(), Comparator.reverseOrder()));
+            boardListMainDtos.sort(Comparator.comparing(BoardListMainDto::getLikeCount, Comparator.reverseOrder()));
         }
 
         return boardListMainDtos;

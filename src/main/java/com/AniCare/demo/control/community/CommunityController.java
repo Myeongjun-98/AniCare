@@ -4,11 +4,13 @@ import com.AniCare.demo.Dto.community.BoardListMainDto;
 import com.AniCare.demo.Dto.community.BoardListSubDto;
 import com.AniCare.demo.Dto.community.*;
 import com.AniCare.demo.constant.community.BoardType;
+import com.AniCare.demo.entity.MainPage.User;
 import com.AniCare.demo.service.community.BoardService;
 import com.AniCare.demo.service.community.CommentService;
 import com.AniCare.demo.service.community.CommunityMainService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,6 +33,20 @@ public class CommunityController {
     private CommentService commentService;
     @Autowired
     private ObjectMapper objectMapper; //JSON 변환용
+
+    // ================ 커뮤니티 - 임시 로그인 기능 구현 ================
+
+    @GetMapping("/temp-login")
+    public String tempComLogin(HttpSession session) {
+        User tempUser = new User();
+        tempUser.setId(2L);
+        tempUser.setUserName("길은지");
+
+        session.setAttribute("tempComUser", tempUser);
+
+        return "redirect:/";
+    }
+
 
     // ================ 커뮤니티 메인 페이지 ================
     @GetMapping("/community/commain")
