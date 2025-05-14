@@ -21,7 +21,7 @@ public class PetService {
 
         User user = userRepository.findByUserEmail(userEmail).get();
 
-        Pet petDetails = petRepository.findByUserUserId(user.getUserId());
+        Pet petDetails = petRepository.findByUserUserId(user.getId());
 
         if (petDetails == null) {
             return null;

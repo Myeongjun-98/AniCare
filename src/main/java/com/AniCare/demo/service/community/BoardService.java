@@ -48,7 +48,7 @@ public class BoardService {
 
 
             //게시글 작성자 관련 정보 갖고 오기
-            User userInfo = userRepository.getById(board.getUser().getUserId());
+            User userInfo = userRepository.getById(board.getUser().getId());
 
             //게시글 정보 가져오기
             BoardListMainDto boardListMainDto = BoardListMainDto.to(board);
@@ -104,7 +104,7 @@ public class BoardService {
 
         //게시글 정보 불러오기
         Board board = boardRepository.findById(boardId).orElse(null);
-        User userBoardInfo = userRepository.findById(board.getUser().getUserId()).orElse(null);
+        User userBoardInfo = userRepository.findById(board.getUser().getId()).orElse(null);
 
 
         //게시글 관련 덧글목록 불러오기
@@ -112,7 +112,7 @@ public class BoardService {
 
         List<CommentViewDto> commentViewDtos = new ArrayList<>();
         for (Comment comment : commentList) {
-            User userCommentInfo = userRepository.findById(comment.getUser().getUserId()).orElse(null);
+            User userCommentInfo = userRepository.findById(comment.getUser().getId()).orElse(null);
             CommentViewDto commentViewDto = CommentViewDto.from(comment);
             commentViewDto.setUserName(userCommentInfo.getUserName());
             commentViewDtos.add(commentViewDto);
