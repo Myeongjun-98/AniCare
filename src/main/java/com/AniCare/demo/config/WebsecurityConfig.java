@@ -41,10 +41,10 @@ public class WebsecurityConfig {
                 .authorizeHttpRequests(
                         ar -> ar
                                 .requestMatchers("/community/**",
-//                                        "/medical/**",      // 로그인 허용하게 하기 위해 활성화
+                                        "/medical/**",      // 로그인 허용하게 하기 위해 활성화
                                         // >> (Medical)개발용 유저 등록을 위해 삽입
                                         // (Medical)로그인 페이지와 정적 리소스 모두 허용
-                                        "/login", "/css/**", "/js/**", "/images/**")
+                                        "/anicareFile/**", "/css/**", "/javascript/**", "/error", "/anicare")
                                 // << (Medical)개발용 유저 등록을 위해 삽입
                                 .permitAll()
                                 // >> (Medical)개발용 유저 등록을 위해 삽입

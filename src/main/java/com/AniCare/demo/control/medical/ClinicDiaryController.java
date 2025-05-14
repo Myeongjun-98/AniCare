@@ -2,27 +2,28 @@ package com.AniCare.demo.control.medical;
 
 import com.AniCare.demo.Dto.medical.ClinicDiaryListDto;
 import com.AniCare.demo.Dto.medical.ClinicDiaryPetInfoDto;
+import com.AniCare.demo.Dto.medical.ClinicDiarySetDto;
+import com.AniCare.demo.service.medical.ClinicDiaryService;
 import com.AniCare.demo.service.medical.MedicalService;
-import com.AniCare.demo.service.medical.devUserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 @RequestMapping("/medical")
+@RequiredArgsConstructor
 public class ClinicDiaryController {
 
-    @Autowired
-    private MedicalService medicalService;
-    @Autowired
-    private devUserService devUserService;
+    private final MedicalService medicalService;
+    private final ClinicDiaryService clinicDiaryService;
 
     // 진료수첩 페이지(특정 반려동물의 메인 진료수첩 페이지)
     @GetMapping("/clinicdiary")
@@ -32,10 +33,10 @@ public class ClinicDiaryController {
         String userName = principal.getName();
 
         //  로그인정보에서 유저 -> default(대표동물) 아이디로 pet정보 불러오기
-        ClinicDiaryPetInfoDto pet = medicalService.petInfoDto(principal.getName());
+        ClinicDiaryPetInfoDto pet = clinicDiaryService.petInfoDto(principal.getName());
         // 2) 진료수첩 페이징 리스트 (page 사이즈는 10개로 설정)
         Page<ClinicDiaryListDto> diaryPage =
-                medicalService.findClinicDiariesByPetId(
+                clinicDiaryService.findClinicDiariesByPetId(
                         medicalService.getDefaultPetFromUserName(userName).getId(),
                         page,
                         10
@@ -53,9 +54,41 @@ public class ClinicDiaryController {
     @GetMapping("clinicdiary/{clinicDiaryId}")
     public String viewClinicDiary(@PathVariable Long clinicDiaryId, Model model) {
 
-        model.addAttribute("clinicDiaryDto", medicalService.viewClinicDiaryDetail(clinicDiaryId));
+        model.addAttribute("clinicDiaryDto", clinicDiaryService.viewClinicDiaryDetail(clinicDiaryId));
 
         return "medical/clinicdiaryDetail";
+    }
+
+    // 진료수첩 작성페이지
+    @GetMapping("clinicdiary/new")
+    public String clinicDiarySavingPage(Model model) {
+        ClinicDiarySetDto dto = new ClinicDiarySetDto();
+
+        model.addAttribute("clinicDiaryDto", dto);
+        return "medical/newClinicDiary";
+    }
+
+    // 진료수첩 작성 요청
+    @PostMapping("uploadClinicDiary")
+    public String clinicDiarySave(Model model, @Valid ClinicDiarySetDto clinicDiarySetDto, BindingResult bindingResult, @RequestParam("boardFile") List<MultipartFile> multipartFileList, Principal principal) {
+
+        if (bindingResult.hasErrors()) {
+            return "medical/newClinicDiary";
+        }
+
+        try {
+            clinicDiaryService.clinicDiarySave(clinicDiarySetDto, clinicDiaryService.getDefaultPetFromUserName(principal.getName()).getId());
+        } catch (Exception e) {
+            model.addAttribute("clinicDiaryUploadError", "진료수첩 작성 실패");
+            return "medical/newClinicDiary";
+        }
+        
+        Long savedId = clinicDiaryService.clinicDiarySave(
+                clinicDiarySetDto,
+                clinicDiaryService.getDefaultPetFromUserName(principal.getName()).getId()
+        );
+
+        return "redirect:/medical/clinicdiary" + savedId;
     }
 
 

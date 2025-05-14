@@ -35,8 +35,4 @@ public class User {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Authorization authorization; // 권한 (사용자 or 관리자)
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "default_pet_id")
-    private Pet defaultPet; // 대표동물 설정
 }
