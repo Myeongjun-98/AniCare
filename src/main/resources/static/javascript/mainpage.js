@@ -27,23 +27,23 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // 로그인 상태 시뮬레이션 (실제 구현시 서버에서 상태 확인)
-  let isLoggedIn = false; // 기본값 false로 설정
-
-  function toggleLoginView() {
-    const loggedInView = document.querySelector(".logged-in-view");
-    const loggedOutView = document.querySelector(".logged-out-view");
-
-    if (isLoggedIn) {
-      loggedInView.style.display = "block";
-      loggedOutView.style.display = "none";
-    } else {
-      loggedInView.style.display = "none";
-      loggedOutView.style.display = "block";
-    }
-  }
+//  let isLoggedIn = false; // 기본값 false로 설정
+//
+//  function toggleLoginView() {
+//    const loggedInView = document.querySelector(".logged-in-view");
+//    const loggedOutView = document.querySelector(".logged-out-view");
+//
+//    if (isLoggedIn) {
+//      loggedInView.style.display = "block";
+//      loggedOutView.style.display = "none";
+//    } else {
+//      loggedInView.style.display = "none";
+//      loggedOutView.style.display = "block";
+//    }
+//  }
 
   // 초기 상태 적용
-  toggleLoginView();
+//  toggleLoginView();
 
   // // 사이드바 로그인 버튼 이벤트
   // document.querySelector('.login-sidebar-btn').addEventListener('click', function() {

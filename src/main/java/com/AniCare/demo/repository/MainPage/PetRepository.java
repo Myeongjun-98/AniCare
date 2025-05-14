@@ -6,10 +6,10 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PetRepository extends JpaRepository<Pet, Long> {
+ //   Pet findByUserId(Long userId);
 
-    // 반려동물 등록 및 수정을 위한 쿼리 동작 메서드
-//    Pet findByPetId(Long id);
+//     반려동물 등록 및 수정을 위한 쿼리 동작 메서드
+  
 
-    // 사용자가 키우는 반려동물 정보를 가져오기 위한 쿼리 동작 메서드
-//    List<Pet> findAllByUserId(Long id);
+
 }

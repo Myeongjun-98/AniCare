@@ -24,7 +24,19 @@ header {
   top: 0;
   z-index: 100;
 }
+ul {
+   list-style-type: none;
+    padding-left:0;
+    margin-left:0;
+    display: inline;
+}
 
+li{
+    list-style-type: none;
+    padding-left:0;
+    margin-left:0;
+    display: inline;
+}
 .header-left {
   display: flex;
   align-items: center;
@@ -69,6 +81,7 @@ header {
 }
 .login-btn,
 .signup-btn {
+  display:inline-block;
   padding: 8px 15px;
   border-radius: 20px;
   font-weight: bold;
@@ -84,6 +97,7 @@ header {
   background-color: #fff9c4;
 }
 .signup-btn {
+
   background-color: #ffa500;
   border: 1px solid #ffa500;
   color: white;
@@ -184,6 +198,8 @@ header {
 }
 
 .user-info img {
+  width:60px;
+  height:60px;
   border-radius: 50%;
   margin-right: 15px;
 }
@@ -245,9 +261,11 @@ header {
 .pet-back {
   transform: rotateY(180deg);
   background-color: #ffecb3;
+  font-size: 14px;
 }
 
 .pet-card.flipped .pet-front {
+    border:1px solid;
   transform: rotateY(180deg);
 }
 
@@ -393,7 +411,8 @@ main.sidebar-open {
   object-fit: cover;
 }
 
-.card h3 {
+.card a {
+
   padding: 10px 10px 0;
   font-size: 16px;
   text-overflow: ellipsis;
