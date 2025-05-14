@@ -26,15 +26,15 @@ public class MedicalService {
     private final ConsultationChatRepository consultationChatRepository;
     private final VetRepository vetRepository;
     // 임시 로그인 관련 레포지토리
-    private final devUserRepository devUserRepository;
+    private final mediUserRepository mediUserRepository;
 
     // --------------메서드
 
-    // 로그인 된 유저 정보로 대표동물 정보 불러오기
+    // 로그인 된 유저 정보로 반려동물 정보 불러오기(리스트 X)
     public Pet getDefaultPetFromUserName(String userName) {
 
         // (임시) 로그인 된 유저 정보 불러오기
-        User user = devUserRepository.findByUserName(userName)
+        User user = mediUserRepository.findByUserName(userName)
                 .orElseThrow(() -> new IllegalStateException("로그인 유저를 찾을 수 없습니다."));
 
         // 로그인된 유저의 대표동물 조회(임시)
@@ -83,7 +83,7 @@ public class MedicalService {
     public Consultation createConsultation(String name, Long vetInfoId, Long checkupId) {
 
         // ① User 조회
-        User user = devUserRepository.findByUserName(name)
+        User user = mediUserRepository.findByUserName(name)
                 .orElseThrow(() -> new NoSuchElementException("User not found"));
 
         // ② VetInfo 조회

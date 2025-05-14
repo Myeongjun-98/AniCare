@@ -18,7 +18,7 @@ import com.AniCare.demo.repository.community.BoardRepository;
 import com.AniCare.demo.repository.medical.AllergyRepository;
 import com.AniCare.demo.repository.medical.ClinicDiaryRepository;
 import com.AniCare.demo.repository.medical.DiseaseRepository;
-import com.AniCare.demo.repository.medical.devUserRepository;
+import com.AniCare.demo.repository.medical.mediUserRepository;
 import com.AniCare.demo.service.community.BoardFileService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -39,7 +39,7 @@ public class ClinicDiaryService {
     private final AllergyRepository allergyRepository;
     private final DiseaseRepository diseaseRepository;
     private final HospitalRepository hospitalRepository;
-    private final devUserRepository devUserRepository;
+    private final mediUserRepository mediUserRepository;
     private final BoardFileRepository boardFileRepository;
     private final BoardFileService boardFileService;
     private final BoardRepository boardRepository;
@@ -50,7 +50,7 @@ public class ClinicDiaryService {
     public Pet getDefaultPetFromUserName(String userName) {
 
         // (임시) 로그인 된 유저 정보 불러오기
-        User user = devUserRepository.findByUserName(userName)
+        User user = mediUserRepository.findByUserName(userName)
                 .orElseThrow(() -> new IllegalStateException("로그인 유저를 찾을 수 없습니다."));
 
         // 로그인된 유저의 대표동물 조회(임시)

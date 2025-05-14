@@ -1,7 +1,7 @@
 package com.AniCare.demo.service.medical;
 
 import com.AniCare.demo.entity.MainPage.User;
-import com.AniCare.demo.repository.medical.devUserRepository;
+import com.AniCare.demo.repository.medical.mediUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -11,14 +11,14 @@ import org.springframework.stereotype.Service;
 // >> (medical) 개발자용 로그인서비스
 @Service
 @RequiredArgsConstructor
-public class devUserService implements UserDetailsService {
-    private final devUserRepository devUserRepository;
+public class mediUserService implements UserDetailsService {
+    private final mediUserRepository mediUserRepository;
 
     // (임시) 로그인상태의 유저이름으로 유저정보 불러오기
     @Override
     public UserDetails loadUserByUsername(String userName)
             throws UsernameNotFoundException {
-        User u = devUserRepository.findByUserName(userName)
+        User u = mediUserRepository.findByUserName(userName)
                 .orElseThrow(() -> new UsernameNotFoundException(userName + " not found"));
 
         return org.springframework.security.core.userdetails.User.builder()
