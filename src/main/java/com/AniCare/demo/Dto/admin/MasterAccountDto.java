@@ -12,20 +12,15 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MasterAccountDto {
-    private Long id;
 
+    private Long id;
     private String name;
     private Authorization authorization;
 
-
-
-
-
-    // ✅ 정적 팩토리 메서드 추가
+    // 정적 팩토리 메서드
     public static MasterAccountDto fromEntity(User account) {
         return new MasterAccountDto(
-                account.getUserId(),
-
+                account.getUserId(), // ✅ 주의: getUserId() → getId()
                 account.getUserName(),
                 account.getAuthorization()
         );

@@ -1,6 +1,7 @@
 package com.AniCare.demo.service.adminService;
 
 import com.AniCare.demo.Dto.admin.EnquiryReplyViewDto;
+import com.AniCare.demo.constant.MainPage.EnquiryStatus;
 import com.AniCare.demo.entity.MainPage.Enquiry;
 import com.AniCare.demo.entity.admin.EnquiryReply;
 import com.AniCare.demo.repository.MainPage.EnquiryRepository;
@@ -29,18 +30,13 @@ public class EnquiryService {
         Enquiry enquiry = enquiryRepository.findById(enquiryId)
                 .orElseThrow(() -> new IllegalArgumentException("문의가 존재하지 않습니다: " + enquiryId));
 
-        enum EnquiryStatus {
-            처리대기,
-            처리완료
-        }
-
-        // 이미 답변이 있는지 확인
         Optional<EnquiryReply> optionalReply = enquiryReplyRepository.findByEnquiry(enquiry);
 
-        EnquiryReply reply = optionalReply.orElseGet(EnquiryReply::new); // 없으면 새로 생성
+        EnquiryReply reply = optionalReply.orElseGet(EnquiryReply::new);
         reply.setEnquiry(enquiry);
         reply.setContent(replyContent);
         reply.setCreateDate(LocalDate.now());
+        reply.setEnquiryStatus(EnquiryStatus.완료); // 상태값 설정
 
         enquiryReplyRepository.save(reply);
     }

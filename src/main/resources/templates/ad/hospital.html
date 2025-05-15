@@ -16,47 +16,70 @@
     <a href="/ad/hospitalList" class="btn btn-outline-primary">병원목록</a>
     <a href="/logout" class="btn btn-outline-danger">로그아웃</a>
 </nav>
-<div class="container">
 
+<div class="container">
     <h2>병원 등록</h2>
     <form th:action="@{/ad/hospital}" method="post" th:object="${hospital}">
         <div class="mb-3">
             <label class="form-label">병원명</label>
             <input type="text" th:field="*{hospitalName}" class="form-control" required>
         </div>
+
         <div class="mb-3">
             <label class="form-label">전화번호</label>
             <input type="text" th:field="*{hospitalTel}" class="form-control" required>
         </div>
+
         <div class="mb-3">
             <label class="form-label">이미지 URL</label>
             <input type="text" th:field="*{hospitalImage}" class="form-control">
         </div>
+
+        <!-- ✅ 수의사 선택 (다중 체크박스) -->
         <div class="mb-3">
-            <label class="form-label">수의사 ID</label>
-
-
-            <input type="text" th:field="*{vetInfoId}" class="form-control">
+            <label class="form-label">수의사 선택</label>
+            <div th:each="vet : ${vetList}">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox"
+                           th:id="'vet_' + ${vet.id}"
+                           th:name="vetInfoIdList"
+                           th:value="${vet.id}"
+                           th:checked="${hospital.vetInfoIdList != null and hospital.vetInfoIdList.contains(vet.id)}"/>
+                    <label class="form-check-label" th:for="'vet_' + ${vet.id}" th:text="${vet.vetName}"></label>
+                </div>
+            </div>
         </div>
+
         <div class="mb-3">
             <label class="form-label">장비</label>
             <input type="text" th:field="*{device}" class="form-control">
         </div>
+
         <div class="mb-3">
             <label class="form-label">운영 시간</label>
             <input type="text" th:field="*{operating}" class="form-control">
         </div>
+
+        <!-- ✅ 진료유형 선택 (다중 체크박스) -->
         <div class="mb-3">
             <label class="form-label">진료 유형</label>
-            <select th:field="*{clinicType}" class="form-select">
-                <option th:each="type : ${T(com.AniCare.demo.constant.admin.ClinicType).values()}"
-                        th:value="${type}" th:text="${type}">진료 유형</option>
-            </select>
+            <div th:each="type : ${T(com.AniCare.demo.constant.admin.ClinicType).values()}">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox"
+                           th:id="'type_' + ${type}"
+                           th:name="clinicTypeList"
+                           th:value="${type}"
+                           th:checked="${hospital.clinicTypeList != null and hospital.clinicTypeList.contains(type)}"/>
+                    <label class="form-check-label" th:for="'type_' + ${type}" th:text="${type}"></label>
+                </div>
+            </div>
         </div>
+
         <div class="mb-3">
             <label class="form-label">주소</label>
             <input type="text" th:field="*{hospitalAddress}" class="form-control">
         </div>
+
         <button type="submit" class="btn btn-primary">등록</button>
         <a href="/ad/hospital" class="btn btn-secondary">취소</a>
     </form>

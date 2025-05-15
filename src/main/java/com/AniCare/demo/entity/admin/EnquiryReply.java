@@ -1,6 +1,7 @@
 package com.AniCare.demo.entity.admin;
 
 import com.AniCare.demo.Dto.admin.EnquiryReplyDto;
+import com.AniCare.demo.constant.MainPage.EnquiryStatus;
 import com.AniCare.demo.entity.MainPage.Enquiry;
 import jakarta.persistence.*;
 import jakarta.persistence.Entity;
@@ -29,7 +30,7 @@ public class EnquiryReply {
     @Column(nullable = false)
     private LocalDate createDate;
 
-    private String status;
+    private EnquiryStatus enquiryStatus;
 
 
 
@@ -40,7 +41,7 @@ public class EnquiryReply {
         }
         dto.setReplyContent(content);
         dto.setReplyDate(createDate);
-        dto.setStatus(status);
+        dto.setEnquiryStatus(enquiryStatus);
         return dto;
     }
 }

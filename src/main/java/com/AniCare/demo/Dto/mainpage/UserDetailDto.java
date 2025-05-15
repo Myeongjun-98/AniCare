@@ -14,14 +14,16 @@ public class UserDetailDto {
     private String userAddress;
     private String userImg;
 
-
-    public static UserDetailDto from(User user){
-        UserDetailDto userDetailDto = new UserDetailDto();
-
-        userDetailDto.setUserName(user.getUserName());
-        userDetailDto.setUserEmail(user.getUserEmail());
-        userDetailDto.setUserAddress(user.getUserAddress());
-        userDetailDto.setUserImg(user.getUserImage());
-        return userDetailDto;
+    /**
+     * User 엔티티 → UserDetailDto 변환
+     */
+    public static UserDetailDto from(User user) {
+        UserDetailDto dto = new UserDetailDto();
+        dto.setUserId(user.getUserId());
+        dto.setUserName(user.getUserName());
+        dto.setUserEmail(user.getUserEmail());
+        dto.setUserAddress(user.getUserAddress());
+        dto.setUserImg(user.getUserImage());
+        return dto;
     }
 }

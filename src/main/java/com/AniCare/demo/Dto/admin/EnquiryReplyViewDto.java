@@ -1,36 +1,35 @@
 package com.AniCare.demo.Dto.admin;
-import com.AniCare.demo.entity.MainPage.Enquiry;
-import com.AniCare.demo.entity.admin.EnquiryReply;
+
+import com.AniCare.demo.constant.MainPage.EnquiryStatus;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.time.LocalDate;
 
 @Getter
 @Setter
 public class EnquiryReplyViewDto {
-    private Long userId;
-    private Long id;             // 문의 ID
-    private String title;        // 문의 제목
-    private String user;         // 작성자 아이디
-    private String content;      // 문의 내용
-    private String status;       // 처리 상태 (Enquiry 기준으로 저장)
-    private String reply;        // 관리자 답변 내용
-    private String createDate;   // 작성일
-    private Long enquiryReplyId; // 답변 ID
+    private Long id;
+    private Long enquiryId;
+    private String enquiryTitle;
+    private String enquiryContent;
+    private String user;
+    private LocalDate createDate;
+    private String reply;
 
-    public static EnquiryReplyViewDto of(EnquiryReply enquiryReply, Enquiry enquiry) {
+    // ✅ 이 필드와 관련 getter/setter가 없으면 컴파일 오류 발생
+    private EnquiryStatus status;
+
+    public static EnquiryReplyViewDto of(com.AniCare.demo.entity.admin.EnquiryReply reply,
+                                         com.AniCare.demo.entity.MainPage.Enquiry enquiry) {
         EnquiryReplyViewDto dto = new EnquiryReplyViewDto();
-        dto.setId(enquiry.getId());
-        dto.setUser(String.valueOf(enquiry.getUser())); // 필요시 getUser().getName() 등 변경
-        dto.setUserId(enquiry.getUser().getUserId());
-        dto.setTitle(enquiry.getEnquiryTitle());
-        dto.setContent(enquiry.getEnquiryContent());
-        dto.setCreateDate(String.valueOf(enquiry.getEnquiryDate()));
-        dto.setEnquiryReplyId(enquiryReply.getId());
-        dto.setReply(enquiryReply.getContent());
-
-        // ✅ 핵심: Enquiry의 상태를 사용해야 "처리완료"가 반영됨
-        dto.setStatus(String.valueOf(enquiry.getStatus()));
-
+        dto.setEnquiryId(enquiry.getId());
+        dto.setEnquiryTitle(enquiry.getEnquiryTitle());
+        dto.setEnquiryContent(enquiry.getEnquiryContent());
+        dto.setUser(enquiry.getUser().getUserName());
+        dto.setCreateDate(enquiry.getEnquiryDate());
+        dto.setStatus(reply.getEnquiryStatus() != null ? reply.getEnquiryStatus() : EnquiryStatus.미완료); // setter 호출
+        dto.setReply(reply.getContent());
         return dto;
     }
 }

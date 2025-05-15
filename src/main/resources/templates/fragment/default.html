@@ -5,27 +5,34 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> ANICARE </title>
+  <title>ANICARE</title>
 
-<link rel="stylesheet" href="/css/mainpage.css">
-  <link
-          href="https://fonts.googleapis.com/icon?family=Material+Icons"
-          rel="stylesheet"
-  />
+  <link rel="stylesheet" href="/css/mainpage.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
+  <!-- 추가 CSS 삽입 -->
   <th:block layout:fragment="css"></th:block>
-  <th:block layout:fragment="javascript"></th:block>
-
 </head>
 <body>
-
 <div id="wrap">
-  <th:block th:replace="fragment/mainheader::header"></th:block>
+
+  <!-- 상단 헤더 -->
+  <th:block th:replace="fragment/mainheader :: header"></th:block>
+
+  <!-- 마이페이지 영역 (필요할 경우만) -->
   <th:block th:replace="fragment/mypage :: mainmypage"></th:block>
-  <th:block layout:fragment="main"></th:block>
-  <th:block th:replace="fragment/footer::footer"></th:block>
+
+  <!-- ✅ 본문 영역: 반드시 이름을 일치시켜야 함 -->
+  <main layout:fragment="main">
+    <!-- 본문이 삽입되는 자리 -->
+  </main>
+
+  <!-- 하단 푸터 -->
+  <th:block th:replace="fragment/footer :: footer"></th:block>
 </div>
 
-  <script src="/javascript/mainpage.js"></script>
+<!-- 추가 스크립트 -->
+<th:block layout:fragment="javascript"></th:block>
+<script src="/javascript/mainpage.js"></script>
 </body>
 </html>

@@ -3,11 +3,15 @@ package com.AniCare.demo.control.admin;
 import com.AniCare.demo.constant.MainPage.Authorization;
 import com.AniCare.demo.Dto.admin.*;
 import com.AniCare.demo.Dto.mainpage.UserDetailDto;
+import com.AniCare.demo.entity.MainPage.User;
 import com.AniCare.demo.entity.medical.VetInfo;
 import com.AniCare.demo.repository.medical.VetRepository;
+import com.AniCare.demo.repository.MainPage.UserRepository;
 import com.AniCare.demo.service.adminService.*;
 import com.AniCare.demo.service.mainpage.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -24,16 +28,25 @@ public class AdminPageController {
     private final MasterAccountService masterAccountService;
     private final NoticeService noticeService;
     private final ReportListService reportListService;
-    private final UserService userService; // ✅ 로그인 사용자 정보 서비스
+    private final UserService userService;
+    private final UserRepository userRepository;
 
-    // ✅ 모든 요청에 공통으로 userDetailDto 모델에 추가
-    @ModelAttribute("userDetailDto")
-    public UserDetailDto userDetailDto() {
-        return userService.getLoginUserInfo();
+    // ⭐ 로그인된 사용자 정보 공통 등록 메서드
+    private void addUserInfoToModel(Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null && auth.isAuthenticated() && !auth.getPrincipal().equals("anonymousUser")) {
+            String email = auth.getName();
+            User user = userRepository.findByUserEmail(email).orElse(null);
+            if (user != null) {
+                UserDetailDto userDetailDto = UserDetailDto.from(user);
+                model.addAttribute("userDetailDto", userDetailDto);
+            }
+        }
     }
 
     @GetMapping("/ad/hospital")
     public String hospitalPage(Model model) {
+        addUserInfoToModel(model);
         List<HospitalDto> hospitalList = hospitalService.findAll();
         List<VetInfo> vetList = vetRepository.findAll();
         model.addAttribute("hospitals", hospitalList);
@@ -44,6 +57,7 @@ public class AdminPageController {
 
     @GetMapping("/ad/hospitalList")
     public String hospitalList(Model model) {
+        addUserInfoToModel(model);
         List<HospitalDto> hospitalList = hospitalService.findAll();
         model.addAttribute("hospitals", hospitalList);
         return "ad/hospitalList";
@@ -57,6 +71,7 @@ public class AdminPageController {
 
     @GetMapping("/ad/enquiryReply")
     public String enquiryReplyPage(Model model) {
+        addUserInfoToModel(model);
         List<EnquiryReplyViewDto> enquiries = enquiryService.findAll();
         model.addAttribute("enquiries", enquiries);
         return "ad/enquiryReply";
@@ -71,6 +86,7 @@ public class AdminPageController {
 
     @GetMapping("/ad/masterAd")
     public String masterAdPage(Model model) {
+        addUserInfoToModel(model);
         List<MasterAccountDto> accounts = masterAccountService.findAll();
         model.addAttribute("userList", accounts);
         return "ad/masterAd";
@@ -85,6 +101,7 @@ public class AdminPageController {
 
     @GetMapping("/ad/notice")
     public String noticePage(Model model) {
+        addUserInfoToModel(model);
         List<NoticeListDto> notices = noticeService.getNoticeList();
         model.addAttribute("notices", notices);
         return "ad/notice";
@@ -109,17 +126,20 @@ public class AdminPageController {
     }
 
     @GetMapping("/ad")
-    public String adHomePage() {
+    public String adHomePage(Model model) {
+        addUserInfoToModel(model);
         return "ad/ad";
     }
 
     @GetMapping("/ad/form")
-    public String formPage() {
+    public String formPage(Model model) {
+        addUserInfoToModel(model);
         return "ad/form";
     }
 
     @GetMapping("/ad/hospital/edit/{id}")
     public String editForm(@PathVariable Long id, Model model) {
+        addUserInfoToModel(model);
         HospitalDto hospitalDto = hospitalService.findById(id);
         model.addAttribute("hospitalDto", hospitalDto);
         return "ad/hospitalEdit";
@@ -139,6 +159,7 @@ public class AdminPageController {
 
     @GetMapping("/ad/reportList")
     public String reportListPage(Model model) {
+        addUserInfoToModel(model);
         List<ReportListDto> reports = reportListService.findAll();
         model.addAttribute("reports", reports);
         return "ad/reportList";
