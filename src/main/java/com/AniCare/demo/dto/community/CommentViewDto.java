@@ -1,4 +1,5 @@
 package com.AniCare.demo.dto.community;
+import com.AniCare.demo.dto.community.CommentViewDto;
 
 import com.AniCare.demo.entity.community.Comment;
 import lombok.Getter;

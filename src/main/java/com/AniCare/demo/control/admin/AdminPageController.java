@@ -1,17 +1,15 @@
 package com.AniCare.demo.control.admin;
 
+import com.AniCare.demo.constant.MainPage.Authorization;
 import com.AniCare.demo.dto.admin.*;
-import com.AniCare.demo.service.adminService.EnquiryService;
-import com.AniCare.demo.service.adminService.HospitalService;
-import com.AniCare.demo.service.adminService.MasterAccountService;
-import com.AniCare.demo.service.adminService.NoticeService;
+import com.AniCare.demo.entity.medical.VetInfo;
+import com.AniCare.demo.repository.medical.VetRepository;
+import com.AniCare.demo.service.adminService.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import com.AniCare.demo.dto.admin.HospitalDto;
 
 import java.util.List;
 
@@ -19,32 +17,35 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AdminPageController {
 
+    private final VetRepository vetRepository;
     private final EnquiryService enquiryService;
     private final HospitalService hospitalService;
     private final MasterAccountService masterAccountService;
     private final NoticeService noticeService;
+    private final ReportListService reportListService;
 
     @GetMapping("/ad/hospital")
     public String hospitalPage(Model model) {
         List<HospitalDto> hospitalList = hospitalService.findAll();
-
+        List<VetInfo> vetList = vetRepository.findAll();
         model.addAttribute("hospitals", hospitalList);
         model.addAttribute("hospital", new HospitalDto());
+        model.addAttribute("vetList", vetList);
         return "ad/hospital";
     }
+
     @GetMapping("/ad/hospitalList")
     public String hospitalList(Model model) {
         List<HospitalDto> hospitalList = hospitalService.findAll();
         model.addAttribute("hospitals", hospitalList);
-        return "ad/hospitalList"; // 이 이름의 HTML이 필요함
+        return "ad/hospitalList";
     }
+
     @PostMapping("/ad/hospital")
     public String registerHospital(@ModelAttribute HospitalDto hospitalDto) {
         hospitalService.save(hospitalDto);
-        return "redirect:/ad/hospital";
+        return "redirect:/ad/hospital?success=true";
     }
-
-
 
     @GetMapping("/ad/enquiryReply")
     public String enquiryReplyPage(Model model) {
@@ -52,7 +53,6 @@ public class AdminPageController {
         model.addAttribute("enquiries", enquiries);
         return "ad/enquiryReply";
     }
-
 
     @PostMapping("/ad/enquiryReply")
     public String replyToEnquiry(@RequestParam("id") Long enquiryId,
@@ -68,6 +68,14 @@ public class AdminPageController {
         return "ad/masterAd";
     }
 
+    // ✅ 사용자 권한 변경 기능 추가
+    @PostMapping("/ad/masterAd/role/update")
+    public String updateUserRole(@RequestParam Long id,
+                                 @RequestParam Authorization role) {
+        masterAccountService.updateRole(id, role);
+        return "redirect:/ad/masterAd";
+    }
+
     @GetMapping("/ad/notice")
     public String noticePage(Model model) {
         List<NoticeListDto> notices = noticeService.getNoticeList();
@@ -78,12 +86,19 @@ public class AdminPageController {
     @PostMapping("/notice/new")
     public String saveNotice(@ModelAttribute NoticeDto noticeDto){
         noticeService.save(noticeDto);
-        return  "redirect:/ad/notice";
+        return "redirect:/ad/notice";
     }
+
     @PostMapping("/notice/update")
     public String updateNotice(@ModelAttribute NoticeDto noticeDto) {
-        noticeService.update(noticeDto.getId(), noticeDto); // id는 반드시 DTO에 있어야 함
+        noticeService.update(noticeDto.getId(), noticeDto);
         return "redirect:/ad/notice";
+    }
+
+    @PostMapping("/notice/{id}/delete")
+    public String deleteNotice(@PathVariable Long id) {
+        noticeService.delete(id);
+        return "redirect:/ad/notice?delete=true";
     }
 
     @GetMapping("/ad")
@@ -94,5 +109,30 @@ public class AdminPageController {
     @GetMapping("/ad/form")
     public String formPage() {
         return "ad/form";
+    }
+    @GetMapping("/ad/hospital/edit/{id}")
+    public String editForm(@PathVariable Long id, Model model) {
+        HospitalDto hospitalDto = hospitalService.findById(id);
+        model.addAttribute("hospitalDto", hospitalDto);
+        return "ad/hospitalEdit"; // 이 템플릿 파일도 있어야 함
+    }
+    @PostMapping("/ad/hospital/delete/{id}")
+    public String deleteHospital(@PathVariable Long id) {
+        hospitalService.delete(id);
+        return "redirect:/ad/hospitalList?delete=true";
+    }
+
+    @PostMapping("/ad/hospital/edit")
+    public String updateHospital(@ModelAttribute HospitalDto dto) {
+        hospitalService.update(dto);
+        return "redirect:/ad/hospitalList";
+    }
+
+
+    @GetMapping("/ad/reportList")
+    public String reportListPage(Model model) {
+        List<ReportListDto> reports = reportListService.findAll();
+        model.addAttribute("reports", reports);
+        return "ad/reportList";
     }
 }

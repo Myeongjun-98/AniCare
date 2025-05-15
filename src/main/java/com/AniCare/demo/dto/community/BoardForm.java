@@ -1,5 +1,5 @@
 package com.AniCare.demo.dto.community;
-
+import com.AniCare.demo.dto.community.BoardForm;
 import com.AniCare.demo.constant.community.BoardType;
 import com.AniCare.demo.entity.community.Board;
 import jakarta.validation.constraints.NotEmpty;

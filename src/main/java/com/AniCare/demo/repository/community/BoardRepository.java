@@ -20,4 +20,5 @@ public interface BoardRepository extends JpaRepository<Board, Long> { //board í…
     List<Board> findByBoardTitleContaining(String keyword);
 
 
+    List<Board> findTop5ByOrderByLikeCountDesc();
 }

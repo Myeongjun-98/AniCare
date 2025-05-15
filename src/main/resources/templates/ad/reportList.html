@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragment/default}">
 <head>
   <meta charset="UTF-8">
   <title>신고 목록</title>
@@ -30,11 +33,11 @@
     </thead>
     <tbody>
     <tr th:each="report : ${reports}">
-      <td th:text="${report.reportId}">1</td>
-      <td th:text="${report.reportDate}">2025-01-02</td>
-      <td th:text="${report.boardId}">1</td>
-      <td th:text="${report.userId}">2</td>
-      <td th:text="${report.reportType}">사기/피해신고</td>
+      <td th:text="${report.reportId}"></td>
+      <td th:text="${report.reportDate}"></td>
+      <td th:text="${report.boardId}"></td>
+      <td th:text="${report.userId}"></td>
+      <td th:text="${report.reportType}"></td>
     </tr>
     </tbody>
   </table>

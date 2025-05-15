@@ -1,5 +1,5 @@
 package com.AniCare.demo.dto.admin;
-
+import com.AniCare.demo.dto.admin.EnquiryReplyViewDto;
 import com.AniCare.demo.entity.MainPage.Enquiry;
 import com.AniCare.demo.entity.admin.EnquiryReply;
 import lombok.Getter;
@@ -22,7 +22,7 @@ public class EnquiryReplyViewDto {
         EnquiryReplyViewDto dto = new EnquiryReplyViewDto();
         dto.setId(enquiry.getId());
         dto.setUser(String.valueOf(enquiry.getUser())); // 필요시 getUser().getName() 등 변경
-        dto.setUserId(enquiry.getUser().getId());
+        dto.setUserId(enquiry.getUser().getUserId());
         dto.setTitle(enquiry.getEnquiryTitle());
         dto.setContent(enquiry.getEnquiryContent());
         dto.setCreateDate(String.valueOf(enquiry.getEnquiryDate()));
@@ -30,7 +30,7 @@ public class EnquiryReplyViewDto {
         dto.setReply(enquiryReply.getContent());
 
         // ✅ 핵심: Enquiry의 상태를 사용해야 "처리완료"가 반영됨
-        dto.setStatus(enquiry.getStatus());
+        dto.setStatus(String.valueOf(enquiry.getStatus()));
 
         return dto;
     }

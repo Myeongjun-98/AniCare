@@ -76,10 +76,15 @@ public class NoticeService {
         notice.setNoticeTitle(dto.getTitle());
         notice.setNoticeBody(dto.getBody());
 
-        // ❗ Null 방지
         notice.setNoticeCategory(dto.getCategory() != null ? dto.getCategory() : NoticeCategory.DEFAULT);
-
         noticeRepository.save(notice);
+    }
+
+    /**
+     * 공지 삭제
+     */
+    public void delete(Long id) {
+        noticeRepository.deleteById(id);
     }
 
     /**
@@ -91,9 +96,10 @@ public class NoticeService {
         );
 
         return new NoticeDto(
-                notice.getId(),notice.getNoticeTitle(),
+                notice.getId(),
+                notice.getNoticeTitle(),
                 notice.getNoticeBody(),
-                notice.getNoticeCategory() // null일 수 있음 → 폼에서 처리 가능
+                notice.getNoticeCategory()
         );
     }
 }

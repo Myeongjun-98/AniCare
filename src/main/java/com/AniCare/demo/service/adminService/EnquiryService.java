@@ -29,7 +29,10 @@ public class EnquiryService {
         Enquiry enquiry = enquiryRepository.findById(enquiryId)
                 .orElseThrow(() -> new IllegalArgumentException("문의가 존재하지 않습니다: " + enquiryId));
 
-        enquiry.setStatus("처리완료");
+        enum EnquiryStatus {
+            처리대기,
+            처리완료
+        }
 
         // 이미 답변이 있는지 확인
         Optional<EnquiryReply> optionalReply = enquiryReplyRepository.findByEnquiry(enquiry);

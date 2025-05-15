@@ -1,12 +1,16 @@
 package com.AniCare.demo.service.community;
 
 import com.AniCare.demo.dto.community.*;
+import com.AniCare.demo.dto.community.*;
 import com.AniCare.demo.entity.community.*;
 import com.AniCare.demo.repository.community.*;
+import com.AniCare.demo.dto.community.*;
 import com.AniCare.demo.constant.community.ErrandCategory;
 import com.AniCare.demo.constant.community.MeetingCategory;
 import com.AniCare.demo.entity.MainPage.User;
+import com.AniCare.demo.entity.community.*;
 import com.AniCare.demo.repository.MainPage.UserRepository;
+import com.AniCare.demo.repository.community.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -48,7 +52,7 @@ public class BoardService {
 
 
             //게시글 작성자 관련 정보 갖고 오기
-            User userInfo = userRepository.getById(board.getUser().getId());
+            User userInfo = userRepository.getById(board.getUser().getUserId());
 
             //게시글 정보 가져오기
             BoardListMainDto boardListMainDto = BoardListMainDto.to(board);
@@ -104,7 +108,7 @@ public class BoardService {
 
         //게시글 정보 불러오기
         Board board = boardRepository.findById(boardId).get();
-        User userBoardInfo = userRepository.getById(board.getUser().getId());
+        User userBoardInfo = userRepository.getById(board.getUser().getUserId());
 
 
         //게시글 관련 덧글목록 불러오기
@@ -112,7 +116,7 @@ public class BoardService {
 
         List<CommentViewDto> commentViewDtos = new ArrayList<>();
         for(Comment comment : commentList) {
-            User userCommentInfo = userRepository.getById(comment.getUser().getId());
+            User userCommentInfo = userRepository.getById(comment.getUser().getUserId());
             CommentViewDto commentViewDto = CommentViewDto.from(comment);
             commentViewDto.setUserName(userCommentInfo.getUserName());
             commentViewDtos.add(commentViewDto);

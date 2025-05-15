@@ -38,8 +38,8 @@ public class EnquiryReply {
         if (enquiry != null) {
             dto.setEnquiryId(enquiry.getId()); // enquiry가 null일 수도 있으니 체크
         }
-        dto.setContent(content);
-        dto.setCreateDate(createDate);
+        dto.setReplyContent(content);
+        dto.setReplyDate(createDate);
         dto.setStatus(status);
         return dto;
     }

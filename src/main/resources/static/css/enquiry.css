@@ -1,0 +1,142 @@
+/* 문의 목록 페이지 스타일 */
+.enquiry-list-container {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+.enquiry-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.enquiry-list-header h2 {
+    color: #FFA500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 22px;
+}
+
+.new-enquiry-btn {
+    padding: 10px 15px;
+    background-color: #FFA500;
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+.new-enquiry-btn:hover {
+    background-color: #FF8C00;
+}
+
+.enquiry-list-table {
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.enquiry-list-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.enquiry-list-table th {
+    background-color: #FFF9C4;
+    padding: 15px;
+    text-align: left;
+    font-weight: 600;
+    color: #555;
+}
+
+.enquiry-list-table td {
+    padding: 15px;
+    border-bottom: 1px solid #f0f0f0;
+    cursor: pointer;
+}
+
+.enquiry-list-table tr:last-child td {
+    border-bottom: none;
+}
+
+.enquiry-list-table tr:hover {
+    background-color: #FFF9E6;
+}
+
+.title-cell {
+    color: #333;
+    font-weight: 500;
+    max-width: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* 상태 뱃지 */
+.status-badge {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.status-badge.completed {
+    background-color: #E8F5E9;
+    color: #2E7D32;
+}
+
+.status-badge.in-progress {
+    background-color: #E3F2FD;
+    color: #1565C0;
+}
+
+.status-badge.pending {
+    background-color: #FFF3E0;
+    color: #E65100;
+}
+
+/* 페이지네이션 */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    gap: 5px;
+}
+
+.page-btn {
+    width: 36px;
+    height: 36px;
+    border: 1px solid #ddd;
+    background: white;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+}
+
+.page-btn:hover:not(:disabled) {
+    border-color: #FFA500;
+    color: #FFA500;
+}
+
+.page-btn.active {
+    background-color: #FFA500;
+    color: white;
+    border-color: #FFA500;
+}
+
+.page-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
