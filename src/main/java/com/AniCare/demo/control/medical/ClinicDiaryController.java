@@ -89,7 +89,14 @@ public class ClinicDiaryController {
 
     // 진료수첩 작성 요청
     @PostMapping("uploadClinicDiary")
-    public String clinicDiarySave(Model model, @Valid ClinicDiarySetDto clinicDiarySetDto, BindingResult bindingResult, @RequestParam("boardFile") List<MultipartFile> multipartFileList, Principal principal) {
+    public String clinicDiarySave(Model model, @Valid ClinicDiarySetDto clinicDiarySetDto,
+                                  BindingResult bindingResult,
+                                  Principal principal) {
+
+        // 헤더에 사용자 정보 띄우기??
+        if (principal.getName() != null) {
+            model.addAttribute("userDetailDto", userService.getUserDetail(principal.getName()));
+        }
 
         if (bindingResult.hasErrors()) {
             return "medical/newClinicDiary";
