@@ -14,6 +14,9 @@ public class VetLoginDto {
     public VetLoginDto from (VetInfo vetInfo){
         VetLoginDto vetLoginDto = new VetLoginDto();
 
+        vetLoginDto.setVetId(vetInfo.getVetId());
+        vetLoginDto.setVetPassword(vetInfo.getVetPassword());
+
         return vetLoginDto;
     }
 }

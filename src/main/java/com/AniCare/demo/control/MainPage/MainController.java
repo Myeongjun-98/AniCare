@@ -58,4 +58,5 @@ public class MainController {
         return "community/board/commain";
     }
 
+
 }
