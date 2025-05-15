@@ -152,7 +152,7 @@ public class CommunityController {
         return "/community/board/boardWrite";
     }
 
-    // ================ 커뮤니티 게시글 작성 요청 (오류메시지 미구현) ================
+    // ================ 커뮤니티 게시글 작성 요청 ================
     @PostMapping("/community/board/boardWrite/boardSave")
     public String boardSave(@Valid BoardForm boardForm,
                             BindingResult bindingResult,

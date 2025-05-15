@@ -152,9 +152,9 @@ public class BoardService {
         //게시글 카테고리 불러오기(심부름 구인글)
         if(boardDetailDto.getBoardType().name().equals("ERRAND"))
         { boardDetailDto.setCategory(errandBoardRepository
-                    .findByBoardId(boardId)
-                    .getErrandCategory()
-                    .toString()); }
+                .findByBoardId(boardId)
+                .getErrandCategory()
+                .toString()); }
 
 
         return boardDetailDto;
@@ -164,7 +164,7 @@ public class BoardService {
     // ================ 커뮤니티 - 게시글 업로드 ================
     public void boardSave(BoardForm boardForm,
                           List<MultipartFile> multipartFileList)
-        throws Exception{
+            throws Exception{
 
         //board타입 제목, 내용 저장
         Board board = boardForm.to();

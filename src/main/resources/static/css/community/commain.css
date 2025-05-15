@@ -1,0 +1,137 @@
+/* commain.css */
+
+@font-face {
+    font-family: 'yg-jalnan';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@import url('https://font.elice.io/css?family=Elice+DX+Neolli');
+
+/* 1. 전체 컨테이너 여백 & 폰트 설정 */
+#main {
+  font-family: 'yg-jalnan';
+  color: #333;
+  background-color: #fff;
+}
+
+/* 2. 배너 영역 */
+.banner {
+  position: relative;
+  width: 100%;
+  height: auto;               /* 원하면 조절 */
+  overflow: hidden;
+  margin-bottom: 40px;
+}
+.banner .mainCommunityBanner {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 3. 버튼 그룹 (모임 모집글 / 심부름 구인글) */
+.btn_field {
+  margin-bottom: 30px;
+}
+.btn-custom {
+  padding: 10px 30px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+  background-color: #ddd;     /* 필요 시 hover 색 바꾸기 */
+  transition: background-color .2s;
+}
+.btn-custom:hover {
+  background-color: #ccc;
+}
+
+/* 4. 검색 input */
+.input-group-text {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+.search-input {
+  width: 60%;
+  max-width: 500px;
+  padding: 12px 15px;
+  border: 2px solid #eee;
+  border-radius: 30px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color .2s;
+}
+.search-input:focus {
+  border-color: #ffa500;       /* 오렌지 계열 포커스 */
+}
+
+/* 5. 섹션 제목 */
+h2 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  color: #444;
+}
+
+/* 6. 인기글 카드 레이아웃 */
+.popular-meeting, .popular-errand {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  margin-bottom: 60px;
+}
+.mb-card, .eb-card {
+  background-color: #fff;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  transition: transform .2s, box-shadow .2s;
+}
+.mb-card:hover, .eb-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.mb-card-thumbnailFile, .eb-card-thumbnailFile {
+  width: 100%;
+  height: 160px;
+  overflow: hidden;
+}
+.board-card-thumbnailFile {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.mb-card-body, .eb-card-body {
+  padding: 15px;
+}
+.mb-card-boardType, .eb-card-boardType {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #ffa500;             /* 타입별 색 다르게? */
+}
+.mb-card-category, .eb-card-category {
+  font-size: 0.75rem;
+  color: #888;
+  margin-bottom: 8px;
+}
+.mb-card-boardName, .eb-card-boardName {
+  font-size: 1.1rem;
+  margin: 0 0 8px 0;
+  line-height: 1.3;
+}
+.mb-card-boardContent, .eb-card-boardContent {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+/* 7. 반응형 처리 (예시) */
+@media (max-width: 768px) {
+  .search-input { width: 90%; }
+  .btn-custom { font-size: 0.9rem; padding: 8px 20px; }
+  .popular-meeting, .popular-errand {
+    grid-template-columns: 1fr;
+  }
+}
