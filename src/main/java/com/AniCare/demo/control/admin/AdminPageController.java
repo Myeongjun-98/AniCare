@@ -1,15 +1,16 @@
 package com.AniCare.demo.control.admin;
 
 import com.AniCare.demo.constant.MainPage.Authorization;
-import com.AniCare.demo.dto.admin.*;
+import com.AniCare.demo.Dto.admin.*;
+import com.AniCare.demo.Dto.mainpage.UserDetailDto;
 import com.AniCare.demo.entity.medical.VetInfo;
 import com.AniCare.demo.repository.medical.VetRepository;
 import com.AniCare.demo.service.adminService.*;
+import com.AniCare.demo.service.mainpage.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import com.AniCare.demo.dto.admin.HospitalDto;
 
 import java.util.List;
 
@@ -23,6 +24,13 @@ public class AdminPageController {
     private final MasterAccountService masterAccountService;
     private final NoticeService noticeService;
     private final ReportListService reportListService;
+    private final UserService userService; // ✅ 로그인 사용자 정보 서비스
+
+    // ✅ 모든 요청에 공통으로 userDetailDto 모델에 추가
+    @ModelAttribute("userDetailDto")
+    public UserDetailDto userDetailDto() {
+        return userService.getLoginUserInfo();
+    }
 
     @GetMapping("/ad/hospital")
     public String hospitalPage(Model model) {
@@ -68,7 +76,6 @@ public class AdminPageController {
         return "ad/masterAd";
     }
 
-    // ✅ 사용자 권한 변경 기능 추가
     @PostMapping("/ad/masterAd/role/update")
     public String updateUserRole(@RequestParam Long id,
                                  @RequestParam Authorization role) {
@@ -110,12 +117,14 @@ public class AdminPageController {
     public String formPage() {
         return "ad/form";
     }
+
     @GetMapping("/ad/hospital/edit/{id}")
     public String editForm(@PathVariable Long id, Model model) {
         HospitalDto hospitalDto = hospitalService.findById(id);
         model.addAttribute("hospitalDto", hospitalDto);
-        return "ad/hospitalEdit"; // 이 템플릿 파일도 있어야 함
+        return "ad/hospitalEdit";
     }
+
     @PostMapping("/ad/hospital/delete/{id}")
     public String deleteHospital(@PathVariable Long id) {
         hospitalService.delete(id);
@@ -127,7 +136,6 @@ public class AdminPageController {
         hospitalService.update(dto);
         return "redirect:/ad/hospitalList";
     }
-
 
     @GetMapping("/ad/reportList")
     public String reportListPage(Model model) {

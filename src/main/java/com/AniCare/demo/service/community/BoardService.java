@@ -1,16 +1,12 @@
 package com.AniCare.demo.service.community;
 
-import com.AniCare.demo.dto.community.*;
-import com.AniCare.demo.dto.community.*;
+import com.AniCare.demo.Dto.community.*;
 import com.AniCare.demo.entity.community.*;
 import com.AniCare.demo.repository.community.*;
-import com.AniCare.demo.dto.community.*;
 import com.AniCare.demo.constant.community.ErrandCategory;
 import com.AniCare.demo.constant.community.MeetingCategory;
 import com.AniCare.demo.entity.MainPage.User;
-import com.AniCare.demo.entity.community.*;
 import com.AniCare.demo.repository.MainPage.UserRepository;
-import com.AniCare.demo.repository.community.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;

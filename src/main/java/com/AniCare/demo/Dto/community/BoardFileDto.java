@@ -1,5 +1,4 @@
-package com.AniCare.demo.dto.community;
-import com.AniCare.demo.dto.community.BoardFileDto;
+package com.AniCare.demo.Dto.community;
 
 import com.AniCare.demo.entity.community.BoardFile;
 import lombok.Getter;
@@ -18,7 +17,7 @@ public class BoardFileDto {
 
     public static ModelMapper modelMapper = new ModelMapper();
 
-    //entity -> dto
+    //entity -> Dto
     public static BoardFileDto from (BoardFile boardFile){
         return modelMapper.map(boardFile, BoardFileDto.class);
     }

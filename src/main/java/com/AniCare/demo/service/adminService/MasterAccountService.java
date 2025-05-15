@@ -1,7 +1,7 @@
 package com.AniCare.demo.service.adminService;
 
 import com.AniCare.demo.constant.MainPage.Authorization;
-import com.AniCare.demo.dto.admin.MasterAccountDto;
+import com.AniCare.demo.Dto.admin.MasterAccountDto;
 import com.AniCare.demo.entity.MainPage.User;
 import com.AniCare.demo.repository.MainPage.UserRepository;
 import com.AniCare.demo.repository.admin.MasterAccountRepository;

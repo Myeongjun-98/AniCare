@@ -1,5 +1,4 @@
-package com.AniCare.demo.dto.admin;
-import com.AniCare.demo.dto.admin.EnquiryReplyViewDto;
+package com.AniCare.demo.Dto.admin;
 import com.AniCare.demo.entity.MainPage.Enquiry;
 import com.AniCare.demo.entity.admin.EnquiryReply;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package com.AniCare.demo.dto.admin;
+package com.AniCare.demo.Dto.admin;
 
 import com.AniCare.demo.constant.MainPage.Authorization;
 import com.AniCare.demo.entity.MainPage.User;
@@ -7,7 +7,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
 @Getter
 @Setter
 @NoArgsConstructor

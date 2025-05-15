@@ -1,7 +1,7 @@
 package com.AniCare.demo.service.adminService;
 
 import com.AniCare.demo.constant.admin.ClinicType;
-import com.AniCare.demo.dto.admin.HospitalDto;
+import com.AniCare.demo.Dto.admin.HospitalDto;
 import com.AniCare.demo.entity.admin.Hospital;
 import com.AniCare.demo.entity.medical.VetInfo;
 import com.AniCare.demo.repository.admin.HospitalRepository;

@@ -1,6 +1,6 @@
 package com.AniCare.demo.entity.admin;
 
-import com.AniCare.demo.dto.admin.EnquiryReplyDto;
+import com.AniCare.demo.Dto.admin.EnquiryReplyDto;
 import com.AniCare.demo.entity.MainPage.Enquiry;
 import jakarta.persistence.*;
 import jakarta.persistence.Entity;

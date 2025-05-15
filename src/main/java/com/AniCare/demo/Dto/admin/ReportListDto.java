@@ -1,5 +1,4 @@
-package com.AniCare.demo.dto.admin;
-import com.AniCare.demo.dto.admin.ReportListDto;
+package com.AniCare.demo.Dto.admin;
 
 import com.AniCare.demo.entity.MainPage.Report;
 import lombok.Getter;

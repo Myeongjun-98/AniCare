@@ -1,6 +1,6 @@
 package com.AniCare.demo.service.adminService;
 
-import com.AniCare.demo.dto.admin.ReportListDto;
+import com.AniCare.demo.Dto.admin.ReportListDto;
 import com.AniCare.demo.repository.admin.ReportListRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

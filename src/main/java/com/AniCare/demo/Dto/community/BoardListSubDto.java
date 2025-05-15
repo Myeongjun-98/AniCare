@@ -1,5 +1,4 @@
-package com.AniCare.demo.dto.community;
-import com.AniCare.demo.dto.community.BoardListMainDto;
+package com.AniCare.demo.Dto.community;
 import com.AniCare.demo.constant.community.BoardType;
 import com.AniCare.demo.entity.community.Board;
 import lombok.Getter;
@@ -19,7 +18,7 @@ public class BoardListSubDto {
     private String Category; //게시글 카테고리
 
 
-    //entity -> dto
+    //entity -> Dto
 public static BoardListSubDto to(Board board, int likeCount){
     BoardListSubDto boardListSubDto = new BoardListSubDto();
 

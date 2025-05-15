@@ -1,5 +1,4 @@
-package com.AniCare.demo.dto.community;
-import com.AniCare.demo.dto.community.BoardDetailDto;
+package com.AniCare.demo.Dto.community;
 import com.AniCare.demo.constant.community.BoardType;
 import com.AniCare.demo.entity.community.Board;
 import lombok.Getter;
@@ -32,7 +31,7 @@ public class BoardDetailDto {
 
     public static ModelMapper modelMapper = new ModelMapper();
 
-    //entity -> dto
+    //entity -> Dto
     public static BoardDetailDto of(Board board, List<CommentViewDto> commentList,
                                     List<BoardFileDto> boardFileDtos){
         BoardDetailDto boardDetailDto = modelMapper.map(board, BoardDetailDto.class);
