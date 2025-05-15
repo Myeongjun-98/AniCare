@@ -28,7 +28,7 @@ public class CommunityController {
     private CommentService commentService;
 
 
-    // =================== 메인페이지 헤더 매핑 =================
+
 
 
 

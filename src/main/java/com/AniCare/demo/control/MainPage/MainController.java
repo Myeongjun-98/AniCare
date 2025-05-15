@@ -38,7 +38,7 @@ public class MainController {
         // 메인페이지에 커뮤니티 정보글 띄우기
         model.addAttribute("communityList", boardService.getAllboardList());
 
-        if (principal.getName() != null) {
+        if (principal != null) {
 
 
             // 마이페이지에 사용자 정보 띄우기
@@ -53,7 +53,7 @@ public class MainController {
 
 
     // 메인헤더 커뮤니티 매핑
-    @GetMapping("communitymain")
+    @GetMapping("/communitymain")
     public String showCommunityMainPage(){
         return "community/board/commain";
     }

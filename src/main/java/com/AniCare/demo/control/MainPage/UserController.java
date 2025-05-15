@@ -89,11 +89,11 @@ public class UserController {
 
     }
 
-    @GetMapping("/ad")
-    public String adminMain(Principal principal, Model model){
-
-    return null;
-    }
+//    @GetMapping("/ad")
+//    public String adminMain(Principal principal, Model model){
+//
+//    return null;
+//    }
 
 
 

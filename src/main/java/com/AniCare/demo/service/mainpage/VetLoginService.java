@@ -8,7 +8,8 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class VetLoginService {
     private final VetLoginRepository vetLoginRepository;
-    // 수의사 로그인
+
+
 
 
 
