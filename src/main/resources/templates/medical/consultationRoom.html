@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko"
+      layout:decorate="~{fragment/default}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <th:block layout:fragment="css"></th:block>
+    <th:block layout:fragment="script"></th:block>
+</head>
+<div id="main" layout:fragment="main">
+
+    <div>   <!-- 전체 컨테이너 -->
+        <div>   <!-- 채팅방 정보 -->
+            <h3 th:text="|${roomInfo.userName}의 상담 페이지|"></h3>
+            <p th:text="|담당 수의사 : ${roomInfo.vetName}|"></p>
+            <p th:text="|환자 : ${roomInfo.petName}|"></p>
+        </div>  <!-- 채팅방 정보 -->
+
+        <div>   <!-- 채팅방 영역 -->
+            <div th:each="m : ${history}">
+                <p>
+                    <span th:text="${history.senderName}"></span>
+                    <span th:text="${history.content}"></span>
+                    <small th:text="${#temporals.format(history.sendAt, 'HH:mm')}"></small>
+                </p>
+            </div>
+        </div>
+
+        <form method="post" th:action="@{/medical/consultationRoom/{roomId}/send(roomId=${roomId})}">
+            <input autocomplete="off" name="content" placeholder="메시지를 입력하세요" type="text"/>
+            <button type="submit">전송</button>
+        </form>
+
+
+    </div>  <!-- 전체 컨테이너 끝 -->
+
+</div>
+
+</html>

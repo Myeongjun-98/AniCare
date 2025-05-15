@@ -12,7 +12,7 @@ public class WebMbvConfig implements WebMvcConfigurer {
     String uploadPath;
 
     @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry){
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/anicareFile/**")
                 .addResourceLocations(uploadPath);
     }

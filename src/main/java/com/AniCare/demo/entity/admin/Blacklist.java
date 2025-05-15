@@ -4,6 +4,7 @@ import com.AniCare.demo.entity.MainPage.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
 import java.time.LocalDate;
 
 @Entity
@@ -16,7 +17,7 @@ public class Blacklist {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name="user_id")
+    @JoinColumn(name = "user_id")
     private User user;
 
     @Column(nullable = false)
