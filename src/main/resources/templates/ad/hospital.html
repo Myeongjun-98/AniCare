@@ -60,11 +60,12 @@
             <input type="text" th:field="*{operating}" class="form-control">
         </div>
 
-        <!-- ✅ 진료유형 선택 (다중 체크박스) -->
+        <!-- ✅ 진료유형 선택 (다중 체크박스, 줄바꿈 자동 처리) -->
         <div class="mb-3">
             <label class="form-label">진료 유형</label>
-            <div th:each="type : ${T(com.AniCare.demo.constant.admin.ClinicType).values()}">
-                <div class="form-check">
+            <div class="d-flex flex-wrap gap-2">
+                <div class="form-check form-check-inline"
+                     th:each="type : ${T(com.AniCare.demo.constant.admin.ClinicType).values()}">
                     <input class="form-check-input" type="checkbox"
                            th:id="'type_' + ${type}"
                            th:name="clinicTypeList"
