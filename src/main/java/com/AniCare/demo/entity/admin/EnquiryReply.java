@@ -1,5 +1,6 @@
 package com.AniCare.demo.entity.admin;
 
+import com.AniCare.demo.Dto.admin.EnquiryReplyDto;
 import com.AniCare.demo.entity.MainPage.Enquiry;
 import jakarta.persistence.*;
 import jakarta.persistence.Entity;
@@ -13,6 +14,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 public class EnquiryReply {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "reply_id")
@@ -27,5 +29,18 @@ public class EnquiryReply {
     @Column(nullable = false)
     private LocalDate createDate;
 
+    private String status;
 
+
+
+    public EnquiryReplyDto to() {
+        EnquiryReplyDto dto = new EnquiryReplyDto();
+        if (enquiry != null) {
+            dto.setEnquiryId(enquiry.getId()); // enquiry가 null일 수도 있으니 체크
+        }
+        dto.setContent(content);
+        dto.setCreateDate(createDate);
+        dto.setStatus(status);
+        return dto;
+    }
 }

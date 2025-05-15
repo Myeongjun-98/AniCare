@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko"
+      layout:decorate="~{fragment/default}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block layout:fragment="css"></th:block>
+    <th:block layout:fragment="script"></th:block>
+</head>
+<div id="main" layout:fragment="main">
+    <div> <!-- 수의사 상세정보 표시영역 -->
+        <div th:style="${vetSelect.profileImage}">프로필이미지</div>
+        <p th:text="${'수의사명 : ' + vetSelect.vetName}"></p>
+        <p th:text="${'병원명 : ' + vetSelect.hospitalName}"></p>
+        <p th:text="${'치료 가능 : ' + vetSelect.curingCapable}"></p>
+        <p th:text="${'출근시간 : ' + vetSelect.onWorkTime}"></p>
+        <p th:text="${'퇴근시간 : ' + vetSelect.offWorkTime}"></p>
+        <p th:text="${'평점 : ' + vetSelect.averageRating}"></p>
+    </div>
+
+    <div> <!-- 버튼(링크) 영역 -->
+        <form method="post" th:action="@{/medical/consultation}">
+            <input name="vetInfoId" th:value="${vetSelect.vetInfoId}" type="hidden">
+            <input name="checkupId" th:value="${checkupId}" type="hidden">
+            <button type="submit">1:1 상담하기</button>
+
+        </form>
+        <button>상담 예약하기</button>
+    </div>
+</div>
+
+</html>

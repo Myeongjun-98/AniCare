@@ -13,13 +13,13 @@ public class Allergy {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "allergy_id")
-    private Long id;
+    private Long id;    // 알러지테이블 고유번호(아이디)
 
     @Column(nullable = false)
-    private String allergyName;
+    private String allergyName; // 알러지 이름
 
     @ManyToOne
     @JoinColumn(name = "pet_id", nullable = false)
-    private Pet pet;
+    private Pet pet;    // 반려동물 정보
 
 }
