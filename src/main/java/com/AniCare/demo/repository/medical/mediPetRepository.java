@@ -7,5 +7,5 @@ import java.util.Optional;
 
 public interface mediPetRepository extends JpaRepository<Pet, Long> {
 
-    Optional<Pet> findByUserEmail(String userEmail);
+    Optional<Pet> findByUserUserEmail(String userEmail);
 }

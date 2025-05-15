@@ -1,7 +1,7 @@
 package com.AniCare.demo.service.adminService;
 
-import com.AniCare.demo.DTO.admin.NoticeDto;
-import com.AniCare.demo.DTO.admin.NoticeListDto;
+import com.AniCare.demo.Dto.admin.NoticeDto;
+import com.AniCare.demo.Dto.admin.NoticeListDto;
 import com.AniCare.demo.entity.admin.Notice;
 import com.AniCare.demo.repository.admin.NoticeRepository;
 import lombok.RequiredArgsConstructor;

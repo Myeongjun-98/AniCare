@@ -1,6 +1,6 @@
 package com.AniCare.demo.service.adminService;
 
-import com.AniCare.demo.DTO.admin.EnquiryReplyViewDto;
+import com.AniCare.demo.Dto.admin.EnquiryReplyViewDto;
 import com.AniCare.demo.entity.MainPage.Enquiry;
 import com.AniCare.demo.entity.admin.EnquiryReply;
 import com.AniCare.demo.repository.MainPage.EnquiryRepository;

@@ -12,7 +12,7 @@
             <form enctype="multipart/form-data"
                   method="post"
                   th:action="@{/medical/uploadClinicDiary}"
-                  th:object="${ClinicDiarySetDto}">
+                  th:object="${clinicDiarySetDto}">
 
                 <input th:name="${_csrf.parameterName}" th:value="${_csrf.token}" type="hidden">
 
@@ -52,9 +52,9 @@
                     <!-- 임시 첨부파일 input -->
                     <div class="mb-3" th:each="num : ${#numbers.sequence(1,5)}">
                         <label class="form-label" th:for="${'files' + num}" th:text="파일+${num}">첨부파일</label>
-                        <input class="form-control" th:field="*{files}" th:id="${'files' + num}">
+                        <input type="file" class="form-control" th:field="*{files}" th:id="${'files' + num}">
                     </div>
-                    <!-- 임시 방편 첨부파일 input ???-->
+                    <!-- 임시 첨부파일 input-->
                     <textarea th:field="*{boardContent}"></textarea>
                 </div>
 

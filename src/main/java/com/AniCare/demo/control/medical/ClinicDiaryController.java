@@ -3,6 +3,7 @@ package com.AniCare.demo.control.medical;
 import com.AniCare.demo.Dto.medical.ClinicDiaryListDto;
 import com.AniCare.demo.Dto.medical.ClinicDiaryPetInfoDto;
 import com.AniCare.demo.Dto.medical.ClinicDiarySetDto;
+import com.AniCare.demo.service.mainpage.UserService;
 import com.AniCare.demo.service.medical.ClinicDiaryService;
 import com.AniCare.demo.service.medical.MedicalService;
 import jakarta.validation.Valid;
@@ -24,12 +25,19 @@ public class ClinicDiaryController {
 
     private final MedicalService medicalService;
     private final ClinicDiaryService clinicDiaryService;
+    private final UserService userService;
 
     // 진료수첩 페이지(특정 반려동물의 메인 진료수첩 페이지)
     @GetMapping("/clinicdiary")
     public String clinicDiaryPage(Principal principal,
                                   Model model,
                                   @RequestParam(name = "page", defaultValue = "0") int page) {
+
+        // 헤더에 사용자 정보 띄우기
+        if (principal.getName() != null) {
+            model.addAttribute("userDetailDto", userService.getUserDetail(principal.getName()));
+        }
+
         String userEmail = principal.getName();
 
         //  로그인정보에서 유저 -> default(대표동물) 아이디로 pet정보 불러오기
@@ -52,7 +60,12 @@ public class ClinicDiaryController {
 
     // 진료수첩 상세페이지
     @GetMapping("clinicdiary/{clinicDiaryId}")
-    public String viewClinicDiary(@PathVariable Long clinicDiaryId, Model model) {
+    public String viewClinicDiary(@PathVariable Long clinicDiaryId, Model model, Principal principal) {
+
+        // 헤더에 사용자 정보 띄우기
+        if (principal.getName() != null) {
+            model.addAttribute("userDetailDto", userService.getUserDetail(principal.getName()));
+        }
 
         model.addAttribute("clinicDiaryDto", clinicDiaryService.viewClinicDiaryDetail(clinicDiaryId));
 
@@ -61,10 +74,16 @@ public class ClinicDiaryController {
 
     // 진료수첩 작성페이지
     @GetMapping("clinicdiary/new")
-    public String clinicDiarySavingPage(Model model) {
+    public String clinicDiarySavingPage(Model model, Principal principal) {
+
+        // 헤더에 사용자 정보 띄우기
+        if (principal.getName() != null) {
+            model.addAttribute("userDetailDto", userService.getUserDetail(principal.getName()));
+        }
+
         ClinicDiarySetDto dto = new ClinicDiarySetDto();
 
-        model.addAttribute("clinicDiaryDto", dto);
+        model.addAttribute("clinicDiarySetDto", dto);
         return "medical/newClinicDiary";
     }
 

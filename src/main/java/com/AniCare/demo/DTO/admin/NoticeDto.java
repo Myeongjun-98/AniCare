@@ -1,4 +1,4 @@
-package com.AniCare.demo.DTO.admin;
+package com.AniCare.demo.Dto.admin;
 
 import com.AniCare.demo.constant.admin.NoticeCategory;
 import lombok.AllArgsConstructor;

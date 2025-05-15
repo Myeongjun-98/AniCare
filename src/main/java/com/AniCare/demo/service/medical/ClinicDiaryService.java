@@ -49,7 +49,7 @@ public class ClinicDiaryService {
 
     // (임시) 로그인 유저 id로 반려동물 한 마리만 불러오기
     public Pet getOnePet(String userEmail) {
-        return mediPetRepository.findByUserEmail(userEmail).stream().findFirst().orElseThrow(() -> new IllegalStateException("등록된 반려동물이 없습니다."));
+        return mediPetRepository.findByUserUserEmail(userEmail).stream().findFirst().orElseThrow(() -> new IllegalStateException("등록된 반려동물이 없습니다."));
     }
 
     // ----동물의 id로 질병/알러지 정보 불러오기

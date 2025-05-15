@@ -1,6 +1,6 @@
 package com.AniCare.demo.control.admin;
 
-import com.AniCare.demo.DTO.admin.*;
+import com.AniCare.demo.Dto.admin.*;
 import com.AniCare.demo.service.adminService.EnquiryService;
 import com.AniCare.demo.service.adminService.HospitalService;
 import com.AniCare.demo.service.adminService.MasterAccountService;
