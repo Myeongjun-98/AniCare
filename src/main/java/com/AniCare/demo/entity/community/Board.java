@@ -20,13 +20,13 @@ public class Board { //게시글 정보를 저장하는 Entity
     @Column(nullable = false)
     private String boardTitle; //게시글 제목
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user; //작성자 아이디
 
     @Column(nullable = false, length = 500)
     private String boardContent; //게시글 내용
-
+    private String boardImg;
     private int boardHit=0; //게시글 조회수
 
     private LocalDate boardWriteDate; //게시글 작성일

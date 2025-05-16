@@ -19,7 +19,7 @@ public class BoardFile { //게시글에 첨부되는 첨부파일을 저장하�
     private String fileUrl; //파일 경로
     private String thumbnailYn; //썸네일 여부
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "board_id")
     private Board board; //게시글 아이디 Join
 

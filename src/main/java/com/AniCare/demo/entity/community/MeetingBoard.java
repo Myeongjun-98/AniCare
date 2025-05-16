@@ -14,7 +14,7 @@ public class MeetingBoard {
     @Column(name = "meeting_id")
     private Long id; //모임 모집글 id
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "board_id")
     private Board board; //게시글 id
 

@@ -16,11 +16,11 @@ public class Comment { //덧글 정보를 저장하는 Entity
     @Column(name = "comment_id")
     private Long id; //덧글 아이기
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "board_id")
     private Board board; //게시글 아이디
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user; //유저 아이디
 

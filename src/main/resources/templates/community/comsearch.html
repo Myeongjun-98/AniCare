@@ -4,43 +4,61 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{fragment/default}">
 <head>
-  <th:block layout:fragment="css">
-    <style>
+  <th:block layout:fragment="css"></th:block>
+  <th:block layout:fragment="script">
+    <script th:inline="javascript">
+      const boardJsonStr = /*[[${boardsJson}]]*/ [];
+      const boards = JSON.parse(boardJsonStr);
 
-    </style>
+      console.log("▶ boards:", boards);
+
+    </script>
   </th:block>
-  <th:block layout:fragment="script"></th:block>
 </head>
 <div layout:fragment="main" id="main"> <!-- ▼ main ▼ -->
   <div class="search-result-wrap">
 
     <!-- ▼ 검색 input ▼ -->
-    <div class="input-group mb-3">
-      <div class="input-group-text">
-        <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
-      </div>
-      <input type="text" class="form-control" aria-label="Text input with checkbox">
-    </div> <!-- ▲ 검색 input 끝 ▲ -->
+    <form method="get" role="search" th:object="${boardSearchForm}"
+          th:action="@{/community/comsearch}">
+        <div class="input-group-text">
+          <input type="text" th:field="*{keyword}" class="search-input" placeholder="검색어를 입력해주세요.">
+
+          <input type="hidden" th:field="*{boardType}">
+          <input type="hidden" th:field="*{category}">
+        </div>
+    </form><!-- ▲ 검색 input 끝 ▲ -->
 
 
   <!-- ▼ 게시판 타입 ▼ -->
     <div class="boardType" style="display=flex; justify-content=center;">
-      <h2 class="TOTAL"> TOTAL </h2>
-      <h2 class="MEETING"> MEETING </h2>
-      <h2 class="ERRAND"> ERRAND </h2>
+      <a href="#" data-board-type="" class="boardType-link"> TOTAL </a>
+      <a href="#" data-board-type="MEETING" class="boardType-link"> MEETING </a>
+      <a href="#" data-board-type="ERRAND" class="boardType-link"> ERRAND </a>
     </div> <!-- ▲ 게시판 타입 끝 ▲ -->
 
 
     <!-- ▼ 게시판 카테고리 ▼ -->
-    <div class="boardCategory" style="display=flex; justify-content=center;">
-      <h4 class="total"> Total </h4>
-      <h4 class="total"> Category1 </h4>
-      <h4 class="total"> Category2 </h4>
-      <h4 class="total"> Category3 </h4>
+    <div class="boardCategory-wrap">
+
+      <!-- 모임 모집글 카테고리 -->
+      <div class="boardCategory" data-board-type="MEETING" style="display=none; justify-content:center;">
+        <a href="#" data-category="" class="category-link"> Total </a>
+        <a href="#" data-category="VOLUNTEER" class="category-link"> Volunteer </a>
+        <a href="#" data-category="WALKING" class="category-link"> Walking </a>
+        <a href="#" data-category="INFO" class="category-link"> Info </a>
+      </div>
+
+      <!-- 심부름 구인글 카테고리 -->
+      <div class="boardCategory" data-board-type="ERRAND" style="display=none; justify-content:center;">
+        <a href="#" data-category="" class="category-link"> Total </a>
+        <a href="#" data-category="WALKING" class="category-link"> Walking </a>
+        <a href="#" data-category="PETSITTER" class="category-link"> Petsitter </a>
+        <a href="#" data-category="ERRANDING" class="category-link"> Erranding </a>
+      </div>
     </div> <!-- ▲ 게시판 카테고리 끝 ▲ -->
 
-
-  <p>"keyword"에 대한 검색 결과</p>
+    <p th:text="|${boardSearchForm.keyword}에 대한 검색 결과:|"></p>
 
   <div class="orderBtn">
     <p style="display: inline;">인기순</p>
@@ -49,15 +67,99 @@
   </div>
 
     <!-- ▼ 검색결과 게시글 리스트 ▼ -->
- <div th:each="board : ${boardListSubDtos}" class="result-list-wrap">
-   <div th:unless="${board.boardType.name() == 'CLINICDIARY'}" class="result-list">
-     <p th:text="${board.boardTitle}"></p> <!-- 게시글 제목 -->
-     <p th:text="${board.boardWriteDate}"></p> <!-- 게시글 작성일 -->
-    <p th:text="${board.likeCount}"></p> <!-- 게시글 좋아요 수 -->
-   </div>
+ <div class="result-list-wrap" id="boardListWrap">
+<!--   <div class="result-list">-->
+<!--     <p th:text="${board.boardTitle}"></p> &lt;!&ndash; 게시글 제목 &ndash;&gt;-->
+<!--     <p th:text="${board.boardWriteDate}"></p> &lt;!&ndash; 게시글 작성일 &ndash;&gt;-->
+<!--    <p th:text="${board.likeCount}"></p> &lt;!&ndash; 게시글 좋아요 수 &ndash;&gt;-->
+<!--   </div>-->
   </div> <!-- ▲ 검색결과 게시글 리스트 끝 ▲ -->
 
+    <script th:inline="javascript">
+      let selectedBoardType = ""; //게시판 타입(""(TOTAL), MEETING, ERRAND)
+      let selectedCategory = ""; //게시판 카테고리(""(Total), Volunteer, Walking, Info, Walking, Petsitter, Erranding)
 
+      //게시판 타입에 따라 카테고리 그룹 토글
+      function categoryDisplay() {
+        document.querySelectorAll(".boardCategory").forEach(group => {
+          const type = group.dataset.boardType;
+
+          //게시판 타입이 TOTAL(빈 문자열)이거나 타입이 선택되지 않을 때엔 모두 숨김.
+          if(!selectedBoardType) {
+            group.style.display = "none";
+          }
+          //선택된 타입과 같으면 display:flex, 아니면 none;
+          else {
+            group.style.display = (type === selectedBoardType ? "flex" : "none");
+          }
+        });
+      }
+
+
+      //게시글 리스트 렌더링 (썸네일 + 정보)
+      function render(list) {
+        const boardListWrap = document.getElementById("boardListWrap");
+        boardListWrap.innerHTML = "";
+        list.forEach(p => {
+          const el = document.createElement("div");
+          el.classList.add("result-list");
+
+          el.innerHTML = `
+             <a href="/community/board/boardDetail/${p.id}">
+                <div class="post-thumbnail">
+                  <img src="${p.fileUrl || '/anicareFile/default-thumbnail.jpg'}" alt="썸네일"
+                  style="width: 200px; height: 200px; object-fit: cover; border-radius:10px;">
+                </div>
+                <div class="post-info">
+                  <p>${p.boardTitle}</p>
+                  <p>${p.boardWriteDate}</p>
+                  <p>❤ ${p.likeCount}</p>
+                </div>
+             </a>
+          `;
+
+          boardListWrap.appendChild(el);
+        });
+      }
+
+      //타입 + 카테고리 필터링
+      function filterBoards() {
+        console.log("filter:", selectedBoardType, selectedCategory);
+        const filtered = boards.filter(p => {
+
+          const matchType = !selectedBoardType || p.boardType === selectedBoardType;
+          const matchCategory = !selectedCategory || p.category === selectedCategory;
+
+          return matchType && matchCategory;
+        });
+        console.log("->", filtered.length, "items match");
+        render(filtered);
+      }
+
+      //이벤트 바인딩: 게시판 타입 클릭
+      document.querySelectorAll(".boardType-link").forEach(link => {
+        link.addEventListener("click", function(e) {
+          e.preventDefault();
+          selectedBoardType = link.dataset.boardType; //"" || MEETING || ERRAND
+          selectedCategory = ""; //타입을 누르면 카테고리는 초기화될 수 있도록!
+          categoryDisplay();
+          filterBoards();
+        });
+      });
+
+      //이벤트 바인딩: 카테고리 클릭
+      document.querySelectorAll(".category-link").forEach(link => {
+        link.addEventListener("click",function(e) {
+          e.preventDefault();
+          selectedCategory = link.dataset.category;
+          filterBoards();
+        });
+      });
+
+      //초기 렌더링
+      categoryDisplay();
+      render(boards);
+    </script>
 
   </div>
 </div> <!-- ▲ main 끝 ▲ -->

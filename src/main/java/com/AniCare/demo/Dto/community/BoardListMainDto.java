@@ -1,5 +1,4 @@
 package com.AniCare.demo.Dto.community;
-
 import com.AniCare.demo.constant.community.BoardType;
 import com.AniCare.demo.entity.community.Board;
 import lombok.Getter;
@@ -19,7 +18,7 @@ public class BoardListMainDto {
 
     private BoardType boardType; //게시글 타입
 
-    private String Category; //게시글 카테고리
+    private String category; //게시글 카테고리
 
     private String boardContent; //게시글 내용
 
@@ -36,7 +35,7 @@ public class BoardListMainDto {
     private Integer likeCount; //좋아요 수(정렬기준을 위함)
 
 
-    //entity -> dto
+    //entity -> Dto
     public static BoardListMainDto to(Board board) {
         BoardListMainDto boardListMainDto = new BoardListMainDto();
 
@@ -46,6 +45,7 @@ public class BoardListMainDto {
         boardListMainDto.setBoardContent(board.getBoardContent());
         boardListMainDto.setBoardWriteDate(board.getBoardWriteDate());
         boardListMainDto.setBoardHit(board.getBoardHit());
+        boardListMainDto.setLikeCount(board.getLikeCount());
 
 
         return boardListMainDto;

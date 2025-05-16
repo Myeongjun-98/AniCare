@@ -15,7 +15,7 @@ public class ErrandBoard { //심부름 구인글 게시판을 분류 및 저장�
     @Column(name = "errand_id")
     private Long id; //심부름 구인글 게시판 id
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "board_id")
     private Board board; //게시글 id
 

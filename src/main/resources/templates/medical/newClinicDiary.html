@@ -43,8 +43,6 @@
                                     th:value="${st}">상태
                             </option>
                         </select>
-                        <p class="fieldError" style="color:red;" th:errors="*{status}"
-                           th:if="${#fields.hasErrors('status')}"></p>
                     </div>
                 </div>
 
@@ -55,6 +53,19 @@
                         <input type="file" class="form-control" th:field="*{files}" th:id="${'files' + num}">
                     </div>
                     <!-- 임시 첨부파일 input-->
+                    <div class="form-group">
+                        <label for="hospital">병원 선택 (선택 사항)</label>
+                        <select id="hospital"
+                                th:field="*{hospitalId}"
+                                class="form-control">
+                            <!-- 빈 값 옵션: 값이 비어있으면 hospitalId는 null로 바인딩 -->
+                            <option th:value="null" th:text="'선택 안 함'"></option>
+                            <option th:each="h : ${hospitals}"
+                                    th:value="${h.id}"
+                                    th:text="${h.hospitalName}">
+                            </option>
+                        </select>
+                    </div>
                     <textarea th:field="*{boardContent}"></textarea>
                 </div>
 
