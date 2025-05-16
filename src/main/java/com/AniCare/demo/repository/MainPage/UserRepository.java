@@ -14,9 +14,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
     List<User> findByUserEmailAndUserPassword(String userEmail, String userPassword);
 
 
-
     // 회원정보 수정 및 마이페이지에 사용자 정보를 띄우기  위한 쿼리문
-    User findByUserId(Long userId);
+    Optional<User> findById(Long id);
 
 
     // 로그인용 메서드 (email 기준 조회)
