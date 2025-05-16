@@ -17,9 +17,16 @@
   <div class="banner">
     <img src="/image/community/mainbanner1.png" class="mainCommunityBanner"> <!-- 커뮤니티 메인배너 -->
   </div>
+  <div class="container">
+  <!-- ▼ 검색 input ▼ -->
+    <form method="get" role="search" th:object="${boardSearchForm}"
+        th:action="@{/community/comsearch}">
+      <div class="input-group-text">
+       <input type="text" th:field="*{keyword}" class="search-input" placeholder="검색어를 입력해주세요.">
+      </div>
+    </form><!-- ▲ 검색 input 끝 ▲ -->
 
   <!-- ▼ 버튼 ▼ -->
-    <div class="container">
       <div class="btn_field" style="display:flex; justify-content:center;">
         <a
             type="button"
@@ -34,22 +41,25 @@
       </div> <!-- ▲ 버튼 끝 ▲ -->
 
 
-  <!-- ▼ 검색 input ▼ -->
-    <form method="get" role="search" th:object="${boardSearchForm}"
-        th:action="@{/community/comsearch}">
-      <div class="input-group-text">
-        <input type="text" th:field="*{keyword}" class="search-input" placeholder="검색어를 입력해주세요.">
-      </div>
-    </form><!-- ▲ 검색 input 끝 ▲ -->
-
-
 <!-- ▼ 모임 모집글 인기글 ▼ -->
     <h2>모임 모집글 인기글</h2>
-    <br>
-    <div th:each="mboard : ${popMeeting}" class="popular-meeting">
-      <div class="mb-card">
 
-        <a> <!-- a태그 th에 게시글 상세보기 링크 걸어두기. "@{'/coms/comdetail/' + ${board.id}" -->
+        <div th:with="firstPost=${popMeeting[0]}">
+          <a th:href="@{'/community/board/boardDetail/' + ${firstPost.id}}">
+            <div
+            th:style="'background-image: url(' + ${firstPost.fileUrl} + '); background-size: cover; background-position: center;'">
+              <h2 th:text="${firstPost.boardTitle}"></h2> <!-- 모임 모집글 1st 게시글 제목 -->
+              <p th:text="${firstPost.category}"></p> <!-- 모임 모집글 1st 게시판 타입 -->
+            </div>
+          </a>
+        </div>
+
+
+    <br>
+    <div th:each="mboard, stat : ${popMeeting}" class="popular-meeting">
+      <div th:if="${stat.index > 0}" class="mb-card">
+
+        <a th:href="@{'/community/board/boardDetail/' + ${mboard.id}}">
           <!-- ▼ 리스트 이미지 ▼ -->
           <div class="mb-card-thumbnailFile">
             <img th:src="${mboard.fileUrl}" class="board-card-thumbnailFile" width="600" height="400" style="object-fit:cover;">
@@ -74,10 +84,21 @@
     <!-- ▼ 심부름 구인글 인기글 ▼ -->
     <br>
     <h2>심부름 구인글 인기글</h2>
+
+    <div th:with="firstPost=${popErrand[0]}">
+      <a th:href="@{'/community/board/boardDetail/' + ${firstPost.id}}">
+        <div
+                th:style="'background-image: url(' + ${firstPost.fileUrl} + '); background-size: cover; background-position: center;'">
+          <h2 th:text="${firstPost.boardTitle}"></h2> <!-- 모임 모집글 1st 게시글 제목 -->
+          <p th:text="${firstPost.category}"></p> <!-- 모임 모집글 1st 게시판 타입 -->
+        </div>
+      </a>
+    </div>
+
     <br>
-    <div th:each="eboard : ${popErrand}" class="popular-errand">
-      <div class="eb-card">
-        <a> <!-- a태그 th에 게시글 상세보기 링크 걸어두기. "@{'/coms/comdetail/' + ${board.id}" -->
+    <div th:each="eboard,stat : ${popErrand}" class="popular-errand">
+      <div th:if="${stat.index > 0}" class="eb-card">
+        <a th:href="@{'/community/board/boardDetail/' + ${eboard.id}}">
 
           <!-- ▼ 리스트 이미지 ▼ -->
           <div class="eb-card-thumbnailFile">

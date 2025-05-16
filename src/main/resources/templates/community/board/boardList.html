@@ -22,16 +22,16 @@
         <div th:if="${type == 'MEETING'}" class="category-box">
             <a class="category-all"
                th:href="@{/community/board/boardList(type=${type}, order=${order}, category='ALL')}">
-                ALL</a>
+                All</a>
             <a class="category-fst"
                th:href="@{/community/board/boardList(type=${type}, order=${order}, category='VOLUNTEER')}">
-                VOLUNTEER</a>
+                Volunteer</a>
             <a class="category-sec"
                th:href="@{/community/board/boardList(type=${type}, order=${order}, category='WALKING')}">
-                WALKING</a>
+                Walking</a>
             <a class="category-trd"
                th:href="@{/community/board/boardList(type=${type}, order=${order}, category='INFO')}">
-                INFO</a>
+                Info</a>
         </div>
 
         <div th:if="${type == 'ERRAND'}" class="category-box">
@@ -40,13 +40,13 @@
                 ALL</a>
             <a class="category-fst"
                th:href="@{/community/board/boardList(type=${type}, order=${order}, category='WALKING')}">
-                WALKING</a>
+                Walking</a>
             <a class="category-sec"
                th:href="@{/community/board/boardList(type=${type}, order=${order}, category='PETSITTER')}">
-                PETSITTER</a>
+                Petsitter</a>
             <a class="category-trd"
                th:href="@{/community/board/boardList(type=${type}, order=${order}, category='ERRANDING')}">
-                ERRANDING</a>
+                Erranding</a>
         </div>
 
     </div>
