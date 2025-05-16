@@ -4,7 +4,17 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{fragment/default}">
 <head>
-  <th:block layout:fragment="css"></th:block>
+  <th:block layout:fragment="css">
+    <style>
+      .likeButton:hover {
+        background-color:#e3b32d;
+      }
+
+      .likeButton:active {
+          background-color:#c27919;
+      }
+    </style>
+  </th:block>
   <th:block layout:fragment="script"></th:block>
 </head>
 <div layout:fragment="main" id="main"> <!-- ▼ main ▼ -->
@@ -34,11 +44,15 @@
     <p class="board-detail-userAddress" th:text="${board.userAddress}"></p>
 
 
+    <!-- 좋아요 버튼 / 덧글 수 표시 -->
     <div class="count-box">
       <div class="board-detail-likeCount-box">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
-          <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
-        </svg>
+        <button role="button" class="likeButton" type="button" data-board-id="[[${board.id}]]" data-liked="[[${liked}]]"
+          style="border:0px; border-radius:30px; pointer-events:none;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+            <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
+          </svg>
+        </button>
         <p class="board-detail-likeCount" th:text="${board.likeCount}"></p>
       </div>
       <div class="board-detail-commentCount-box">
@@ -52,16 +66,18 @@
   </div> <!-- ▲ 게시글 상세보기 끝 ▲ -->
 
   <!-- ▼ 덧글 작성 input ▼ -->
-  <form th:object="${commentForm}" method="get" action="/community/board/boardDetail/commentSave">
+  <form th:object="${commentForm}" method="post" action="/community/board/boardDetail/commentSave">
     <div class="comment-write">
       <div class="input-group mb-3">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
         <input type="hidden" th:field="*{boardId}">
         <input type="text"
              th:field="*{commentContent}" class="form-control" placeholder="덧글을 작성해주세요."
                aria-label="Recipient's username"
                aria-describedby="button-addon2">
         <button class="btn btn-outline-secondary" type="submit" id="button-addon2">작성</button>
-        <p th:if="${#fields.hasErrors('commentContent')}" th:errors="*{commentContent}" class="fieldError"></p>
+        <p th:if="${#fields.hasErrors('commentContent')}" th:errors="*{commentContent}"
+           style="color:red;" class="fieldError"></p>
       </div>
     </div>
   </form><!-- ▲ 덧글 작성 input 끝 ▲ -->

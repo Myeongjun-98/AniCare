@@ -18,7 +18,7 @@ public class BoardListMainDto {
 
     private BoardType boardType; //게시글 타입
 
-    private String Category; //게시글 카테고리
+    private String category; //게시글 카테고리
 
     private String boardContent; //게시글 내용
 
@@ -45,6 +45,7 @@ public class BoardListMainDto {
         boardListMainDto.setBoardContent(board.getBoardContent());
         boardListMainDto.setBoardWriteDate(board.getBoardWriteDate());
         boardListMainDto.setBoardHit(board.getBoardHit());
+        boardListMainDto.setLikeCount(board.getLikeCount());
 
 
         return boardListMainDto;

@@ -33,6 +33,7 @@
 
       });
 
+
       categorySelect.value = "";
 
       });
@@ -49,22 +50,24 @@
           enctype="multipart/form-data"
           method="post">
 
-<!--    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />-->
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 
   <div  class="board-write">
     <div class="board-select-wrap">
       <div class="board-boardType">
-        <select th:field="*{boardType}" class="form-select" aria-label="Default select example" id="boardType">
+        <select th:field="*{boardType}" class="form-select" id="boardType">
           <!-- selected는 나중에 선택 후 submit 시 오류 뜨게해야함 -->
           <option value="" selected>게시판 타입을 선택해주세요.</option>
           <option value="MEETING">모임 모집글</option>
           <option value="ERRAND">심부름 구인글</option>
         </select>
+        <p th:if="${#fields.hasErrors('boardType')}" th:errors="*{boardType}"
+           style="color:red;" class="fieldError"></p>
       </div>
 
-      <!-- 모임 모집글 소카테고리 -->
+      <!-- 소카테고리 -->
       <div class="board-boardCategory">
-        <select th:field="*{category}" class="form-select" aria-label="Default select example" id="category">
+        <select th:field="*{category}" class="form-select" id="category">
           <!-- selected는 나중에 선택 후 submit 시 오류 뜨게해야함 -->
           <option value="" selected>게시판 카테고리를 선택해주세요.</option>
           <option value="VOLUNTEER" data-type="MEETING">봉사활동</option>
@@ -75,6 +78,8 @@
           <option value="PETSITTER" data-type="ERRAND">펫시터</option>
           <option value="ERRANDING" data-type="ERRAND">심부름</option>
         </select>
+        <p th:if="${#fields.hasErrors('category')}" th:errors="*{category}"
+           style="color:red;" class="fieldError"></p>
       </div>
 
     </div>
@@ -82,10 +87,15 @@
     <div class="mb-3">
       <label for="exampleFormControlInput1" class="form-label">글 제목</label>
       <input th:field="*{boardTitle}" type="text" class="form-control" id="exampleFormControlInput1" placeholder="boardTitle">
+      <p th:if="${#fields.hasErrors('boardTitle')}" th:errors="*{boardTitle}"
+         style="color:red;" class="fieldError"></p>
     </div>
     <div class="mb-3">
       <label for="exampleFormControlTextarea1" class="form-label">작성 내용</label>
-      <textarea th:field="*{boardContent}" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+      <textarea th:field="*{boardContent}" class="form-control" id="exampleFormControlTextarea1" rows="3"
+                placeholder="내용을 입력하세요."></textarea>
+      <p th:if="${#fields.hasErrors('boardContent')}" th:errors="*{boardContent}"
+         style="color:red;" class="fieldError"></p>
     </div>
 
     <!-- 임시 첨부파일 input -->

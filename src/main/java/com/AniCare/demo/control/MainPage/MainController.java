@@ -52,10 +52,10 @@ public class MainController {
     }
 
 
-    // 메인헤더 커뮤니티 매핑
-    @GetMapping("communitymain")
-    public String showCommunityMainPage(){
-        return "community/board/commain";
-    }
+//    // 메인헤더 커뮤니티 매핑
+//    @GetMapping("communitymain")
+//    public String showCommunityMainPage(){
+//        return "community/board/commain";
+//    }
 
 }
