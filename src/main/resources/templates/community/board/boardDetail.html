@@ -5,7 +5,9 @@
       layout:decorate="~{fragment/default}">
 <head>
   <th:block layout:fragment="css">
+    <link rel="stylesheet" href="/css/community/boardDetail.css">
     <style>
+
       .likeButton:hover {
         background-color:#e3b32d;
       }
@@ -20,31 +22,61 @@
 <div layout:fragment="main" id="main"> <!-- ▼ main ▼ -->
 
   <div class="board-detail-wrap">  <!-- ▼ 게시글 상세보기 ▼ -->
+    <div class="board-detail-card">
 
     <!--  게시글 이미지 목록 보여주기  -->
-    <div th:each="file : ${board.boardFileDtos}">
-      <img th:if="${not #strings.isEmpty(file.fileUrl)}"
-           th:src="${file.fileUrl}"
-           class="boardFile"
-            width="700">
+    <div class="board-detail-image">
+
+      <!-- 이미지 1장일 때 -->
+      <div th:if="${board.boardFileDtos.size() == 1}" class="single-image">
+         <img th:src="${board.boardFileDtos[0].fileUrl}"
+            class="boardFile"
+              width="700">
+      </div>
+
+      <!-- 이미지가 2장 이상일 때 -->
+      <div th:if="${board.boardFileDtos.size() > 1}" id="carouselExample" class="carousel slide">
+        <div class="carousel-inner">
+          <div th:each="file, iterStat : ${board.boardFileDtos}"
+               th:class="'carousel-item' + ${iterStat.index == 0 ? ' active' : ''}">
+            <img th:src="${file.fileUrl}" class="d-block w-100" alt="...">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+
     </div>
 
     <!--  게시글 정보 상세보기  -->
-    <h3 class="board-detail-title" th:text="${board.boardTitle}"></h3>
-    <p class="board-detail-writeDate" th:text="${board.boardWriteDate}"></p>
-    <p class="board-detail-boardType" th:text="${board.boardType}"></p>
-    <p class="board-detail-category" th:text="${board.category}"></p>
-    <p class="board-detail-boardHit" th:text="${board.boardHit}"></p>
+    <div class="board-detail-card">
+      <h3 class="board-detail-title" th:text="${board.boardTitle}"></h3>
+      <p class="board-detail-writeDate" th:text="${board.boardWriteDate}"></p>
 
-    <br>
+      <div class="board-detail-subcard">
+        <p class="board-detail-boardType" th:text="${board.boardType}"></p>
+        <p class="board-detail-category" th:text="${board.category}"></p>
+        <p class="board-detail-boardHit" th:text="'조회수:' + ${board.boardHit}"></p>
+      </div>
 
-    <p class="board-detail-boardContent" th:text="${board.boardContent}"></p>
+      <br>
 
-    <h5 class="board-detail-userName" th:text="${board.userName}"></h5>
-    <p class="board-detail-userAddress" th:text="${board.userAddress}"></p>
+      <p class="board-detail-boardContent" th:text="${board.boardContent}"></p>
+
+        <div class="board-detail-userCard">
+          <p class="board-detail-userName" th:text="${board.userName}"></p>
+          <p class="board-detail-userAddress" th:text="${board.userAddress}"></p>
+        </div>
+      </div>
 
 
-    <!-- 좋아요 버튼 / 덧글 수 표시 -->
+      <!-- 좋아요 버튼 / 덧글 수 표시 -->
     <div class="count-box">
       <div class="board-detail-likeCount-box">
         <button role="button" class="likeButton" type="button" data-board-id="[[${board.id}]]" data-liked="[[${liked}]]"
@@ -62,7 +94,7 @@
         <p class="board-detail-commentCount" th:text="${board.commentCount}"></p>
       </div>
     </div>
-
+    </div>
   </div> <!-- ▲ 게시글 상세보기 끝 ▲ -->
 
   <!-- ▼ 덧글 작성 input ▼ -->
