@@ -44,7 +44,7 @@ public class VetInfo {
 
     private String profileImage;    // 수의사 프로필 이미지
 
-    @Column(nullable = false, columnDefinition = "VARCHAR(20) DEFAULT '퇴근'")
+    @Column(columnDefinition = "VARCHAR(20) DEFAULT '퇴근'")
     @Enumerated(EnumType.STRING)
     private OnWork workStatus;  // 수의사 근태근황
 
