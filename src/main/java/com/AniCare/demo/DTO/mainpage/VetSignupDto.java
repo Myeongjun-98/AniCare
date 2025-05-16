@@ -16,15 +16,5 @@ public class VetSignupDto {
     private LocalTime finTime; // 진료종료 시간
 
 
-    public VetInfo to (VetSignupDto vetSignupDto){
-        VetInfo vetInfo = new VetInfo();
 
-        vetInfo.setVetId(vetSignupDto.getVetId());
-        vetInfo.setVetPassword(vetSignupDto.getPassword());
-        vetInfo.setVetName(vetSignupDto.getVetName());
-        vetInfo.setOnWorkTime(vetSignupDto.getStartTime());
-        vetInfo.setOffWorkTime(vetSignupDto.getFinTime());
-
-        return vetInfo;
-    }
 }
