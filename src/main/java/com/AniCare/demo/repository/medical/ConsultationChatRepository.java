@@ -1,6 +1,5 @@
 package com.AniCare.demo.repository.medical;
 
-import com.AniCare.demo.Dto.medical.ConsultationChatListDto;
 import com.AniCare.demo.entity.medical.ConsultationChat;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

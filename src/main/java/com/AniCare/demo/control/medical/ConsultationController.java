@@ -1,12 +1,9 @@
 package com.AniCare.demo.control.medical;
 
-import com.AniCare.demo.Dto.medical.ConsultationChatListDto;
-import com.AniCare.demo.Dto.medical.UserConsultationListDto;
 import com.AniCare.demo.entity.medical.Consultation;
 import com.AniCare.demo.service.mainpage.UserService;
 import com.AniCare.demo.service.medical.MedicalService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
