@@ -1,6 +1,7 @@
 package com.AniCare.demo.control.medical;
 
 import com.AniCare.demo.Dto.medical.ClinicDiaryListDto;
+import com.AniCare.demo.Dto.medical.ClinicDiaryPetInfoDto;
 import com.AniCare.demo.Dto.medical.ClinicDiarySetDto;
 import com.AniCare.demo.service.mainpage.UserService;
 import com.AniCare.demo.service.medical.ClinicDiaryService;

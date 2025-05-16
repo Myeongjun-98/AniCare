@@ -2,6 +2,7 @@ package com.AniCare.demo.service.medical;
 
 import com.AniCare.demo.Dto.medical.ClinicDiaryDto;
 import com.AniCare.demo.Dto.medical.ClinicDiaryListDto;
+import com.AniCare.demo.Dto.medical.ClinicDiaryPetInfoDto;
 import com.AniCare.demo.Dto.medical.ClinicDiarySetDto;
 import com.AniCare.demo.entity.MainPage.Pet;
 import com.AniCare.demo.entity.community.Board;

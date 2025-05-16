@@ -1,6 +1,8 @@
 package com.AniCare.demo.service.medical;
 
 import com.AniCare.demo.Dto.medical.CheckupSetDto;
+import com.AniCare.demo.Dto.medical.ConsultationChatListDto;
+import com.AniCare.demo.Dto.medical.UserConsultationListDto;
 import com.AniCare.demo.entity.MainPage.Pet;
 import com.AniCare.demo.entity.MainPage.User;
 import com.AniCare.demo.entity.medical.*;

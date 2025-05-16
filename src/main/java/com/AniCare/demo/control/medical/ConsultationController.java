@@ -1,5 +1,7 @@
 package com.AniCare.demo.control.medical;
 
+import com.AniCare.demo.Dto.medical.ConsultationChatListDto;
+import com.AniCare.demo.Dto.medical.UserConsultationListDto;
 import com.AniCare.demo.entity.medical.Consultation;
 import com.AniCare.demo.service.mainpage.UserService;
 import com.AniCare.demo.service.medical.MedicalService;
