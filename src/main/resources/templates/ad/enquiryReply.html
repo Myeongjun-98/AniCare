@@ -1,113 +1,106 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragment/default}">
 <head>
-    <meta charset="UTF-8">
-    <title>문의 리스트</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="UTF-8"/>
+    <title>문의 응답</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
 </head>
-<body class="p-4">
 
-<!-- 공통 네비게이션 -->
-<nav class="mb-3">
-    <a href="/ad/reportList" class="btn btn-outline-primary">신고</a>
-    <a href="/ad/enquiryReply" class="btn btn-outline-primary">문의</a>
-    <a href="/ad/notice" class="btn btn-outline-primary">공지</a>
-    <a href="/ad/hospital" class="btn btn-outline-primary">병원등록</a>
-    <a href="/ad/masterAd" class="btn btn-outline-primary">계정관리</a>
-    <a href="/logout" class="btn btn-outline-danger">로그아웃</a>
-</nav>
+<body>
+<div layout:fragment="main" class="container p-4">
 
-<div class="container">
-    <h2>문의 리스트</h2>
+    <!-- ✅ 네비게이션 바 추가 -->
+    <nav class="mb-3">
+        <a href="/ad/reportList" class="btn btn-outline-primary">신고</a>
+        <a href="/ad/enquiryReply" class="btn btn-outline-primary">문의</a>
+        <a href="/ad/notice" class="btn btn-outline-primary">공지</a>
+        <a href="/ad/hospital" class="btn btn-outline-primary">병원등록</a>
+        <a href="/ad/masterAd" class="btn btn-outline-primary">계정관리</a>
+        <a href="/ad/hospitalList" class="btn btn-outline-primary">병원목록</a>
 
-    <!-- 리스트 개수 디버깅용 -->
-    <p th:text="'문의 개수: ' + ${#lists.size(enquiries)}">문의 개수: 0</p>
+    </nav>
 
-    <div class="row">
-        <!-- 문의 리스트 -->
-        <div class="col-md-4">
-            <div class="list-group" id="inquiryList">
-                <a href="#" class="list-group-item list-group-item-action" th:each="inq : ${enquiries}"
-                   th:data-id="${inq.id}" th:data-title="${inq.title}" th:data-userid="${inq.userId}"
-                   th:data-content="${inq.content}" th:data-status="${inq.status}" th:data-reply="${inq.reply}">
-                    <div>
-                        <strong th:text="${inq.title}">제목</strong><br/>
-                        <small class="text-muted" th:text="'ID: ' + ${inq.userId}">ID</small>
+    <h2 class="mb-4">문의 목록</h2>
+
+    <table class="table table-hover">
+        <thead class="table-light">
+        <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>날짜</th>
+            <th>상태</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="enquiry : ${enquiries}" data-bs-toggle="modal"
+            data-bs-target="#replyModal"
+            th:attr="data-id=${enquiry.enquiryId},
+                     data-title=${enquiry.enquiryTitle},
+                     data-content=${enquiry.enquiryContent},
+                     data-reply=${enquiry.reply},
+                     data-status=${enquiry.status}"
+            onclick="fillModal(this)">
+            <td th:text="${enquiry.enquiryId}">1</td>
+            <td th:text="${enquiry.enquiryTitle}">제목</td>
+            <td th:text="${enquiry.user}">사용자</td>
+            <td th:text="${enquiry.createDate}">2025-05-15</td>
+            <td>
+                <span th:if="${enquiry.status.name() == '미완료'}" class="badge text-bg-warning">미완료</span>
+                <span th:if="${enquiry.status.name() != '미완료'}" class="badge text-bg-success">완료</span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- 답변 모달 -->
+    <div class="modal fade" id="replyModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <form th:action="@{/ad/enquiryReply}" method="post">
+                    <input type="hidden" id="modalEnquiryId" name="id"/>
+                    <div class="modal-header">
+                        <h5 class="modal-title">문의 답변</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
-                    <span th:text="${inq.status}"
-                          th:classappend="${inq.status == '처리완료'} ? ' bg-success' : ' bg-warning text-dark'">
-                        상태
-                    </span>
-                </a>
-            </div>
-        </div>
+                    <div class="modal-body">
+                        <h6>문의 제목</h6>
+                        <p id="modalTitle"></p>
+                        <h6>문의 내용</h6>
+                        <p id="modalContent"></p>
 
-        <!-- 선택된 문의 상태 -->
-        <div class="col-md-8">
-            <div class="card" id="statusCard" style="display:none;">
-                <div class="card-header">선택된 문의 상태</div>
-                <div class="card-body">
-                    <p id="statusText" class="text-muted"></p>
-                </div>
+                        <div class="mb-3">
+                            <label for="replyText" class="form-label">답변 작성</label>
+                            <textarea id="replyText" name="reply" class="form-control" rows="4" required></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">답변 등록</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-</div>
 
-<!-- 문의 상세/답변 모달 -->
-<div class="modal fade" id="inquiryModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable">
-        <div class="modal-content">
-            <form th:action="@{/enquiryReply}" method="post">
-                <input type="hidden" id="inquiryId" name="id"/>
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalTitle"></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <p><strong>문의자 ID:</strong> <span id="modalUserId"></span></p>
-                    <p><strong>문의 내용:</strong></p>
-                    <p id="modalContent"></p>
-                    <div class="mb-3">
-                        <label for="replyText" class="form-label">관리자 답변</label>
-                        <textarea id="replyText" name="reply" class="form-control" rows="3"></textarea>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">완료</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-    const list = document.querySelectorAll('#inquiryList a');
-    const statusCard = document.getElementById('statusCard');
-    const statusText = document.getElementById('statusText');
-    const modal = new bootstrap.Modal(document.getElementById('inquiryModal'));
-    const modalTitle = document.getElementById('modalTitle');
-    const modalUserId = document.getElementById('modalUserId');
-    const modalContent = document.getElementById('modalContent');
-    const replyText = document.getElementById('replyText');
-    const inquiryIdInput = document.getElementById('inquiryId');
+    <!-- Bootstrap + Script -->
+    <script>
+        function fillModal(row) {
+            const id = row.getAttribute("data-id");
+            const title = row.getAttribute("data-title");
+            const content = row.getAttribute("data-content");
+            const reply = row.getAttribute("data-reply");
 
-    list.forEach(item => {
-        item.addEventListener('click', e => {
-            e.preventDefault();
-            const { id, title, userid, content, status, reply } = item.dataset;
-            modalTitle.textContent = title;
-            modalUserId.textContent = userid;
-            modalContent.textContent = content;
-            replyText.value = reply || '';
-            inquiryIdInput.value = id;
-            statusText.textContent = `문의 ID ${id} 상태: ${status}`;
-            statusCard.style.display = 'block';
-            modal.show();
-        });
-    });
-</script>
+            document.getElementById("modalEnquiryId").value = id;
+            document.getElementById("modalTitle").innerText = title;
+            document.getElementById("modalContent").innerText = content;
+            document.getElementById("replyText").value = reply || '';
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</div>
 </body>
 </html>
-

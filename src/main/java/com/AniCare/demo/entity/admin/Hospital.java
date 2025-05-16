@@ -6,6 +6,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Setter
 @Getter
 @Entity
@@ -23,15 +26,17 @@ public class Hospital {
 
     private String hospitalImage;
 
-    @OneToOne
-    @JoinColumn(name = "vet_info_id")
-    private VetInfo vetInfo;
+    @OneToMany(mappedBy = "hospital", fetch = FetchType.LAZY)
+    private List<VetInfo> vetInfos = new ArrayList<>();
 
     private String device;
     private String operating;
 
+    @ElementCollection(fetch = FetchType.LAZY)
+    @CollectionTable(name = "hospital_clinic_type", joinColumns = @JoinColumn(name = "hospital_id"))
     @Enumerated(EnumType.STRING)
-    private ClinicType clinicType;
+    @Column(name = "clinic_type")
+    private List<ClinicType> clinicTypes = new ArrayList<>();
 
     @Column(nullable = false)
     private String hospitalAddress;

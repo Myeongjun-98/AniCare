@@ -1,6 +1,7 @@
 package com.AniCare.demo.service.adminService;
 
 import com.AniCare.demo.Dto.admin.EnquiryReplyViewDto;
+import com.AniCare.demo.constant.MainPage.EnquiryStatus;
 import com.AniCare.demo.entity.MainPage.Enquiry;
 import com.AniCare.demo.entity.admin.EnquiryReply;
 import com.AniCare.demo.repository.MainPage.EnquiryRepository;
@@ -13,7 +14,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -30,40 +30,33 @@ public class EnquiryService {
         Enquiry enquiry = enquiryRepository.findById(enquiryId)
                 .orElseThrow(() -> new IllegalArgumentException("문의가 존재하지 않습니다: " + enquiryId));
 
-        enquiry.setStatus("처리완료");
-
-        // 이미 답변이 있는지 확인
         Optional<EnquiryReply> optionalReply = enquiryReplyRepository.findByEnquiry(enquiry);
 
-        EnquiryReply reply = optionalReply.orElseGet(EnquiryReply::new); // 없으면 새로 생성
+        EnquiryReply reply = optionalReply.orElseGet(EnquiryReply::new);
         reply.setEnquiry(enquiry);
         reply.setContent(replyContent);
         reply.setCreateDate(LocalDate.now());
+        reply.setEnquiryStatus(EnquiryStatus.완료); // 상태값 설정
 
         enquiryReplyRepository.save(reply);
     }
-
 
     /**
      * 문의 + 답변 리스트 조회
      */
     @Transactional(readOnly = true)
-
     public List<EnquiryReplyViewDto> findAll() {
-
         List<EnquiryReplyViewDto> enquiryReplyViewDtos = new ArrayList<>();
-
         List<Enquiry> enquiries = enquiryRepository.findAll();
 
-        for(Enquiry enquiry : enquiries){
-            EnquiryReply enquiryReply = enquiryReplyRepository.findByEnquiryId(enquiry.getId()).orElse( new EnquiryReply());
+        for (Enquiry enquiry : enquiries) {
+            EnquiryReply enquiryReply = enquiryReplyRepository.findByEnquiryId(enquiry.getId())
+                    .orElse(new EnquiryReply());
 
-            EnquiryReplyViewDto dto = EnquiryReplyViewDto.of(enquiryReply,enquiry);
+            EnquiryReplyViewDto dto = EnquiryReplyViewDto.of(enquiryReply, enquiry);
             enquiryReplyViewDtos.add(dto);
-
         }
 
         return enquiryReplyViewDtos;
     }
 }
-

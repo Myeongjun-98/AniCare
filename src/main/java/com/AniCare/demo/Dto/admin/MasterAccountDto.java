@@ -1,38 +1,28 @@
 package com.AniCare.demo.Dto.admin;
 
-import com.AniCare.demo.entity.admin.MasterAccount;
+import com.AniCare.demo.constant.MainPage.Authorization;
+import com.AniCare.demo.entity.MainPage.User;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import java.time.LocalDate;
-
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class MasterAccountDto {
+
     private Long id;
-    private String loginId;
     private String name;
-    private String role;
-    private LocalDate createDate;
+    private Authorization authorization;
 
-    public MasterAccountDto(Long id, String loginId, String name, String role, LocalDate createDate) {
-        this.id = id;
-        this.loginId = loginId;
-        this.name = name;
-        this.role = role;
-        this.createDate = createDate;
-    }
-
-    public Long getId() { return id; }
-    public String getLoginId() { return loginId; }
-    public String getName() { return name; }
-    public String getRole() { return role; }
-    public LocalDate getCreateDate() { return createDate; }
-
-    // ✅ 정적 팩토리 메서드 추가
-    public static MasterAccountDto fromEntity(MasterAccount account) {
+    // 정적 팩토리 메서드
+    public static MasterAccountDto fromEntity(User account) {
         return new MasterAccountDto(
-                account.getId(),
-                account.getLoginId(),
-                account.getName(),
-                account.getRole().name(),
-                account.getCreateDate()
+                account.getId(), // ✅ 주의: getUserId() → getId()
+                account.getUserName(),
+                account.getAuthorization()
         );
     }
 }
