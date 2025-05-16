@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko"
+      layout:decorate="~{fragment/vet/vetdefault}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block layout:fragment="css"></th:block>
+    <th:block layout:fragment="script"></th:block>
+</head>
+<div id="main" layout:fragment="main">
+    <div>   <!-- 수의사 정보, 수의사 소속 병원 -->
+        <div>   <!-- 수의사 정보 영역 -->
+            <div></div> <!-- 수의사 프로필이미지 -->
+
+            <div>   <!-- 인라인 정보 영역 -->
+
+                <p></p> <!-- 수의사 이름 -->
+                <p></p> <!-- 소속 병원 -->
+                <p></p> <!-- 진료 가능한 동물 종류 -->
+                <p></p> <!-- 비대면 근무 시간(출근) -->
+                <p></p> <!-- 비대면 근무 시간(퇴근) -->
+
+            </div>
+        </div>
+
+        <div>   <!-- 수의사 소속 병원 정보 -->
+
+            <div></div> <!-- 수의사 프로필이미지 -->
+
+            <div>   <!-- 인라인 정보 영역 -->
+
+                <p></p> <!-- 병원 이름 -->
+                <p></p> <!-- 병원 주소 -->
+                <p></p> <!-- 병원 연락처 -->
+                <p></p> <!-- 병원 운영시간(문자열) -->
+                <p></p> <!-- 진료가능 동물 -->
+
+            </div>
+
+        </div>
+
+        <div>   <!-- 근태 변경 -->
+            <button>근무중</button>
+            <button>휴식</button>
+            <button>퇴근</button>
+            <button>휴무</button>
+        </div>
+
+        <div>   <!-- 진료 대기 보이는 영역 -->
+            <div>
+                <a href=""></a>
+            </div>
+        </div>
+
+        <div>   <!-- 달력으로 스케쥴 보기 -->
+
+        </div>
+
+        <div>
+
+            <div>   <!-- 수의사 별점 추이 -->
+
+            </div>
+            <div>   <!-- 수의사 진료 추이??? -->
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+</html>

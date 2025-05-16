@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ko"
+      layout:decorate="~{fragment/default}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block layout:fragment="css"></th:block>
+    <th:block layout:fragment="script"></th:block>
+</head>
+<div id="main" layout:fragment="main">
+    <div>   <!-- 반려동물 정보 영역 -->
+
+        <!-- outer table: 2 columns, 33% / 67% -->
+        <table style="width:100%; border-collapse:collapse;">
+            <colgroup>
+                <col style="width:33%;"/>
+                <col style="width:67%;"/>
+            </colgroup>
+            <tr>
+                <!-- 왼쪽 셀: 프로필 + 이름/나이·성별 -->
+                <td style="vertical-align:top; padding:0;">
+                    <table style="width:100%; border:1px solid #ccc; border-collapse:collapse;">
+                        <!-- 프로필 이미지, 나중에 바꾸어야 함 -->
+                        <tr>
+                            <td style="padding:8px; text-align:center;">
+                                <img alt="pet image"
+                                     style="max-width:100%; height:auto; display:block;"
+                                     th:text="@{${petInfo.petImage}}"/>
+                            </td>
+                        </tr>
+                        <!-- 이름 / 나이·성별 -->
+                        <tr>
+                            <td style="padding:8px;">
+                                <div><strong th:text="${petInfo.petName}">이름</strong></div>
+                                <div>
+                                    <span th:text="${petInfo.petAge}">0</span>세 /
+                                    <span th:text="${petInfo.petSex}">성별</span>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+
+                <!-- 오른쪽 셀: 나머지 정보 -->
+                <td style="vertical-align:top; padding:0;">
+                    <table style="width:100%; border:1px solid #ccc; border-collapse:collapse;">
+                        <!-- 동물종 -->
+                        <tr>
+                            <th style="text-align:left; padding:8px; border:1px solid #ccc;">
+                                동물종
+                            </th>
+                            <td style="padding:8px; border:1px solid #ccc;"
+                                th:text="${petInfo.petSpecies}">종
+                            </td>
+                        </tr>
+                        <!-- 동물품종 -->
+                        <tr>
+                            <th style="text-align:left; padding:8px; border:1px solid #ccc;">
+                                몸무게
+                            </th>
+                            <td style="padding:8px; border:1px solid #ccc;"
+                                th:text="${petInfo.petBreed}">몸무게
+                            </td>
+                        </tr>
+                        <!-- 병명 (여러 개) -->
+                        <tr>
+                            <th style="text-align:left; padding:8px; border:1px solid #ccc;">
+                                병명
+                            </th>
+                            <td style="padding:8px; border:1px solid #ccc;">
+                                <ul style="margin:0; padding-left:1.2em;">
+                                    <li th:each="d : ${petInfo.diseases}"
+                                        th:text="${d.diseaseName}">질병명
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <!-- 알러지 정보 -->
+                        <tr>
+                            <th style="text-align:left; padding:8px; border:1px solid #ccc;">
+                                알러지 정보
+                            </th>
+                            <td style="padding:8px; border:1px solid #ccc;">
+                                <ul style="margin:0; padding-left:1.2em;">
+                                    <li th:each="a : ${petInfo.allergies}"
+                                        th:text="${a.allergyName}">알러지명
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div style="display:flex; justify-content: space-between; align-items:center;">
+        <h2>진료수첩 목록</h2>
+        <a class="btn btn-primary" th:href="@{/medical/clinicdiary/new}">글쓰기</a>
+    </div>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>순번</th>
+            <th>작성일</th>
+            <th>상태</th>
+            <th>제목</th>
+            <th>조회수</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="dto, stat : ${clinicDiaryList.content}">
+            <!-- stat.index 는 0부터 시작하므로 +1 -->
+            <td th:text="${stat.index + 1 + clinicDiaryList.number * clinicDiaryList.size}">1</td>
+            <td th:text="${dto.recordDate}">2025-05-11</td>
+            <td th:text="${dto.status}">투병중</td>
+            <td>
+                <a th:href="@{/medical/clinicdiary/{clinicDiaryId}(clinicDiaryId=${dto.clinicDiaryId})}"
+                   th:text="${dto.boardTitle}">제목</a>
+            </td>
+            <td th:text="${dto.boardHit}">123</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- 페이징 네비게이션 -->
+    <nav>
+        <ul class="pagination">
+            <li class="page-item" th:classappend="${clinicDiaryList.first} ? 'disabled'">
+                <a class="page-link"
+                   th:href="@{/medical/clinicdiary(page=${clinicDiaryList.number - 1})}">이전</a>
+            </li>
+            <li class="page-item"
+                th:classappend="${p == clinicDiaryList.number} ? 'active'"
+                th:each="p : ${#numbers.sequence(0, clinicDiaryList.totalPages - 1)}">
+                <a class="page-link"
+                   th:href="@{/medical/clinicdiary(page=${p})}"
+                   th:text="${p + 1}">1</a>
+            </li>
+            <li class="page-item" th:classappend="${clinicDiaryList.last} ? 'disabled'">
+                <a class="page-link"
+                   th:href="@{/medical/clinicdiary(page=${clinicDiaryList.number + 1})}">다음</a>
+            </li>
+        </ul>
+    </nav>
+
+
+</div>
+
+</html>

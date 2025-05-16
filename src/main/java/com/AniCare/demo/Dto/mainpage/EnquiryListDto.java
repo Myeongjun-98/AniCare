@@ -22,13 +22,13 @@ public class EnquiryListDto {
     // ✅ static 변환 메서드
     public static EnquiryListDto from(Enquiry enquiry) {
         EnquiryListDto dto = new EnquiryListDto();
-        com.AniCare.demo.Dto.mainpage.UserDetailDto userDetailDto = new UserDetailDto();
+        UserDetailDto userDetailDto = new UserDetailDto();
         dto.setUserName(userDetailDto.getUserName());
         dto.setId(enquiry.getId());                        // ✅ ID 설정 추가
         dto.setEnquiryTitle(enquiry.getEnquiryTitle());
         dto.setEnquiryType(enquiry.getEnquiryType());
         dto.setEnquiryDate(enquiry.getEnquiryDate());
-        dto.setEnquiryStatus(enquiry.getStatus());
+        dto.setEnquiryStatus(enquiry.getEnquiryStatus());
         return dto;
     }
 
