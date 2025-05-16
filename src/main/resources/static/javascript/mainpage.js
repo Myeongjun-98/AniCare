@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // window.location.href = '/login';  // 실제 구현시 사용
   });
 
-  document.querySelector(".signup-btn").addEventListener("click", function () {
+  document.querySelector(".vetsignup-btn").addEventListener("click", function () {
     alert("회원가입 페이지로 이동합니다.");
     // window.location.href = '/signup';  // 실제 구현시 사용
   });
@@ -45,27 +45,27 @@ document.addEventListener("DOMContentLoaded", function () {
   // 초기 상태 적용
 //  toggleLoginView();
 
-  // // 사이드바 로그인 버튼 이벤트
-  // document.querySelector('.login-sidebar-btn').addEventListener('click', function() {
-  //     alert('로그인 페이지로 이동합니다.');
-  //     // window.location.href = '/login';
-  // });
+   // 사이드바 로그인 버튼 이벤트
+   document.querySelector('.login-sidebar-btn').addEventListener('click', function() {
+       alert('로그인 페이지로 이동합니다.');
+       // window.location.href = '/login';
+   });
 
-  // document.querySelector('.signup-sidebar-btn').addEventListener('click', function() {
-  //     alert('회원가입 페이지로 이동합니다.');
-  //     // window.location.href = '/signup';
-  // });
+   document.querySelector('.signup-sidebar-btn').addEventListener('click', function() {
+       alert('회원가입 페이지로 이동합니다.');
+       // window.location.href = '/signup';
+   });
 
-  // // (테스트용) 로그인 상태 변경 함수
-  // function simulateLogin() {
-  //     isLoggedIn = true;
-  //     toggleLoginView();
-  // }
+   // (테스트용) 로그인 상태 변경 함수
+   function simulateLogin() {
+       isLoggedIn = true;
+       toggleLoginView();
+   }
 
-  // function simulateLogout() {
-  //     isLoggedIn = false;
-  //     toggleLoginView();
-  // }
+   function simulateLogout() {
+       isLoggedIn = false;
+       toggleLoginView();
+   }
 
   // 실제 구현시 예시: 로그인 성공 후 호출
   // simulateLogin();

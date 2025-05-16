@@ -1,13 +1,16 @@
 package com.AniCare.demo.service.mainpage;
 
 import com.AniCare.demo.Dto.mainpage.EnquiryListDto;
+import com.AniCare.demo.Dto.mainpage.EnquiryWriteDto;
 import com.AniCare.demo.entity.MainPage.Enquiry;
 import com.AniCare.demo.entity.MainPage.User;
 import com.AniCare.demo.repository.MainPage.EnquiryRepository;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -26,5 +29,8 @@ public class MainEnquiryService {
     public Page<Enquiry> getAllEnquiries(Pageable pageable) {
 
         return enquiryRepository.findAll(pageable);
+    }
+
+    public void enquirysave(@Valid EnquiryWriteDto enquiryWriteDto, List<MultipartFile> multipartFileList) {
     }
 }
