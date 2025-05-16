@@ -20,7 +20,7 @@ public class MasterAccountDto {
     // 정적 팩토리 메서드
     public static MasterAccountDto fromEntity(User account) {
         return new MasterAccountDto(
-                account.getUserId(), // ✅ 주의: getUserId() → getId()
+                account.getId(), // ✅ 주의: getUserId() → getId()
                 account.getUserName(),
                 account.getAuthorization()
         );

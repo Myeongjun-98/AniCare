@@ -19,7 +19,7 @@ public class UserDetailDto {
      */
     public static UserDetailDto from(User user) {
         UserDetailDto dto = new UserDetailDto();
-        dto.setUserId(user.getUserId());
+        dto.setUserId(user.getId());
         dto.setUserName(user.getUserName());
         dto.setUserEmail(user.getUserEmail());
         dto.setUserAddress(user.getUserAddress());

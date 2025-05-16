@@ -27,7 +27,7 @@ public class ReportListDto {
 
         // 신고자 ID (user가 null일 수 있음)
         if (report.getUser() != null) {
-            dto.setUserId(report.getUser().getUserId());
+            dto.setUserId(report.getUser().getId());
         }
 
         dto.setReportDate(report.getReportDate()); // 신고 날짜
