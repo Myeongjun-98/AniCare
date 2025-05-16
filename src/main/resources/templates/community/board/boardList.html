@@ -16,7 +16,7 @@
         <a style="display: inline;" th:href="@{/community/board/boardList(type=${type}, order='I', category=${category})}">최신순</a>
     </div> <!-- ▲ 정렬버튼 끝 ▲ -->
 
-    <!-- ▼ 카테고리버튼 ▼ -->
+    <!-- ▼ 카테고리버튼 / 작성 버튼 ▼ -->
     <div class="category-box-wrap">
         <!-- 모임 모집글 -->
         <div th:if="${type == 'MEETING'}" class="category-box">
@@ -49,7 +49,16 @@
                 Erranding</a>
         </div>
 
-    </div>
+        <div class="writeBtn">
+            <a
+                    class="writeBtn"
+                    type="button"
+                    style="background-color: #FFA500;"
+                    href="/community/board/boardWrite">
+                게시글 작성하기
+            </a>
+        </div>
+    </div> <!-- ▲ 카테고리버튼/작성 버튼 끝 ▲ -->
 
     <!-- ▼ 게시글 리스트 목록 ▼ -->
     <div th:each="board : ${boardListDtos}" class="board-list">

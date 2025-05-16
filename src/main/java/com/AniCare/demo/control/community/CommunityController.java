@@ -3,6 +3,7 @@ package com.AniCare.demo.control.community;
 import com.AniCare.demo.Dto.community.BoardListMainDto;
 import com.AniCare.demo.Dto.community.BoardListSubDto;
 import com.AniCare.demo.Dto.community.*;
+import com.AniCare.demo.Dto.mainpage.UserDetailDto;
 import com.AniCare.demo.constant.community.BoardType;
 import com.AniCare.demo.entity.MainPage.User;
 import com.AniCare.demo.service.community.BoardService;
@@ -38,6 +39,18 @@ public class CommunityController {
     @Autowired
     private ObjectMapper objectMapper; //JSON 변환용
 
+    public CommunityController(UserService userService) {
+        this.userService = userService;
+    }
+
+    @ModelAttribute("userDetailDto")
+    public UserDetailDto addUser(Principal principal) {
+        if(principal != null) {
+            return userService.getUserDetail(principal.getName());
+        }
+        return null;
+    }
+
 
     // ================ 커뮤니티 메인 페이지 ================
     @GetMapping("/community/commain")
@@ -47,12 +60,6 @@ public class CommunityController {
                               @RequestParam(name = "category", defaultValue = "ALL") String category,
                               Principal principal,
                               Model model){
-
-        // 헤더에 사용자 정보 띄우기
-        if (principal.getName() != null) {
-            model.addAttribute("userDetailDto", userService.getUserDetail(principal.getName()));
-        }
-
 
         List<BoardListMainDto> boardListMainDtos = communityMainService.getBoardMainList();
 
