@@ -28,7 +28,7 @@ public class EnquiryListDto {
         dto.setEnquiryTitle(enquiry.getEnquiryTitle());
         dto.setEnquiryType(enquiry.getEnquiryType());
         dto.setEnquiryDate(enquiry.getEnquiryDate());
-        dto.setEnquiryStatus(enquiry.getEnquiryStatus());
+        dto.setEnquiryStatus(enquiry.getStatus());
         return dto;
     }
 
