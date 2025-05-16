@@ -8,6 +8,7 @@ import com.AniCare.demo.entity.MainPage.User;
 import com.AniCare.demo.service.community.BoardService;
 import com.AniCare.demo.service.community.CommentService;
 import com.AniCare.demo.service.community.CommunityMainService;
+import com.AniCare.demo.service.mainpage.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpSession;
@@ -19,6 +20,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,6 +34,8 @@ public class CommunityController {
     @Autowired
     private CommentService commentService;
     @Autowired
+    private UserService userService;
+    @Autowired
     private ObjectMapper objectMapper; //JSON 변환용
 
 
@@ -41,7 +45,14 @@ public class CommunityController {
                               @RequestParam(name = "type", defaultValue = "MEETING") String type,
                               @RequestParam(name = "order", defaultValue = "I") String order,
                               @RequestParam(name = "category", defaultValue = "ALL") String category,
+                              Principal principal,
                               Model model){
+
+        // 헤더에 사용자 정보 띄우기
+        if (principal.getName() != null) {
+            model.addAttribute("userDetailDto", userService.getUserDetail(principal.getName()));
+        }
+
 
         List<BoardListMainDto> boardListMainDtos = communityMainService.getBoardMainList();
 

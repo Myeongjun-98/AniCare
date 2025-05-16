@@ -44,12 +44,13 @@
 <!-- ▼ 모임 모집글 인기글 ▼ -->
     <h2>모임 모집글 인기글</h2>
 
-        <div th:with="firstPost=${popMeeting[0]}">
+        <div th:with="firstPost=${popMeeting[0]}" class="firstBoard-wrap">
           <a th:href="@{'/community/board/boardDetail/' + ${firstPost.id}}">
             <div
-            th:style="'background-image: url(' + ${firstPost.fileUrl} + '); background-size: cover; background-position: center;'">
-              <h2 th:text="${firstPost.boardTitle}"></h2> <!-- 모임 모집글 1st 게시글 제목 -->
-              <p th:text="${firstPost.category}"></p> <!-- 모임 모집글 1st 게시판 타입 -->
+            th:style="'background-image: url(' + ${firstPost.fileUrl} + '); background-size: cover; background-position: center;'"
+            class="firstBoard-thumbnail">
+              <h2 class="firstBoard-title" th:text="${firstPost.boardTitle}"></h2> <!-- 모임 모집글 1st 게시글 제목 -->
+              <p class="firstBoard-type" th:text="${firstPost.category}"></p> <!-- 모임 모집글 1st 게시판 타입 -->
             </div>
           </a>
         </div>
@@ -85,12 +86,13 @@
     <br>
     <h2>심부름 구인글 인기글</h2>
 
-    <div th:with="firstPost=${popErrand[0]}">
+    <div th:with="firstPost=${popErrand[0]}" class="firstBoard-wrap">
       <a th:href="@{'/community/board/boardDetail/' + ${firstPost.id}}">
         <div
-                th:style="'background-image: url(' + ${firstPost.fileUrl} + '); background-size: cover; background-position: center;'">
-          <h2 th:text="${firstPost.boardTitle}"></h2> <!-- 모임 모집글 1st 게시글 제목 -->
-          <p th:text="${firstPost.category}"></p> <!-- 모임 모집글 1st 게시판 타입 -->
+                th:style="'background-image: url(' + ${firstPost.fileUrl} + '); background-size: cover; background-position: center;'"
+          class="firstBoard-thumbnail">
+          <h2 class="firstBoard-title" th:text="${firstPost.boardTitle}"></h2> <!-- 모임 모집글 1st 게시글 제목 -->
+          <p class="firstBoard-type" th:text="${firstPost.category}"></p> <!-- 모임 모집글 1st 게시판 타입 -->
         </div>
       </a>
     </div>
