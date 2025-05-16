@@ -175,20 +175,26 @@ public class CommunityController {
     public String boardSave(@Valid BoardForm boardForm,
                             BindingResult bindingResult,
                             @RequestParam("boardFile") List<MultipartFile> multipartFileList,
+                            Principal principal,
                             Model model){
 
         if(bindingResult.hasErrors()){
             return "community/board/boardWrite";
         }
 
+        String email = principal.getName();
+
         try {
-            boardService.boardSave(boardForm, multipartFileList);
+            boardService.boardSave(boardForm, multipartFileList, email);
         } catch(Exception e) {
             model.addAttribute("boardError", "게시글 작성 실패");
             return "community/board/boardWrite";
         }
 
-        return "/community/board/boardList/" + boardForm.getBoardType().name() + "/I/" + boardForm.getCategory();
+        return "redirect:/community/board/boardList?type="
+                + boardForm.getBoardType().name()
+                + "&order=I&category="
+                + boardForm.getCategory();
     }
 
 

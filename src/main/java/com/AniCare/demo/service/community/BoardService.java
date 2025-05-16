@@ -4,13 +4,10 @@ import com.AniCare.demo.Dto.community.*;
 import com.AniCare.demo.constant.community.BoardType;
 import com.AniCare.demo.entity.community.*;
 import com.AniCare.demo.repository.community.*;
-import com.AniCare.demo.Dto.community.*;
 import com.AniCare.demo.constant.community.ErrandCategory;
 import com.AniCare.demo.constant.community.MeetingCategory;
 import com.AniCare.demo.entity.MainPage.User;
-import com.AniCare.demo.entity.community.*;
 import com.AniCare.demo.repository.MainPage.UserRepository;
-import com.AniCare.demo.repository.community.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,7 +15,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.function.Supplier;
 
 @Service
 @RequiredArgsConstructor
@@ -163,7 +159,7 @@ public class BoardService {
 
     // ================ 커뮤니티 - 게시글 업로드 ================
     public void boardSave(BoardForm boardForm,
-                          List<MultipartFile> multipartFileList)
+                          List<MultipartFile> multipartFileList, String email)
             throws Exception{
 
         //board타입 제목, 내용 저장
@@ -171,9 +167,8 @@ public class BoardService {
         ErrandBoard errandBoard = new ErrandBoard();
         MeetingBoard meetingBoard = new MeetingBoard();
 
-        //임시방편(로그인 기능 구현된 후 수정할 것)
-        boardForm.setUserId(2L);
-        User user = userRepository.findById(boardForm.getUserId()).orElse(null);
+        //회원정보 User에 담아주기
+        User user = userRepository.findByUserEmail(email).orElse(null);
         board.setUser(user);
 
         boardRepository.save(board);
@@ -199,7 +194,7 @@ public class BoardService {
             //첨부파일 배열에 빈칸이 있다면 데이터 저장 X
             MultipartFile file = multipartFileList.get(i);
             if(file.isEmpty()){
-                return;
+                continue;
             }
 
             BoardFile boardFile = new BoardFile();
