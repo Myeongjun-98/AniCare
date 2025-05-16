@@ -34,7 +34,7 @@ public class Board { //게시글 정보를 저장하는 Entity
     @Enumerated(EnumType.STRING)
     private BoardType boardType; //게시판 타입
 
-    private Integer likeCount=0; //좋아요 개수
+    private int likeCount=0; //좋아요 개수
 
 
     public void likeIncrease(){

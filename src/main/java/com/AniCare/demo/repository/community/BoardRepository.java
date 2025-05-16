@@ -31,4 +31,5 @@ public interface BoardRepository extends JpaRepository<Board, Long> { //board í…
     List<Board> searchByBoardTypeAndKeyword(@Param("keyword") String keyword);
 
 
+    List<Board> findTop5ByOrderByLikeCountDesc();
 }
