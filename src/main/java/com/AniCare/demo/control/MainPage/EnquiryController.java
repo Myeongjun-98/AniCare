@@ -1,9 +1,6 @@
 package com.AniCare.demo.control.MainPage;
 
-import com.AniCare.demo.Dto.mainpage.EnquiryDetailDto;
-import com.AniCare.demo.Dto.mainpage.EnquiryListDto;
-import com.AniCare.demo.Dto.mainpage.UserDetailDto;
-import com.AniCare.demo.Dto.mainpage.UserInfoDto;
+import com.AniCare.demo.Dto.mainpage.*;
 import com.AniCare.demo.entity.MainPage.Enquiry;
 import com.AniCare.demo.entity.MainPage.User;
 import com.AniCare.demo.entity.admin.EnquiryReply;
@@ -20,7 +17,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.security.Principal;
 import java.util.ArrayList;
@@ -58,10 +57,17 @@ public class EnquiryController {
         model.addAttribute("userDetailDto",userService.getUserDetail(principal.getName()) );
         return "mainpage/enquirywrite";
     }
+    @PostMapping("/enquirywrite")
+    public String enquiryWriteSave(@Valid EnquiryWriteDto enquiryWriteDto, BindingResult bindingResult, @RequestParam("enquiryFile")List<MultipartFile> multipartFileList, Model model){
+        try{
+            mainEnquiryService.enquirysave(enquiryWriteDto,multipartFileList);
+        }catch (Exception e){
+            return "/mainpage/enquirywrite";
+        }
 
-//    @PostMapping("/enquirysave")
-//    public String enquiryWriteSave(@Valid())
+        return "/mainpage/enquiryList";
 
+    }
 
     // 문의사항 상세보기
     @GetMapping("/enquirydetail/{enquiryId}")

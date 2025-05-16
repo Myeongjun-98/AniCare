@@ -31,13 +31,13 @@
 
             <!-- 에러 메시지 표시 -->
             <div th:if="${param.error}" class="alert alert-danger">
-                <span th:text="${param.exception != null} ? ${param.exception} : '이메일 또는 비밀번호가 잘못되었습니다.'"></span>
+                <span th:text="${param.exception != null} ? ${param.exception} : '아이디 또는 비밀번호가 잘못되었습니다.'"></span>
             </div>
 
-            <form th:action="@{/mainpage/userlogin}" method="post">
-                <!-- 이메일 입력 -->
+            <form th:action="@{/mainpage/vetlogin}" method="post">
+                <!-- 아이디 입력 -->
                 <div class="mb-3">
-                    <label for="id" class="form-label">이메일</label>
+                    <label for="id" class="form-label">아이디</label>
                     <input type="text" class="form-control" id="id"
                            name="id" placeholder="exaple123" required>
                 </div>
@@ -55,7 +55,7 @@
 
             <div class="mt-3 text-center">
                 <span>아직 회원이 아니신가요?</span>
-                <a th:href="@{/mainpage/usersignup}" class="ms-2">회원가입</a>
+                <a th:href="@{/mainpage/vetsignup}" class="ms-2">회원가입</a>
             </div>
         </div>
     </div>

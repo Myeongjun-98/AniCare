@@ -80,10 +80,13 @@ li{
   gap: 10px;
 }
 .login-btn,
-.signup-btn {
+.signup-btn,
+.vetlogin-btn,
+.vetsignup-btn {
   display:inline-block;
-  padding: 8px 15px;
-  border-radius: 20px;
+  padding: 5px 10px;
+  font-size: 12px;
+  border-radius: 15px;
   font-weight: bold;
   cursor: pointer;
   transition: all 0.3s;
@@ -105,6 +108,27 @@ li{
 .signup-btn:hover {
   background-color: #ff8c00;
 }
+
+.vetlogin-btn {
+    background-color: transparent;
+    border: 1px solid #FFA500;
+    color: #FFA500;
+}
+
+.vetlogin-btn:hover {
+    background-color: #FFF9C4;
+}
+
+.vetsignup-btn {
+    background-color: #FFA500;
+    border: 1px solid #FFA500;
+    color: white;
+}
+
+.vetsignup-btn:hover {
+    background-color: #FF8C00;
+}
+
 @media (max-width: 768px) {
   .search-container {
     display: none;
@@ -195,6 +219,66 @@ li{
   padding: 20px;
   align-items: center;
   border-bottom: 1px solid #eee;
+}
+
+/* 비로그인시 마이페이지에 보일 로그인 회원가입 버튼  */
+
+/* 버튼 컨테이너 스타일 (가운데 정렬 및 버튼 간격 조절) */
+.sidebar-btn-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin: 30px 0;
+}
+
+/* 공통 버튼 스타일 */
+.login-sidebar-btn,
+.signup-sidebar-btn {
+    padding: 10px 20px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+    width: 80%;
+    text-align: center;
+    font-weight: bold;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+/* 로그인 버튼 스타일 */
+.login-sidebar-btn {
+    background-color: #FFF9C4;
+    color: #FF8C00;
+    border: 1px solid #FFD700;
+}
+
+.login-sidebar-btn:hover {
+    background-color: #FFEB3B;
+}
+
+/* 회원가입 버튼 스타일 */
+.signup-sidebar-btn {
+    background-color: #FFA500;
+    color: white;
+}
+
+.signup-sidebar-btn:hover {
+    background-color: #FF8C00;
+}
+
+
+.login-prompt p {
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.login-sidebar-btn,
+.signup-sidebar-btn {
+    padding: 8px;
+    font-size: 14px;
 }
 
 .user-info img {
@@ -346,7 +430,6 @@ li{
   border-radius: 5px;
   cursor: pointer;
 }
-
 
 /* 메인 컨텐츠 스타일 */
 main {

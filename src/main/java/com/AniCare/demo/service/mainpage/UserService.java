@@ -52,6 +52,7 @@ public class UserService implements UserDetailsService{
     private void orElseThrow(Object o) {
     }
 
+
     public void register(@Valid UserInfoDto userInfoDto, PetDetailDto petDetailDto, PasswordEncoder passwordEncoder) {
 
         User user = User.createUser(userInfoDto,passwordEncoder);

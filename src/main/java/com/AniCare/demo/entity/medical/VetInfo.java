@@ -1,11 +1,14 @@
 package com.AniCare.demo.entity.medical;
 
+import com.AniCare.demo.Dto.mainpage.VetSignupDto;
 import com.AniCare.demo.constant.medical.OnWork;
 import com.AniCare.demo.constant.medical.PetSpecies;
 import com.AniCare.demo.entity.admin.Hospital;
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalTime;
 import java.util.List;
@@ -44,10 +47,23 @@ public class VetInfo {
 
     private String profileImage;    // 수의사 프로필 이미지
 
-    @Column(nullable = false, columnDefinition = "VARCHAR(20) DEFAULT '퇴근'")
+    @Column(columnDefinition = "VARCHAR(20) DEFAULT '퇴근'")
     @Enumerated(EnumType.STRING)
     private OnWork workStatus;  // 수의사 근태근황
 
     private LocalTime onWorkTime;   // 수의사 근로시간(시작)
     private LocalTime offWorkTime;  // 수의사 근로시간(끝)
+
+    public static VetInfo createVet(@Valid VetSignupDto vetSignupDto, PasswordEncoder passwordEncoder) {
+        VetInfo vetInfo = new VetInfo();
+
+        vetInfo.setVetId(vetSignupDto.getVetId());
+        vetInfo.setVetName(vetSignupDto.getVetName());
+        vetInfo.setOnWorkTime(vetSignupDto.getStartTime());
+        vetInfo.setOffWorkTime(vetSignupDto.getFinTime());
+
+        String password = passwordEncoder.encode(vetSignupDto.getPassword());
+        vetInfo.setVetPassword(password);
+        return vetInfo;
+    }
 }

@@ -28,10 +28,10 @@
 <body>
 
 <div id="wrap">
-    <th:block th:replace="fragment/mainheader::header"></th:block>
-    <th:block th:replace="fragment/mypage :: mainmypage"></th:block>
+    <th:block th:replace="~{fragment/mainheader::header}"></th:block>
+    <th:block th:replace="~{fragment/mypage :: mainmypage}"></th:block>
     <th:block layout:fragment="main"></th:block>
-    <th:block th:replace="fragment/footer::footer"></th:block>
+    <th:block th:replace="~{fragment/footer::footer}"></th:block>
 </div>
 
 <script src="/javascript/mainpage.js"></script>

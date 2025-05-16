@@ -46,4 +46,5 @@ public class Enquiry {
 
     public void setStatus(String 처리완료) {
     }
+
 }

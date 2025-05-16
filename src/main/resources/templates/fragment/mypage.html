@@ -27,7 +27,7 @@
         <div class="pet-slider">
             <div class="pet-card">
                 <div class="pet-front">
-                    <img src="${petDetailDto?.petImg}" alt="반려동물프로필 사진">
+                    <img th:src="@{petDetailDto?.petImg}" alt="반려동물프로필 사진">
                     <h4 th:if="${petDetailDto != null}" th:text="${petDetailDto.petName}"></h4>
                 </div>
                 <div class="pet-back">
@@ -80,15 +80,13 @@
             </li>
         </ul>
     </nav>
-
-        <button class="logout-btn">로그아웃</button>
 </div>
 
     <!--  비로그인시  -->
     <div class="userInfo" th:unless="${userDetailDto != null}">
         <p> 로그인이 필요합니다</p>
-        <button onclick="location.href='/mainpage/userlogin'">로그인</button>
-        <button onclick="location.href='/mainpage/usersignup'">회원가입</button>
+        <button class="login-sidebar-btn" onclick="location.href='/mainpage/userlogin'">로그인</button>
+        <button class ="signup-sidebar-btn" onclick="location.href='/mainpage/usersignup'">회원가입</button>
     </div>
 
 </aside>
