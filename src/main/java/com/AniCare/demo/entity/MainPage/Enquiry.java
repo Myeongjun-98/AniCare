@@ -20,10 +20,9 @@ public class Enquiry {
     private Long id;
 
     // 유저테이블 아이디
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id")
     @ManyToOne
     private User user;
-
 
     @Column(nullable = false)
     private String enquiryTitle; // 문의사항 제목
@@ -41,9 +40,5 @@ public class Enquiry {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private EnquiryStatus enquiryStatus;
-
-
-    public void setStatus(String 처리완료) {
-    }
+    private EnquiryStatus status;
 }

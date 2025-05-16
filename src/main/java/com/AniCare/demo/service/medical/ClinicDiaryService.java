@@ -42,7 +42,6 @@ public class ClinicDiaryService {
     private final BoardFileRepository boardFileRepository;
     private final BoardFileService boardFileService;
     private final BoardRepository boardRepository;
-    private final UserRepository userRepository;
     private final mediPetRepository mediPetRepository;
 
     // --------------메서드

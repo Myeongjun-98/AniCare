@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class NoticeDto {
+    private Long id;
     private String title;
     private String body;
     private NoticeCategory category;
