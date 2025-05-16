@@ -1,0 +1,59 @@
+/* ✅ Jalnan2 폰트 (폰트 파일은 /fonts/에 있어야 함) */
+@font-face {
+  font-family: 'Jalnan2';
+  src: url('/fonts/Jalnan2.ttf') format('truetype');
+}
+
+/* ✅ 전체 컨테이너 스타일 */
+.container {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 150px;
+  font-family: 'KoPub돋움', '엘리스DX널리체', sans-serif;
+}
+
+/* ✅ 제목용 폰트 */
+h2, .modal-title {
+  font-family: 'Jalnan2', 'KoPub돋움', sans-serif;
+  color: #4CAF50;
+}
+
+/* ✅ 버튼 색상 통일 (녹색) */
+.btn-outline-primary {
+  border-color: #4CAF50;
+  color: #4CAF50;
+}
+.btn-outline-primary:hover,
+.btn-primary {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+}
+.btn-primary:hover {
+  background-color: #43a047;
+}
+
+/* ✅ 상태 배지 스타일 강조 */
+.badge.text-bg-success {
+  background-color: #4CAF50 !important;
+}
+.badge.text-bg-warning {
+  background-color: #FFC107 !important;
+  color: #212529 !important;
+}
+
+/* ✅ 테이블 정돈 */
+.table th,
+.table td {
+  vertical-align: middle;
+}
+.table-hover tbody tr:hover {
+  background-color: #f6fdf8;
+  cursor: pointer;
+}
+
+/* ✅ 모달 스타일 개선 */
+.modal-title {
+  font-size: 20px;
+  font-weight: bold;
+}
