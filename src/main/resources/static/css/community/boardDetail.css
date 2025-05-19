@@ -131,13 +131,9 @@
   margin: 20px 0 0 0;
   line-height: 1.6;
   white-space: pre-wrap;
+  user-select: none;
 }
-.board-detail-boardContent::selection,
-.board-detail-boardTitle::selection,
-.comment-wrap span::selection {
-    background: #F2A831;
-    color:white;
-}
+
 
 /* 작성자 정보 기본 위치 유지 */
 .board-detail-userCard {
@@ -180,17 +176,17 @@
   user-select: none;
 }
 .count-box svg {
+    color: #666666;
     overflow: visible;
     fill: none;
     width: 24px;
     height: 24px;
-    stroke: #666666;
-    stroke-width: 1px;
+    /* stroke: #666666;
+    stroke-width: .5px;
     stroke-linecap: round;
-    stroke-linejoin: round;
+    stroke-linejoin: round; */
 }
 .count-box p {
-  font-family: 'yg-jalnan', sans-serif;
     color: #666666;
 }
 .board-detail-likeCount-box,

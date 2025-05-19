@@ -11,13 +11,6 @@
 </head>
 <div layout:fragment="main" id="main"> <!-- ▼ main ▼ -->
 
-    <!-- ▼ 정렬버튼 ▼ -->
-    <div class="orderBtn">
-        <a style="display: inline;" th:href="@{/community/board/boardList(type=${type}, order='L', category=${category})}">인기순</a>
-        <p style="display: inline;"> | </p>
-        <a style="display: inline;" th:href="@{/community/board/boardList(type=${type}, order='I', category=${category})}">최신순</a>
-    </div> <!-- ▲ 정렬버튼 끝 ▲ -->
-
     <!-- ▼ 카테고리버튼 / 작성 버튼 ▼ -->
     <div class="category-box-wrap">
         <!-- 모임 모집글 -->
@@ -64,20 +57,34 @@
         </div>
     </div> <!-- ▲ 카테고리버튼/작성 버튼 끝 ▲ -->
 
+
+    <!-- ▼ 정렬버튼 ▼ -->
+    <div class="orderBtn">
+        <a style="display: inline;" th:href="@{/community/board/boardList(type=${type}, order='L', category=${category})}">인기순</a>
+        <p style="display: inline;"> | </p>
+        <a style="display: inline;" th:href="@{/community/board/boardList(type=${type}, order='I', category=${category})}">최신순</a>
+    </div> <!-- ▲ 정렬버튼 끝 ▲ -->
+
     <!-- ▼ 게시글 리스트 목록 ▼ -->
     <div th:each="board : ${boardListDtos}" class="board-list">
+        <div th:if="${category == 'ALL' or board.category == category}" class="board-card-body">
         <div class="board-card">
-
-            <div th:if="${category == 'ALL' or board.category == category}" class="board-card-body">
                 <a th:href="@{ '/community/board/boardDetail/'+${board.id} }">
-                    <img th:src="${board.userFile}" class="userImg"
-                        style="width:100px; height:100px; object-fit:cover;">
-                    <h3 class="board-card-userName" th:text="${board.userName}"></h3> <!-- 작성자 이름 -->
-                    <p class="board-card-writeDate" th:text="${board.boardWriteDate}"></p> <!-- 게시글 작성일 -->
-                    <p class="board-card-boardHit" th:text="'조회수: ' + ${board.boardHit}"></p> <!-- 게시글 조회수 -->
-                    <p class="board-card-content" th:text="${board.boardContent}"
+                    <div class="board-subInfo">
+                        <img th:src="${board.userFile}" class="userImg"
+                        style="width:50px; height:50px; object-fit:cover;">
+                        <h5 class="board-card-userName" th:text="${board.userName}"></h5> <!-- 작성자 이름 -->
+                        <p class="board-card-writeDate" th:text="${board.boardWriteDate}"></p> <!-- 게시글 작성일 -->
+                        <p class="board-card-boardHit" th:text="'조회수: ' + ${board.boardHit}"></p> <!-- 게시글 조회수 -->
+                    </div>
+                    <div class="board-mainInfo">
+                        <p class="board-card-content" th:text="${board.boardContent}"
                        style="white-space: nowrap; overflow:hidden; text-overflow: ellipsis; max-width:400px;">></p>
-                    <img th:src="${board.fileUrl}" class="board-card-thumbnailFile" width="400" height="400" style="object-fit:cover;"> <!-- 게시글 내용 -->
+                    </div>
+                    <div class="board-thumbnail">
+                           <div class="board-card-thumbnailFile"
+                                th:style="'background-image: url(' + ${board.fileUrl} + ');'"> <!-- 게시글 내용 -->
+                    </div>
                 </a>
             </div>
 
