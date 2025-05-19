@@ -23,6 +23,7 @@ public class BoardDetailDto {
     private String boardContent; //게시글 내용
     private String userName; //게시글 작성자 이름
     private String userAddress; //게시글 작성자 주소
+    private String userImage; //게시글 작성자 인장 주소
     private List<CommentViewDto> commentList; //게시글 덧글 목록
     private Integer likeCount; //좋아요 수
     private Integer commentCount; //덧글 수

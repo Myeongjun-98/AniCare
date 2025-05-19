@@ -60,5 +60,23 @@ public class ConsultationController {
         return "medical/consultationRoom";
     }
 
+    //상담페이지 - 채팅 저장 요청
+    @PostMapping("/consultationRoom/send")
+    public String chatSend(@RequestParam("content") String content,
+                           @RequestParam("id") Long consultationId,
+                           Principal principal, Model model) {
+
+        String name = principal.getName();
+
+        try {
+            medicalService.saveChat(content, consultationId, name);
+        } catch(Exception e) {
+            model.addAttribute("chatError", "채팅 전송 실패");
+            return "medical/consultationRoom";
+        }
+
+        return "redirect:/medical/consultationRoom/" + consultationId;
+    }
+
 
 }

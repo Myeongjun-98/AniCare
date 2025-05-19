@@ -103,6 +103,9 @@ h2 {
   background-color: rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
+.firstBoard-thumbnail::hover {
+    background-size: 90%;
+}
 .firstBoard-title {
   font-family: 'yg-jalnan', sans-serif;
   position: absolute;
