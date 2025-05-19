@@ -71,6 +71,7 @@ public class MedicalService {
         return checkupRepository.save(c);
     }
 
+    // 채팅방 정보 저장(채팅방 생성)
     @Transactional
     public Consultation createConsultation(String Email, Long vetInfoId, Long checkupId) {
 
