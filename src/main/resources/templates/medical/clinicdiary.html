@@ -7,6 +7,7 @@
     <th:block layout:fragment="css"></th:block>
     <th:block layout:fragment="script"></th:block>
     <link href="/css/medical/clinicdiary.css" rel="stylesheet">
+    <link href="/css/medical/petinfo.css" rel="stylesheet">
 </head>
 <div id="main" layout:fragment="main">
     <div id="container">
@@ -72,7 +73,7 @@
                                     병명 정보
                                 </th>
                                 <td style="padding:8px 8px 8px 20px; border:1px solid #ccc;">
-                                    <ul>
+                                    <ul class="inline-list">
                                         <li th:each="d : ${petInfo.diseases}"
                                             th:text="${d.diseaseName}">질병명
                                         </li>
@@ -85,7 +86,7 @@
                                     알러지 정보
                                 </th>
                                 <td style="padding:8px 8px 8px 20px; border:1px solid #ccc;">
-                                    <ul>
+                                    <ul class="inline-list">
                                         <li th:each="a : ${petInfo.allergies}"
                                             th:text="${a.allergyName}">알러지명
                                         </li>

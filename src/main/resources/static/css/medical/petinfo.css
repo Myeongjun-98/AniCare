@@ -1,0 +1,116 @@
+@import "medicaldefault.css";
+
+/* ─────────── 반려동물 정보 영역 ─────────── */
+.pet-info {
+    width: 60%;
+    max-width: 700px;
+    margin: 0 auto 50px -42px;
+}
+
+.pet-info table {
+    width: auto;
+    border-collapse: collapse;
+    margin: 0 auto;
+    max-width: 600px;
+}
+
+.pet-info > table {
+    width: auto;
+    max-width: 600px;
+    table-layout: fixed;
+    height: 180px;
+}
+
+.pet-info > table > tbody > tr > td {
+    padding: 0;
+}
+
+.pet-info > table > tbody > tr > td:first-child > table {
+    border: 1px solid #ccc;
+    padding: 4px 8px; /* 가로 여백을 8px로 줄여 공간 확보 */
+    vertical-align: middle; /* 수직 중앙 정렬 */
+    text-align: center; /* 기본 가로 중앙 정렬 */
+    word-break: keep-all; /* 가능한 한 줄 유지 */
+}
+
+.pet-info > table > tbody > tr > td:first-child > table tr:nth-child(2) td {
+    text-align: center;
+    padding: 8px;
+}
+
+.pet-info th,
+.pet-info td {
+    padding: 12px;
+}
+
+.pet-info td img {
+    width: 150px;
+    height: 150px;
+    border-radius: 8px;
+    display: block;
+    object-fit: cover;
+    margin: 0 auto 8px;
+}
+
+.pet-info > table > tbody > tr > td:last-child > table {
+    width: 100%;
+    height: 100%;
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+}
+
+.pet-info > table > tbody > tr > td:last-child ul {
+    margin: 0;
+    padding-left: 0;
+    list-style-position: inside;
+}
+
+.pet-info td ul {
+    margin: 0;
+    padding-left: 1em;
+    text-align: left;
+    list-style-position: inside;
+}
+
+/* ─────────── 반려동물 정보 카드 크기 제한 & 가운데 정렬 ─────────── */
+
+/* 내부 테이블은 100% 너비 유지 */
+.pet-info table {
+    width: 100%;
+}
+
+/* ─── pet-info 오른쪽 테이블(동물종·몸무게·병명·알러지) 4:6 비율 ─── */
+.pet-info > table > tbody > tr > td:last-child > table {
+    table-layout: fixed; /* 셀 너비 고정 모드 */
+    width: 100%;
+}
+
+/* 첫 번째 컬럼(th/td) 너비 40% */
+.pet-info > table > tbody > tr > td:last-child > table th:nth-child(1),
+.pet-info > table > tbody > tr > td:last-child > table td:nth-child(1) {
+    width: 40%;
+}
+
+/* 두 번째 컬럼(th/td) 너비 60% */
+.pet-info > table > tbody > tr > td:last-child > table th:nth-child(2),
+.pet-info > table > tbody > tr > td:last-child > table td:nth-child(2) {
+    width: 60%;
+}
+
+ul.inline-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+ul.inline-list li {
+    display: inline;
+}
+
+.inline-list li::after {
+    content: ",\00a0"; /* 쉼표 + 공백 */
+}
+
+.inline-list li:last-child::after {
+    content: ""; /* 마지막 항목엔 아무 것도 붙이지 않음 */
+}

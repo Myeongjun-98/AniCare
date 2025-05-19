@@ -30,7 +30,7 @@
 .vet-image {
     width: 150px;
     height: 150px;
-    background-color: #ccc;
+    background-color: white;
     border-radius: 8px;
     flex-shrink: 0;
     margin-right: 24px;

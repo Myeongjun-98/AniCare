@@ -15,7 +15,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.security.Principal;
 import java.util.List;
@@ -70,6 +69,10 @@ public class ClinicDiaryController {
             model.addAttribute("userDetailDto", userService.getUserDetail(principal.getName()));
         }
 
+        //  로그인정보에서 유저 -> default(대표동물) 아이디로 pet정보 불러오기
+        ClinicDiaryPetInfoDto pet = clinicDiaryService.petInfoDto(principal.getName());
+
+        model.addAttribute("petInfo", pet);
         model.addAttribute("clinicDiaryDto", clinicDiaryService.viewClinicDiaryDetail(clinicDiaryId));
 
         return "medical/clinicdiaryDetail";

@@ -1,9 +1,11 @@
 package com.AniCare.demo.control.medical;
 
+import com.AniCare.demo.Dto.medical.ClinicDiaryPetInfoDto;
 import com.AniCare.demo.Dto.medical.ConsultationChatListDto;
 import com.AniCare.demo.Dto.medical.UserConsultationListDto;
 import com.AniCare.demo.entity.medical.Consultation;
 import com.AniCare.demo.service.mainpage.UserService;
+import com.AniCare.demo.service.medical.ClinicDiaryService;
 import com.AniCare.demo.service.medical.MedicalService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -20,6 +22,7 @@ public class ConsultationController {
 
     private final MedicalService medicalService;
     private final UserService userService;
+    private final ClinicDiaryService clinicDiaryService;
 
     // 1:1상담하기 누를 시, 1:1상담 페이지로 이동
     @PostMapping("/consultation")
@@ -55,6 +58,10 @@ public class ConsultationController {
         // (유저)채팅방 정보
         UserConsultationListDto info = medicalService.roomInfo(roomId);
 
+        //  로그인정보에서 유저 -> default(대표동물) 아이디로 pet정보 불러오기
+        ClinicDiaryPetInfoDto pet = clinicDiaryService.petInfoDto(principal.getName());
+
+        model.addAttribute("petInfo", pet);
         model.addAttribute("roomInfo", info);
         model.addAttribute("history", dto);
         return "medical/consultationRoom";
@@ -70,7 +77,7 @@ public class ConsultationController {
 
         try {
             medicalService.saveChat(content, consultationId, name);
-        } catch(Exception e) {
+        } catch (Exception e) {
             model.addAttribute("chatError", "채팅 전송 실패");
             return "medical/consultationRoom";
         }

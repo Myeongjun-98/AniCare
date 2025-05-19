@@ -6,74 +6,165 @@
 <head>
     <th:block layout:fragment="css"></th:block>
     <th:block layout:fragment="script"></th:block>
+    <link href="/css/medical/petinfo.css" rel="stylesheet">
     <link href="/css/medical/clinicdiarydetail.css" rel="stylesheet">
 
 </head>
 <div id="main" layout:fragment="main">
-    <div class="board-detail-wrap">  <!-- ▼ 게시글 상세보기 ▼ -->
-        <div>       <!-- 게시글 영역 -->
-            <div><!--  게시글 정보영역  -->
-                <div>
-                    <h3 class="board-detail-title" th:text="${clinicDiaryDto.boardTitle}"></h3>
-                    <br>
-                    <p class="board-detail-writeDate" th:text="|기록일 : ${clinicDiaryDto.clinicDiaryRecordDate}|"></p>
-                </div>
-                <div>
-                    <h4 style="color: #2999F3FF">진료수첩</h4>
-                    <p class="board-detail-boardHit" th:text="|조회수 : ${clinicDiaryDto.boardHit}|"></p>
-                    <p th:text="${clinicDiaryDto.status}"></p>
-                </div>
-            </div>
+    <div id="container">
 
-            <br>
-            <div>          <!-- 내용 -->
-                <div class="board-detail-image">
+        <div class="pet-info">   <!-- 반려동물 정보 영역 -->
 
-                    <!-- 이미지 1장일 때 -->
-                    <div class="single-image" th:if="${clinicDiaryDto.boardFiles.size() == 1}">
-                        <img class="boardFile"
-                             th:src="${clinicDiaryDto.boardFiles[0].fileUrl}"
-                             width="700">
+            <!-- outer table: 2 columns, 33% / 67% -->
+            <table style="border-collapse:collapse;">
+                <colgroup>
+                    <col style="width:33%;"/>
+                    <col style="width:67%;"/>
+                </colgroup>
+                <tr>
+                    <!-- 왼쪽 셀: 프로필 + 이름/나이·성별 -->
+                    <td style="vertical-align:top; padding:0;">
+                        <table style="width:100%; border:1px solid #ccc; border-collapse:collapse;">
+                            <!-- 프로필 이미지, 나중에 바꾸어야 함 -->
+                            <tr>
+                                <td style="padding:8px; text-align:center;">
+                                    <img alt="pet image"
+                                         th:if="${not #strings.isEmpty(petInfo.petImage)}"
+                                         th:src="@{/anicareFile/{file}(file=${petInfo.petImage})}"
+                                    />
+                                </td>
+                            </tr>
+                            <!-- 이름 / 나이·성별 -->
+                            <tr>
+                                <td style="padding:8px;">
+                                    <div><strong th:text="${petInfo.petName}">이름</strong></div>
+                                    <div>
+                                        <span th:text="${petInfo.petAge}">0</span>세 /
+                                        <span th:text="${petInfo.petSex}">성별</span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+
+                    <!-- 오른쪽 셀: 나머지 정보 -->
+                    <td style="vertical-align:top; padding:0;">
+                        <table style="width:100%; border:1px solid #ccc; border-collapse:collapse;">
+                            <!-- 동물종 -->
+                            <tr>
+                                <th style="text-align:center; padding:8px; border:1px solid #ccc;">
+                                    동물종
+                                </th>
+                                <td style="padding:8px 8px 8px 20px; border:1px solid #ccc;"
+                                    th:text="${petInfo.petSpecies}">
+                                </td>
+                            </tr>
+                            <!-- 동물품종 -->
+                            <tr>
+                                <th style="text-align:center; padding:8px; border:1px solid #ccc;">
+                                    몸무게
+                                </th>
+                                <td style="padding:8px 8px 8px 20px; border:1px solid #ccc;"
+                                    th:text="${petInfo.petBreed}">몸무게
+                                </td>
+                            </tr>
+                            <!-- 병명 (여러 개) -->
+                            <tr>
+                                <th style="text-align:center; padding:8px; border:1px solid #ccc;">
+                                    병명 정보
+                                </th>
+                                <td style="padding:8px 8px 8px 20px; border:1px solid #ccc;">
+                                    <ul class="inline-list">
+                                        <li th:each="d : ${petInfo.diseases}"
+                                            th:text="${d.diseaseName}">질병명
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <!-- 알러지 정보 -->
+                            <tr>
+                                <th style="text-align:center; padding:8px; border:1px solid #ccc;">
+                                    알러지 정보
+                                </th>
+                                <td style="padding:8px 8px 8px 20px; border:1px solid #ccc;">
+                                    <ul class="inline-list">
+                                        <li th:each="a : ${petInfo.allergies}"
+                                            th:text="${a.allergyName}">알러지명
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="board-detail-wrap">  <!-- ▼ 게시글 상세보기 ▼ -->
+            <div>       <!-- 게시글 영역 -->
+                <div><!--  게시글 정보영역  -->
+                    <div>
+                        <h3 class="board-detail-title" th:text="${clinicDiaryDto.boardTitle}"></h3>
+                        <br>
+                        <p class="board-detail-writeDate" th:text="|기록일 : ${clinicDiaryDto.clinicDiaryRecordDate}|"></p>
                     </div>
+                    <div>
+                        <h4 style="color: #2999F3FF">진료수첩</h4>
+                        <p class="board-detail-boardHit" th:text="|조회수 : ${clinicDiaryDto.boardHit}|"></p>
+                        <p th:text="${clinicDiaryDto.status}"></p>
+                    </div>
+                </div>
 
-                    <!-- 이미지가 2장 이상일 때 -->
-                    <div class="carousel slide" id="carouselExample" th:if="${clinicDiaryDto.boardFiles.size() > 1}">
-                        <div class="carousel-inner">
-                            <div th:class="'carousel-item' + ${iterStat.index == 0 ? ' active' : ''}"
-                                 th:each="file, iterStat : ${clinicDiaryDto.boardFiles}">
-                                <img alt="..." class="d-block w-100" th:src="${file.fileUrl}">
-                            </div>
+                <br>
+                <div>          <!-- 내용 -->
+                    <div class="board-detail-image">
+
+                        <!-- 이미지 1장일 때 -->
+                        <div class="single-image" th:if="${clinicDiaryDto.boardFiles.size() == 1}">
+                            <img class="boardFile"
+                                 th:src="${clinicDiaryDto.boardFiles[0].fileUrl}"
+                                 width="700">
                         </div>
-                        <button class="carousel-control-prev" data-bs-slide="prev" data-bs-target="#carouselExample"
-                                type="button">
-                            <span aria-hidden="true" class="carousel-control-prev-icon"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" data-bs-slide="next" data-bs-target="#carouselExample"
-                                type="button">
-                            <span aria-hidden="true" class="carousel-control-next-icon"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
+
+                        <!-- 이미지가 2장 이상일 때 -->
+                        <div class="carousel slide" id="carouselExample"
+                             th:if="${clinicDiaryDto.boardFiles.size() > 1}">
+                            <div class="carousel-inner">
+                                <div th:class="'carousel-item' + ${iterStat.index == 0 ? ' active' : ''}"
+                                     th:each="file, iterStat : ${clinicDiaryDto.boardFiles}">
+                                    <img alt="..." class="d-block w-100" th:src="${file.fileUrl}">
+                                </div>
+                            </div>
+                            <button class="carousel-control-prev" data-bs-slide="prev" data-bs-target="#carouselExample"
+                                    type="button">
+                                <span aria-hidden="true" class="carousel-control-prev-icon"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" data-bs-slide="next" data-bs-target="#carouselExample"
+                                    type="button">
+                                <span aria-hidden="true" class="carousel-control-next-icon"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+
                     </div>
 
+                    <p class="board-detail-boardContent" th:text="${clinicDiaryDto.boardContent}"></p>
                 </div>
 
-                <p class="board-detail-boardContent" th:text="${clinicDiaryDto.boardContent}"></p>
-            </div>
 
-
-            <div class="count-box"> <!-- 좋아요(눌렀을 시 on/off 및 카운팅 필요 -->
-                <div class="board-detail-likeCount-box">
-                    <svg class="bi bi-heart-fill" fill="currentColor" height="16" viewBox="0 0 16 16"
-                         width="16" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"
-                              fill-rule="evenodd"/>
-                    </svg>
-                    <p class="board-detail-likeCount" th:text="${clinicDiaryDto.boardLikeCount}"></p>
+                <div class="count-box"> <!-- 좋아요(눌렀을 시 on/off 및 카운팅 필요 -->
+                    <div class="board-detail-likeCount-box">
+                        <svg class="bi bi-heart-fill" fill="currentColor" height="16" viewBox="0 0 16 16"
+                             width="16" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"
+                                  fill-rule="evenodd"/>
+                        </svg>
+                        <p class="board-detail-likeCount" th:text="${clinicDiaryDto.boardLikeCount}"></p>
+                    </div>
                 </div>
-            </div>
 
-        </div> <!-- ▲ 게시글 상세보기 끝 ▲ -->
+            </div> <!-- ▲ 게시글 상세보기 끝 ▲ -->
+        </div>
     </div>
 </div>
 
