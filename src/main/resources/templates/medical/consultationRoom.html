@@ -18,7 +18,6 @@
         </div>  <!-- 채팅방 정보 -->
 
         <div>   <!-- 채팅방 영역 -->
-            <p th:text="'history size = ' + ${history.size()}">history size</p>
             <div th:each="m : ${history}">
                 <p>
                     <span th:text="${m.senderName}"></span>
