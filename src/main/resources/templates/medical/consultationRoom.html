@@ -18,16 +18,19 @@
         </div>  <!-- 채팅방 정보 -->
 
         <div>   <!-- 채팅방 영역 -->
+            <p th:text="'history size = ' + ${history.size()}">history size</p>
             <div th:each="m : ${history}">
                 <p>
-                    <span th:text="${history.senderName}"></span>
-                    <span th:text="${history.content}"></span>
-                    <small th:text="${#temporals.format(history.sendAt, 'HH:mm')}"></small>
+                    <span th:text="${m.senderName}"></span>
+                    <span th:text="${m.content}"></span>
+                    <small th:text="${#temporals.format(m.sentAt, 'HH:mm')}"></small>
                 </p>
             </div>
         </div>
 
-        <form method="post" th:action="@{/medical/consultationRoom/{roomId}/send(roomId=${roomId})}">
+        <form method="post" th:action="@{/medical/consultationRoom/send}">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+            <input type="hidden" name="id" th:value="${roomInfo.consultationId}">
             <input autocomplete="off" name="content" placeholder="메시지를 입력하세요" type="text"/>
             <button type="submit">전송</button>
         </form>
