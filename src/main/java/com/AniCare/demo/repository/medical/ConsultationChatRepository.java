@@ -11,26 +11,8 @@ import java.util.List;
 @Repository
 public interface ConsultationChatRepository extends JpaRepository<ConsultationChat, Long> {
 
-    @Query("""
-              SELECT new com.AniCare.demo.Dto.medical.ConsultationChatListDto(
-                cm.id,
-                c.id,
-                case
-                  when cm.senderUser is not null then com.AniCare.demo.constant.MainPage.SenderType.USER else com.AniCare.demo.constant.MainPage.SenderType.VET
-                end,
-                coalesce(cm.senderUser.id, cm.senderVet.id),
-                coalesce(cm.senderUser.userName, cm.senderVet.vetName),
-                cm.content,
-                cm.sendAt,
-                cm.readFlag
-              )
-              FROM ConsultationChat cm
-                JOIN cm.consultation c
-              WHERE c.id = :consultationId
-              ORDER BY cm.sendAt
-            """)
-    List<ConsultationChatListDto> findMessagesByConsultation(Long consultationId);
-
+    //채팅 메시지 조회
+    List<ConsultationChat> findAllByConsultationId(Long consultationId);
 
     // 안읽은 메시지가 있는지 조회(단수)
     boolean existsByConsultation_IdAndReadFlagFalse(Long roomId);

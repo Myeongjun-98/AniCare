@@ -16,6 +16,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+
     @Autowired
     UserService userService;
 
@@ -31,7 +32,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/", "/anicare", "/anicare/**",
                                 "/mainpage", "/mainpage/**",
-                                "/signup", "/image/**", "/anicareFile/**",
+                                "/signup", "/image/**", "/anicareFile/**", "/community/**",
                                 "/css/**", "/javascript/**", "/mypage").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/user/**").hasAnyRole("USER", "ADMIN")

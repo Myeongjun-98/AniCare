@@ -20,7 +20,7 @@ public class Board { //게시글 정보를 저장하는 Entity
     @Column(nullable = false)
     private String boardTitle; //게시글 제목
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user; //작성자 아이디
 

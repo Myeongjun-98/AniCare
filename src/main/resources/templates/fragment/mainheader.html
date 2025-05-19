@@ -2,6 +2,7 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
                 xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
+
 <!-- 헤더 영역 -->
 <header th:fragment="header">
 
@@ -10,7 +11,7 @@
         <a href="/anicare" class="site-title" >ANICARE</a>
         <h1 class="logo">
             <li><a href="/medical/medicalMain">메디컬</a></li> |
-            <li><a href="/commnuitymain">커뮤니티</a></li>
+            <li><a href="/community/commain">커뮤니티</a></li>
         </h1>
     </div>
     <div class="search-container">
@@ -21,7 +22,9 @@
     <!--  로그인 성공시 로그아웃 버튼으로 바뀜 -->
     <div class="auth-buttons" sec:authorize="isAnonymous()">
         <button class="login-btn" onclick="location.href='/mainpage/userlogin'">로그인</button>
+        <button class="vetlogin-btn" onclick="location.href='/mainpage/vetlogin'">수의사 로그인</button>
         <button class="signup-btn" onclick="location.href='/mainpage/usersignup'">회원가입</button>
+        <button class="vetsignup-btn" onclick="location.href='/mainpage/vetsignup'">수의사 회원가입</button>
     </div>
 
     <div  sec:authorize="isAuthenticated()">

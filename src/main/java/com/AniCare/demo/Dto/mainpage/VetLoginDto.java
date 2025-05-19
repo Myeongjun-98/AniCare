@@ -11,9 +11,4 @@ public class VetLoginDto {
     private String vetId;
     private String vetPassword;
 
-    public VetLoginDto from (VetInfo vetInfo){
-        VetLoginDto vetLoginDto = new VetLoginDto();
-
-        return vetLoginDto;
-    }
 }
