@@ -74,16 +74,16 @@ public class UserService implements UserDetailsService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userRepository.findByUserEmail(email).orElse(null);
 //                .orElseThrow(() -> new UsernameNotFoundException("이메일을 찾을 수 없습니다: " + email));
-        String username =null , password=null, role=null;
-        if( user ==null ) {
+        String username = null, password = null, role = null;
+        if (user == null) {
             VetInfo vetInfo = vetRepository.findByVetId(email);
             username = vetInfo.getVetId();
-            password=vetInfo.getVetPassword();
-            role= Authorization.USER.toString();
-        }else{
-            username= user.getUserEmail();
-            password=user.getUserPassword();
-            role=String.valueOf(user.getAuthorization());
+            password = vetInfo.getVetPassword();
+            role = Authorization.USER.toString();
+        } else {
+            username = user.getUserEmail();
+            password = user.getUserPassword();
+            role = String.valueOf(user.getAuthorization());
         }
 
         return org.springframework.security.core.userdetails.User.builder()
@@ -96,10 +96,15 @@ public class UserService implements UserDetailsService {
     public boolean isVetLogin(String name) {
 
         VetInfo vetInfo = vetRepository.findByVetId(name);
-        if( vetInfo == null) return false;
-
-        return true;
+        return vetInfo != null;
     }
+
+    public UserDetailDto getVetDetail(String name) {
+        VetInfo vetInfo = vetRepository.findByVetId(name);
+
+        return UserDetailDto.from(vetInfo);
+    }
+
 }
 
 

@@ -1,6 +1,7 @@
 package com.AniCare.demo.Dto.medical;
 
 import com.AniCare.demo.constant.medical.PetSpecies;
+import com.AniCare.demo.entity.medical.VetInfo;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,4 +24,18 @@ public class VetInfoDto {
     private LocalTime onWorkTime;   // 근무시간(시작)
     private LocalTime offWorkTime;  // 근무시간(끝)
     private double averageRating;   // 별점
+
+    public static VetInfoDto createDto(VetInfo vetInfo) {
+        VetInfoDto vetInfoDto = new VetInfoDto();
+        vetInfoDto.setVetInfoId(vetInfo.getId());
+        vetInfoDto.setProfileImage(vetInfo.getProfileImage());
+        vetInfoDto.setVetName(vetInfo.getVetName());
+        vetInfoDto.setHospitalName(vetInfo.getHospital() == null ? null : vetInfo.getHospital().getHospitalName());
+        vetInfoDto.setCuringCapable(vetInfo.getCuringCapable());
+        vetInfoDto.setOnWorkTime(vetInfo.getOnWorkTime());
+        vetInfoDto.setOffWorkTime(vetInfo.getOffWorkTime());
+
+        return vetInfoDto;
+    }
+
 }

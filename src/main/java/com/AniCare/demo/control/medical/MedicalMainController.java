@@ -14,23 +14,19 @@ public class MedicalMainController {
 
     private final UserService userService;
 
-    // 메디컬 메인페이지
     @GetMapping("/medical/medicalMain")
     public String medicalMainPage(Model model, Principal principal) {
 
-            // 헤더에 사용자 정보 띄우기
-        if (principal.getName() != null) {
-            model.addAttribute("userDetailDto", userService.getUserDetail(principal.getName()));
+        // 헤더에 사용자 정보 띄우기
+        if (principal != null) {
+            boolean hasVet = userService.isVetLogin(principal.getName());
+            if (hasVet) {
+                model.addAttribute("userDetailDto", userService.getVetDetail(principal.getName()));
+            } else
+                model.addAttribute("userDetailDto", userService.getUserDetail(principal.getName()));
         }
 
         return "medical/medicalMain";
     }
-
-    // 메디컬 수의사페이지
-    @GetMapping("/medical/vet/vetPage")
-    public String vetPage(Model model) {
-        return "medical/vet/vetPage";
-    }
-
 
 }

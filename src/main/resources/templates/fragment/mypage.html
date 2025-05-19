@@ -8,7 +8,7 @@
         <h2>마이페이지</h2>
         <button id="closeSidebar" class="close-btn">×</button>
     </div>
-    <!--  로그인 상태일 때 보여줄 내용   -->
+    <!--  로그인 산태일 때 보여줄 내용   -->
     <div class="userInfo" th:if="${userDetailDto != null}">
 
     <!-- 로그인 상태 -->
@@ -22,12 +22,24 @@
         </div>
         <button class="edit-btn">수정</button>
     </div>
-    <div class="pet-slider">
+    <nav th:if="${userDetailDto.isVet}" class="sidebar-menu">
+        <ul>
+            <li>
+                <details>
+                    <summary>내정보</summary>
+                    <ul>
+                        <li><a href="/medical/vet/vetPage">진료기록 보기</a></li>
+                    </ul>
+                </details>
+            </li>
+
+        </ul>
+    </nav>
+    <div  th:if="${!userDetailDto.isVet}" class="pet-slider">
         <!-- 반려동물 정보 슬라이드 -->
         <div class="pet-slider">
             <div class="pet-card">
                 <div class="pet-front">
-
                     <img th:src="@{petDetailDto?.petImg}" alt="반려동물프로필 사진">
                     <h4 th:if="${petDetailDto != null}" th:text="${petDetailDto.petName}"></h4>
                 </div>
@@ -43,7 +55,7 @@
     </div>
 
     <!-- 메뉴 카테고리 -->
-    <nav class="sidebar-menu">
+    <nav th:if="${!userDetailDto.isVet}" class="sidebar-menu">
         <ul>
             <li>
                 <details>

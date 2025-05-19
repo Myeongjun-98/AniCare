@@ -1,24 +1,27 @@
 package com.AniCare.demo.service.medical;
 
+import com.AniCare.demo.Dto.admin.HospitalDto;
 import com.AniCare.demo.Dto.medical.VetAverageReviewDto;
 import com.AniCare.demo.Dto.medical.VetInfoDto;
 import com.AniCare.demo.Dto.medical.VetInfoListDto;
 import com.AniCare.demo.constant.medical.PetSpecies;
+import com.AniCare.demo.entity.admin.Hospital;
 import com.AniCare.demo.entity.medical.VetInfo;
+import com.AniCare.demo.repository.admin.HospitalRepository;
 import com.AniCare.demo.repository.medical.VetRepository;
 import com.AniCare.demo.repository.medical.VetReviewRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class VetService {
-    @Autowired
-    private VetRepository vetRepository;
-    @Autowired
-    private VetReviewRepository vetReviewRepository;
+    private final VetRepository vetRepository;
+    private final VetReviewRepository vetReviewRepository;
+    private final HospitalRepository hospitalRepository;
 
     // 수의사 리스트 별점순으로 정렬하기
     public List<VetInfoListDto> getVetsWithRatings() {
@@ -105,6 +108,27 @@ public class VetService {
                 avg
         );
 
+    }
+
+    public VetInfoDto getVetDefaultInfo(String name) {
+
+        VetInfo vetInfo = vetRepository.findByVetId(name);
+        VetInfoDto vetInfoDto = VetInfoDto.createDto(vetInfo);
+
+        return vetInfoDto;
+
+    }
+
+    public HospitalDto getHospitalInfo(String name) {
+        VetInfo vetInfo = vetRepository.findByVetId(name);
+        HospitalDto hospitalDto = new HospitalDto();
+        if (vetInfo.getHospital() != null) {
+            Hospital hospital = hospitalRepository.findById(vetInfo.getHospital().getId()).get();
+            hospitalDto = HospitalDto.from(hospital);
+        }
+
+
+        return hospitalDto;
     }
 
 }

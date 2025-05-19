@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+<html lang="ko" layout:decorate="~{fragment/default}"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{fragment/default}">
+      xmlns:th="http://www.thymeleaf.org">
 
 <th:block layout:fragment="css">
     <link rel="stylesheet" src="/css/signup.css">
@@ -11,8 +11,9 @@
             margin: 0 auto;
             padding: 2rem;
             border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
         }
+
         .error-message {
             color: #dc3545;
             font-size: 0.875rem;
@@ -30,32 +31,32 @@
             <h2 class="text-center mb-4">로그인</h2>
 
             <!-- 에러 메시지 표시 -->
-            <div th:if="${param.error}" class="alert alert-danger">
+            <div class="alert alert-danger" th:if="${param.error}">
                 <span th:text="${param.exception != null} ? ${param.exception} : '이메일 또는 비밀번호가 잘못되었습니다.'"></span>
             </div>
 
-            <form th:action="@{/mainpage/userlogin}" method="post">
-                <!-- 이메일 입력 -->
+            <form method="post" th:action="@{/mainpage/userlogin}">
+                <!-- 이메일(수의사 : 아이디) 입력 -->
                 <div class="mb-3">
-                    <label for="email" class="form-label">이메일</label>
-                    <input type="email" class="form-control" id="email"
-                           name="email" placeholder="example@anicare.com" required>
+                    <label class="form-label" for="email">이메일</label>
+                    <input class="form-control" id="email" name="email"
+                           placeholder="example@anicare.com" required type="text">
                 </div>
 
                 <!-- 비밀번호 입력 -->
                 <div class="mb-3">
-                    <label for="password" class="form-label">비밀번호</label>
-                    <input type="password" class="form-control" id="password"
-                           name="password" placeholder="비밀번호 입력" required>
+                    <label class="form-label" for="password">비밀번호</label>
+                    <input class="form-control" id="password" name="password"
+                           placeholder="비밀번호 입력" required type="password">
                 </div>
 
                 <!-- 로그인 버튼 -->
-                <button type="submit" class="btn btn-primary w-100 py-2">로그인</button>
+                <button class="btn btn-primary w-100 py-2" type="submit">로그인</button>
             </form>
 
             <div class="mt-3 text-center">
                 <span>아직 회원이 아니신가요?</span>
-                <a th:href="@{/mainpage/usersignup}" class="ms-2">회원가입</a>
+                <a class="ms-2" th:href="@{/mainpage/usersignup}">회원가입</a>
             </div>
         </div>
     </div>

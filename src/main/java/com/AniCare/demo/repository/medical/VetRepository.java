@@ -30,4 +30,6 @@ public interface VetRepository extends JpaRepository<VetInfo, Long> {
     Optional<VetInfo> findWithDetailById(@Param("id") Long id);
 
     VetInfo findByVetId(String email);
+
+    VetInfo findByVetName(String name);
 }
