@@ -139,6 +139,7 @@ public class CommunityController {
     @PostMapping("/community/board/boardDetail/commentSave")
     public String commentSave(@Valid CommentForm commentForm,
                               BindingResult bindingResult,
+                              Principal principal,
                               Model model){
 
         //dto에 지정해준 오류가 발생할 시:
@@ -148,8 +149,10 @@ public class CommunityController {
             return "community/board/boardDetail";
         }
 
+        String email = principal.getName();
+
         try {
-            commentService.saveComment(commentForm);
+            commentService.saveComment(commentForm, email);
         }catch(Exception e){ //덧글 저장 과정에서 오류 발생시:
             BoardDetailDto board = boardService.getBoardDetail(commentForm.getBoardId());
             model.addAttribute("board", board);

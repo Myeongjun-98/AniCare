@@ -132,6 +132,7 @@ public class BoardService {
         //게시글 작성자 정보 불러오기
         boardDetailDto.setUserName(userBoardInfo.getUserName());
         boardDetailDto.setUserAddress(userBoardInfo.getUserAddress());
+        boardDetailDto.setUserImage(userBoardInfo.getUserImage());
 
         //게시글 덧글수 불러오기
         int comCount = commentRepository.countByBoardId(boardId);
