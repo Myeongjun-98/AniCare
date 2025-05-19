@@ -14,15 +14,15 @@
             <li><a href="/community/commain">커뮤니티</a></li>
         </h1>
     </div>
+    <form th:action="@{/mainpage/mainsearch}" method="get">
     <div class="search-container">
-        <input type="text" placeholder="검색어를 입력하세요 (해시태그 가능)" />
+        <input type="text" name="keyword" placeholder="검색어를 입력하세요 (해시태그 가능)" />
         <button class="search-btn"><i class="material-icons">search</i></button>
     </div>
-
+    </form>
     <!--  로그인 성공시 로그아웃 버튼으로 바뀜 -->
     <div class="auth-buttons" sec:authorize="isAnonymous()">
         <button class="login-btn" onclick="location.href='/mainpage/userlogin'">로그인</button>
-        <button class="vetlogin-btn" onclick="location.href='/mainpage/vetlogin'">수의사 로그인</button>
         <button class="signup-btn" onclick="location.href='/mainpage/usersignup'">회원가입</button>
         <button class="vetsignup-btn" onclick="location.href='/mainpage/vetsignup'">수의사 회원가입</button>
     </div>

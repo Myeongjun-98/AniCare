@@ -8,7 +8,7 @@
         <h2>마이페이지</h2>
         <button id="closeSidebar" class="close-btn">×</button>
     </div>
-    <!--  로그인 산태일 때 보여줄 내용   -->
+    <!--  로그인 상태일 때 보여줄 내용   -->
     <div class="userInfo" th:if="${userDetailDto != null}">
 
     <!-- 로그인 상태 -->
@@ -27,6 +27,7 @@
         <div class="pet-slider">
             <div class="pet-card">
                 <div class="pet-front">
+
                     <img th:src="@{petDetailDto?.petImg}" alt="반려동물프로필 사진">
                     <h4 th:if="${petDetailDto != null}" th:text="${petDetailDto.petName}"></h4>
                 </div>

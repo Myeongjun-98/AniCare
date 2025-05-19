@@ -32,8 +32,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/", "/anicare", "/anicare/**",
                                 "/mainpage", "/mainpage/**",
-                                "/signup", "/image/**", "/anicareFile/**", "/community/**",
-                                "/css/**", "/javascript/**", "/mypage").permitAll()
+                                "/signup", "/image/**", "/anicareFile/**",
+                                "/css/**", "/javascript/**", "/mypage","/search","/search/**").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/user/**").hasAnyRole("USER", "ADMIN")
                         .anyRequest().authenticated()

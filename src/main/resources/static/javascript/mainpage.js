@@ -111,4 +111,6 @@ document.addEventListener("DOMContentLoaded", function () {
       searchBtn.click();
     }
   });
+
 });
+
