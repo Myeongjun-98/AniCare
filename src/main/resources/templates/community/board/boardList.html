@@ -4,7 +4,9 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{fragment/default}">
 <head>
-    <th:block layout:fragment="css"></th:block>
+    <th:block layout:fragment="css">
+        <link rel="stylesheet" href="/css/community/boardList.css">
+    </th:block>
     <th:block layout:fragment="script"></th:block>
 </head>
 <div layout:fragment="main" id="main"> <!-- ▼ main ▼ -->
@@ -55,7 +57,9 @@
                     type="button"
                     style="background-color: #FFA500;"
                     href="/community/board/boardWrite">
-                게시글 작성하기
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                    <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z"/>
+                </svg>
             </a>
         </div>
     </div> <!-- ▲ 카테고리버튼/작성 버튼 끝 ▲ -->
@@ -66,12 +70,14 @@
 
             <div th:if="${category == 'ALL' or board.category == category}" class="board-card-body">
                 <a th:href="@{ '/community/board/boardDetail/'+${board.id} }">
-                    <img th:src="${board.fileUrl}" class="board-card-thumbnailFile" width="400" height="400" style="object-fit:cover;">
+                    <img th:src="${board.userFile}" class="userImg"
+                        style="width:100px; height:100px; object-fit:cover;">
                     <h3 class="board-card-userName" th:text="${board.userName}"></h3> <!-- 작성자 이름 -->
                     <p class="board-card-writeDate" th:text="${board.boardWriteDate}"></p> <!-- 게시글 작성일 -->
-                    <p class="board-card-boardHit" th:text="${board.boardHit}"></p> <!-- 게시글 조회수 -->
+                    <p class="board-card-boardHit" th:text="'조회수: ' + ${board.boardHit}"></p> <!-- 게시글 조회수 -->
                     <p class="board-card-content" th:text="${board.boardContent}"
-                    style="white-space: nowrap; overflow:hidden; text-overflow: ellipsis; max-width:400px;"></p> <!-- 게시글 내용 -->
+                       style="white-space: nowrap; overflow:hidden; text-overflow: ellipsis; max-width:400px;">></p>
+                    <img th:src="${board.fileUrl}" class="board-card-thumbnailFile" width="400" height="400" style="object-fit:cover;"> <!-- 게시글 내용 -->
                 </a>
             </div>
 

@@ -1,0 +1,173 @@
+/* boardWrite.css */
+
+@font-face {
+    font-family: 'yg-jalnan';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@import url('https://font.elice.io/css?family=Elice+DX+Neolli');
+
+*{
+    font-family: 'Elice DX Neolli', sans-serif;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    list-style:none;
+}
+
+#main {
+  padding: 0 150px;
+}
+
+/* 게시글 작성 영역 */
+.board-write {
+  position: relative;
+  margin: 40px 0;
+  padding: 40px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* 게시 버튼 우상단 */
+button#button-addon2 {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  background-color: #ffa500;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+button#button-addon2:hover {
+  background-color: #e59400;
+}
+
+/* 상단 선택 박스 */
+.board-write-selectedBox {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.board-select-wrap {
+  display: flex;
+  gap: 10px;
+}
+
+.form-select {
+  padding: 8px 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: #fafafa;
+}
+.form-select:focus {
+  border-color: #ffa500;
+  outline: none;
+}
+.fieldError {
+  font-size: 12px;
+  color: #d9534f;
+  margin-top: 4px;
+}
+
+/* 제목 고정 크기 */
+.boardWrite-title input.form-control {
+  width: 530px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+.boardWrite-title .form-label {
+  font-weight: 600;
+  margin-bottom: 8px;
+  display: block;
+}
+
+/* 내용 + 미리보기 그리드 레이아웃 */
+.boardWrite-content {
+  display: grid;
+  grid-template-columns: 650px auto;
+  gap: 20px;
+  background: white;
+}
+.boardWrite-content .form-label {
+  grid-column: 1 / 2;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.boardWrite-content textarea.form-control {
+  grid-column: 1 / 2;
+  width: 100%;
+  height: 300px;
+  resize: none;
+  box-sizing: border-box;
+  border: none;
+}
+
+/* 미리보기 박스 크기 */
+#imagePreview {
+  grid-column: 3 / 3;
+  width: 100%;
+  height: 300px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 5px;             /* 이미지 간격 좁힘 */
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  background: #fafafa;
+}
+#imagePreview img {
+  width: 100%;
+  aspect-ratio: 1 / 1;  /* 정사각형 유지 */
+  object-fit: cover;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* 이미지 업로드 버튼 */
+.boardWrite-imgPreview {
+  margin-top: 10px;
+}
+#formFile { display: none; }
+#imgUploadBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+#imgUploadBtn svg {
+  width: 24px;
+  height: 24px;
+  color: #555;
+}
+#imgUploadBtn:hover svg {
+  color: #000;
+}
+
+/* 폼 공통 스타일 */
+.form-control {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 8px 12px;
+  font-size: 14px;
+  background: #fafafa;
+  transition: border-color 0.2s;
+}
+.form-control:focus {
+  border-color: #ffa500;
+  box-shadow: none; /* 부트스트랩 기본 파란 그림자 제거 */
+  outline: none;
+
+  border-color: #ffa500;
+  outline: none;
+}

@@ -26,7 +26,7 @@ public class BoardListMainDto {
 
     private int boardHit; //게시글 조회수
 
-//    private String userFile; //작성자 프로필이미지
+    private String userFile; //작성자 프로필이미지
 
     private String userName; //게시글 작성자
 
