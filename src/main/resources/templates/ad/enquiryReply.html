@@ -7,13 +7,14 @@
 <head>
     <meta charset="UTF-8"/>
     <title>문의 응답</title>
+
     <link rel="stylesheet" href="/css/ad/er.css">
 </head>
 
 <body>
 <div layout:fragment="main" class="report-container">
 
-    <!-- ✅ 네비게이션 -->
+    <!--  네비게이션 -->
     <nav class="nav-container">
         <a href="/ad/reportList" class="nav-btn">신고</a>
         <a href="/ad/enquiryReply" class="nav-btn">문의</a>
@@ -25,7 +26,7 @@
 
     <h2 class="mb-4">문의 목록</h2>
 
-    <!-- ✅ 문의 테이블 -->
+    <!--  문의 테이블 -->
     <table class="custom-table">
         <thead>
         <tr>
@@ -59,7 +60,7 @@
     </table>
 </div>
 
-<!-- ✅ 답변 모달 -->
+<!--  답변 모달 -->
 <div class="modal fade" id="replyModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -89,7 +90,7 @@
     </div>
 </div>
 
-<!-- ✅ 스크립트 -->
+<!--  스크립트 -->
 <script>
     function fillModal(row) {
         const id = row.getAttribute("data-id");

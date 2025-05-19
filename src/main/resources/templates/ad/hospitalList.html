@@ -11,6 +11,8 @@
 
 <body>
 <div layout:fragment="main" class="report-container">
+
+  <!-- ✅ 네비게이션 -->
   <nav class="nav-container">
     <a href="/ad/reportList" class="nav-btn">신고</a>
     <a href="/ad/enquiryReply" class="nav-btn">문의</a>
@@ -40,17 +42,15 @@
         <td th:text="${hospital.hospitalName}">병원명</td>
         <td th:text="${hospital.hospitalTel}">전화</td>
         <td th:text="${hospital.hospitalAddress}">주소</td>
-        <td>
-          <ul class="clinic-type-list">
-            <li th:each="type : ${hospital.clinicTypeList}" th:text="'* ' + type">진료유형</li>
-          </ul>
-        </td>
+
+
+        <td th:text="${#strings.listJoin(hospital.clinicTypeList, ', ')}">진료유형</td>
+
         <td th:text="${hospital.device}">장비</td>
-        <td>
-          <ul class="vet-name-list">
-            <li th:each="vet : ${hospital.vetList}" th:text="'• ' + ${vet.vetName}">수의사</li>
-          </ul>
-        </td>
+
+
+        <td th:text="${#strings.listJoin(hospital.vetNameList, ', ')}">수의사</td>
+
         <td>
           <a th:href="@{'/ad/hospital/edit/' + ${hospital.id}}" class="btn btn-sm btn-outline-green">수정</a>
           <form th:action="@{'/ad/hospital/delete/' + ${hospital.id}}" method="post" style="display:inline;">
@@ -69,6 +69,7 @@
       alert("병원 정보가 삭제되었습니다.");
     }
   </script>
+
 </div>
 </body>
 </html>

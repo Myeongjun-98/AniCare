@@ -118,13 +118,13 @@ h2, .modal-title {
   color: white;
 }
 
-/* ✅ table-hover 효과 */
+/* table-hover 효과 */
 .table-hover tbody tr:hover {
   background-color: #f6fdf8;
   cursor: pointer;
 }
 
-/* ✅ 진료유형 리스트용 */
+/* 진료유형 리스트용 */
 .clinic-type-list {
   list-style: none;
   padding-left: 0;
@@ -136,7 +136,7 @@ h2, .modal-title {
   color: #4CAF50;
 }
 
-/* ✅ 반응형 대응 */
+/*  반응형 대응 */
 @media (max-width: 768px) {
   .report-container {
     padding: 20px;
