@@ -33,7 +33,7 @@ public class ClinicDiary {
     @Enumerated(EnumType.STRING)
     private PetStatus status;       // 반려동물 병 상태 ( 판정, 투병중, 완치, 기타 )
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "hospital_id")
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @JoinColumn(name = "hospital_id", nullable = true)
     private Hospital hospital;      // 병원테이블 정보
 }

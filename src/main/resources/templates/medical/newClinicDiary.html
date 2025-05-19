@@ -52,14 +52,15 @@
                         <label class="form-label" th:for="${'files' + num}" th:text="파일+${num}">첨부파일</label>
                         <input type="file" class="form-control" th:field="*{files}" th:id="${'files' + num}">
                     </div>
-                    <!-- 임시 첨부파일 input-->
+
+
                     <div class="form-group">
                         <label for="hospital">병원 선택 (선택 사항)</label>
                         <select id="hospital"
                                 th:field="*{hospitalId}"
                                 class="form-control">
                             <!-- 빈 값 옵션: 값이 비어있으면 hospitalId는 null로 바인딩 -->
-                            <option th:value="null" th:text="'선택 안 함'"></option>
+                            <option value="0" th:text="'선택 안 함'"></option>
                             <option th:each="h : ${hospitals}"
                                     th:value="${h.id}"
                                     th:text="${h.hospitalName}">

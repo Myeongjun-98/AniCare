@@ -4,7 +4,10 @@ import com.AniCare.demo.Dto.medical.ClinicDiaryDto;
 import com.AniCare.demo.Dto.medical.ClinicDiaryListDto;
 import com.AniCare.demo.Dto.medical.ClinicDiaryPetInfoDto;
 import com.AniCare.demo.Dto.medical.ClinicDiarySetDto;
+import com.AniCare.demo.constant.community.BoardType;
 import com.AniCare.demo.entity.MainPage.Pet;
+import com.AniCare.demo.entity.MainPage.User;
+import com.AniCare.demo.entity.admin.Hospital;
 import com.AniCare.demo.entity.community.Board;
 import com.AniCare.demo.entity.community.BoardFile;
 import com.AniCare.demo.entity.medical.Allergy;
@@ -27,6 +30,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -43,6 +47,7 @@ public class ClinicDiaryService {
     private final BoardFileService boardFileService;
     private final BoardRepository boardRepository;
     private final mediPetRepository mediPetRepository;
+    private final UserRepository userRepository;
 
     // --------------메서드
 
@@ -116,10 +121,12 @@ public class ClinicDiaryService {
 
     // 진료수첩 저장
     @Transactional
-    public Long clinicDiarySave(ClinicDiarySetDto dto, Long petId) {
+    public void clinicDiarySave(ClinicDiarySetDto dto, Long petId, String email) {
         // 각 객체 생성
         Board b = new Board();
         ClinicDiary cd = new ClinicDiary();
+        User user = userRepository.findByUserEmail(email).orElseThrow();
+
 
         // 반려동물 정보 불러오기
         Pet p = petRepository.findById(petId).orElseThrow(() -> new IllegalStateException("반려동물 정보를 로드할 수 없습니다."));
@@ -127,6 +134,10 @@ public class ClinicDiaryService {
         // 보드 값 삽입 및 저장
         b.setBoardTitle(dto.getBoardTitle());
         b.setBoardContent(dto.getBoardContent());
+        b.setBoardType(BoardType.CLINICDIARY);
+        b.setBoardWriteDate(LocalDate.now());
+        b.setUser(user);
+
         boardRepository.save(b);
 
         // 진료수첩 정보 삽입 및 저장
@@ -134,7 +145,11 @@ public class ClinicDiaryService {
         cd.setBoard(b);
         cd.setClinicDiaryRecordDate(dto.getClinicDiaryRecordDate().atStartOfDay());
         cd.setStatus(dto.getStatus());
-        cd.setHospital(hospitalRepository.findById(dto.getHospitalId()).orElseThrow(() -> new IllegalStateException("병원 정보 없음.")));
+
+        //병원 정보 저장
+        Hospital hospital = hospitalRepository.findById(dto.getHospitalId()).orElse(null);
+        cd.setHospital(hospital);
+
         clinicDiaryRepository.save(cd);
 
         //이미지 업로드 -> board_file 테이블 저장
@@ -165,6 +180,5 @@ public class ClinicDiaryService {
             }
         }
 
-        return petId;
     }
 }
