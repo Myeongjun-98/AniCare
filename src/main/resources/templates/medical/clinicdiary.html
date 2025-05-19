@@ -11,10 +11,10 @@
 <div id="main" layout:fragment="main">
     <div id="container">
 
-        <div>   <!-- 반려동물 정보 영역 -->
+        <div class="pet-info">   <!-- 반려동물 정보 영역 -->
 
             <!-- outer table: 2 columns, 33% / 67% -->
-            <table style="width:100%; border-collapse:collapse;">
+            <table style="border-collapse:collapse;">
                 <colgroup>
                     <col style="width:33%;"/>
                     <col style="width:67%;"/>
@@ -27,8 +27,9 @@
                             <tr>
                                 <td style="padding:8px; text-align:center;">
                                     <img alt="pet image"
-                                         style="max-width:100%; height:auto; display:block;"
-                                         th:text="@{${petInfo.petImage}}"/>
+                                         th:if="${not #strings.isEmpty(petInfo.petImage)}"
+                                         th:src="@{/anicareFile/{file}(file=${petInfo.petImage})}"
+                                    />
                                 </td>
                             </tr>
                             <!-- 이름 / 나이·성별 -->
@@ -49,16 +50,16 @@
                         <table style="width:100%; border:1px solid #ccc; border-collapse:collapse;">
                             <!-- 동물종 -->
                             <tr>
-                                <th style="text-align:left; padding:8px; border:1px solid #ccc;">
+                                <th style="text-align:center; padding:8px; border:1px solid #ccc;">
                                     동물종
                                 </th>
                                 <td style="padding:8px; border:1px solid #ccc;"
-                                    th:text="${petInfo.petSpecies}">종
+                                    th:text="${petInfo.petSpecies}">
                                 </td>
                             </tr>
                             <!-- 동물품종 -->
                             <tr>
-                                <th style="text-align:left; padding:8px; border:1px solid #ccc;">
+                                <th style="text-align:center; padding:8px; border:1px solid #ccc;">
                                     몸무게
                                 </th>
                                 <td style="padding:8px; border:1px solid #ccc;"
@@ -67,11 +68,11 @@
                             </tr>
                             <!-- 병명 (여러 개) -->
                             <tr>
-                                <th style="text-align:left; padding:8px; border:1px solid #ccc;">
-                                    병명
+                                <th style="text-align:center; padding:8px; border:1px solid #ccc;">
+                                    병명 정보
                                 </th>
                                 <td style="padding:8px; border:1px solid #ccc;">
-                                    <ul style="margin:0; padding-left:1.2em;">
+                                    <ul>
                                         <li th:each="d : ${petInfo.diseases}"
                                             th:text="${d.diseaseName}">질병명
                                         </li>
@@ -80,11 +81,11 @@
                             </tr>
                             <!-- 알러지 정보 -->
                             <tr>
-                                <th style="text-align:left; padding:8px; border:1px solid #ccc;">
+                                <th style="text-align:center; padding:8px; border:1px solid #ccc;">
                                     알러지 정보
                                 </th>
                                 <td style="padding:8px; border:1px solid #ccc;">
-                                    <ul style="margin:0; padding-left:1.2em;">
+                                    <ul>
                                         <li th:each="a : ${petInfo.allergies}"
                                             th:text="${a.allergyName}">알러지명
                                         </li>
@@ -97,9 +98,13 @@
             </table>
         </div>
 
-        <div style="display:flex; justify-content: space-between; align-items:center;">
-            <h2>진료수첩 목록</h2>
-            <a class="btn btn-primary" th:href="@{/medical/clinicdiary/new}">글쓰기</a>
+        <div class="list-header">
+            <div>
+                <h2>진료수첩 목록</h2>
+            </div>
+            <div>
+                <a class="btn btn-primary" th:href="@{/medical/clinicdiary/new}">글쓰기</a>
+            </div>
         </div>
 
         <table class="table">

@@ -5,6 +5,7 @@
 <head>
     <th:block layout:fragment="css"></th:block>
     <th:block layout:fragment="script"></th:block>
+    <link href="/css/medical/newclinicdiary.css" rel="stylesheet">
 </head>
 <div id="main" layout:fragment="main">
     <div class="board-detail-wrap">  <!-- ▼ 게시글 상세보기 ▼ -->
@@ -22,18 +23,22 @@
                     </div>
                     <div>
                         <input placeholder="제목을 입력해주세요." th:field="*{boardTitle}" type="text"></input>
+                        <br>
                         <div th:errors="*{boardTitle}"
                              th:if="${#fields.hasErrors('boardTitle')}"></div>
-                        <br>
+                    </div>
+                    <br>
+                    <div>
                         <input max="2025-12-31" placeholder="날짜 선택"
-                               th:field="*{clinicDiaryRecordDate}" type="date"></input>
+                               th:field="*{clinicDiaryRecordDate}" type="date"/>
+                        <br>
                         <div th:errors="*{clinicDiaryRecordDate}"
                              th:if="${#fields.hasErrors('clinicDiaryRecordDate')}"></div>
                     </div>
-
+                    <br>
                     <div>
                         <select th:field="*{status}">
-                            <option disabled selected value="">반려동물 상태를 선택해주세요.</option>
+                            <option selected value="">반려동물 상태를 선택해주세요.</option>
                             <!--                            <option data-type="판정" value="판정">판정</option>-->
                             <!--                            <option data-type="투병중" value="투병중">투병중</option>-->
                             <!--                            <option data-type="완치" value="완치">완치</option>-->
@@ -43,30 +48,33 @@
                                     th:value="${st}">상태
                             </option>
                         </select>
+                        <div th:errors="*{status}"
+                             th:if="${#fields.hasErrors('status')}"></div>
                     </div>
+                    <br>
                 </div>
 
                 <div>          <!-- 내용 -->
                     <!-- 임시 첨부파일 input -->
                     <div class="mb-3" th:each="num : ${#numbers.sequence(1,5)}">
                         <label class="form-label" th:for="${'files' + num}" th:text="파일+${num}">첨부파일</label>
-                        <input type="file" class="form-control" th:field="*{files}" th:id="${'files' + num}">
+                        <input class="form-control" th:field="*{files}" th:id="${'files' + num}" type="file">
                     </div>
                     <!-- 임시 첨부파일 input-->
                     <div class="form-group">
                         <label for="hospital">병원 선택 (선택 사항)</label>
-                        <select id="hospital"
-                                th:field="*{hospitalId}"
-                                class="form-control">
+                        <select class="form-control"
+                                id="hospital"
+                                th:field="*{hospitalId}">
                             <!-- 빈 값 옵션: 값이 비어있으면 hospitalId는 null로 바인딩 -->
-                            <option th:value="null" th:text="'선택 안 함'"></option>
+                            <option th:text="'선택 안 함'" th:value="null"></option>
                             <option th:each="h : ${hospitals}"
-                                    th:value="${h.id}"
-                                    th:text="${h.hospitalName}">
+                                    th:text="${h.hospitalName}"
+                                    th:value="${h.id}">
                             </option>
                         </select>
                     </div>
-                    <textarea th:field="*{boardContent}"></textarea>
+                    <textarea placeholder="내용을 작성해주세요." th:field="*{boardContent}"></textarea>
                 </div>
 
                 <button type="submit">저장</button>

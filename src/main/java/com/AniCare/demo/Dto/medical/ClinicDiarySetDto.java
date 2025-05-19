@@ -23,6 +23,7 @@ public class ClinicDiarySetDto {
 
     @NotNull(message = "날짜를 선택해주세요.")
     private LocalDate clinicDiaryRecordDate;    // 진료수첩 설정날짜
+    @NotNull(message = "반려동물 상태를 선택해주세요.")
     private PetStatus status;                   // 반려동물 투병상태
     private List<Disease> petDisease;           // 반려동물 질병정보
     private List<Allergy> petAllergy;           // 반려동물 알러지 정보

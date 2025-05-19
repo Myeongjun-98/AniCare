@@ -1,35 +1,34 @@
 @import url("https://font.elice.io/css?family=Elice+DX+Neolli");
 
 @font-face {
-  font-family: "yg-jalnan";
-  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff")
-    format("woff");
-  font-weight: normal;
-  font-style: normal;
+    font-family: "yg-jalnan";
+    src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
 }
 
 * {
-  margin: 0px auto;
-  box-sizing: border-box;
-  text-decoration: none;
+    /*margin: 0px auto;*/
+    box-sizing: border-box;
+    text-decoration: none;
 }
 
 #main {
-  /* 메인 두께 1140px */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  max-width: 1440px;
+    /* 메인 두께 1140px */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1440px;
 }
 
 #container {
-  width: 1140px;
+    width: 1140px;
 }
 
 :root {
-  --maincolor: #2999f3;
-  --subcolor: #2948f3;
-  --semicolor: #ccc;
-  --displayfont: "yg-jalnan";
-  --systemfont: "Elice DX Neolli";
+    --maincolor: #2999f3;
+    --subcolor: #2948f3;
+    --semicolor: #ccc;
+    --displayfont: "yg-jalnan";
+    --systemfont: "Elice DX Neolli";
 }
