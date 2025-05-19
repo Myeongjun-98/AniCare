@@ -54,7 +54,6 @@
 .board-detail-wrap input[type="date"],
 .board-detail-wrap select,
 .board-detail-wrap textarea {
-    width: 100%;
     padding: 10px 12px;
     border: 1px solid #ccc;
     border-radius: 6px;
@@ -161,4 +160,10 @@
     .bt-margin {
         margin-bottom: 10px;
     }
+
+    .input-width {
+        max-width: 300px;
+        width: auto;
+    }
+
 }

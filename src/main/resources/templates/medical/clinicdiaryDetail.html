@@ -6,17 +6,12 @@
 <head>
     <th:block layout:fragment="css"></th:block>
     <th:block layout:fragment="script"></th:block>
+    <link href="/css/medical/clinicdiarydetail.css" rel="stylesheet">
+
 </head>
 <div id="main" layout:fragment="main">
     <div class="board-detail-wrap">  <!-- ▼ 게시글 상세보기 ▼ -->
         <div>       <!-- 게시글 영역 -->
-            <!--  게시글 이미지 목록 보여주기  -->
-            <div th:each="file : ${clinicDiaryDto.boardFiles}">
-                <img class="boardFile"
-                     th:if="${not #strings.isEmpty(file.fileUrl)}"
-                     th:src="${file.fileUrl}"
-                     width="700">
-            </div>
             <div><!--  게시글 정보영역  -->
                 <div>
                     <h3 class="board-detail-title" th:text="${clinicDiaryDto.boardTitle}"></h3>
@@ -24,15 +19,45 @@
                     <p class="board-detail-writeDate" th:text="|기록일 : ${clinicDiaryDto.clinicDiaryRecordDate}|"></p>
                 </div>
                 <div>
-                    <h4>진료수첩</h4>
+                    <h4 style="color: #2999F3FF">진료수첩</h4>
                     <p class="board-detail-boardHit" th:text="|조회수 : ${clinicDiaryDto.boardHit}|"></p>
-                    <br>
-                    <p th:text="|상태 : ${clinicDiaryDto.status}|"></p>
+                    <p th:text="${clinicDiaryDto.status}"></p>
                 </div>
             </div>
 
             <br>
             <div>          <!-- 내용 -->
+                <div class="board-detail-image">
+
+                    <!-- 이미지 1장일 때 -->
+                    <div class="single-image" th:if="${clinicDiaryDto.boardFiles.size() == 1}">
+                        <img class="boardFile"
+                             th:src="${clinicDiaryDto.boardFiles[0].fileUrl}"
+                             width="700">
+                    </div>
+
+                    <!-- 이미지가 2장 이상일 때 -->
+                    <div class="carousel slide" id="carouselExample" th:if="${clinicDiaryDto.boardFiles.size() > 1}">
+                        <div class="carousel-inner">
+                            <div th:class="'carousel-item' + ${iterStat.index == 0 ? ' active' : ''}"
+                                 th:each="file, iterStat : ${clinicDiaryDto.boardFiles}">
+                                <img alt="..." class="d-block w-100" th:src="${file.fileUrl}">
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" data-bs-slide="prev" data-bs-target="#carouselExample"
+                                type="button">
+                            <span aria-hidden="true" class="carousel-control-prev-icon"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" data-bs-slide="next" data-bs-target="#carouselExample"
+                                type="button">
+                            <span aria-hidden="true" class="carousel-control-next-icon"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+
+                </div>
+
                 <p class="board-detail-boardContent" th:text="${clinicDiaryDto.boardContent}"></p>
             </div>
 
@@ -46,13 +71,6 @@
                     </svg>
                     <p class="board-detail-likeCount" th:text="${clinicDiaryDto.boardLikeCount}"></p>
                 </div>
-                <!--            <div class="board-detail-commentCount-box">-->
-                <!--                <svg class="bi bi-chat-left" fill="currentColor" height="16" viewBox="0 0 16 16"-->
-                <!--                     width="16" xmlns="http://www.w3.org/2000/svg">-->
-                <!--                    <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>-->
-                <!--                </svg>-->
-                <!--                <p class="board-detail-commentCount" th:text="${clinicDiaryDto.commentCount}"></p>-->
-                <!--            </div>-->
             </div>
 
         </div> <!-- ▲ 게시글 상세보기 끝 ▲ -->

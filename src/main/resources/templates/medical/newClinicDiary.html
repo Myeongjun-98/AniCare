@@ -22,33 +22,29 @@
                         <h3>진료수첩</h3>
                     </div>
                     <div>
-                        <input placeholder="제목을 입력해주세요." th:field="*{boardTitle}" type="text"></input>
+                        <input placeholder="제목을 입력해주세요." style="width: 90%" th:field="*{boardTitle}" type="text"/>
                         <br>
-                        <div th:errors="*{boardTitle}"
+                        <div class="text-danger" style="padding-left: 16px" th:errors="*{boardTitle}"
                              th:if="${#fields.hasErrors('boardTitle')}"></div>
                     </div>
                     <br>
                     <div>
-                        <input max="2025-12-31" placeholder="날짜 선택"
-                               th:field="*{clinicDiaryRecordDate}" type="date"/>
+                        <input class="input-width" max="2025-12-31"
+                               placeholder="날짜 선택" th:field="*{clinicDiaryRecordDate}" type="date"/>
                         <br>
-                        <div th:errors="*{clinicDiaryRecordDate}"
+                        <div class="text-danger" style="padding-left: 16px" th:errors="*{clinicDiaryRecordDate}"
                              th:if="${#fields.hasErrors('clinicDiaryRecordDate')}"></div>
                     </div>
                     <br>
                     <div>
-                        <select th:field="*{status}">
+                        <select class="input-width" th:field="*{status}">
                             <option selected value="">반려동물 상태를 선택해주세요.</option>
-                            <!--                            <option data-type="판정" value="판정">판정</option>-->
-                            <!--                            <option data-type="투병중" value="투병중">투병중</option>-->
-                            <!--                            <option data-type="완치" value="완치">완치</option>-->
-                            <!--                            <option data-type="기타" value="기타">기타</option>-->
                             <option th:each="st : ${T(com.AniCare.demo.constant.medical.PetStatus).values()}"
                                     th:text="${st}"
                                     th:value="${st}">상태
                             </option>
                         </select>
-                        <div th:errors="*{status}"
+                        <div class="text-danger" style="padding-left: 16px" th:errors="*{status}"
                              th:if="${#fields.hasErrors('status')}"></div>
                     </div>
                     <br>
@@ -63,7 +59,7 @@
                     <!-- 임시 첨부파일 input-->
                     <div class="form-group">
                         <label for="hospital">병원 선택 (선택 사항)</label>
-                        <select class="form-control"
+                        <select class="form-control input-width"
                                 id="hospital"
                                 th:field="*{hospitalId}">
                             <!-- 빈 값 옵션: 값이 비어있으면 hospitalId는 null로 바인딩 -->

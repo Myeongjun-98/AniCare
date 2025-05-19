@@ -8,16 +8,23 @@
 <head>
     <th:block layout:fragment="css"></th:block>
     <th:block layout:fragment="script"></th:block>
+    <link href="/css/medical/vetlist.css" rel="stylesheet">
 </head>
 <div id="main" layout:fragment="main">
-    <div> <!-- 창 영역 -->
-        <div th:each=" vetCard : ${vets} "><!-- 수의사 리스트 카드 -->
+    <div class="vet-list"> <!-- 창 영역 -->
+        <div class="vet-card" th:each=" vetCard : ${vets} "><!-- 수의사 리스트 카드 -->
             <a th:href="@{/medical/vetList/{vetInfoId}(vetInfoId=${vetCard.vetInfoId},checkupId=${checkupId})}">
-                <div th:style="${vetCard.profileImage}">프로필이미지</div>
-                <p th:text="${'수의사명 : ' + vetCard.vetName}"></p>
-                <p th:text="${'병원명 : ' + vetCard.hospitalName}"></p>
-                <p th:text="${'치료 가능 : ' + vetCard.curingCapable}"></p>
-                <p th:text="${'별점 : ' + vetCard.averageRating}"></p>
+                <img
+                        alt="수의사 프로필"
+                        class="vet-image"
+                        th:src="@{/anicareFile/{file}(file=${vetCard.profileImage})}"
+                />
+                <div class="vet-info">
+                    <p th:text="${'수의사명 : ' + vetCard.vetName}"></p>
+                    <p th:text="${'병원명 : ' + vetCard.hospitalName}"></p>
+                    <p th:text="${'치료 가능 : ' + vetCard.curingCapable}"></p>
+                    <p th:text="${'별점 : ' + vetCard.averageRating}"></p>
+                </div>
             </a>
         </div>
     </div>

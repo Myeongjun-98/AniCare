@@ -41,7 +41,6 @@
 .pet-info th,
 .pet-info td {
     padding: 12px;
-    vertical-align: top;
 }
 
 .pet-info td img {
@@ -200,5 +199,23 @@ ul.pagination .page-link {
 /* 내부 테이블은 100% 너비 유지 */
 .pet-info table {
     width: 100%;
+}
+
+/* ─── pet-info 오른쪽 테이블(동물종·몸무게·병명·알러지) 4:6 비율 ─── */
+.pet-info > table > tbody > tr > td:last-child > table {
+    table-layout: fixed; /* 셀 너비 고정 모드 */
+    width: 100%;
+}
+
+/* 첫 번째 컬럼(th/td) 너비 40% */
+.pet-info > table > tbody > tr > td:last-child > table th:nth-child(1),
+.pet-info > table > tbody > tr > td:last-child > table td:nth-child(1) {
+    width: 40%;
+}
+
+/* 두 번째 컬럼(th/td) 너비 60% */
+.pet-info > table > tbody > tr > td:last-child > table th:nth-child(2),
+.pet-info > table > tbody > tr > td:last-child > table td:nth-child(2) {
+    width: 60%;
 }
 
