@@ -9,10 +9,10 @@
   <link rel="stylesheet" href="/css/ad/rplist.css">
 </head>
 
-<div layout:fragment="main" id="main">
-  <body>
+<body>
+<div layout:fragment="main" class="report-container">
 
-  <!-- 상단 네비게이션 -->
+  <!-- ✅ 네비게이션 -->
   <nav class="nav-container">
     <a href="/ad/reportList" class="nav-btn">신고</a>
     <a href="/ad/enquiryReply" class="nav-btn">문의</a>
@@ -22,30 +22,29 @@
     <a href="/ad/hospitalList" class="nav-btn">병원목록</a>
   </nav>
 
-  <div class="report-container">
-    <h2 class="title">신고 목록</h2>
-    <table class="custom-table">
-      <thead>
-      <tr>
-        <th>신고 ID</th>
-        <th>날짜</th>
-        <th>게시글 ID</th>
-        <th>사용자 ID</th>
-        <th>신고 유형</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr th:each="report : ${reports}">
-        <td th:text="${report.reportId}"></td>
-        <td th:text="${report.reportDate}"></td>
-        <td th:text="${report.boardId}"></td>
-        <td th:text="${report.userId}"></td>
-        <td th:text="${report.reportType}"></td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
+  <h2 class="mb-4">신고 목록</h2>
 
-  </body>
+  <table class="custom-table">
+    <thead>
+    <tr>
+      <th>신고 ID</th>
+      <th>신고일</th>
+      <th>게시글 ID</th>
+      <th>신고자 ID</th>
+      <th>신고 유형</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="report : ${reports}">
+      <td th:text="${report.reportId}">1</td>
+      <td th:text="${report.reportDate}">2025-05-19</td>
+      <td th:text="${report.boardId}">1002</td>
+      <td th:text="${report.userId}">3001</td>
+      <td th:text="${report.reportType}">욕설</td>
+    </tr>
+    </tbody>
+  </table>
+
 </div>
+</body>
 </html>

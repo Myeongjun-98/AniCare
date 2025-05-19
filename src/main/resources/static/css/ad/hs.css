@@ -1,20 +1,6 @@
-.nav-container {
-  padding: 20px 150px;
-}
-
-.nav-btn {
-  display: inline-block;
-  margin-right: 5px;
-  padding: 6px 12px;
-  border: 2px solid #4CAF50;
-  border-radius: 6px;
-  color: #4CAF50;
-  text-decoration: none;
-  font-weight: bold;
-}
-.nav-btn:hover {
-  background-color: #4CAF50;
-  color: white;
+body {
+  background-color: #fafafa;
+  font-family: 'Jalnan2', 'KoPub돋움', 'sans-serif';
 }
 
 .report-container {
@@ -23,18 +9,33 @@
   padding: 40px 150px;
 }
 
+/* ✅ 상단 네비게이션 버튼 */
+.nav-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.nav-btn {
+  padding: 8px 16px;
+  border: 2px solid #4CAF50;
+  border-radius: 6px;
+  color: #4CAF50;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.nav-btn:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+
+/* ✅ 폼 요소 공통 */
 .form-label {
   font-weight: bold;
   margin-bottom: 6px;
-}
-
-.btn-green {
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 5px;
-  font-weight: bold;
 }
 
 .form-control {
@@ -44,13 +45,16 @@
 }
 
 .form-check {
-  margin-bottom: 5px;
+  margin-bottom: 8px;
 }
+
+/* ✅ 진료유형 checkbox 그리드 */
 .clinic-grid {
   display: grid;
-  grid-template-columns: repeat(10, 1fr); /* 10개씩 한 줄 */
-  gap: 5px;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 10px;
 }
-.clinic-grid .form-check {
-  margin-bottom: 5px;
-}
+
+/* ✅ 등록 버튼 */
+.btn-green {
+  background-color: #4CAF50;

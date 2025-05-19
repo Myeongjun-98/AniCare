@@ -1,75 +1,38 @@
-/* ✅ Jalnan2 폰트 (폰트 파일은 /fonts/에 있어야 함) */
+/* ✅ 기본 폰트 */
 @font-face {
   font-family: 'Jalnan2';
   src: url('/fonts/Jalnan2.ttf') format('truetype');
 }
 
-/* ✅ 전체 컨테이너 스타일 */
+body {
+  font-family: 'Jalnan2', 'KoPub돋움', '엘리스DX널리체', sans-serif;
+  background-color: #fafafa;
+  color: #333;
+}
+
+/* ✅ 컨테이너 및 레이아웃 */
+.report-container,
 .container {
   max-width: 1140px;
   margin: 0 auto;
-  padding: 0 150px;
-  font-family: 'KoPub돋움', '엘리스DX널리체', sans-serif;
+  padding: 40px 150px;
 }
 
-/* ✅ 제목용 폰트 */
+/* ✅ 제목 */
 h2, .modal-title {
   font-family: 'Jalnan2', 'KoPub돋움', sans-serif;
   color: #4CAF50;
 }
 
-/* ✅ 버튼 색상 통일 (녹색) */
-.btn-outline-primary {
-  border-color: #4CAF50;
-  color: #4CAF50;
-}
-.btn-outline-primary:hover,
-.btn-primary {
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-}
-.btn-primary:hover {
-  background-color: #43a047;
-}
-
-/* ✅ 상태 배지 스타일 강조 */
-.badge.text-bg-success {
-  background-color: #4CAF50 !important;
-}
-.badge.text-bg-warning {
-  background-color: #FFC107 !important;
-  color: #212529 !important;
-}
-
-/* ✅ 테이블 정돈 */
-.table th,
-.table td {
-  vertical-align: middle;
-}
-.table-hover tbody tr:hover {
-  background-color: #f6fdf8;
-  cursor: pointer;
-}
-
-/* ✅ 모달 스타일 개선 */
-.modal-title {
-  font-size: 20px;
-  font-weight: bold;
-}
-/* table-primary 헤더 색상 완전 덮어쓰기 */
-.table.table-striped thead.table-primary th {
-  background-color: var(--main-green) !important; /* 또는 원하는 색 코드(#FF8800 등) */
-  color: #fff !important;
-  border-color: var(--main-green) !important;
-}
+/* ✅ 네비게이션 바 */
 .nav-container {
-  padding: 20px 150px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
 }
-
 .nav-btn {
   display: inline-block;
-  margin-right: 5px;
   padding: 6px 12px;
   border: 2px solid #4CAF50;
   border-radius: 6px;
@@ -82,12 +45,7 @@ h2, .modal-title {
   color: white;
 }
 
-.report-container {
-  max-width: 1140px;
-  margin: 0 auto;
-  padding: 40px 150px;
-}
-
+/* ✅ 테이블 공통 스타일 */
 .custom-table {
   width: 100%;
   border-collapse: collapse;
@@ -106,21 +64,111 @@ h2, .modal-title {
   text-align: center;
   padding: 12px 10px;
   border-bottom: 1px solid #ddd;
+  word-break: break-word;
+}
+.custom-table tr:last-child td {
+  border-bottom: none;
 }
 
+/* ✅ 상태 뱃지 */
+.badge-success,
+.badge.text-bg-success {
+  background-color: #4CAF50 !important;
+  color: white !important;
+  padding: 4px 8px;
+  border-radius: 5px;
+}
+.badge-warning,
+.badge.text-bg-warning {
+  background-color: #FFC107 !important;
+  color: #212529 !important;
+  padding: 4px 8px;
+  border-radius: 5px;
+}
+
+/* ✅ 버튼 커스터마이징 */
+.btn-green {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+.btn-outline-green {
+  border: 1px solid #4CAF50;
+  color: #4CAF50;
+  background: white;
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+.btn-outline-green:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+.btn-outline-red {
+  border: 1px solid #f44336;
+  color: #f44336;
+  background: white;
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+.btn-outline-red:hover {
+  background-color: #f44336;
+  color: white;
+}
+
+/* ✅ table-hover 효과 */
+.table-hover tbody tr:hover {
+  background-color: #f6fdf8;
+  cursor: pointer;
+}
+
+/* ✅ 진료유형 리스트용 */
+.clinic-type-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+  text-align: left;
+}
+.clinic-type-list li::before {
+  content: '* ';
+  color: #4CAF50;
+}
+
+/* ✅ 반응형 대응 */
+@media (max-width: 768px) {
+  .report-container {
+    padding: 20px;
+  }
+
+  .custom-table th,
+  .custom-table td {
+    padding: 8px 6px;
+    font-size: 12px;
+  }
+
+  .clinic-type-list li {
+    font-size: 12px;
+  }
+
+  .nav-btn {
+    font-size: 13px;
+    padding: 4px 10px;
+  }
+}
+.custom-table thead {
+  background-color: #4CAF50;
+  color: white;
+}
 .badge-success {
   background-color: #4CAF50;
   color: white;
-  padding: 4px 8px;
-  border-radius: 5px;
 }
 .badge-warning {
   background-color: #FFC107;
   color: black;
-  padding: 4px 8px;
-  border-radius: 5px;
 }
-
 .btn-green {
   background-color: #4CAF50;
   color: white;
