@@ -1,4 +1,4 @@
-/* 문의 목록 페이지 스타일 */
+/* 문의사항 목록 페이지 스타일 */
 .enquiry-list-container {
     max-width: 900px;
     margin: 30px auto;
@@ -139,4 +139,293 @@
 .page-btn:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+}
+
+
+/* 문의사항 작성 페이지 스타일 */
+.enquiry-container {
+  display: flex;
+  justify-content: center;
+  padding: 30px 20px;
+  background-color: #f9f9f9;
+  min-height: calc(100vh - 70px);
+}
+
+.enquiry-card {
+  width: 100%;
+  max-width: 700px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+  padding: 30px;
+}
+
+.enquiry-card h2 {
+  color: #ffa500;
+  margin-bottom: 25px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 22px;
+}
+
+.form-group {
+  margin-bottom: 25px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #444;
+}
+
+.form-group .required {
+  color: #f44336;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 15px;
+  transition: all 0.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: #ffa500;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(255, 165, 0, 0.1);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 150px;
+}
+
+.char-count {
+  text-align: right;
+  font-size: 13px;
+  color: #777;
+  margin-top: 5px;
+}
+
+/* 파일 업로드 스타일 */
+.file-upload {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.file-upload input[type="file"] {
+  display: none;
+}
+
+.file-label {
+  padding: 10px 15px;
+  background-color: #ffecb3;
+  color: #ff8c00;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 14px;
+  transition: all 0.3s;
+}
+
+.file-label:hover {
+  background-color: #ffe082;
+}
+
+#fileName {
+  font-size: 14px;
+  color: #666;
+  flex-grow: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.file-notice {
+  margin-top: 8px;
+  font-size: 13px;
+  color: #f44336;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* 제출 버튼 */
+.form-submit {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.submit-btn {
+  padding: 12px 25px;
+  background-color: #ffa500;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s;
+}
+
+.submit-btn:hover {
+  background-color: #ff8c00;
+  transform: translateY(-2px);
+  box-shadow: 0 3px 8px rgba(255, 165, 0, 0.3);
+}
+
+/* 문의 목록 페이지 스타일 */
+.enquiry-list-container {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 0 20px;
+}
+
+.enquiry-list-header {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+
+.enquiry-list-header h2 {
+  color: #ffa500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 22px;
+}
+
+.new-enquiry-btn {
+  padding: 4px 8px;
+  background-color: #ffa500;
+  color: white;
+  border-radius: 3px;
+  text-decoration: none;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  transition: all 0.3s;
+  display: inline-flex;
+}
+
+.new-enquiry-btn:hover {
+  background-color: #ff8c00;
+}
+
+.enquiry-list-table {
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.enquiry-list-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.enquiry-list-table th {
+  background-color: #fff9c4;
+  padding: 15px;
+  text-align: left;
+  font-weight: 600;
+  color: #555;
+}
+
+.enquiry-list-table td {
+  padding: 15px;
+  border-bottom: 1px solid #f0f0f0;
+  cursor: pointer;
+}
+
+.enquiry-list-table tr:last-child td {
+  border-bottom: none;
+}
+
+.enquiry-list-table tr:hover {
+  background-color: #fff9e6;
+}
+
+.title-cell {
+  color: #333;
+  font-weight: 500;
+  max-width: 300px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 상태 뱃지 */
+.status-badge {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 15px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.status-badge.completed {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+.status-badge.in-progress {
+  background-color: #e3f2fd;
+  color: #1565c0;
+}
+
+.status-badge.pending {
+  background-color: #fff3e0;
+  color: #e65100;
+}
+
+/* 페이지네이션 */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  gap: 5px;
+}
+
+.page-btn {
+  width: 36px;
+  height: 36px;
+  border: 1px solid #ddd;
+  background: white;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+
+.page-btn:hover:not(:disabled) {
+  border-color: #ffa500;
+  color: #ffa500;
+}
+
+.page-btn.active {
+  background-color: #ffa500;
+  color: white;
+  border-color: #ffa500;
+}
+
+.page-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }

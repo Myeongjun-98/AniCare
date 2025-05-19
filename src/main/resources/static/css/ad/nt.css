@@ -1,0 +1,50 @@
+/* nt.css */
+
+/* 공통 설정 */
+body {
+    font-family: 'KoPubDotum', '엘리스DX널리체', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #fff;
+    color: #333;
+}
+
+/* 메인 레이아웃 설정 */
+#main {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 150px;
+}
+
+/* 버튼 공통 스타일 */
+.btn-success {
+    background-color: #4CAF50;
+    border-color: #4CAF50;
+}
+
+.btn-success:hover {
+    background-color: #45a049;
+    border-color: #45a049;
+}
+
+/* 테이블 설정 */
+.table {
+    font-size: 0.95rem;
+}
+
+.table th, .table td {
+    vertical-align: middle;
+}
+
+/* 링크 스타일 */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* 모달 입력 필드 */
+.modal .form-control,
+.modal .form-select {
+    font-size: 0.95rem;
+}
