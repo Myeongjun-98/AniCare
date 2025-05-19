@@ -33,7 +33,7 @@ public class SecurityConfig {
                         .requestMatchers("/", "/anicare", "/anicare/**",
                                 "/mainpage", "/mainpage/**",
                                 "/signup", "/image/**", "/anicareFile/**",
-                                "/css/**", "/javascript/**", "/mypage").permitAll()
+                                "/css/**", "/javascript/**", "/mypage","/search","/search/**").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/user/**").hasAnyRole("USER", "ADMIN")
                         .anyRequest().authenticated()
