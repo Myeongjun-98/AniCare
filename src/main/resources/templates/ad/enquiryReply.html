@@ -6,56 +6,57 @@
 <head>
     <meta charset="UTF-8"/>
     <title>문의 응답</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="/css/ad/er.css">
 </head>
 
-<body>
-<div layout:fragment="main" class="container p-4">
+<div layout:fragment="main" id="main">
+    <body>
 
-    <!-- ✅ 네비게이션 바 추가 -->
-    <nav class="mb-3">
-        <a href="/ad/reportList" class="btn btn-outline-primary">신고</a>
-        <a href="/ad/enquiryReply" class="btn btn-outline-primary">문의</a>
-        <a href="/ad/notice" class="btn btn-outline-primary">공지</a>
-        <a href="/ad/hospital" class="btn btn-outline-primary">병원등록</a>
-        <a href="/ad/masterAd" class="btn btn-outline-primary">계정관리</a>
-        <a href="/ad/hospitalList" class="btn btn-outline-primary">병원목록</a>
-
+    <!-- ✅ 네비게이션 -->
+    <nav class="nav-container">
+        <a href="/ad/reportList" class="nav-btn">신고</a>
+        <a href="/ad/enquiryReply" class="nav-btn">문의</a>
+        <a href="/ad/notice" class="nav-btn">공지</a>
+        <a href="/ad/hospital" class="nav-btn">병원등록</a>
+        <a href="/ad/masterAd" class="nav-btn">계정관리</a>
+        <a href="/ad/hospitalList" class="nav-btn">병원목록</a>
     </nav>
 
-    <h2 class="mb-4">문의 목록</h2>
+    <div class="report-container">
+        <h2 class="mb-4">문의 목록</h2>
 
-    <table class="table table-hover">
-        <thead class="table-light">
-        <tr>
-            <th>번호</th>
-            <th>제목</th>
-            <th>작성자</th>
-            <th>날짜</th>
-            <th>상태</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="enquiry : ${enquiries}" data-bs-toggle="modal"
-            data-bs-target="#replyModal"
-            th:attr="data-id=${enquiry.enquiryId},
+        <table class="custom-table">
+            <thead>
+            <tr>
+                <th>번호</th>
+                <th>제목</th>
+                <th>작성자</th>
+                <th>날짜</th>
+                <th>상태</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="enquiry : ${enquiries}"
+                th:attr="data-id=${enquiry.enquiryId},
                      data-title=${enquiry.enquiryTitle},
                      data-content=${enquiry.enquiryContent},
                      data-reply=${enquiry.reply},
                      data-status=${enquiry.status}"
-            onclick="fillModal(this)">
-            <td th:text="${enquiry.enquiryId}">1</td>
-            <td th:text="${enquiry.enquiryTitle}">제목</td>
-            <td th:text="${enquiry.user}">사용자</td>
-            <td th:text="${enquiry.createDate}">2025-05-15</td>
-            <td>
-                <span th:if="${enquiry.status.name() == '미완료'}" class="badge text-bg-warning">미완료</span>
-                <span th:if="${enquiry.status.name() != '미완료'}" class="badge text-bg-success">완료</span>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+                onclick="fillModal(this)"
+                data-bs-toggle="modal"
+                data-bs-target="#replyModal">
+                <td th:text="${enquiry.enquiryId}">1</td>
+                <td th:text="${enquiry.enquiryTitle}">제목</td>
+                <td th:text="${enquiry.user}">사용자</td>
+                <td th:text="${enquiry.createDate}">2025-05-15</td>
+                <td>
+                    <span th:if="${enquiry.status.name() == '미완료'}" class="badge-warning">미완료</span>
+                    <span th:if="${enquiry.status.name() != '미완료'}" class="badge-success">완료</span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 
     <!-- 답변 모달 -->
     <div class="modal fade" id="replyModal" tabindex="-1" aria-hidden="true">
@@ -79,7 +80,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">답변 등록</button>
+                        <button type="submit" class="btn-green">답변 등록</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
                     </div>
                 </form>
@@ -87,7 +88,6 @@
         </div>
     </div>
 
-    <!-- Bootstrap + Script -->
     <script>
         function fillModal(row) {
             const id = row.getAttribute("data-id");
@@ -102,6 +102,6 @@
         }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
 </div>
-</body>
 </html>

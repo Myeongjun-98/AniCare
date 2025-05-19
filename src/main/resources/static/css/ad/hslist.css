@@ -1,0 +1,218 @@
+@font-face {
+  font-family: 'Jalnan2';
+  src: url('/fonts/Jalnan2.ttf') format('truetype');
+}
+
+body {
+  font-family: 'Jalnan2', 'KoPub돋움', '엘리스DX널리체', sans-serif;
+  background-color: #fafafa;
+  color: #333;
+}
+
+.report-container {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 150px;
+}
+
+/* 네비게이션 버튼 */
+.nav-btn {
+  display: inline-block;
+  margin-right: 5px;
+  padding: 6px 12px;
+  border: 2px solid #4CAF50;
+  border-radius: 6px;
+  color: #4CAF50;
+  text-decoration: none;
+  font-weight: bold;
+}
+.nav-btn:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+
+/* 테이블 */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  font-size: 14px;
+}
+.table th,
+.table td {
+  text-align: center;
+  padding: 12px 10px;
+  border-bottom: 1px solid #eee;
+}
+
+/* 테이블 헤더 녹색 */
+.table-header-green {
+  background-color: #4CAF50;
+  color: white;
+}
+
+/* 진료유형 리스트 */
+.clinic-type-list {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 0;
+}
+.clinic-type-list li {
+  margin-bottom: 2px;
+}
+
+/* 테이블 */
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  font-size: 14px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.05);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.custom-table thead {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.custom-table th,
+.custom-table td {
+  text-align: center;
+  padding: 12px 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.custom-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* 버튼 커스터마이징 */
+.btn-green {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.btn-outline-green {
+  border: 1px solid #4CAF50;
+  color: #4CAF50;
+  background: white;
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+.btn-outline-green:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.btn-outline-red {
+  border: 1px solid #f44336;
+  color: #f44336;
+  background: white;
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+.btn-outline-red:hover {
+  background-color: #f44336;
+  color: white;
+}
+
+.title-link {
+  cursor: pointer;
+  text-decoration: none;
+  color: #333;
+}
+.title-link:hover {
+  text-decoration: underline;
+}
+.nav-container {
+  padding: 20px 150px;
+}
+
+.nav-btn {
+  display: inline-block;
+  margin-right: 5px;
+  padding: 6px 12px;
+  border: 2px solid #4CAF50;
+  border-radius: 6px;
+  color: #4CAF50;
+  text-decoration: none;
+  font-weight: bold;
+}
+.nav-btn:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.report-container {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 40px 150px;
+}
+
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  font-size: 14px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.05);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.custom-table thead {
+  background-color: #4CAF50;
+  color: white;
+}
+.custom-table th,
+.custom-table td {
+  text-align: center;
+  padding: 12px 10px;
+  border-bottom: 1px solid #ddd;
+}
+.custom-table tr:last-child td {
+  border-bottom: none;
+}
+
+.btn-green {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+.btn-outline-green {
+  border: 1px solid #4CAF50;
+  color: #4CAF50;
+  background: white;
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+.btn-outline-green:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+.btn-outline-red {
+  border: 1px solid #f44336;
+  color: #f44336;
+  background: white;
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+.btn-outline-red:hover {
+  background-color: #f44336;
+  color: white;
+}
+.title-link {
+  cursor: pointer;
+  text-decoration: none;
+  color: #333;
+}
+.title-link:hover {
+  text-decoration: underline;
+}
