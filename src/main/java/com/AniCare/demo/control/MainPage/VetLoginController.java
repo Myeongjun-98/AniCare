@@ -64,7 +64,8 @@ public class VetLoginController {
 
         return "mainpage/vetlogin";
     }
-
+    
+    // 수의사 로그인 성공시
 
 
 }

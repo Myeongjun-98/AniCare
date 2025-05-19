@@ -20,7 +20,34 @@
             <p th:if="${userDetailDto != null}" th:text="${userDetailDto.userAddress}"></p>
             <span th:if="${userDetailDto == null}">로그인이 필요합니다</span>
         </div>
-        <button class="edit-btn">수정</button>
+        <button class="edit-btn" onclick="openEditModal()">수정</button>
+        <div id="userEditModal" class="modal hidden">
+            <div class="modal-content">
+                <h3>사용자 정보 수정</h3>
+                <form id="userEditForm" th:action="@{/mainpage/updateUser}" method="post" enctype="multipart/form-data">
+                    <label>사진</label>
+                    <input type="file" name="userImg" accept="image/*">
+
+                    <label>이름</label>
+                    <input type="text" th:value="${userDetailDto.userName}" readonly>
+
+                    <label>이메일</label>
+                    <input type="email" th:value="${userDetailDto.userEmail}" readonly>
+
+                    <label>비밀번호</label>
+                    <input type="password" name="password">
+
+                    <label>전화번호</label>
+                    <input type="text" name="tel" th:value="${userDetailDto.userTel}">
+
+                    <label>주소</label>
+                    <input type="text" name="address" th:value="${userDetailDto.userAddress}">
+
+                    <button type="submit">수정완료</button>
+                    <button type="button" onclick="closeEditModal()">취소</button>
+                </form>
+            </div>
+        </div>
     </div>
     <div class="pet-slider">
         <!-- 반려동물 정보 슬라이드 -->

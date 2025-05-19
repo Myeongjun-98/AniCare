@@ -1,5 +1,7 @@
 package com.AniCare.demo.service.mainpage;
 
+
+import com.AniCare.demo.DTO.mainpage.UserUpdateDto;
 import com.AniCare.demo.Dto.mainpage.PetDetailDto;
 import com.AniCare.demo.Dto.mainpage.UserDetailDto;
 import com.AniCare.demo.Dto.mainpage.UserInfoDto;
@@ -19,6 +21,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 @RequiredArgsConstructor
@@ -27,6 +31,7 @@ public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
     private final PetRepository petRepository;
     private final VetRepository vetRepository;
+    private final PasswordEncoder passwordEncoder;
 
     /**
      * 로그인된 사용자 정보 반환 (마이페이지 등 공통 사용 가능)
@@ -100,6 +105,36 @@ public class UserService implements UserDetailsService {
 
         return true;
     }
+
+
+    // 마이페이지 사용자 정보 수정 모달을 위한 매서드
+    @Transactional
+    public void updateUser(UserUpdateDto userUpdateDto) throws Exception {
+
+        // 로그인한 사용자 이메일을 통해 사용자 조회
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userEmail = authentication.getName();
+        User user = userRepository.findByUserEmail(userEmail).orElseThrow( () -> new IllegalArgumentException("일치하는 사용자 정보를 찾을 수 없습니다"));
+
+        // 수정 가능한 정보만 업데이트
+        if(userUpdateDto.getPassword() != null && userUpdateDto.getPassword().isEmpty()){
+            user.setUserPassword(passwordEncoder.encode(userUpdateDto.getPassword()));
+        }
+        user.setUserTel(userUpdateDto.getTel());
+        user.setUserAddress(userUpdateDto.getAddress());
+
+        MultipartFile img = userUpdateDto.getUserImg();
+        if (img != null && !img.isEmpty()) {
+            // 이미지 업로드 처리
+            String filePath = "/images/" + img.getOriginalFilename();
+            img.transferTo(new java.io.File("src/main/resources/static"+filePath));
+            user.setUserImage(filePath);
+        }
+        userRepository.save(user);
+
+    }
+
+
 }
 
 

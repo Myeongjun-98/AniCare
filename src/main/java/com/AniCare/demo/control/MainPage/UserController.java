@@ -8,6 +8,7 @@ import com.AniCare.demo.entity.MainPage.Pet;
 import com.AniCare.demo.entity.MainPage.User;
 import com.AniCare.demo.repository.MainPage.UserRepository;
 import com.AniCare.demo.service.mainpage.UserService;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
@@ -90,8 +91,15 @@ public class UserController {
     }
 
 
+    @GetMapping("/ad")
+    public String adminLoginForm(@RequestParam(value = "error", required = false) String error, @RequestParam(value = "exception", required = false) String excetion,Model model){
 
 
+        model.addAttribute("error", error);
+        model.addAttribute("excetion",excetion);
+        return "mainpage/userlogin";
+
+    }
 
 
 }

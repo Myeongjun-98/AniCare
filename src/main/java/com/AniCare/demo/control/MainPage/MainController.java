@@ -1,6 +1,7 @@
 package com.AniCare.demo.control.MainPage;
 
 
+import com.AniCare.demo.DTO.mainpage.UserUpdateDto;
 import com.AniCare.demo.Dto.mainpage.SearchResultDto;
 import com.AniCare.demo.entity.MainPage.User;
 import com.AniCare.demo.service.community.BoardService;
@@ -8,13 +9,17 @@ import com.AniCare.demo.service.mainpage.MainEnquiryService;
 import com.AniCare.demo.service.mainpage.MainSearchService;
 import com.AniCare.demo.service.mainpage.PetService;
 import com.AniCare.demo.service.mainpage.UserService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
 
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
 import java.util.List;
@@ -35,11 +40,10 @@ public class MainController {
 
 
     @GetMapping("/")
-    public String mainRedircet(){
+    public String mainRedircet() {
 
         return "redirect:/anicare";
     }
-
 
 
     @GetMapping("/anicare")
@@ -49,8 +53,8 @@ public class MainController {
         model.addAttribute("communityList", boardService.getAllboardList());
 
         if (principal != null) {
-            boolean hasVet = userService.isVetLogin( principal.getName() );
-            if(hasVet){
+            boolean hasVet = userService.isVetLogin(principal.getName());
+            if (hasVet) {
                 return "redirect:/medical/vet/vetPage";
             }
 
@@ -67,22 +71,36 @@ public class MainController {
 
     // 메인헤더 커뮤니티 매핑
     @GetMapping("/communitymain")
-    public String showCommunityMainPage(){
+    public String showCommunityMainPage() {
         return "community/board/commain";
     }
 
 
-   // 메인페이지 통합검색
+    // 메인페이지 통합검색
     @GetMapping("/mainpage/mainsearch")
-    public String search(@RequestParam("keyword") String keyword,Principal principal, Model model){
-    List<SearchResultDto> results = mainSearchService.searchAllByKeyword(keyword);
+    public String search(@RequestParam("keyword") String keyword, Principal principal, Model model) {
+        List<SearchResultDto> results = mainSearchService.searchAllByKeyword(keyword);
 
-    model.addAttribute("userDetailDto",userService.getUserDetail(principal.getName()) );
-    model.addAttribute("results", results);
-    model.addAttribute("keyword", keyword);
+        model.addAttribute("userDetailDto", userService.getUserDetail(principal.getName()));
+        model.addAttribute("results", results);
+        model.addAttribute("keyword", keyword);
 
 
+        return "/mainpage/mainsearch";
+    }
 
-    return "/mainpage/mainsearch";
+
+    // 마이페이지 사용자 정보 수정 모달창 요청
+    @PostMapping("updateUser")
+    public String updateUser(@ModelAttribute UserUpdateDto userUpdateDto, Principal principal, RedirectAttributes redirectAttributes) {
+        try {
+            userService.updateUser(userUpdateDto);
+            redirectAttributes.addFlashAttribute("successMessage", "회원 정보 수정이 완료되었습니다");
+        }catch (Exception e) {
+            redirectAttributes.addFlashAttribute("errorMessage", "회원 정보 수정 중 오류가 발생했습니다 ");
+        }
+        return "redirect:/mainpage";
     }
 }
+
+
