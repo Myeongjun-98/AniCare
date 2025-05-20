@@ -1,10 +1,10 @@
 package com.AniCare.demo.service.mainpage;
 
 
-import com.AniCare.demo.Dto.mainpage.UserUpdateDto;
 import com.AniCare.demo.Dto.mainpage.PetDetailDto;
 import com.AniCare.demo.Dto.mainpage.UserDetailDto;
 import com.AniCare.demo.Dto.mainpage.UserInfoDto;
+import com.AniCare.demo.Dto.mainpage.UserUpdateDto;
 import com.AniCare.demo.constant.MainPage.Authorization;
 import com.AniCare.demo.entity.MainPage.Pet;
 import com.AniCare.demo.entity.MainPage.User;
@@ -23,9 +23,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-
-import java.util.Collections;
 
 @Service
 @RequiredArgsConstructor
@@ -104,23 +101,21 @@ public class UserService implements UserDetailsService {
     public boolean isVetLogin(String name) {
 
         VetInfo vetInfo = vetRepository.findByVetId(name);
-        if( vetInfo == null) return false;
-
-        return true;
+        return vetInfo != null;
     }
 
 
     // 마이페이지 사용자 정보 수정 모달을 위한 매서드
     @Transactional
-    public void updateUser(UserUpdateDto userUpdateDto,PasswordEncoder passwordEncoder) throws Exception {
+    public void updateUser(UserUpdateDto userUpdateDto, PasswordEncoder passwordEncoder) throws Exception {
 
         // 로그인한 사용자 이메일을 통해 사용자 조회
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userEmail = authentication.getName();
-        User user = userRepository.findByUserEmail(userEmail).orElseThrow( () -> new IllegalArgumentException("일치하는 사용자 정보를 찾을 수 없습니다"));
+        User user = userRepository.findByUserEmail(userEmail).orElseThrow(() -> new IllegalArgumentException("일치하는 사용자 정보를 찾을 수 없습니다"));
 
         // 수정 가능한 정보만 업데이트
-        if(userUpdateDto.getPassword() != null && userUpdateDto.getPassword().isEmpty()){
+        if (userUpdateDto.getPassword() != null && userUpdateDto.getPassword().isEmpty()) {
             user.setUserPassword(passwordEncoder.encode(userUpdateDto.getPassword()));
         }
         user.setUserTel(userUpdateDto.getTel());
@@ -130,13 +125,18 @@ public class UserService implements UserDetailsService {
         if (img != null && !img.isEmpty()) {
             // 이미지 업로드 처리
             String filePath = "/images/" + img.getOriginalFilename();
-            img.transferTo(new java.io.File("src/main/resources/static"+filePath));
+            img.transferTo(new java.io.File("src/main/resources/static" + filePath));
             user.setUserImage(filePath);
         }
         userRepository.save(user);
 
     }
 
+    public UserDetailDto getVetDetail(String name) {
+        VetInfo vetInfo = vetRepository.findByVetId(name);
+
+        return UserDetailDto.from(vetInfo);
+    }
 }
 
 

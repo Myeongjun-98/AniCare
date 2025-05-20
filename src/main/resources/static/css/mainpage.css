@@ -583,17 +583,7 @@ main.sidebar-open {
 }
 
 .community-card {
-  border-top: 3px solid #2196f3;
-  width:283px;
+    border-top: 3px solid #2196f3;
+    width: 283px;
 }
 
-/* 검색 영역 전체 감싸는 박스 */
-#main > div:first-child {
-    padding: 20px;
-    border-bottom: 1px solid #ddd;
-    background-color: #fff8dc; /* 연한 노란색 배경 (우리 메인 색 참고) */
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    flex-wrap: wrap;
-}
