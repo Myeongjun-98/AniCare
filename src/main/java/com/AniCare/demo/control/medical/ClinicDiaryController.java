@@ -1,8 +1,10 @@
 package com.AniCare.demo.control.medical;
 
+import com.AniCare.demo.Dto.admin.HospitalDto;
 import com.AniCare.demo.Dto.medical.ClinicDiaryListDto;
 import com.AniCare.demo.Dto.medical.ClinicDiaryPetInfoDto;
 import com.AniCare.demo.Dto.medical.ClinicDiarySetDto;
+import com.AniCare.demo.service.adminService.HospitalService;
 import com.AniCare.demo.service.mainpage.UserService;
 import com.AniCare.demo.service.medical.ClinicDiaryService;
 import com.AniCare.demo.service.medical.MedicalService;
@@ -26,6 +28,7 @@ public class ClinicDiaryController {
     private final MedicalService medicalService;
     private final ClinicDiaryService clinicDiaryService;
     private final UserService userService;
+    private final HospitalService hospitalService;
 
     // 진료수첩 페이지(특정 반려동물의 메인 진료수첩 페이지)
     @GetMapping("/clinicdiary")
@@ -81,33 +84,44 @@ public class ClinicDiaryController {
             model.addAttribute("userDetailDto", userService.getUserDetail(principal.getName()));
         }
 
+        // 비어있는 ClinicDiarySetDto 객체 보내기
         ClinicDiarySetDto dto = new ClinicDiarySetDto();
+        // 병원 리스트 보내기
+        List<HospitalDto> hospitals = hospitalService.findAll();
 
         model.addAttribute("clinicDiarySetDto", dto);
+        model.addAttribute("hospitals", hospitals);
         return "medical/newClinicDiary";
     }
 
     // 진료수첩 작성 요청
     @PostMapping("uploadClinicDiary")
-    public String clinicDiarySave(Model model, @Valid ClinicDiarySetDto clinicDiarySetDto, BindingResult bindingResult, @RequestParam("boardFile") List<MultipartFile> multipartFileList, Principal principal) {
+    public String clinicDiarySave(Model model, @Valid ClinicDiarySetDto clinicDiarySetDto,
+                                  BindingResult bindingResult,
+                                  Principal principal) {
+
+        //오류가 나서 페이지 반환되어도 hospital 목록 다시 보여줄 수 있게 model 선언해주기
+        model.addAttribute("hospitals", hospitalService.findAll());
+
+        // 헤더에 사용자 정보 띄우기??
+        if (principal.getName() != null) {
+            model.addAttribute("userDetailDto", userService.getUserDetail(principal.getName()));
+        }
+
+        String email = principal.getName();
 
         if (bindingResult.hasErrors()) {
             return "medical/newClinicDiary";
         }
 
         try {
-            clinicDiaryService.clinicDiarySave(clinicDiarySetDto, clinicDiaryService.getOnePet(principal.getName()).getId());
+            clinicDiaryService.clinicDiarySave(clinicDiarySetDto, clinicDiaryService.getOnePet(email).getId(), email);
         } catch (Exception e) {
             model.addAttribute("clinicDiaryUploadError", "진료수첩 작성 실패");
             return "medical/newClinicDiary";
         }
 
-        Long savedId = clinicDiaryService.clinicDiarySave(
-                clinicDiarySetDto,
-                clinicDiaryService.getOnePet(principal.getName()).getId()
-        );
-
-        return "redirect:/medical/clinicdiary" + savedId;
+        return "redirect:/medical/clinicdiary";
     }
 
 

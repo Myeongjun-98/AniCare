@@ -37,7 +37,7 @@ public class ConsultationChat {
 
     @Lob
     @Column(nullable = false)
-    private String content;
+    private String content;     // 내용
 
     @Column(nullable = false)
     private boolean readFlag;           // 읽음 여부

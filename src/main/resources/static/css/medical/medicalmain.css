@@ -1,0 +1,12 @@
+@import "medicaldefault.css";
+
+#carouselExampleIndicators {
+    width: 1440px;
+}
+
+.carousel-item img {
+    border: 1px solid;
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}

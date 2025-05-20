@@ -9,25 +9,71 @@
 </head>
 <div layout:fragment="main" id="main"> <!-- ▼ main ▼ -->
 
+    <!-- ▼ 정렬버튼 ▼ -->
     <div class="orderBtn">
-        <a style="display: inline;" href="/community/board/boardList/L">인기순</a>
+        <a style="display: inline;" th:href="@{/community/board/boardList(type=${type}, order='L', category=${category})}">인기순</a>
         <p style="display: inline;"> | </p>
-        <a style="display: inline;" href="/community/board/boardList/I">최신순</a>
-    </div>
+        <a style="display: inline;" th:href="@{/community/board/boardList(type=${type}, order='I', category=${category})}">최신순</a>
+    </div> <!-- ▲ 정렬버튼 끝 ▲ -->
+
+    <!-- ▼ 카테고리버튼 / 작성 버튼 ▼ -->
+    <div class="category-box-wrap">
+        <!-- 모임 모집글 -->
+        <div th:if="${type == 'MEETING'}" class="category-box">
+            <a class="category-all"
+               th:href="@{/community/board/boardList(type=${type}, order=${order}, category='ALL')}">
+                All</a>
+            <a class="category-fst"
+               th:href="@{/community/board/boardList(type=${type}, order=${order}, category='VOLUNTEER')}">
+                Volunteer</a>
+            <a class="category-sec"
+               th:href="@{/community/board/boardList(type=${type}, order=${order}, category='WALKING')}">
+                Walking</a>
+            <a class="category-trd"
+               th:href="@{/community/board/boardList(type=${type}, order=${order}, category='INFO')}">
+                Info</a>
+        </div>
+
+        <div th:if="${type == 'ERRAND'}" class="category-box">
+            <a class="category-all"
+               th:href="@{/community/board/boardList(type=${type}, order=${order}, category='ALL')}">
+                ALL</a>
+            <a class="category-fst"
+               th:href="@{/community/board/boardList(type=${type}, order=${order}, category='WALKING')}">
+                Walking</a>
+            <a class="category-sec"
+               th:href="@{/community/board/boardList(type=${type}, order=${order}, category='PETSITTER')}">
+                Petsitter</a>
+            <a class="category-trd"
+               th:href="@{/community/board/boardList(type=${type}, order=${order}, category='ERRANDING')}">
+                Erranding</a>
+        </div>
+
+        <div class="writeBtn">
+            <a
+                    class="writeBtn"
+                    type="button"
+                    style="background-color: #FFA500;"
+                    href="/community/board/boardWrite">
+                게시글 작성하기
+            </a>
+        </div>
+    </div> <!-- ▲ 카테고리버튼/작성 버튼 끝 ▲ -->
 
     <!-- ▼ 게시글 리스트 목록 ▼ -->
     <div th:each="board : ${boardListDtos}" class="board-list">
-        <div th:unless="${board.boardType.name() == 'CLINICDIARY'}" class="board-card">
+        <div class="board-card">
 
-            <a th:href="@{ '/community/board/boardDetail/'+${board.id} }">
-            <div class="board-card-body">
-                <img th:src="${board.fileUrl}" class="board-card-thumbnailFile" width="400" height="400" style="object-fit:cover;">
-                <h3 class="board-card-userName" th:text="${board.userName}"></h3> <!-- 작성자 이름 -->
-                <p class="board-card-writeDate" th:text="${board.boardWriteDate}"></p> <!-- 게시글 작성일 -->
-                <p class="board-card-boardHit" th:text="${board.boardHit}"></p> <!-- 게시글 조회수 -->
-                <p class="board-card-content" th:text="${board.boardContent}"></p> <!-- 게시글 내용 -->
+            <div th:if="${category == 'ALL' or board.category == category}" class="board-card-body">
+                <a th:href="@{ '/community/board/boardDetail/'+${board.id} }">
+                    <img th:src="${board.fileUrl}" class="board-card-thumbnailFile" width="400" height="400" style="object-fit:cover;">
+                    <h3 class="board-card-userName" th:text="${board.userName}"></h3> <!-- 작성자 이름 -->
+                    <p class="board-card-writeDate" th:text="${board.boardWriteDate}"></p> <!-- 게시글 작성일 -->
+                    <p class="board-card-boardHit" th:text="${board.boardHit}"></p> <!-- 게시글 조회수 -->
+                    <p class="board-card-content" th:text="${board.boardContent}"
+                    style="white-space: nowrap; overflow:hidden; text-overflow: ellipsis; max-width:400px;"></p> <!-- 게시글 내용 -->
+                </a>
             </div>
-            </a>
 
         </div>
     </div> <!-- ▲ 게시글 리스트 목록 끝 ▲ -->

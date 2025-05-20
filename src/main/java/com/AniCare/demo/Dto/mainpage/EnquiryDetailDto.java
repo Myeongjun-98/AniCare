@@ -13,6 +13,7 @@ import java.time.LocalDate;
 @Setter
 public class EnquiryDetailDto {
 
+        
     private EnquiryType enquiryType;
     private String enquiryTitle;
     private String enquiryContent;

@@ -1,0 +1,217 @@
+/* commain.css */
+
+@font-face {
+    font-family: 'yg-jalnan';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@import url('https://font.elice.io/css?family=Elice+DX+Neolli');
+
+
+/* 1. 페이지 좌우 여백 150 (배너 제외) */
+.container {
+  width: auto;
+  margin: 0 150px;
+}
+
+/* 배너: full width */
+.banner {
+  width: 100%;
+  margin: 0;
+}
+.mainCommunityBanner {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* 검색 input 스타일 */
+.input-group-text {
+  display: flex;
+  justify-content: center;
+  margin: 30px 0;
+}
+.search-input {
+  width: 100%;
+  max-width: 600px;
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  transition: all 0.2s;
+}
+.search-input:focus {
+    border: 1px solid #FFA500;
+    outline: none;
+}
+
+/* 버튼 그룹 */
+.btn_field {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+.btn_field .btn-custom {
+  font-family: 'yg-jalnan', sans-serif;
+  border: none;
+  border-radius: 4px;
+  padding: 12px 20px;
+  font-size: 16px;
+  color: #333;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+.btn_field .btn-custom:hover {
+  background-color: #e0e0e0;
+}
+
+/* 섹션 제목 */
+h2 {
+  font-family: 'yg-jalnan', sans-serif;
+  font-size: 24px;
+  margin: 40px 0 20px;
+  color: #333;
+}
+
+/* 첫 번째 인기글(모임/심부름) */
+.firstBoard-wrap {
+  margin-bottom: 20px;
+}
+.firstBoard-wrap a {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+.firstBoard-thumbnail {
+  position: relative;
+  width: 100%;
+  height: 350px;
+  border-radius: 8px;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+}
+/* 다크 오버레이 추가 */
+.firstBoard-thumbnail::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+.firstBoard-thumbnail::hover {
+    background-size: 90%;
+}
+.firstBoard-title {
+  font-family: 'yg-jalnan', sans-serif;
+  position: absolute;
+  bottom: 50px;
+  left: 30px;
+  margin: 0;
+  color: #fff;
+  font-size: 28px;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.6);
+  z-index:2;
+}
+.firstBoard-type {
+  font-family: 'Elice DX Neolli', sans-serif;
+  position: absolute;
+  bottom: 20px;
+  left: 30px;
+  margin: 0;
+  color: #fff;
+  font-size: 16px;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+  z-index:2;
+}
+
+/* 리스트 카드(모임/심부름) */
+.popular-meeting .mb-card,
+.popular-errand .eb-card {
+  display: flex;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  transition: all 0.2s ease;
+  position: relative;
+}
+.popular-meeting .mb-card:hover,
+.popular-errand .eb-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* 리스트 전체 링크 블록 처리 */
+.mb-card a,
+.eb-card a {
+  display: flex;
+  width: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* 카드 썸네일 */
+.mb-card-thumbnailFile,
+.eb-card-thumbnailFile {
+  flex-shrink: 0;
+  width: 200px;
+  height: 150px;
+  overflow: hidden;
+}
+.board-card-thumbnailFile {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 카드 본문 (정렬 및 간격 보정) */
+.mb-card-body,
+.eb-card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 15px;
+  background-color: #fff;
+  color: #333;
+  width: 100%;
+  box-sizing: border-box;
+  gap: 8px; /* 요소 간 간격 */
+}
+.mb-card-boardType,
+.eb-card-boardType {
+  font-family: 'Elice DX Neolli', sans-serif;
+  margin: 0;
+  font-size: 12px;
+  font-weight: bold;
+}
+.mb-card-category,
+.eb-card-category {
+  font-family: 'Elice DX Neolli', sans-serif;
+  margin: 0;
+  font-size: 12px;
+  color: #777;
+}
+.mb-card-boardName,
+.eb-card-boardName {
+  font-family: 'Elice DX Neolli', sans-serif;
+  margin: 0;
+  font-size: 18px;
+  color: #333;
+}
+.mb-card-boardContent,
+.eb-card-boardContent {
+  font-family: 'Elice DX Neolli', sans-serif;
+  margin: 0;
+  font-size: 14px;
+  color: #555;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
