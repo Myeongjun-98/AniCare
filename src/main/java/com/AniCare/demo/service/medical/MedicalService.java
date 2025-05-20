@@ -17,6 +17,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -137,27 +138,27 @@ public class MedicalService {
 
         List<ConsultationChatListDto> consultationChatListDtos = new ArrayList<>();
 
-        for(ConsultationChat consultationChat : consultationChats) {
+        for (ConsultationChat consultationChat : consultationChats) {
 
             //2. DTO 그릇에 데이터 차례로 담기
             ConsultationChatListDto consultationChatListDto = ConsultationChatListDto.from(consultationChat);
 
-           if(consultationChat.getSenderUser() == null) {
+            if (consultationChat.getSenderUser() == null) {
                 consultationChatListDto.setSenderType(SenderType.VET);
                 consultationChatListDto.setSenderName(consultationChat.getSenderVet().getVetName());
-           } else {
-               consultationChatListDto.setSenderType(SenderType.USER);
-               consultationChatListDto.setSenderName(consultationChat.getSenderUser().getUserName());
-           }
+            } else {
+                consultationChatListDto.setSenderType(SenderType.USER);
+                consultationChatListDto.setSenderName(consultationChat.getSenderUser().getUserName());
+            }
 
-           consultationChatListDtos.add(consultationChatListDto);
+            consultationChatListDtos.add(consultationChatListDto);
         }
         return consultationChatListDtos;
     }
 
 
     //채팅 저장
-    public void saveChat(String content, Long consultationId, String name){
+    public void saveChat(String content, Long consultationId, String name) {
 
         //ConsultationChat 데이터 세팅
         ConsultationChat consultationChat = new ConsultationChat();
@@ -169,13 +170,12 @@ public class MedicalService {
         consultationChat.setReadFlag(false);
 
         //보내는 사람 세팅 (user or vet)
-        if(userRepository.findByUserEmail(name).isEmpty()) {
+        Optional<User> userOpt = userRepository.findByUserEmail(name);
+        if (userOpt.isPresent()) {
+            consultationChat.setSenderUser(userOpt.get());
+        } else {
             VetInfo vetInfo = vetRepository.findByVetName(name);
             consultationChat.setSenderVet(vetInfo);
-        }
-        else {
-            User user = userRepository.findByUserEmail(name).orElseThrow();
-            consultationChat.setSenderUser(user);
         }
 
         consultationChatRepository.save(consultationChat);

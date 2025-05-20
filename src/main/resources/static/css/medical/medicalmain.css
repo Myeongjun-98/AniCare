@@ -34,7 +34,7 @@
     margin-bottom: 60px;
 }
 
-.link-buttons button {
+.link-buttons div {
     flex: 1;
     background-color: var(--maincolor);
     border: none;
@@ -44,11 +44,11 @@
     transition: background-color 0.3s ease;
 }
 
-.link-buttons button:hover {
+.link-buttons div:hover {
     background-color: var(--subcolor);
 }
 
-.link-buttons button a {
+.link-buttons div a {
     display: block;
     font-family: var(--systemfont);
     font-size: 1.6rem;

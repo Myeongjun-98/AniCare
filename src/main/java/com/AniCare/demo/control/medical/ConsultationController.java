@@ -4,6 +4,8 @@ import com.AniCare.demo.Dto.medical.ClinicDiaryPetInfoDto;
 import com.AniCare.demo.Dto.medical.ConsultationChatListDto;
 import com.AniCare.demo.Dto.medical.UserConsultationListDto;
 import com.AniCare.demo.entity.medical.Consultation;
+import com.AniCare.demo.repository.MainPage.UserRepository;
+import com.AniCare.demo.repository.medical.VetRepository;
 import com.AniCare.demo.service.mainpage.UserService;
 import com.AniCare.demo.service.medical.ClinicDiaryService;
 import com.AniCare.demo.service.medical.MedicalService;
@@ -23,6 +25,8 @@ public class ConsultationController {
     private final MedicalService medicalService;
     private final UserService userService;
     private final ClinicDiaryService clinicDiaryService;
+    private final UserRepository userRepository;
+    private final VetRepository vetRepository;
 
     // 1:1상담하기 누를 시, 1:1상담 페이지로 이동
     @PostMapping("/consultation")
@@ -74,7 +78,7 @@ public class ConsultationController {
                            Principal principal, Model model) {
 
         String name = principal.getName();
-
+        System.out.println("name : " + name);
         try {
             medicalService.saveChat(content, consultationId, name);
         } catch (Exception e) {

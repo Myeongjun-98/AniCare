@@ -13,7 +13,11 @@
 <div id="main" layout:fragment="main">
 
     <div id="container">   <!-- 전체 컨테이너 -->
-        <h3 th:text="|${roomInfo.userName}의 상담 페이지|"></h3>
+        <!-- ① 룸 헤더: 제목 + 담당 수의사 -->
+        <div class="room-header">
+            <h3 th:text="|${roomInfo.userName}님의 상담 페이지|">OOO님의 상담 페이지</h3>
+            <div class="doctor-info" th:text="|담당 수의사 : ${roomInfo.vetName}|">담당 수의사 : OOO</div>
+        </div>
 
         <div class="pet-info">   <!-- 반려동물 정보 영역 -->
 
@@ -101,15 +105,12 @@
             </table>
         </div>
 
-        <div>   <!-- 채팅방 정보 -->
-            <p th:text="|담당 수의사 : ${roomInfo.vetName}|"></p>
-        </div>  <!-- 채팅방 정보 -->
-
         <div class="chat-container">   <!-- 채팅방 영역 -->
-            <div th:classappend="' chat-message ' + (m.senderName == roomInfo.userName ? 'me' : 'vet')"
+            <div th:class="${m.senderName == roomInfo.userName} ? 'chat-message me' : 'chat-message vet'"
                  th:each="m : ${history}">
+                
                 <p>
-                    <span class="sender"></span>
+                    <span class="sender" th:text="${m.senderName}">OOO(나)</span>
                     <span class="text" th:text="${m.content}"></span>
                     <small class="time" th:text="${#temporals.format(m.sentAt, 'HH:mm')}"></small>
                 </p>
@@ -127,7 +128,27 @@
 
 
     </div>  <!-- 전체 컨테이너 끝 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.querySelector('.chat-input');
+            const textarea = form.querySelector('textarea');
+            const button = form.querySelector('button');
 
+            // textarea 값이 비어있으면 true, 아니면 false
+            const isEmpty = () => textarea.value.trim().length === 0;
+
+            // disabled 속성 토글
+            const toggleButton = () => {
+                button.disabled = isEmpty();
+            };
+
+            // 초기 상태 설정
+            toggleButton();
+
+            // 입력이 있을 때마다 상태 업데이트
+            textarea.addEventListener('input', toggleButton);
+        });
+    </script>
 </div>
 
 </html>
