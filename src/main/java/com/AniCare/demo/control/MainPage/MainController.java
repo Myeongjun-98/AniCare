@@ -1,10 +1,12 @@
 package com.AniCare.demo.control.MainPage;
 
 
-import com.AniCare.demo.DTO.mainpage.UserUpdateDto;
+import com.AniCare.demo.Dto.community.BoardListMainDto;
+import com.AniCare.demo.Dto.mainpage.UserUpdateDto;
 import com.AniCare.demo.Dto.mainpage.SearchResultDto;
 import com.AniCare.demo.entity.MainPage.User;
 import com.AniCare.demo.service.community.BoardService;
+import com.AniCare.demo.service.community.CommunityMainService;
 import com.AniCare.demo.service.mainpage.MainEnquiryService;
 import com.AniCare.demo.service.mainpage.MainSearchService;
 import com.AniCare.demo.service.mainpage.PetService;
@@ -37,6 +39,8 @@ public class MainController {
     private PetService petService;
     @Autowired
     private MainSearchService mainSearchService;
+    @Autowired
+    private CommunityMainService communityMainService;
 
 
     @GetMapping("/")
@@ -49,8 +53,12 @@ public class MainController {
     @GetMapping("/anicare")
     public String main(Principal principal, Model model) {
 
+        List<BoardListMainDto> popCom = communityMainService.getBoardMainList().stream()
+                .limit(5)
+                        .toList();
+
         // 메인페이지에 커뮤니티 정보글 띄우기
-        model.addAttribute("communityList", boardService.getAllboardList());
+        model.addAttribute("communityList", popCom);
 
         if (principal != null) {
             boolean hasVet = userService.isVetLogin(principal.getName());
@@ -90,17 +98,7 @@ public class MainController {
     }
 
 
-    // 마이페이지 사용자 정보 수정 모달창 요청
-    @PostMapping("updateUser")
-    public String updateUser(@ModelAttribute UserUpdateDto userUpdateDto, Principal principal, RedirectAttributes redirectAttributes) {
-        try {
-            userService.updateUser(userUpdateDto);
-            redirectAttributes.addFlashAttribute("successMessage", "회원 정보 수정이 완료되었습니다");
-        }catch (Exception e) {
-            redirectAttributes.addFlashAttribute("errorMessage", "회원 정보 수정 중 오류가 발생했습니다 ");
-        }
-        return "redirect:/mainpage";
-    }
+
 }
 
 

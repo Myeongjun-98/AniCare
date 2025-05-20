@@ -1,7 +1,7 @@
 package com.AniCare.demo.service.mainpage;
 
 
-import com.AniCare.demo.DTO.mainpage.UserUpdateDto;
+import com.AniCare.demo.Dto.mainpage.UserUpdateDto;
 import com.AniCare.demo.Dto.mainpage.PetDetailDto;
 import com.AniCare.demo.Dto.mainpage.UserDetailDto;
 import com.AniCare.demo.Dto.mainpage.UserInfoDto;
@@ -31,7 +31,7 @@ public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
     private final PetRepository petRepository;
     private final VetRepository vetRepository;
-    private final PasswordEncoder passwordEncoder;
+
 
     /**
      * 로그인된 사용자 정보 반환 (마이페이지 등 공통 사용 가능)
@@ -109,7 +109,7 @@ public class UserService implements UserDetailsService {
 
     // 마이페이지 사용자 정보 수정 모달을 위한 매서드
     @Transactional
-    public void updateUser(UserUpdateDto userUpdateDto) throws Exception {
+    public void updateUser(UserUpdateDto userUpdateDto,PasswordEncoder passwordEncoder) throws Exception {
 
         // 로그인한 사용자 이메일을 통해 사용자 조회
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

@@ -2,6 +2,7 @@ package com.AniCare.demo.control.MainPage;
 
 import com.AniCare.demo.Dto.mainpage.PetDetailDto;
 import com.AniCare.demo.Dto.mainpage.UserInfoDto;
+import com.AniCare.demo.Dto.mainpage.UserUpdateDto;
 import com.AniCare.demo.constant.medical.PetSex;
 import com.AniCare.demo.constant.medical.PetSpecies;
 import com.AniCare.demo.entity.MainPage.Pet;
@@ -100,7 +101,17 @@ public class UserController {
         return "mainpage/userlogin";
 
     }
-
+    // 마이페이지 사용자 정보 수정 모달창 요청
+    @PostMapping("updateUser")
+    public String updateUser(@ModelAttribute UserUpdateDto userUpdateDto, Principal principal, RedirectAttributes redirectAttributes) {
+        try {
+            userService.updateUser(userUpdateDto,passwordEncoder);
+            redirectAttributes.addFlashAttribute("successMessage", "회원 정보 수정이 완료되었습니다");
+        }catch (Exception e) {
+            redirectAttributes.addFlashAttribute("errorMessage", "회원 정보 수정 중 오류가 발생했습니다 ");
+        }
+        return "redirect:/mainpage";
+    }
 
 }
 

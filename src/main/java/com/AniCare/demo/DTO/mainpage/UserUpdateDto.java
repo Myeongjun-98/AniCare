@@ -1,4 +1,4 @@
-package com.AniCare.demo.DTO.mainpage;
+package com.AniCare.demo.Dto.mainpage;
 
 import lombok.Getter;
 import lombok.Setter;
