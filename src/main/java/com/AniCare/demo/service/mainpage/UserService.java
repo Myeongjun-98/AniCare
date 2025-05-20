@@ -16,6 +16,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
+import java.util.Collections;
 
 @Service
 @RequiredArgsConstructor
@@ -71,10 +74,11 @@ public class UserService implements UserDetailsService {
         User user = userRepository.findByUserEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("이메일을 찾을 수 없습니다: " + email));
 
+        //  권한을 SimpleGrantedAuthority로 설정 (ROLE_ 접두어 없이)
         return org.springframework.security.core.userdetails.User.builder()
                 .username(user.getUserEmail())
                 .password(user.getUserPassword())
-                .roles(String.valueOf(user.getAuthorization()))
+                .authorities(Collections.singletonList(new SimpleGrantedAuthority(user.getAuthorization().name())))
                 .build();
     }
 }
