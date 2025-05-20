@@ -51,7 +51,6 @@ public class HospitalService {
         hospital.setDevice(dto.getDevice());
         hospital.setOperating(dto.getOperating());
 
-        // clinicTypeList → List<ClinicType>
         if (dto.getClinicTypeList() != null && !dto.getClinicTypeList().isEmpty()) {
             List<ClinicType> clinicTypes = dto.getClinicTypeList().stream()
                     .map(ClinicType::valueOf)
@@ -61,10 +60,8 @@ public class HospitalService {
             hospital.setClinicTypes(new ArrayList<>());
         }
 
-        // 병원 저장
         hospital = hospitalRepository.save(hospital);
 
-        // 수의사 병원 연결
         if (dto.getVetInfoIdList() != null) {
             List<VetInfo> vetInfos = vetInfoRepository.findAllById(dto.getVetInfoIdList());
             for (VetInfo vet : vetInfos) {
@@ -82,10 +79,10 @@ public class HospitalService {
         Hospital hospital = hospitalRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 병원이 존재하지 않습니다."));
 
-        // 연결된 수의사들의 hospital 참조 해제
         if (hospital.getVetInfos() != null) {
             for (VetInfo vet : hospital.getVetInfos()) {
                 vet.setHospital(null);
+                vetInfoRepository.save(vet);
             }
         }
 
@@ -93,7 +90,7 @@ public class HospitalService {
     }
 
     /**
-     * 병원 정보 수정
+     * 병원 정보 수정 (진료유형 + 수의사 포함)
      */
     @Transactional
     public void update(HospitalDto dto) {
@@ -107,11 +104,29 @@ public class HospitalService {
         hospital.setDevice(dto.getDevice());
         hospital.setOperating(dto.getOperating());
 
+        // 진료유형 수정
         if (dto.getClinicTypeList() != null) {
             List<ClinicType> clinicTypes = dto.getClinicTypeList().stream()
                     .map(ClinicType::valueOf)
                     .collect(Collectors.toList());
             hospital.setClinicTypes(clinicTypes);
+        }
+
+        // 기존 수의사 병원 해제
+        if (hospital.getVetInfos() != null) {
+            for (VetInfo vet : hospital.getVetInfos()) {
+                vet.setHospital(null);
+                vetInfoRepository.save(vet);
+            }
+        }
+
+        // 새 수의사 병원 연결
+        if (dto.getVetInfoIdList() != null) {
+            List<VetInfo> newVetInfos = vetInfoRepository.findAllById(dto.getVetInfoIdList());
+            for (VetInfo vet : newVetInfos) {
+                vet.setHospital(hospital);
+                vetInfoRepository.save(vet);
+            }
         }
     }
 }

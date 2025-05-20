@@ -1,96 +1,67 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragment/default}">
 <head>
     <meta charset="UTF-8">
     <title>병원 등록</title>
     <link rel="stylesheet" href="/css/ad/hs.css">
-    <style>
-        .clinic-grid {
-            display: grid;
-            grid-template-columns: repeat(10, 1fr);
-            gap: 5px;
-        }
-        .clinic-grid .form-check {
-            margin-bottom: 5px;
-        }
-    </style>
 </head>
 <body>
+<div layout:fragment="main" class="report-container">
 
-<!--  공통 네비게이션 -->
-<nav class="nav-container">
-    <a href="/ad/reportList" class="nav-btn">신고</a>
-    <a href="/ad/enquiryReply" class="nav-btn">문의</a>
-    <a href="/ad/notice" class="nav-btn">공지</a>
-    <a href="/ad/hospital" class="nav-btn">병원등록</a>
-    <a href="/ad/masterAd" class="nav-btn">계정관리</a>
-    <a href="/ad/hospitalList" class="nav-btn">병원목록</a>
-</nav>
+    <!-- ✅ 네비게이션 -->
+    <nav class="nav-container">
+        <a href="/ad/reportList" class="nav-btn">신고</a>
+        <a href="/ad/enquiryReply" class="nav-btn">문의</a>
+        <a href="/ad/notice" class="nav-btn">공지</a>
+        <a href="/ad/hospital" class="nav-btn">병원등록</a>
+        <a href="/ad/masterAd" class="nav-btn">계정관리</a>
+        <a href="/ad/hospitalList" class="nav-btn">병원목록</a>
+    </nav>
 
-<div class="report-container">
-    <h2>병원 등록</h2>
+    <h2 class="mb-4">병원 등록</h2>
+
     <form th:action="@{/ad/hospital}" method="post" th:object="${hospital}">
         <div class="mb-3">
             <label class="form-label">병원명</label>
-            <input type="text" th:field="*{hospitalName}" class="form-control" required>
+            <input type="text" class="form-control" th:field="*{hospitalName}" required>
         </div>
 
         <div class="mb-3">
             <label class="form-label">전화번호</label>
-            <input type="text" th:field="*{hospitalTel}" class="form-control" required>
+            <input type="text" class="form-control" th:field="*{hospitalTel}" required>
         </div>
 
         <div class="mb-3">
-            <label class="form-label">이미지 URL</label>
-            <input type="text" th:field="*{hospitalImage}" class="form-control">
-        </div>
-
-        <div class="mb-3">
-            <label class="form-label">수의사 선택</label>
-            <div th:each="vet : ${vetList}">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox"
-                           th:id="'vet_' + ${vet.vetId}"
-                           th:name="vetInfoIdList"
-                           th:value="${vet.vetId}"
-                           th:checked="${hospital.vetInfoIdList != null and hospital.vetInfoIdList.contains(vet.vetId)}"/>
-                    <label class="form-check-label"
-                           th:for="'vet_' + ${vet.vetId}"
-                           th:text="${vet.vetName + ' (' + vet.vetId + ')'}"></label>
-                </div>
-            </div>
+            <label class="form-label">주소</label>
+            <input type="text" class="form-control" th:field="*{hospitalAddress}" required>
         </div>
 
         <div class="mb-3">
             <label class="form-label">장비</label>
-            <input type="text" th:field="*{device}" class="form-control">
-        </div>
-
-        <div class="mb-3">
-            <label class="form-label">운영 시간</label>
-            <input type="text" th:field="*{operating}" class="form-control">
+            <input type="text" class="form-control" th:field="*{device}">
         </div>
 
         <div class="mb-3">
             <label class="form-label">진료 유형</label>
             <div class="clinic-grid">
-                <div class="form-check"
-                     th:each="type : ${T(com.AniCare.demo.constant.admin.ClinicType).values()}">
+                <div class="form-check" th:each="type : ${T(com.AniCare.demo.constant.admin.ClinicType).values()}">
                     <input class="form-check-input" type="checkbox"
-                           th:id="'type_' + ${type}"
-                           th:name="clinicTypeList"
-                           th:value="${type}"
-                           th:checked="${hospital.clinicTypeList != null and hospital.clinicTypeList.contains(type)}"/>
-                    <label class="form-check-label"
-                           th:for="'type_' + ${type}"
-                           th:text="${type}"></label>
+                           th:value="${type}" th:field="*{clinicTypeList}"/>
+                    <label class="form-check-label" th:text="${type}"></label>
                 </div>
             </div>
         </div>
 
         <div class="mb-3">
-            <label class="form-label">주소</label>
-            <input type="text" th:field="*{hospitalAddress}" class="form-control">
+            <label class="form-label">수의사</label>
+            <div class="form-check" th:each="vet : ${vetList}">
+                <input class="form-check-input" type="checkbox"
+                       th:value="${vet.id}" th:field="*{vetInfoIdList}"/>
+                <label class="form-check-label" th:text="${vet.vetName}"></label>
+            </div>
         </div>
 
         <button type="submit" class="btn-green">등록</button>
