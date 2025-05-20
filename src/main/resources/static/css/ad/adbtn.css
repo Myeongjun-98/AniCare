@@ -1,0 +1,25 @@
+/* 관리자 전용 버튼 wrapper */
+.admin-btn-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+  padding: 10px 20px;
+}
+
+/* 관리자 페이지 버튼 스타일 */
+.admin-page-btn {
+  background-color: #ffa500;
+  color: #fff;
+  font-weight: bold;
+  padding: 10px 18px;
+  font-size: 14px;
+  text-decoration: none;
+  border-radius: 8px;
+  border: none;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.admin-page-btn:hover {
+  background-color: #ff8c00;
+}
