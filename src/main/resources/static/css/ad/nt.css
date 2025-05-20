@@ -1,50 +1,155 @@
-/* nt.css */
+@font-face {
+  font-family: 'Jalnan2';
+  src: url('/fonts/Jalnan2.ttf') format('truetype');
+}
 
-/* 공통 설정 */
 body {
-    font-family: 'KoPubDotum', '엘리스DX널리체', sans-serif;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    background-color: #fff;
-    color: #333;
+  font-family: 'Jalnan2', 'KoPub돋움', '엘리스DX널리체', sans-serif;
+  background-color: #fafafa;
+  color: #333;
+  margin: 0;
+  padding: 0;
 }
 
-/* 메인 레이아웃 설정 */
-#main {
-    max-width: 1140px;
-    margin: 0 auto;
-    padding: 0 150px;
+/* 컨테이너 */
+.report-container {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 40px 150px;
 }
 
-/* 버튼 공통 스타일 */
-.btn-success {
-    background-color: #4CAF50;
-    border-color: #4CAF50;
+/* 제목 */
+h2, .modal-title {
+  font-family: 'Jalnan2', 'KoPub돋움', sans-serif;
+  color: #4CAF50;
 }
 
-.btn-success:hover {
-    background-color: #45a049;
-    border-color: #45a049;
+/* 네비게이션 */
+.nav-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 0 0 20px 0;
+  justify-content: flex-start;
 }
 
-/* 테이블 설정 */
-.table {
-    font-size: 0.95rem;
+.nav-btn {
+  display: inline-block;
+  padding: 6px 12px;
+  border: 2px solid #4CAF50;
+  border-radius: 6px;
+  color: #4CAF50;
+  text-decoration: none;
+  font-weight: bold;
 }
 
-.table th, .table td {
-    vertical-align: middle;
+.nav-btn:hover {
+  background-color: #4CAF50;
+  color: white;
 }
 
-/* 링크 스타일 */
-a {
-    text-decoration: none;
-    color: inherit;
+/* 테이블 */
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  font-size: 14px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  overflow: hidden;
 }
 
-/* 모달 입력 필드 */
-.modal .form-control,
-.modal .form-select {
-    font-size: 0.95rem;
+.custom-table thead {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.custom-table th,
+.custom-table td {
+  text-align: center;
+  padding: 12px 10px;
+  border-bottom: 1px solid #ddd;
+  word-break: break-word;
+}
+
+.custom-table tr:last-child td {
+  border-bottom: none;
+}
+
+.custom-table tbody tr:hover {
+  background-color: #f6fdf8;
+  cursor: pointer;
+}
+
+/* 버튼 */
+.btn-green {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.btn-outline-green {
+  border: 1px solid #4CAF50;
+  color: #4CAF50;
+  background: white;
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+
+.btn-outline-green:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.btn-outline-red {
+  border: 1px solid #f44336;
+  color: #f44336;
+  background: white;
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+
+.btn-outline-red:hover {
+  background-color: #f44336;
+  color: white;
+}
+
+/* 링크 텍스트 */
+.title-link {
+  cursor: pointer;
+  text-decoration: none;
+  color: #333;
+}
+
+.title-link:hover {
+  text-decoration: underline;
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+  .report-container {
+    padding: 20px;
+  }
+
+  .custom-table th,
+  .custom-table td {
+    padding: 8px 6px;
+    font-size: 12px;
+  }
+
+  .nav-btn {
+    font-size: 13px;
+    padding: 4px 10px;
+  }
+}
+.title-link {
+  cursor: pointer;
+  color: #333;
+  text-decoration: none;
+}
+.title-link:hover {
+  text-decoration: underline;
 }
