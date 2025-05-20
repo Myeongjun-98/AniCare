@@ -61,6 +61,7 @@ public class BoardService {
                 //게시글 작성자 정보 가져오기
                 boardListMainDto.setUserName(userInfo.getUserName());
                 boardListMainDto.setUserAddress(userInfo.getUserAddress());
+                boardListMainDto.setUserFile(userInfo.getUserImage());
 
                 //게시글 첨부파일 이미지 가져오기
                 BoardFile boardFile = boardFileRepository.findByBoardIdAndThumbnailYn(board.getId(), "Y");

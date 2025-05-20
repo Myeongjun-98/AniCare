@@ -5,7 +5,7 @@
       layout:decorate="~{fragment/default}">
 <head>
   <th:block layout:fragment="css">
-    <link rel="stylesheet" href="/css/community/commain.css">
+    <link rel="stylesheet" href="/css/community/comsearch.css">
   </th:block>
   <th:block layout:fragment="script">
     <script th:inline="javascript">
@@ -60,13 +60,8 @@
       </div>
     </div> <!-- ▲ 게시판 카테고리 끝 ▲ -->
 
-    <p th:text="|${boardSearchForm.keyword}에 대한 검색 결과:|"></p>
+    <p class="keyword-result" th:text="|${boardSearchForm.keyword}에 대한 검색 결과:|"></p>
 
-  <div class="orderBtn">
-    <p style="display: inline;">인기순</p>
-    <p style="display: inline;"> | </p>
-    <p style="display: inline;">최신순</p>
-  </div>
 
     <!-- ▼ 검색결과 게시글 리스트 ▼ -->
  <div class="result-list-wrap" id="boardListWrap">
@@ -111,9 +106,9 @@
                 <div class="post-thumbnail">
                   <img src="${p.fileUrl || '/anicareFile/default-thumbnail.jpg'}" alt="썸네일"
                   style="width: 200px; height: 200px; object-fit: cover; border-radius:10px;">
+                  <div class="title-overlay">${p.boardTitle}</div>
                 </div>
-                <div class="post-info">
-                  <p>${p.boardTitle}</p>
+                <div class="post-meta">
                   <p>${p.boardWriteDate}</p>
                   <p>❤ ${p.likeCount}</p>
                 </div>
