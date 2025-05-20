@@ -134,11 +134,11 @@ public class AdminPageController {
         return "redirect:/ad/notice?delete=true";
     }
 
-    @GetMapping("/ad")
-    public String adHomePage(Model model) {
-        addUserInfoToModel(model);
-        return "ad/ad";
-    }
+//    @GetMapping("/ad")
+//    public String adHomePage(Model model) {
+//        addUserInfoToModel(model);
+//        return "ad/ad";
+//    }
 
     @GetMapping("/ad/form")
     public String formPage(Model model) {

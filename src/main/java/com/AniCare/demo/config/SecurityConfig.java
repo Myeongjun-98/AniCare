@@ -32,7 +32,7 @@ public class SecurityConfig {
                         .requestMatchers("/", "/anicare", "/anicare/**",
                                 "/mainpage", "/mainpage/**",
                                 "/signup", "/image/**", "/anicareFile/**", "/community/**",
-                                "/css/**", "/javascript/**", "/mypage").permitAll()
+                                "/css/**", "/javascript/**", "/mypage","/search","/search/**").permitAll()
                         .requestMatchers("/ad/**").hasAuthority("ADMIN")  // ✅ Authorization 기반 권한 체크
                         .requestMatchers("/user/**").hasAnyAuthority("USER", "ADMIN")
                         .anyRequest().authenticated()

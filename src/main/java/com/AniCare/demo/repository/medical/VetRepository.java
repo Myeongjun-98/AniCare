@@ -29,6 +29,5 @@ public interface VetRepository extends JpaRepository<VetInfo, Long> {
             """)
     Optional<VetInfo> findWithDetailById(@Param("id") Long id);
 
-    //수의사 정보 불러오기
-    VetInfo findByVetName(String name);
+    VetInfo findByVetId(String email);
 }

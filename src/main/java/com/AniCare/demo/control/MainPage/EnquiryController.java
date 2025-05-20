@@ -58,9 +58,13 @@ public class EnquiryController {
         return "mainpage/enquirywrite";
     }
     @PostMapping("/enquirywrite")
-    public String enquiryWriteSave(@Valid EnquiryWriteDto enquiryWriteDto, BindingResult bindingResult, @RequestParam("enquiryFile")List<MultipartFile> multipartFileList, Model model){
+    public String enquiryWriteSave(@Valid EnquiryWriteDto enquiryWriteDto, BindingResult bindingResult, @RequestParam("enquiryFile")List<MultipartFile> multipartFileList,
+                                   Principal principal, Model model){
+
+        String email = principal.getName();
+
         try{
-            mainEnquiryService.enquirysave(enquiryWriteDto,multipartFileList);
+            mainEnquiryService.enquirysave(enquiryWriteDto,multipartFileList,email);
         }catch (Exception e){
             return "/mainpage/enquirywrite";
         }

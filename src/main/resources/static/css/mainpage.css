@@ -81,7 +81,6 @@ li{
 }
 .login-btn,
 .signup-btn,
-.vetlogin-btn,
 .vetsignup-btn {
   display:inline-block;
   padding: 5px 10px;
@@ -129,11 +128,68 @@ li{
     background-color: #FF8C00;
 }
 
-@media (max-width: 768px) {
-  .search-container {
-    display: none;
-  }
+/*   메인페이지 통합검색창   */
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 30px 0;
 }
+
+/* 검색 입력창 스타일 */
+.search-container input[type="text"] {
+    width: 800px;
+    max-width: 90%;
+    padding: 12px 16px;
+    font-size: 16px;
+    border: 2px solid #FFD700;
+    border-radius: 6px 0 0 6px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+/* 검색 버튼 스타일 */
+.search-container .search-btn {
+    background-color: #FFD700;
+    color: #333;
+    border: 2px solid #FFD700;
+    border-left: none;
+    padding: 12px 16px;
+    font-size: 16px;
+    border-radius: 0 6px 6px 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.search-container .search-btn:hover {
+    background-color: #FFC107;
+}
+
+/* Material Icons 아이콘 크기 조절 */
+.search-container .material-icons {
+    font-size: 20px;
+}
+
+/* 모바일 대응 */
+@media (max-width: 768px) {
+    .search-container {
+        flex-direction: column;
+    }
+
+    .search-container input[type="text"],
+    .search-container .search-btn {
+        width: 100%;
+        border-radius: 6px;
+        margin: 5px 0;
+    }
+
+    .search-container .search-btn {
+        border-left: 2px solid #FFD700; /* 모바일에서 좌우 테두리 */
+    }
+}
+
 .hamburger {
   font-size: 24px;
   background: none;
@@ -522,3 +578,17 @@ main.sidebar-open {
   border-top: 3px solid #2196f3;
   width:283px;
 }
+
+/* 검색 영역 전체 감싸는 박스 */
+#main > div:first-child {
+    padding: 20px;
+    border-bottom: 1px solid #ddd;
+    background-color: #fff8dc; /* 연한 노란색 배경 (우리 메인 색 참고) */
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+
+

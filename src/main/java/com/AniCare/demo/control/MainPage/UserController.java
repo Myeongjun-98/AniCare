@@ -2,12 +2,14 @@ package com.AniCare.demo.control.MainPage;
 
 import com.AniCare.demo.Dto.mainpage.PetDetailDto;
 import com.AniCare.demo.Dto.mainpage.UserInfoDto;
+import com.AniCare.demo.Dto.mainpage.UserUpdateDto;
 import com.AniCare.demo.constant.medical.PetSex;
 import com.AniCare.demo.constant.medical.PetSpecies;
 import com.AniCare.demo.entity.MainPage.Pet;
 import com.AniCare.demo.entity.MainPage.User;
 import com.AniCare.demo.repository.MainPage.UserRepository;
 import com.AniCare.demo.service.mainpage.UserService;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
@@ -90,9 +92,26 @@ public class UserController {
     }
 
 
+    @GetMapping("/ad")
+    public String adminLoginForm(@RequestParam(value = "error", required = false) String error, @RequestParam(value = "exception", required = false) String excetion,Model model){
 
 
+        model.addAttribute("error", error);
+        model.addAttribute("excetion",excetion);
+        return "mainpage/userlogin";
 
+    }
+    // 마이페이지 사용자 정보 수정 모달창 요청
+    @PostMapping("updateUser")
+    public String updateUser(@ModelAttribute UserUpdateDto userUpdateDto, Principal principal, RedirectAttributes redirectAttributes) {
+        try {
+            userService.updateUser(userUpdateDto,passwordEncoder);
+            redirectAttributes.addFlashAttribute("successMessage", "회원 정보 수정이 완료되었습니다");
+        }catch (Exception e) {
+            redirectAttributes.addFlashAttribute("errorMessage", "회원 정보 수정 중 오류가 발생했습니다 ");
+        }
+        return "redirect:/mainpage";
+    }
 
 }
 

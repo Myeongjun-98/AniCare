@@ -1,5 +1,6 @@
 package com.AniCare.demo.repository.medical;
 
+import com.AniCare.demo.Dto.mainpage.SearchResultDto;
 import com.AniCare.demo.Dto.medical.ClinicDiaryListDto;
 import com.AniCare.demo.entity.medical.ClinicDiary;
 import org.springframework.data.domain.Page;
@@ -9,6 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Collection;
 import java.util.Optional;
 
 @Repository
@@ -46,4 +48,6 @@ public interface ClinicDiaryRepository extends JpaRepository<ClinicDiary, Long> 
                 WHERE c.id = :id
             """)
     Optional<ClinicDiary> findByClinicDiaryId(@Param("id") Long id);
+
+
 }

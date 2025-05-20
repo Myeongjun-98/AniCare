@@ -55,4 +55,12 @@ public class User {
         return user;
 
     }
+    public void updateUser(String userPassword,String userTel, String userAddress, String userImage, PasswordEncoder passwordEncoder) {
+        if (userPassword!= null && !userPassword.isEmpty()) {
+            this.userPassword = passwordEncoder.encode(userPassword);
+        }
+        this.userTel = userTel;
+        this.userAddress = userAddress;
+        this.userImage = userImage;
+    }
 }

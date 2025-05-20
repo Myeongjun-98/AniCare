@@ -26,7 +26,7 @@ public class Board { //게시글 정보를 저장하는 Entity
 
     @Column(nullable = false, length = 500)
     private String boardContent; //게시글 내용
-    private String boardImg;
+
     private int boardHit=0; //게시글 조회수
 
     private LocalDate boardWriteDate; //게시글 작성일
