@@ -20,7 +20,6 @@ public class SecurityConfig {
     @Autowired
     UserService userService;
 
-
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         // 요청 캐시 설정 (중복 요청 방지)
@@ -32,19 +31,17 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/", "/anicare", "/anicare/**",
                                 "/mainpage", "/mainpage/**",
-                                "/signup", "/image/**", "/anicareFile/**",
+                                "/signup", "/image/**", "/anicareFile/**", "/community/**",
                                 "/css/**", "/javascript/**", "/mypage","/search","/search/**").permitAll()
-                        .requestMatchers("/admin/**").hasRole("ADMIN")
-                        .requestMatchers("/user/**").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers("/ad/**").hasAuthority("ADMIN")  // ✅ Authorization 기반 권한 체크
+                        .requestMatchers("/user/**").hasAnyAuthority("USER", "ADMIN")
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
-                        .loginPage("/mainpage/userlogin")                    // 사용자 로그인 페이지
-                      //  .loginProcessingUrl("/mainpage/userlogin")          // 로그인 요청 처리 URL
+                        .loginPage("/mainpage/userlogin")                    // 로그인 페이지
                         .usernameParameter("email")                         // 이메일로 로그인
-                      //  .passwordParameter("password")                      // 패스워드 파라미터 명시 (선택)
-                        .defaultSuccessUrl("/anicare", true)             // 로그인 성공 시 이동
-                        .failureUrl("/mainpage/userlogin?error=true")       // 실패 시 다시 로그인 페이지
+                        .defaultSuccessUrl("/anicare", true)                // 로그인 성공 후 이동
+                        .failureUrl("/mainpage/userlogin?error=true")       // 실패 시 다시 로그인
                         .permitAll()
                 )
                 .logout(out -> out
@@ -58,6 +55,9 @@ public class SecurityConfig {
 
         return http.build();
     }
+
     @Bean
-    public PasswordEncoder passwordEncoder() {return new BCryptPasswordEncoder();}
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 }

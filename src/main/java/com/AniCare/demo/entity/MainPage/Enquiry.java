@@ -41,4 +41,6 @@ public class Enquiry {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private EnquiryStatus status;
+
+
 }

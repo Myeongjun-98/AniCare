@@ -135,16 +135,10 @@
 
 /* 게시글 내용 기본 위치 유지 */
 .board-detail-boardContent {
-    margin: 20px 0 0 0;
-    line-height: 1.6;
-    white-space: pre-wrap;
-}
-
-.board-detail-boardContent::selection,
-.board-detail-boardTitle::selection,
-.comment-wrap span::selection {
-    background: #F2A831;
-    color: white;
+  margin: 20px 0 0 0;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  user-select: none;
 }
 
 /* 작성자 정보 기본 위치 유지 */
@@ -182,29 +176,27 @@
 
 /* 좋아요/댓글 수 박스 */
 .count-box {
-    background-color: #E2E2E2;
-    display: flex;
-    align-items: center;
-    position: absolute;
-    bottom: 40px;
-    right: 40px;
-    font-size: 1.5rem;
-    user-select: none;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  bottom: 40px;
+  right: 40px;
+  font-size:1.5rem;
+  user-select: none;
 }
 
 .count-box svg {
+    fill: #666666;
     overflow: visible;
-    fill: none;
     width: 24px;
     height: 24px;
-    stroke: #666666;
-    stroke-width: 1px;
+    /* stroke: #666666;
+    stroke-width: .5px;
     stroke-linecap: round;
-    stroke-linejoin: round;
+    stroke-linejoin: round; */
 }
 
 .count-box p {
-    font-family: 'yg-jalnan', sans-serif;
     color: #666666;
 }
 

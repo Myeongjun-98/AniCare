@@ -1,14 +1,24 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="https://www.thymeleaf.org/extras/spring-security"
       layout:decorate="~{fragment/default}">
 
+<!-- ✅ CSS 파일 연결 -->
+<th:block layout:fragment="css">
+    <link rel="stylesheet" href="/css/ad/adbtn.css" />
+</th:block>
 
-<th:block layout:fragment="css"></th:block>
 <th:block layout:fragment="javascript"></th:block>
 
-
 <main layout:fragment="main">
+
+    <!-- ✅ 관리자 전용 버튼 -->
+    <div class="admin-btn-wrapper" sec:authorize="hasAuthority('ADMIN')">
+        <a href="/ad" class="admin-page-btn">관리자 페이지</a>
+    </div>
+
     <!-- 공지사항 배너 -->
     <section class="notice-banner">
         <h3>📢 공지사항</h3>
@@ -16,28 +26,15 @@
         <a href="#">더보기</a>
     </section>
 
-    <!-- 메디컬 추천 섹션 -->
-    <section class="recommend-section">
-        <h2>메디컬 추천 정보</h2>
-        <div class="card-slider">
-            <div class="card medical-card">
-                <img src="https://via.placeholder.com/150" alt="병원 이미지" />
-                <h3>강남 동물병원</h3>
-                <p>슬개골 탈구 전문</p>
-            </div>
-            <!-- 추가 카드들... -->
-        </div>
-    </section>
-
     <!-- 커뮤니티 추천 섹션 -->
     <section class="recommend-section">
         <h2>커뮤니티 인기 글</h2>
         <div class="card-slider">
-<!--            <div th:each="community : ${communityList}" class="card community-card">-->
-<!--                <img th:src="${community.boardImg}" alt="커뮤니티 이미지" />-->    <!-- 오류로 인해 잠시 막아두겠음(0515 명준) -->
-<!--                <a th:href=" '/community/board/boardDetail/'+${community.boardId} " th:text="${community.boardTitle}"></a>-->
-<!--                <p th:text="${community.boardContent}"></p>-->
-<!--            </div>-->
+            <div th:each="community : ${communityList}" class="card community-card">
+                <img th:src="${community.fileUrl}" alt="커뮤니티 이미지" />
+                <a th:href=" '/community/board/boardDetail/'+${community.id} " th:text="${community.boardTitle}"></a>
+                <p th:text="${community.boardContent}"></p>
+            </div>
             <!-- 추가 카드들... -->
         </div>
     </section>

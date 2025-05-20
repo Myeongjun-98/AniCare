@@ -1,11 +1,25 @@
+body {
+  background-color: #fafafa;
+  font-family: 'Jalnan2', 'KoPub돋움', 'sans-serif';
+}
+
+.report-container {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 40px 150px;
+}
+
+/* 상단 네비게이션 버튼 */
 .nav-container {
-  padding: 20px 150px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 30px;
 }
 
 .nav-btn {
-  display: inline-block;
-  margin-right: 5px;
-  padding: 6px 12px;
+  padding: 8px 16px;
   border: 2px solid #4CAF50;
   border-radius: 6px;
   color: #4CAF50;
@@ -17,40 +31,72 @@
   color: white;
 }
 
-.report-container {
-  max-width: 1140px;
-  margin: 0 auto;
-  padding: 40px 150px;
-}
-
+/*  폼 요소 공통 */
 .form-label {
   font-weight: bold;
   margin-bottom: 6px;
 }
-
-.btn-green {
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 5px;
-  font-weight: bold;
-}
-
 .form-control {
   border: 1px solid #ccc;
   border-radius: 4px;
   padding: 8px;
 }
-
 .form-check {
-  margin-bottom: 5px;
+  margin-bottom: 8px;
 }
+
+/*  진료유형 checkbox 그리드 */
 .clinic-grid {
   display: grid;
-  grid-template-columns: repeat(10, 1fr); /* 10개씩 한 줄 */
-  gap: 5px;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 10px;
 }
-.clinic-grid .form-check {
-  margin-bottom: 5px;
+
+/* 등록 버튼 */
+.btn-green {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+.btn-green:hover {
+  background-color: #43a047;
+}
+
+/*  리스트 스타일 */
+.clinic-type-list,
+.vet-name-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+.clinic-type-list li::before,
+.vet-name-list li::before {
+  content: '• ';
+  color: #4CAF50;
+  margin-right: 4px;
+}
+
+/* 테이블 */
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  font-size: 14px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.custom-table th,
+.custom-table td {
+  padding: 12px 10px;
+  border-bottom: 1px solid #ddd;
+  vertical-align: top;
+  word-break: break-word;
+}
+.table-header-green {
+  background-color: #4CAF50;
+  color: white;
 }

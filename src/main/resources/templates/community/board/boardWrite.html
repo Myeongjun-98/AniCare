@@ -5,6 +5,7 @@
       layout:decorate="~{fragment/default}">
 <head>
   <th:block layout:fragment="css">
+    <link rel="stylesheet" th:href="@{/css/community/boardWrite.css}" />
   </th:block>
   <th:block layout:fragment="script">
   <script th:src="@{/javascript/boardFile/boardFile.js}"></script>
@@ -54,45 +55,51 @@
     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 
   <div  class="board-write">
-    <div class="board-select-wrap">
-      <div class="board-boardType">
-        <select th:field="*{boardType}" class="form-select" id="boardType">
-          <!-- selected는 나중에 선택 후 submit 시 오류 뜨게해야함 -->
-          <option value="" selected>게시판 타입을 선택해주세요.</option>
-          <option value="MEETING">모임 모집글</option>
-          <option value="ERRAND">심부름 구인글</option>
-        </select>
-        <p th:if="${#fields.hasErrors('boardType')}" th:errors="*{boardType}"
-           style="color:red;" class="fieldError"></p>
-      </div>
+    <div class="board-write-selectedBox">
 
-      <!-- 소카테고리 -->
-      <div class="board-boardCategory">
-        <select th:field="*{category}" class="form-select" id="category">
-          <!-- selected는 나중에 선택 후 submit 시 오류 뜨게해야함 -->
-          <option value="" selected>게시판 카테고리를 선택해주세요.</option>
-          <option value="VOLUNTEER" data-type="MEETING">봉사활동</option>
-          <option value="WALKING" data-type="MEETING">산책모임</option>
-          <option value="INFO" data-type="MEETING">교류모임</option>
-
-          <option value="WALKING" data-type="ERRAND">산책</option>
-          <option value="PETSITTER" data-type="ERRAND">펫시터</option>
-          <option value="ERRANDING" data-type="ERRAND">심부름</option>
-        </select>
-        <p th:if="${#fields.hasErrors('category')}" th:errors="*{category}"
+      <div class="board-select-wrap">
+        <div class="board-boardType">
+          <select th:field="*{boardType}" class="form-select" id="boardType">
+            <!-- selected는 나중에 선택 후 submit 시 오류 뜨게해야함 -->
+            <option value="" selected>게시판 타입을 선택해주세요.</option>
+            <option value="MEETING">모임 모집글</option>
+            <option value="ERRAND">심부름 구인글</option>
+          </select>
+          <p th:if="${#fields.hasErrors('boardType')}" th:errors="*{boardType}"
            style="color:red;" class="fieldError"></p>
+        </div>
+
+        <!-- 소카테고리 -->
+        <div class="board-boardCategory">
+          <select th:field="*{category}" class="form-select" id="category">
+            <!-- selected는 나중에 선택 후 submit 시 오류 뜨게해야함 -->
+            <option value="" selected>게시판 카테고리를 선택해주세요.</option>
+            <option value="VOLUNTEER" data-type="MEETING">봉사활동</option>
+            <option value="WALKING" data-type="MEETING">산책모임</option>
+            <option value="INFO" data-type="MEETING">교류모임</option>
+
+            <option value="WALKING" data-type="ERRAND">산책</option>
+            <option value="PETSITTER" data-type="ERRAND">펫시터</option>
+            <option value="ERRANDING" data-type="ERRAND">심부름</option>
+          </select>
+          <p th:if="${#fields.hasErrors('category')}" th:errors="*{category}"
+           style="color:red;" class="fieldError"></p>
+        </div>
+
+        <button class="btn btn-outline-secondary" type="submit" id="button-addon2">게시</button>
+
       </div>
 
     </div>
 
-    <div class="mb-3">
+    <div class="boardWrite-title">
       <label for="exampleFormControlInput1" class="form-label">글 제목</label>
-      <input th:field="*{boardTitle}" type="text" class="form-control" id="exampleFormControlInput1" placeholder="boardTitle">
+      <input th:field="*{boardTitle}" type="text" class="form-control" id="exampleFormControlInput1" placeholder="제목을 입력해주세요.">
       <p th:if="${#fields.hasErrors('boardTitle')}" th:errors="*{boardTitle}"
          style="color:red;" class="fieldError"></p>
     </div>
-    <div class="mb-3">
-      <label for="exampleFormControlTextarea1" class="form-label">작성 내용</label>
+    <div class="boardWrite-content">
+      <label for="exampleFormControlTextarea1" class="form-label">내용</label>
       <textarea th:field="*{boardContent}" class="form-control" id="exampleFormControlTextarea1" rows="3"
                 placeholder="내용을 입력하세요."></textarea>
       <p th:if="${#fields.hasErrors('boardContent')}" th:errors="*{boardContent}"
@@ -102,7 +109,7 @@
     </div>
 
     <!-- ▼ 첨부파일 input ▼ -->
-    <div class="mb-3">
+    <div class="boardWrite-imgPreview">
       <input class="form-control" type="file" id="formFile" name="boardFile" multiple style="display:none;" />
       <button type="button" id="imgUploadBtn">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-images" viewBox="0 0 16 16">
@@ -143,7 +150,6 @@
         });
       });
     </script>
-    <button class="btn btn-outline-secondary" type="submit" id="button-addon2">게시</button>
   </div>
   </form>  <!-- ▲ 게시글 작성 input 끝 ▲ -->
 

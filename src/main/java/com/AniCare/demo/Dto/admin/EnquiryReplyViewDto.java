@@ -17,7 +17,7 @@ public class EnquiryReplyViewDto {
     private LocalDate createDate;
     private String reply;
 
-    // ✅ 이 필드와 관련 getter/setter가 없으면 컴파일 오류 발생
+
     private EnquiryStatus status;
 
     public static EnquiryReplyViewDto of(com.AniCare.demo.entity.admin.EnquiryReply reply,

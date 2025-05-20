@@ -2,13 +2,17 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{fragment/default}">
+<head layout:fragment="head">
+    <link rel="stylesheet" th:href="@{/css/mainpage/userupdate.css}">
+</head>
+
 
 <aside th:fragment="mainmypage" id="sidebar" class="sidebar">
     <div class="sidebar-header">
         <h2>마이페이지</h2>
         <button id="closeSidebar" class="close-btn">×</button>
     </div>
-    <!--  로그인 산태일 때 보여줄 내용   -->
+    <!--  로그인 상태일 때 보여줄 내용   -->
     <div class="userInfo" th:if="${userDetailDto != null}">
 
     <!-- 로그인 상태 -->
@@ -20,7 +24,31 @@
             <p th:if="${userDetailDto != null}" th:text="${userDetailDto.userAddress}"></p>
             <span th:if="${userDetailDto == null}">로그인이 필요합니다</span>
         </div>
-        <button class="edit-btn">수정</button>
+        <button class="edit-btn" onclick="openEditModal()">수정</button>
+        <div id="userEditModal" class="modal hidden">
+            <div class="modal-content">
+                <h3>사용자 정보 수정</h3>
+                <form id="userEditForm" th:action="@{/mainpage/updateUser}" method="post" enctype="multipart/form-data">
+                    <label>사진</label>
+                    <input type="file" name="userImg" accept="image/*">
+
+                    <label>이름</label>
+                    <input type="text" th:value="${userDetailDto.userName}" readonly>
+
+                    <label>이메일</label>
+                    <input type="email" th:value="${userDetailDto.userEmail}" readonly>
+
+                    <label>비밀번호</label>
+                    <input type="password" name="password">
+
+                    <label>주소</label>
+                    <input type="text" name="address" th:value="${userDetailDto.userAddress}">
+
+                    <button type="submit">수정완료</button>
+                    <button type="button" onclick="closeEditModal()">취소</button>
+                </form>
+            </div>
+        </div>
     </div>
     <nav th:if="${userDetailDto.isVet}" class="sidebar-menu">
         <ul>
@@ -40,6 +68,7 @@
         <div class="pet-slider">
             <div class="pet-card">
                 <div class="pet-front">
+
                     <img th:src="@{petDetailDto?.petImg}" alt="반려동물프로필 사진">
                     <h4 th:if="${petDetailDto != null}" th:text="${petDetailDto.petName}"></h4>
                 </div>
@@ -69,7 +98,7 @@
                 <details>
                     <summary>진료수첩</summary>
                     <ul>
-                        <li><a href="#">진료수첩 전체 보기</a></li>
+                        <li><a href="/clinicdiary">진료수첩 전체 보기</a></li>
                     </ul>
                 </details>
             </li>
@@ -78,7 +107,7 @@
                     <summary>커뮤니티</summary>
                     <ul>
                         <li><a href="/communitymain">커뮤니티 메인</a></li>
-                        <li><a href="#">모임 모집글</a></li>
+                        <li><a th:href="@{/community/board/boardList(type='MEETING', order='I', category='ALL')}">모임 모집글</a></li>
                     </ul>
                 </details>
             </li>

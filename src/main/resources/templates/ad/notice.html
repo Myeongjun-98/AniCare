@@ -7,12 +7,13 @@
     <meta charset="UTF-8" />
     <title>공지 목록</title>
     <link rel="stylesheet" href="/css/ad/nt.css">
+    <script th:inline="javascript"></script> <!-- JS 내에서 [[...]] 사용할 수 있게 설정 -->
 </head>
 
+<body>
 <div layout:fragment="main" id="main">
-    <body>
 
-
+    <!--  네비게이션 -->
     <nav class="nav-container">
         <a href="/ad/reportList" class="nav-btn">신고</a>
         <a href="/ad/enquiryReply" class="nav-btn">문의</a>
@@ -27,8 +28,8 @@
             <button class="btn-green" data-bs-toggle="modal" data-bs-target="#noticeWriteModal">글 작성</button>
         </div>
 
-
-        <div class="modal fade" id="noticeWriteModal" tabindex="-1" aria-labelledby="noticeWriteModalLabel" aria-hidden="true">
+        <!--  공지 작성 모달 -->
+        <div class="modal fade" id="noticeWriteModal" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <form th:action="@{/notice/new}" method="post">
@@ -62,7 +63,7 @@
             </div>
         </div>
 
-        <!--  수정 모달 -->
+        <!--  공지 수정 모달 -->
         <div class="modal fade" id="editNoticeModal" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -98,7 +99,7 @@
             </div>
         </div>
 
-        <!-- 공지 테이블 -->
+        <!--  공지 테이블 -->
         <table class="custom-table">
             <thead>
             <tr>
@@ -112,24 +113,23 @@
             </thead>
             <tbody>
             <th:block th:each="notice, stat : ${notices}">
-                <tr>
+                <tr th:id="'row-' + ${notice.id}" th:onclick="|toggleContent(event, '${notice.id}')|">
                     <td th:text="${stat.index + 1}">1</td>
                     <td th:text="${notice.category}">공지</td>
-                    <td>
-                        <a href="javascript:void(0);" th:onclick="'toggleContent(' + ${notice.id} + ')'"
-                           th:text="${notice.title}" class="title-link"></a>
-                    </td>
+                    <td th:text="${notice.title}" class="title-link"></td>
                     <td th:text="${notice.summary}">요약</td>
                     <td th:text="${notice.date}">2025-04-30</td>
                     <td>
                         <button type="button" class="btn-outline-green" data-bs-toggle="modal" data-bs-target="#editNoticeModal"
                                 th:attr="data-id=${notice.id},
-                                     data-title=${notice.title},
-                                     data-category=${notice.category},
-                                     data-content=${notice.content}"
-                                onclick="openEditModal(this)">수정</button>
-                        <form th:action="@{/notice/{id}/delete(id=${notice.id})}" method="post" style="display:inline">
-                            <button type="submit" class="btn-outline-red" onclick="return confirm('정말 삭제하시겠습니까?');">삭제</button>
+                                         data-title=${notice.title},
+                                         data-category=${notice.category},
+                                         data-content=${notice.content}"
+                                onclick="event.stopPropagation(); openEditModal(this)">수정</button>
+                        <form th:action="@{/notice/{id}/delete(id=${notice.id})}" method="post" style="display:inline"
+                              onsubmit="event.stopPropagation();">
+                            <button type="submit" class="btn-outline-red"
+                                    onclick="return confirm('정말 삭제하시겠습니까?');">삭제</button>
                         </form>
                     </td>
                 </tr>
@@ -145,10 +145,16 @@
     </div>
 
     <script>
-        function toggleContent(id) {
-            const row = document.getElementById(`content-${id}`);
-            row.style.display = row.style.display === "none" ? "table-row" : "none";
+        function toggleContent(event, id) {
+            // 수정/삭제 버튼 클릭은 무시
+            if (event.target.closest("button") || event.target.closest("form")) return;
+
+            const row = document.getElementById("content-" + id);
+            if (row) {
+                row.style.display = row.style.display === "none" ? "table-row" : "none";
+            }
         }
+
         function openEditModal(button) {
             document.getElementById("editId").value = button.dataset.id;
             document.getElementById("editTitle").value = button.dataset.title;
@@ -156,7 +162,9 @@
             document.getElementById("editBody").value = button.dataset.content;
         }
     </script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    </body>
+
 </div>
+</body>
 </html>

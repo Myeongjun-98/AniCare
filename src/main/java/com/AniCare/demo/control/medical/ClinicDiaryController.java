@@ -103,28 +103,28 @@ public class ClinicDiaryController {
                                   BindingResult bindingResult,
                                   Principal principal) {
 
+        //오류가 나서 페이지 반환되어도 hospital 목록 다시 보여줄 수 있게 model 선언해주기
+        model.addAttribute("hospitals", hospitalService.findAll());
+
         // 헤더에 사용자 정보 띄우기??
         if (principal.getName() != null) {
             model.addAttribute("userDetailDto", userService.getUserDetail(principal.getName()));
         }
+
+        String email = principal.getName();
 
         if (bindingResult.hasErrors()) {
             return "medical/newClinicDiary";
         }
 
         try {
-            clinicDiaryService.clinicDiarySave(clinicDiarySetDto, clinicDiaryService.getOnePet(principal.getName()).getId());
+            clinicDiaryService.clinicDiarySave(clinicDiarySetDto, clinicDiaryService.getOnePet(email).getId(), email);
         } catch (Exception e) {
             model.addAttribute("clinicDiaryUploadError", "진료수첩 작성 실패");
             return "medical/newClinicDiary";
         }
 
-        Long savedId = clinicDiaryService.clinicDiarySave(
-                clinicDiarySetDto,
-                clinicDiaryService.getOnePet(principal.getName()).getId()
-        );
-
-        return "redirect:/medical/clinicdiary" + savedId;
+        return "redirect:/medical/clinicdiary";
     }
 
 

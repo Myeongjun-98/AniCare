@@ -2,6 +2,11 @@
   font-family: 'Jalnan2';
   src: url('/fonts/Jalnan2.ttf') format('truetype');
 }
+h2, .modal-title {
+  font-family: 'Jalnan2', 'KoPub돋움', sans-serif;
+  color: #4CAF50;
+}
+
 
 body {
   font-family: 'Jalnan2', 'KoPub돋움', '엘리스DX널리체', sans-serif;
@@ -67,4 +72,120 @@ body {
 
 .custom-table tr:last-child td {
   border-bottom: none;
+}
+.nav-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; /* 버튼 사이 간격 */
+  padding: 0 0 20px 0;
+  justify-content: flex-start;
+}
+
+.custom-table td {
+  word-break: break-word;
+}
+
+
+@media (max-width: 768px) {
+  .report-container {
+    padding: 20px;
+  }
+
+  .nav-btn {
+    font-size: 13px;
+    padding: 4px 10px;
+  }
+
+  .custom-table th,
+  .custom-table td {
+    font-size: 13px;
+    padding: 10px 8px;
+  }
+
+  .modal-title {
+    font-size: 18px;
+  }
+}
+@font-face {
+  font-family: 'Jalnan2';
+  src: url('/fonts/Jalnan2.ttf') format('truetype');
+}
+
+body {
+  font-family: 'Jalnan2', 'KoPub돋움', '엘리스DX널리체', sans-serif;
+  background-color: #fafafa;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+.report-container {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 40px 150px;
+}
+
+h2 {
+  font-family: 'Jalnan2', 'KoPub돋움', sans-serif;
+  color: #4CAF50;
+  margin-bottom: 24px;
+}
+
+.nav-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 0 0 20px 0;
+}
+
+.nav-btn {
+  display: inline-block;
+  padding: 6px 12px;
+  border: 2px solid #4CAF50;
+  border-radius: 6px;
+  color: #4CAF50;
+  text-decoration: none;
+  font-weight: bold;
+}
+.nav-btn:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  font-size: 14px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.05);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.custom-table thead {
+  background-color: #4CAF50;
+  color: white;
+}
+.custom-table th,
+.custom-table td {
+  text-align: center;
+  padding: 12px 10px;
+  border-bottom: 1px solid #ddd;
+}
+.custom-table tr:last-child td {
+  border-bottom: none;
+}
+
+@media (max-width: 768px) {
+  .report-container {
+    padding: 20px;
+  }
+  .nav-btn {
+    font-size: 13px;
+    padding: 4px 10px;
+  }
+  .custom-table th,
+  .custom-table td {
+    padding: 8px 6px;
+    font-size: 12px;
+  }
 }

@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor
@@ -31,7 +32,6 @@ public class AdminPageController {
     private final UserService userService;
     private final UserRepository userRepository;
 
-    // ⭐ 로그인된 사용자 정보 공통 등록 메서드
     private void addUserInfoToModel(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null && auth.isAuthenticated() && !auth.getPrincipal().equals("anonymousUser")) {
@@ -59,6 +59,15 @@ public class AdminPageController {
     public String hospitalList(Model model) {
         addUserInfoToModel(model);
         List<HospitalDto> hospitalList = hospitalService.findAll();
+
+        // 병원 DTO에 연결된 수의사 이름 추가
+        for (HospitalDto dto : hospitalList) {
+            List<VetSimpleDto> vetNames = vetRepository.findAllById(dto.getVetInfoIdList()).stream()
+                    .map(vet -> new VetSimpleDto(vet.getId(), vet.getVetName()))
+                    .collect(Collectors.toList());
+            dto.setVetList(vetNames);
+        }
+
         model.addAttribute("hospitals", hospitalList);
         return "ad/hospitalList";
     }
@@ -125,11 +134,11 @@ public class AdminPageController {
         return "redirect:/ad/notice?delete=true";
     }
 
-    @GetMapping("/ad")
-    public String adHomePage(Model model) {
-        addUserInfoToModel(model);
-        return "ad/ad";
-    }
+//    @GetMapping("/ad")
+//    public String adHomePage(Model model) {
+//        addUserInfoToModel(model);
+//        return "ad/ad";
+//    }
 
     @GetMapping("/ad/form")
     public String formPage(Model model) {
@@ -141,7 +150,9 @@ public class AdminPageController {
     public String editForm(@PathVariable Long id, Model model) {
         addUserInfoToModel(model);
         HospitalDto hospitalDto = hospitalService.findById(id);
+        List<VetInfo> vetList = vetRepository.findAll();
         model.addAttribute("hospitalDto", hospitalDto);
+        model.addAttribute("vetList", vetList);
         return "ad/hospitalEdit";
     }
 

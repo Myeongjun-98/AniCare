@@ -3,14 +3,15 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{fragment/default}">
+
 <head>
     <meta charset="UTF-8"/>
     <title>문의 응답</title>
     <link rel="stylesheet" href="/css/ad/er.css">
 </head>
 
-<div layout:fragment="main" id="main">
-    <body>
+<body>
+<div layout:fragment="main" class="report-container">
 
     <!-- ✅ 네비게이션 -->
     <nav class="nav-container">
@@ -22,43 +23,52 @@
         <a href="/ad/hospitalList" class="nav-btn">병원목록</a>
     </nav>
 
-    <div class="report-container">
-        <h2 class="mb-4">문의 목록</h2>
+    <h2 class="mb-4">문의 목록</h2>
 
-        <table class="custom-table">
-            <thead>
-            <tr>
-                <th>번호</th>
-                <th>제목</th>
-                <th>작성자</th>
-                <th>날짜</th>
-                <th>상태</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="enquiry : ${enquiries}"
-                th:attr="data-id=${enquiry.enquiryId},
+    <!-- ✅ 문의 테이블 -->
+    <table class="custom-table table-hover">
+        <thead>
+        <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>날짜</th>
+            <th>상태</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="enquiry : ${enquiries}"
+            th:attr="data-id=${enquiry.enquiryId},
                      data-title=${enquiry.enquiryTitle},
                      data-content=${enquiry.enquiryContent},
-                     data-reply=${enquiry.reply},
-                     data-status=${enquiry.status}"
-                onclick="fillModal(this)"
+                     data-reply=${enquiry.reply}">
+            <td th:text="${enquiry.enquiryId}"
                 data-bs-toggle="modal"
-                data-bs-target="#replyModal">
-                <td th:text="${enquiry.enquiryId}">1</td>
-                <td th:text="${enquiry.enquiryTitle}">제목</td>
-                <td th:text="${enquiry.user}">사용자</td>
-                <td th:text="${enquiry.createDate}">2025-05-15</td>
-                <td>
-                    <span th:if="${enquiry.status.name() == '미완료'}" class="badge-warning">미완료</span>
-                    <span th:if="${enquiry.status.name() != '미완료'}" class="badge-success">완료</span>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+                data-bs-target="#replyModal"
+                onclick="fillModal(this.parentElement)">1</td>
+            <td th:text="${enquiry.enquiryTitle}"
+                data-bs-toggle="modal"
+                data-bs-target="#replyModal"
+                onclick="fillModal(this.parentElement)">제목</td>
+            <td th:text="${enquiry.user}"
+                data-bs-toggle="modal"
+                data-bs-target="#replyModal"
+                onclick="fillModal(this.parentElement)">사용자</td>
+            <td th:text="${enquiry.createDate}"
+                data-bs-toggle="modal"
+                data-bs-target="#replyModal"
+                onclick="fillModal(this.parentElement)">날짜</td>
+            <td data-bs-toggle="modal"
+                data-bs-target="#replyModal"
+                onclick="fillModal(this.parentElement)">
+                <span th:if="${enquiry.status.name() == '미완료'}" class="badge-warning">미완료</span>
+                <span th:if="${enquiry.status.name() != '미완료'}" class="badge-success">완료</span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 
-    <!-- 답변 모달 -->
+    <!-- ✅ 답변 모달 -->
     <div class="modal fade" id="replyModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -88,6 +98,7 @@
         </div>
     </div>
 
+    <!-- ✅ 모달에 데이터 주입하는 스크립트 -->
     <script>
         function fillModal(row) {
             const id = row.getAttribute("data-id");
@@ -101,7 +112,10 @@
             document.getElementById("replyText").value = reply || '';
         }
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    </body>
 </div>
+
+<!-- ✅ Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
 </html>

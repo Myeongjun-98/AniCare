@@ -56,7 +56,8 @@
                         <label class="form-label" th:for="${'files' + num}" th:text="파일+${num}">첨부파일</label>
                         <input class="form-control" th:field="*{files}" th:id="${'files' + num}" type="file">
                     </div>
-                    <!-- 임시 첨부파일 input-->
+
+
                     <div class="form-group">
                         <label for="hospital">병원 선택 (선택 사항)</label>
                         <select class="form-control input-width"
