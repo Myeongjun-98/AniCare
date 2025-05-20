@@ -108,7 +108,7 @@
         <div class="chat-container">   <!-- 채팅방 영역 -->
             <div th:class="${m.senderName == roomInfo.userName} ? 'chat-message me' : 'chat-message vet'"
                  th:each="m : ${history}">
-                
+
                 <p>
                     <span class="sender" th:text="${m.senderName}">OOO(나)</span>
                     <span class="text" th:text="${m.content}"></span>
