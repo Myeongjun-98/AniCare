@@ -7,36 +7,148 @@
 <head>
     <th:block layout:fragment="css"></th:block>
     <th:block layout:fragment="script"></th:block>
+    <link href="/css/medical/petinfo.css" rel="stylesheet">
+    <link href="/css/medical/consultationroom.css" rel="stylesheet">
 </head>
 <div id="main" layout:fragment="main">
 
-    <div>   <!-- 전체 컨테이너 -->
-        <div>   <!-- 채팅방 정보 -->
-            <h3 th:text="|${roomInfo.userName}의 상담 페이지|"></h3>
-            <p th:text="|담당 수의사 : ${roomInfo.vetName}|"></p>
-            <p th:text="|환자 : ${roomInfo.petName}|"></p>
-        </div>  <!-- 채팅방 정보 -->
+    <div id="container">   <!-- 전체 컨테이너 -->
+        <!-- ① 룸 헤더: 제목 + 담당 수의사 -->
+        <div class="room-header">
+            <h3 th:text="|${roomInfo.userName}님의 상담 페이지|">OOO님의 상담 페이지</h3>
+            <div class="doctor-info" th:text="|담당 수의사 : ${roomInfo.vetName}|">담당 수의사 : OOO</div>
+        </div>
 
-        <div>   <!-- 채팅방 영역 -->
-            <div th:each="m : ${history}">
+        <div class="pet-info">   <!-- 반려동물 정보 영역 -->
+
+            <!-- outer table: 2 columns, 33% / 67% -->
+            <table style="border-collapse:collapse;">
+                <colgroup>
+                    <col style="width:33%;"/>
+                    <col style="width:67%;"/>
+                </colgroup>
+                <tr>
+                    <!-- 왼쪽 셀: 프로필 + 이름/나이·성별 -->
+                    <td style="vertical-align:top; padding:0;">
+                        <table style="width:100%; border:1px solid #ccc; border-collapse:collapse;">
+                            <tr>
+                                <td style="padding:8px; text-align:center;">
+                                    <img alt="pet image"
+                                         th:if="${not #strings.isEmpty(petInfo.petImage)}"
+                                         th:src="@{/anicareFile/{file}(file=${petInfo.petImage})}"
+                                    />
+                                </td>
+                            </tr>
+                            <!-- 이름 / 나이·성별 -->
+                            <tr>
+                                <td style="padding:8px;">
+                                    <div><strong th:text="${petInfo.petName}">이름</strong></div>
+                                    <div>
+                                        <span th:text="${petInfo.petAge}">0</span>세 /
+                                        <span th:text="${petInfo.petSex}">성별</span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+
+                    <!-- 오른쪽 셀: 나머지 정보 -->
+                    <td style="vertical-align:top; padding:0;">
+                        <table style="width:100%; border:1px solid #ccc; border-collapse:collapse;">
+                            <!-- 동물종 -->
+                            <tr>
+                                <th style="text-align:center; padding:8px; border:1px solid #ccc;">
+                                    동물종
+                                </th>
+                                <td style="padding:8px 8px 8px 20px; border:1px solid #ccc;"
+                                    th:text="${petInfo.petSpecies}">
+                                </td>
+                            </tr>
+                            <!-- 동물품종 -->
+                            <tr>
+                                <th style="text-align:center; padding:8px; border:1px solid #ccc;">
+                                    몸무게
+                                </th>
+                                <td style="padding:8px 8px 8px 20px; border:1px solid #ccc;"
+                                    th:text="${petInfo.petBreed}">몸무게
+                                </td>
+                            </tr>
+                            <!-- 병명 (여러 개) -->
+                            <tr>
+                                <th style="text-align:center; padding:8px; border:1px solid #ccc;">
+                                    병명 정보
+                                </th>
+                                <td style="padding:8px 8px 8px 20px; border:1px solid #ccc;">
+                                    <ul class="inline-list">
+                                        <li th:each="d : ${petInfo.diseases}"
+                                            th:text="${d.diseaseName}">질병명
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <!-- 알러지 정보 -->
+                            <tr>
+                                <th style="text-align:center; padding:8px; border:1px solid #ccc;">
+                                    알러지 정보
+                                </th>
+                                <td style="padding:8px 8px 8px 20px; border:1px solid #ccc;">
+                                    <ul class="inline-list">
+                                        <li th:each="a : ${petInfo.allergies}"
+                                            th:text="${a.allergyName}">알러지명
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="chat-container">   <!-- 채팅방 영역 -->
+            <div th:class="${m.senderName == roomInfo.userName} ? 'chat-message me' : 'chat-message vet'"
+                 th:each="m : ${history}">
+
                 <p>
-                    <span th:text="${m.senderName}"></span>
-                    <span th:text="${m.content}"></span>
-                    <small th:text="${#temporals.format(m.sentAt, 'HH:mm')}"></small>
+                    <span class="sender" th:text="${m.senderName}">OOO(나)</span>
+                    <span class="text" th:text="${m.content}"></span>
+                    <small class="time" th:text="${#temporals.format(m.sentAt, 'HH:mm')}"></small>
                 </p>
             </div>
         </div>
 
-        <form method="post" th:action="@{/medical/consultationRoom/send}">
-            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-            <input type="hidden" name="id" th:value="${roomInfo.consultationId}">
-            <input autocomplete="off" name="content" placeholder="메시지를 입력하세요" type="text"/>
+        <form class="chat-input" method="post" th:action="@{/medical/consultationRoom/send}">
+            <input th:name="${_csrf.parameterName}" th:value="${_csrf.token}" type="hidden"/>
+            <input name="id" th:value="${roomInfo.consultationId}" type="hidden">
+            <textarea class="chat-textarea"
+                      name="content"
+                      placeholder="메시지를 입력하세요"></textarea>
             <button type="submit">전송</button>
         </form>
 
 
     </div>  <!-- 전체 컨테이너 끝 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.querySelector('.chat-input');
+            const textarea = form.querySelector('textarea');
+            const button = form.querySelector('button');
 
+            // textarea 값이 비어있으면 true, 아니면 false
+            const isEmpty = () => textarea.value.trim().length === 0;
+
+            // disabled 속성 토글
+            const toggleButton = () => {
+                button.disabled = isEmpty();
+            };
+
+            // 초기 상태 설정
+            toggleButton();
+
+            // 입력이 있을 때마다 상태 업데이트
+            textarea.addEventListener('input', toggleButton);
+        });
+    </script>
 </div>
 
 </html>

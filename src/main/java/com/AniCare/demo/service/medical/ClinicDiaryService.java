@@ -14,7 +14,6 @@ import com.AniCare.demo.entity.medical.Allergy;
 import com.AniCare.demo.entity.medical.ClinicDiary;
 import com.AniCare.demo.entity.medical.Disease;
 import com.AniCare.demo.repository.MainPage.PetRepository;
-import com.AniCare.demo.repository.MainPage.UserRepository;
 import com.AniCare.demo.repository.admin.HospitalRepository;
 import com.AniCare.demo.repository.community.BoardFileRepository;
 import com.AniCare.demo.repository.community.BoardRepository;
@@ -80,7 +79,7 @@ public class ClinicDiaryService {
                 pet.getPetBreed(),
                 pet.getPetSex(),
                 pet.getPetAge(),
-                pet.getPetSpecies(),
+                pet.getPetSpecies().getTypeName(),
                 getDiseases(pet.getId()),
                 getAllergies(pet.getId())
         );

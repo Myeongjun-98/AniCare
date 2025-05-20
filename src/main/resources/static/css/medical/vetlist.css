@@ -1,0 +1,70 @@
+/* vetList.css */
+@import "medicaldefault.css";
+
+/* ─────────── 전체 리스트 래퍼 ─────────── */
+.vet-list {
+    width: 60%;
+    max-width: 800px;
+    margin: 40px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* ─────────── 개별 카드 ─────────── */
+.vet-card {
+    background-color: #f1f1f1;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.vet-card a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    padding: 16px;
+}
+
+/* ─────────── 프로필 이미지 ─────────── */
+.vet-image {
+    width: 150px;
+    height: 150px;
+    background-color: white;
+    border-radius: 8px;
+    flex-shrink: 0;
+    margin-right: 24px;
+}
+
+/* ─────────── 텍스트 정보 ─────────── */
+.vet-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.vet-info p {
+    margin: 0;
+    font-family: var(--systemfont);
+    font-size: 1rem;
+    color: #333;
+}
+
+/* ─────────── 반응형 ─────────── */
+@media (max-width: 768px) {
+    .vet-list {
+        width: 90%;
+    }
+
+    .vet-card a {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .vet-image {
+        width: 100%;
+        height: auto;
+        margin-right: 0;
+        margin-bottom: 16px;
+    }
+}

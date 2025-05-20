@@ -2,7 +2,6 @@ package com.AniCare.demo.Dto.medical;
 
 
 import com.AniCare.demo.constant.medical.PetSex;
-import com.AniCare.demo.constant.medical.PetSpecies;
 import com.AniCare.demo.entity.medical.Allergy;
 import com.AniCare.demo.entity.medical.Disease;
 import lombok.AllArgsConstructor;
@@ -23,7 +22,7 @@ public class ClinicDiaryPetInfoDto {
     private String petBreed;
     private PetSex petSex;
     private int petAge;
-    private PetSpecies petSpecies;
+    private String petSpecies;
     private List<Disease> diseases;
     private List<Allergy> allergies;
 }

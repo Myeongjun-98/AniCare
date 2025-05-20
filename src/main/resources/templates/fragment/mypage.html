@@ -50,7 +50,20 @@
             </div>
         </div>
     </div>
-    <div class="pet-slider">
+    <nav th:if="${userDetailDto.isVet}" class="sidebar-menu">
+        <ul>
+            <li>
+                <details>
+                    <summary>내정보</summary>
+                    <ul>
+                        <li><a href="/medical/vet/vetPage">진료기록 보기</a></li>
+                    </ul>
+                </details>
+            </li>
+
+        </ul>
+    </nav>
+    <div  th:if="${!userDetailDto.isVet}" class="pet-slider">
         <!-- 반려동물 정보 슬라이드 -->
         <div class="pet-slider">
             <div class="pet-card">
@@ -71,7 +84,7 @@
     </div>
 
     <!-- 메뉴 카테고리 -->
-    <nav class="sidebar-menu">
+    <nav th:if="${!userDetailDto.isVet}" class="sidebar-menu">
         <ul>
             <li>
                 <details>

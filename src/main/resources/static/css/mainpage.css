@@ -1,111 +1,119 @@
 /* 기본 스타일 */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Arial", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Arial", sans-serif;
 }
 
 body {
-  background-color: #fff;
-  color: #333;
-  transition: margin-left 0.3s;
+    background-color: #fff;
+    color: #333;
+    transition: margin-left 0.3s;
 }
 
 /* 헤더 스타일 */
 header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 20px;
-  background-color: #fff;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  position: sticky;
-  top: 0;
-  z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
+
 ul {
-   list-style-type: none;
-    padding-left:0;
-    margin-left:0;
+    list-style-type: none;
+    padding-left: 0;
+    margin-left: 0;
     display: inline;
 }
 
-li{
+li {
     list-style-type: none;
-    padding-left:0;
-    margin-left:0;
+    padding-left: 0;
+    margin-left: 0;
     display: inline;
 }
+
 .header-left {
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
 }
 
 /* 사이트 로고 스타일 */
 .site-title {
-  font-size: 22px;
-  font-weight: bold;
-  color: #ffa500; /* 노란 계열 */
-  margin: 0 15px;
-  font-family: "Arial", sans-serif;
+    font-size: 22px;
+    font-weight: bold;
+    color: #ffa500; /* 노란 계열 */
+    margin: 0 15px;
+    font-family: "Arial", sans-serif;
 }
 
 /* 기존 .logo 클래스 수정 (간격 조정) */
 .logo {
-  font-size: 18px;
-  font-weight: bold;
-  margin-left: 10px; /* 로고와의 간격 */
+    font-size: 18px;
+    font-weight: bold;
+    margin-left: 10px; /* 로고와의 간격 */
 }
 
 /* 반응형: 모바일에서 로고 간격 축소 */
 @media (max-width: 768px) {
-  .site-title {
-    margin: 0 10px;
-    font-size: 20px;
-  }
-  .logo {
-    font-size: 16px;
-  }
+    .site-title {
+        margin: 0 10px;
+        font-size: 20px;
+    }
+
+    .logo {
+        font-size: 16px;
+    }
 }
 
 .header-right {
-  display: flex;
-  align-items: center;
-  gap: 15px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
 
 .auth-buttons {
-  display: flex;
-  gap: 10px;
+    display: flex;
+    gap: 10px;
 }
+
 .login-btn,
 .signup-btn,
 .vetsignup-btn {
-  display:inline-block;
-  padding: 5px 10px;
-  font-size: 12px;
-  border-radius: 15px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.3s;
+    display: inline-block;
+    padding: 5px 10px;
+    font-size: 12px;
+    border-radius: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
 }
+
 .login-btn {
-  background-color: transparent;
-  border: 1px solid #ffa500;
-  color: #ffa500;
+    background-color: transparent;
+    border: 1px solid #ffa500;
+    color: #ffa500;
 }
+
 .login-btn:hover {
-  background-color: #fff9c4;
+    background-color: #fff9c4;
 }
+
 .signup-btn {
 
-  background-color: #ffa500;
-  border: 1px solid #ffa500;
-  color: white;
+    background-color: #ffa500;
+    border: 1px solid #ffa500;
+    color: white;
 }
+
 .signup-btn:hover {
-  background-color: #ff8c00;
+    background-color: #ff8c00;
 }
 
 .vetlogin-btn {
@@ -191,90 +199,90 @@ li{
 }
 
 .hamburger {
-  font-size: 24px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  margin-right: 15px;
-  color: #ffa500;
+    font-size: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-right: 15px;
+    color: #ffa500;
 }
 
 .logo {
-  font-size: 20px;
-  font-weight: bold;
+    font-size: 20px;
+    font-weight: bold;
 }
 
 .medical {
-  color: #4caf50;
-  cursor: pointer;
+    color: #4caf50;
+    cursor: pointer;
 }
 
 .community {
-   color: #ffa500;
-  cursor: pointer;
+    color: #ffa500;
+    cursor: pointer;
 
 }
 
 .search-container {
-  display: flex;
-  width: 50%;
+    display: flex;
+    width: 50%;
 }
 
 .search-container input {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 20px 0 0 20px;
-  outline: none;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 20px 0 0 20px;
+    outline: none;
 }
 
 .search-btn {
-  padding: 10px 15px;
-  background-color: #ffa500;
-  color: white;
-  border: none;
-  border-radius: 0 20px 20px 0;
-  cursor: pointer;
+    padding: 10px 15px;
+    background-color: #ffa500;
+    color: white;
+    border: none;
+    border-radius: 0 20px 20px 0;
+    cursor: pointer;
 }
 
 /* 마이페이지 스타일 */
 .sidebar {
-  height: 100%;
-  width: 300px;
-  position: fixed;
-  top: 0;
-  left: -300px;
-  background-color: #fff;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-  transition: left 0.3s;
-  z-index: 1000;
-  overflow-y: auto;
+    height: 100%;
+    width: 300px;
+    position: fixed;
+    top: 0;
+    left: -300px;
+    background-color: #fff;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    transition: left 0.3s;
+    z-index: 1000;
+    overflow-y: auto;
 }
 
 .sidebar.active {
-  left: 0;
+    left: 0;
 }
 
 .sidebar-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px;
-  border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #eee;
 }
 
 .close-btn {
-  font-size: 24px;
-  background: none;
-  border: none;
-  cursor: pointer;
+    font-size: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
 }
 
 .user-info {
-  display: flex;
-  padding: 20px;
-  align-items: center;
-  border-bottom: 1px solid #eee;
+    display: flex;
+    padding: 20px;
+    align-items: center;
+    border-bottom: 1px solid #eee;
 }
 
 /* 비로그인시 마이페이지에 보일 로그인 회원가입 버튼  */
@@ -338,240 +346,240 @@ li{
 }
 
 .user-info img {
-  width:60px;
-  height:60px;
-  border-radius: 50%;
-  margin-right: 15px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-right: 15px;
 }
 
 .user-details h3 {
-  margin-bottom: 5px;
+    margin-bottom: 5px;
 }
 
 .user-details p {
-  font-size: 12px;
-  color: #666;
+    font-size: 12px;
+    color: #666;
 }
 
 .edit-btn {
-  margin-left: auto;
-  background: #ffa500;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 5px;
-  font-size: 12px;
-  cursor: pointer;
+    margin-left: auto;
+    background: #ffa500;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    cursor: pointer;
 }
 
 /* 동물 정보 슬라이더 */
 .pet-slider {
-  display: flex;
-  padding: 15px;
-  overflow-x: auto;
-  border-bottom: 1px solid #eee;
+    display: flex;
+    padding: 15px;
+    overflow-x: auto;
+    border-bottom: 1px solid #eee;
 }
 
 .pet-card {
-  width: 100px;
-  height: 120px;
-  margin-right: 10px;
-  perspective: 1000px;
-  cursor: pointer;
-  flex-shrink: 0;
+    width: 100px;
+    height: 120px;
+    margin-right: 10px;
+    perspective: 1000px;
+    cursor: pointer;
+    flex-shrink: 0;
 }
 
 .pet-front,
 .pet-back {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  backface-visibility: hidden;
-  transition: transform 0.6s;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: #fff9c4;
-  border-radius: 10px;
-  padding: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+    transition: transform 0.6s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff9c4;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .pet-back {
-  transform: rotateY(180deg);
-  background-color: #ffecb3;
-  font-size: 14px;
+    transform: rotateY(180deg);
+    background-color: #ffecb3;
+    font-size: 14px;
 }
 
 .pet-card.flipped .pet-front {
-    border:1px solid;
-  transform: rotateY(180deg);
+    border: 1px solid;
+    transform: rotateY(180deg);
 }
 
 .pet-card.flipped .pet-back {
-  transform: rotateY(0deg);
+    transform: rotateY(0deg);
 }
 
 .add-pet {
-  width: 100px;
-  height: 120px;
-  background-color: #fff9c4;
-  border: 2px dashed #ffa500;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
-  color: #ffa500;
-  cursor: pointer;
-  flex-shrink: 0;
+    width: 100px;
+    height: 120px;
+    background-color: #fff9c4;
+    border: 2px dashed #ffa500;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: #ffa500;
+    cursor: pointer;
+    flex-shrink: 0;
 }
 
 /* 마이페이지 메뉴 */
 .sidebar-menu {
-  padding: 15px;
+    padding: 15px;
 }
 
 .sidebar-menu details {
-  margin-bottom: 10px;
+    margin-bottom: 10px;
 }
 
 .sidebar-menu summary {
-  padding: 10px;
-  background-color: #fff9c4;
-  border-radius: 5px;
-  cursor: pointer;
-  font-weight: bold;
-  list-style: none;
+    padding: 10px;
+    background-color: #fff9c4;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    list-style: none;
 }
 
 .sidebar-menu summary::-webkit-details-marker {
-  display: none;
+    display: none;
 }
 
 .sidebar-menu summary:after {
-  content: "+";
-  float: right;
+    content: "+";
+    float: right;
 }
 
 .sidebar-menu details[open] summary:after {
-  content: "-";
+    content: "-";
 }
 
 .sidebar-menu ul ul {
-  margin-top: 5px;
-  padding-left: 20px;
+    margin-top: 5px;
+    padding-left: 20px;
 }
 
 .sidebar-menu a {
-  display: block;
-  padding: 8px 10px;
-  color: #333;
-  text-decoration: none;
-  border-radius: 5px;
+    display: block;
+    padding: 8px 10px;
+    color: #333;
+    text-decoration: none;
+    border-radius: 5px;
 }
 
 .sidebar-menu a:hover {
-  background-color: #ffecb3;
+    background-color: #ffecb3;
 }
 
 .logout-btn {
-  width: calc(100% - 30px);
-  margin: 15px;
-  padding: 10px;
-  background-color: #f44336;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+    width: calc(100% - 30px);
+    margin: 15px;
+    padding: 10px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 /* 메인 컨텐츠 스타일 */
 main {
-  padding: 20px;
-  margin-left: 0;
-  transition: margin-left 0.3s;
+    padding: 20px;
+    margin-left: 0;
+    transition: margin-left 0.3s;
 }
 
 main.sidebar-open {
-  margin-left: 300px;
+    margin-left: 300px;
 }
 
 .notice-banner {
-  background-color: #fff9c4;
-  padding: 15px;
-  border-radius: 10px;
-  margin-bottom: 20px;
-  display: flex;
-  align-items: center;
+    background-color: #fff9c4;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
 }
 
 .notice-banner h3 {
-  margin-right: 10px;
+    margin-right: 10px;
 }
 
 .notice-banner p {
-  flex-grow: 1;
+    flex-grow: 1;
 }
 
 .notice-banner a {
-  color: #ffa500;
-  text-decoration: none;
+    color: #ffa500;
+    text-decoration: none;
 }
 
 .recommend-section {
-  margin-bottom: 30px;
+    margin-bottom: 30px;
 }
 
 .recommend-section h2 {
-  margin-bottom: 15px;
-  color: #333;
+    margin-bottom: 15px;
+    color: #333;
 }
 
 .card-slider {
-  display: flex;
-  overflow-x: auto;
-  gap: 15px;
-  padding-bottom: 10px;
+    display: flex;
+    overflow-x: auto;
+    gap: 15px;
+    padding-bottom: 10px;
 }
 
 .card {
-  min-width: 200px;
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  flex-shrink: 0;
+    min-width: 200px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    flex-shrink: 0;
 }
 
 .card img {
-  width: 100%;
-  height: 120px;
-  object-fit: cover;
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
 }
 
 .card a {
 
-  padding: 10px 10px 0;
-  font-size: 16px;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
+    padding: 10px 10px 0;
+    font-size: 16px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .card p {
-  padding: 0 10px 10px;
-  font-size: 14px;
-  color: #666;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
+    padding: 0 10px 10px;
+    font-size: 14px;
+    color: #666;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 
 }
 
 .medical-card {
-  border-top: 3px solid #4caf50;
+    border-top: 3px solid #4caf50;
 }
 
 .community-card {
@@ -589,6 +597,3 @@ main.sidebar-open {
     gap: 20px;
     flex-wrap: wrap;
 }
-
-
-

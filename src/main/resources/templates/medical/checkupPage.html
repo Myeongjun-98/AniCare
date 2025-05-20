@@ -8,14 +8,15 @@
 <head>
     <th:block layout:fragment="css"></th:block>
     <th:block layout:fragment="script"></th:block>
+    <link href="/css/medical/checkup.css" rel="stylesheet">
 </head>
 <div id="main" layout:fragment="main">
     <div>
         <!-- 문진표 구역 -->
         <div>
-            <div>펫 정보 슬라이드 구역</div>
-        </div>
-        <div>
+            <div id="checkupTitle">
+                <h2>문진표 작성</h2>
+            </div>
             <form method="post" th:action="@{/medical/checkupPage}" th:object="${checkupSetDto}">
                 <label>
                     탈모
@@ -65,11 +66,16 @@
                     호흡이상
                     <input th:field="*{symptom}" type="checkbox" value="호흡이상"/>
                 </label>
-                <label>
-                    기타 증상
+                <div id="etcDiv">
+                    <!--                    <label>-->
+                    <!--                        기타 증상-->
+                    <!--                        <input id="etcCheckbox" type="checkbox"/>-->
+                    <!--                        <input disabled id="etcSymptom" placeholder="직접 입력" th:field="*{etcSymptom}" type="text"/>-->
+                    <!--                    </label>-->
+                    <span>기타 증상</span>
                     <input id="etcCheckbox" type="checkbox"/>
                     <input disabled id="etcSymptom" placeholder="직접 입력" th:field="*{etcSymptom}" type="text"/>
-                </label>
+                </div>
                 <!-- 문진표 구역 -->
                 <button type="submit">비대면 진료 신청</button>
                 <button>병원예약(미구현)</button>

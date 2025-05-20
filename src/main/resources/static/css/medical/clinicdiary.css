@@ -1,0 +1,117 @@
+@import "medicaldefault.css";
+
+/* ─────────── 목록 헤더 (제목 + 글쓰기 버튼) ─────────── */
+.list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 10px 20px 10px;
+    width: 100%;
+}
+
+.list-header h2 {
+    font-family: var(--displayfont);
+    font-size: 2rem;
+    color: var(--subcolor);
+}
+
+.list-header .btn {
+    padding: 10px 20px;
+    font-size: 1rem;
+}
+
+/* ─────────── 진료수첩 목록 테이블 ─────────── */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 60px;
+}
+
+.table thead th {
+    background-color: var(--semicolor);
+    padding: 12px;
+    font-family: var(--systemfont);
+    font-size: 1rem;
+}
+
+.table tbody tr:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+.table tbody tr:nth-child(even) {
+    background-color: #eaeaea;
+}
+
+.table th,
+.table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+}
+
+/* 2) 4번째 열(제목)만 좌측 정렬 */
+.table tbody td:nth-child(4) {
+    text-align: left;
+}
+
+.table a {
+    color: var(--maincolor);
+    text-decoration: none;
+}
+
+.table a:hover {
+    text-decoration: underline;
+}
+
+/* ─────────── 페이징 네비게이션 ─────────── */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.pagination .page-link {
+    color: black;
+}
+
+/* 페이징 중앙 정렬 & 간격 조절 */
+ul.pagination {
+    display: flex; /* flex 레이아웃 */
+    justify-content: center; /* 중앙 정렬 */
+    padding-left: 0; /* 부트스트랩 기본 padding 제거 */
+    margin: 40px auto; /* 위아래 margin:40px, 좌우 auto(center) */
+    list-style: none; /* 불릿 제거 */
+    width: auto; /* 컨테이너 폭을 content 폭에 맞춤 */
+}
+
+/* 각 페이지 아이템 크기 고정 및 간격 설정 */
+ul.pagination .page-item {
+    flex: 0 0 auto; /* flex-grow, flex-shrink 모두 0 → 내용 크기만큼 */
+    margin: 0; /* 좌우 간격 */
+}
+
+/* (선택) prev/next 링크, 숫자 링크 통일된 스타일링 */
+ul.pagination .page-link {
+    padding: 0.5rem 0.75rem;
+    font-size: 1rem;
+}
+
+
+/* ─────────── 반응형 조정 ─────────── */
+@media (max-width: 768px) {
+    .pet-info table,
+    .table {
+        font-size: 0.9rem;
+    }
+
+    .list-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .list-header .btn {
+        margin-top: 10px;
+    }
+}
+
+

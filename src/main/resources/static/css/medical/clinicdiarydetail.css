@@ -1,0 +1,165 @@
+/* clinicdiarydetail.css */
+@import "medicaldefault.css";
+
+/* ─────────── 전체 감싸는 카드 ─────────── */
+.board-detail-wrap {
+    width: 60%;
+    max-width: 900px;
+    margin: 60px auto;
+    padding: 24px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* ─────────── 게시글 정보영역 레이아웃 ─────────── */
+.board-detail-wrap > div > div:first-child {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 24px;
+}
+
+/* 제목 */
+.board-detail-title {
+    font-family: var(--displayfont);
+    font-size: 2.2rem;
+    margin: 0;
+}
+
+/* 기록일 */
+.board-detail-writeDate {
+    font-family: var(--systemfont);
+    font-size: 0.95rem;
+    color: #666;
+    margin-top: 4px;
+}
+
+/* 조회수/상태 블록 */
+.board-detail-wrap > div > div:first-child > div:last-child {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.board-detail-wrap > div > div:first-child > div:last-child h4 {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.board-detail-boardHit {
+    font-family: var(--systemfont);
+    font-size: 0.9rem;
+    margin-top: 6px;
+}
+
+.board-detail-wrap > div > div:first-child > div:last-child p:not(.board-detail-boardHit) {
+    font-family: var(--systemfont);
+    font-size: 0.9rem;
+    margin-top: 4px;
+}
+
+/* ─────────── 이미지 섹션 ─────────── */
+.board-detail-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.single-image .boardFile {
+    width: 700px;
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+#carouselExample {
+    width: 700px;
+    max-width: 100%;
+}
+
+#carouselExample .carousel-inner {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+#carouselExample .carousel-item img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+}
+
+/* ─────────── 본문 내용 ─────────── */
+.board-detail-boardContent {
+    line-height: 1.6;
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 32px;
+    white-space: pre-wrap;
+}
+
+/* ─────────── 좋아요 박스 ─────────── */
+.count-box {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 8px;
+}
+
+.board-detail-likeCount {
+    margin: 0;
+}
+
+.board-detail-likeCount-box {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-family: var(--systemfont);
+    font-size: 1rem;
+}
+
+.board-detail-likeCount-box svg {
+    fill: var(--maincolor);
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.board-detail-likeCount-box svg:hover {
+    transform: scale(1.1);
+}
+
+/* ─────────── 반응형 조정 ─────────── */
+@media (max-width: 768px) {
+    .board-detail-wrap {
+        width: 90%;
+        padding: 16px;
+    }
+
+    .board-detail-wrap > div > div:first-child {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .board-detail-image {
+        flex-direction: column;
+    }
+
+    .single-image .boardFile,
+    #carouselExample {
+        width: 100%;
+    }
+
+    #carouselExample .carousel-item img {
+        height: 200px;
+    }
+
+    .count-box {
+        justify-content: center;
+        margin-bottom: 16px;
+    }
+}

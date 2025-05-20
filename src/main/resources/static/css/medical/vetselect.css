@@ -1,0 +1,99 @@
+@import "medicaldefault.css";
+
+/* ─────────── 상세정보 컨테이너 ─────────── */
+.vet-detail {
+    width: 60%;
+    max-width: 900px;
+    margin: 40px auto;
+    display: flex;
+    background-color: #f1f1f1;
+    border-radius: 8px;
+    padding: 24px;
+    gap: 24px;
+    box-sizing: border-box;
+}
+
+/* 프로필 이미지 */
+.vet-image {
+    width: 240px;
+    height: 240px;
+    background-size: cover;
+    border-radius: 6px;
+    flex-shrink: 0;
+    margin-right: 60px;
+}
+
+/* 텍스트 정보 */
+.vet-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+}
+
+.vet-info p {
+    margin: 4px 0;
+    font-family: var(--systemfont);
+    font-size: 1rem;
+    color: #333;
+}
+
+/* ─────────── 버튼 영역 ─────────── */
+.vet-actions {
+    width: 60%;
+    max-width: 900px;
+    margin: 20px auto 60px;
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    box-sizing: border-box;
+}
+
+.vet-actions form,
+.vet-actions > button {
+    flex: 1;
+}
+
+.vet-actions button,
+.vet-actions form button {
+    width: 100%;
+    padding: 18px 0;
+    font-family: var(--displayfont);
+    font-size: 1.2rem;
+    background-color: var(--maincolor);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.vet-actions button:hover,
+.vet-actions form button:hover {
+    background-color: var(--subcolor);
+}
+
+/* ─────────── 반응형 ─────────── */
+@media (max-width: 768px) {
+    .vet-detail,
+    .vet-actions {
+        width: 90%;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .vet-actions {
+        margin: 20px auto 40px;
+    }
+
+    .vet-image {
+        width: 100%;
+        height: 200px;
+    }
+
+    .vet-actions form,
+    .vet-actions > button {
+        width: 100%;
+    }
+}

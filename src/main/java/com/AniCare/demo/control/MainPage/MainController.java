@@ -63,11 +63,13 @@ public class MainController {
         if (principal != null) {
             boolean hasVet = userService.isVetLogin(principal.getName());
             if (hasVet) {
-                return "redirect:/medical/vet/vetPage";
+
+                return "redirect:/medical/medicalMain";
             }
 
-            // 마이페이지에 사용자 정보 띄우기
+            // 마이페이지에 사용자 정보 띄우기 - 일반 사용자
             model.addAttribute("userDetailDto", userService.getUserDetail(principal.getName()));
+
 
             // 마이페이지에 내 반려동물 정보 띄우기
             model.addAttribute("petDetailDto", petService.getPetDetail(principal.getName()));
@@ -96,9 +98,6 @@ public class MainController {
 
         return "/mainpage/mainsearch";
     }
-
-
-
 }
 
 

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko"
-      layout:decorate="~{fragment/vet/vetdefault}"
+      layout:decorate="~{fragment/default}"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -10,15 +10,17 @@
 <div id="main" layout:fragment="main">
     <div>   <!-- 수의사 정보, 수의사 소속 병원 -->
         <div>   <!-- 수의사 정보 영역 -->
-            <div></div> <!-- 수의사 프로필이미지 -->
+            <div>
+                <img th:src="${vetInfoDto.profileImage}">
+            </div> <!-- 수의사 프로필이미지 -->
 
             <div>   <!-- 인라인 정보 영역 -->
 
-                <p></p> <!-- 수의사 이름 -->
-                <p></p> <!-- 소속 병원 -->
-                <p></p> <!-- 진료 가능한 동물 종류 -->
-                <p></p> <!-- 비대면 근무 시간(출근) -->
-                <p></p> <!-- 비대면 근무 시간(퇴근) -->
+                <p th:text="${vetInfoDto.vetName}"></p> <!-- 수의사 이름 -->
+                <p th:text="${vetInfoDto.hospitalName}"></p> <!-- 소속 병원 -->
+                <p th:each="pet : ${vetInfoDto.curingCapable}" th:text="${pet.getTypeName()}"></p> <!-- 진료 가능한 동물 종류 -->
+                <p th:text="${vetInfoDto.onWorkTime}"></p> <!-- 비대면 근무 시간(출근) -->
+                <p th:text="${vetInfoDto.offWorkTime}"></p> <!-- 비대면 근무 시간(퇴근) -->
 
             </div>
         </div>
@@ -29,11 +31,11 @@
 
             <div>   <!-- 인라인 정보 영역 -->
 
-                <p></p> <!-- 병원 이름 -->
-                <p></p> <!-- 병원 주소 -->
-                <p></p> <!-- 병원 연락처 -->
-                <p></p> <!-- 병원 운영시간(문자열) -->
-                <p></p> <!-- 진료가능 동물 -->
+                <p th:text="${hospitalDto.hospitalName}"></p> <!-- 병원 이름 -->
+                <p th:text="${hospitalDto.hospitalAddress}"></p> <!-- 병원 주소 -->
+                <p th:text="${hospitalDto.hospitalTel}"></p> <!-- 병원 연락처 -->
+                <p th:text="${hospitalDto.operating}"></p> <!-- 병원 운영시간(문자열) -->
+                <p th:each="type : ${hospitalDto.clinicTypeList}" th:text="${type}"></p> <!-- 진료가능 동물 -->
 
             </div>
 

@@ -35,7 +35,6 @@ public class UserService implements UserDetailsService {
     private final PetRepository petRepository;
     private final VetRepository vetRepository;
 
-
     /**
      * 로그인된 사용자 정보 반환 (마이페이지 등 공통 사용 가능)
      */
@@ -82,23 +81,23 @@ public class UserService implements UserDetailsService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userRepository.findByUserEmail(email).orElse(null);
 //                .orElseThrow(() -> new UsernameNotFoundException("이메일을 찾을 수 없습니다: " + email));
-        String username =null , password=null, role=null;
-        if( user ==null ) {
+        String username = null, password = null, role = null;
+        if (user == null) {
             VetInfo vetInfo = vetRepository.findByVetId(email);
             username = vetInfo.getVetId();
-            password=vetInfo.getVetPassword();
-            role= Authorization.USER.toString();
-        }else{
-            username= user.getUserEmail();
-            password=user.getUserPassword();
-            role=String.valueOf(user.getAuthorization());
+            password = vetInfo.getVetPassword();
+            role = Authorization.USER.toString();
+        } else {
+            username = user.getUserEmail();
+            password = user.getUserPassword();
+            role = String.valueOf(user.getAuthorization());
         }
 
         //  권한을 SimpleGrantedAuthority로 설정 (ROLE_ 접두어 없이)
         return org.springframework.security.core.userdetails.User.builder()
-                .username(user.getUserEmail())
-                .password(user.getUserPassword())
-                .authorities(Collections.singletonList(new SimpleGrantedAuthority(user.getAuthorization().name())))
+                .username(username)
+                .password(password)
+                .roles(role)
                 .build();
     }
 
@@ -137,7 +136,6 @@ public class UserService implements UserDetailsService {
         userRepository.save(user);
 
     }
-
 
 }
 

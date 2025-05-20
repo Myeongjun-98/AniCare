@@ -2,42 +2,36 @@
 
 <!DOCTYPE html>
 <html
-  lang="ko"
-  layout:decorate="~{fragment/default}"
-  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-  xmlns:th="http://www.thymeleaf.org"
+        lang="ko"
+        layout:decorate="~{fragment/default}"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        xmlns:th="http://www.thymeleaf.org"
 >
-  <head>
+<head>
     <th:block layout:fragment="css"></th:block>
     <th:block layout:fragment="script"></th:block>
-    <link href="/css/medical/medicalmain.css" rel="stylesheet" />
-  </head>
+    <link href="/css/medical/medicalmain.css" rel="stylesheet"/>
+</head>
 
-  <div id="main" layout:fragment="main">
-    <div id="container">
-        <h1 class="display-font">메디컬 메인페이지</h1>
-
-      <div>
-        <img
-          src="/src/main/resources/static/medicalImages/ChatGPT Image 2025년 5월 18일 오후 08_11_36.png"
-          alt="메디컬 매인 배너"
-          style="width: 1440px; height: 560px; object-fit: cover"
-        />
-      </div>
-
-      <div>
-        <!-- 링크 이동용 버튼 -->
-        <button>
-          <a href="/"> 예약 진료 이동 </a>
-        </button>
-        <button>
-          <a href="/medical/clinicdiary"> 진료수첩 </a>
-        </button>
-        <button>
-          <a href="/medical/checkupPage"> 진단받기 </a>
-        </button>
-        <!-- 링크 이동용 버튼 -->
-      </div>
+<div id="main" layout:fragment="main">
+    <div class="banner">
+        <img src="/medicalImages/KakaoTalk_20250520_111909933.png" style="margin-bottom: 100px;">
     </div>
-  </div>
+    <div id="container">
+
+        <div class="link-buttons">
+            <!-- 링크 이동용 버튼 -->
+            <div>
+                <a href="/"> 진행중인 진료 </a>
+            </div>
+            <div>
+                <a href="/medical/clinicdiary"> 진료수첩 </a>
+            </div>
+            <div>
+                <a href="/medical/checkupPage"> 진단받기 </a>
+            </div>
+            <!-- 링크 이동용 버튼 -->
+        </div>
+    </div>
+</div>
 </html>
