@@ -3,6 +3,7 @@ package com.AniCare.demo.service.medical;
 import com.AniCare.demo.Dto.medical.CheckupSetDto;
 import com.AniCare.demo.Dto.medical.ConsultationChatListDto;
 import com.AniCare.demo.Dto.medical.UserConsultationListDto;
+import com.AniCare.demo.constant.MainPage.SenderType;
 import com.AniCare.demo.entity.MainPage.Pet;
 import com.AniCare.demo.entity.MainPage.User;
 import com.AniCare.demo.entity.medical.*;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -71,6 +73,7 @@ public class MedicalService {
         return checkupRepository.save(c);
     }
 
+    // 채팅방 정보 저장(채팅방 생성)
     @Transactional
     public Consultation createConsultation(String Email, Long vetInfoId, Long checkupId) {
 
@@ -129,7 +132,52 @@ public class MedicalService {
 
     // 채팅로그 불러오기
     public List<ConsultationChatListDto> loadMessages(Long roomId) {
-        List<ConsultationChatListDto> dtos = consultationChatRepository.findMessagesByConsultation(roomId);
-        return dtos;
+        //1. 채팅 내역 데이터 가져오기
+        List<ConsultationChat> consultationChats = consultationChatRepository.findAllByConsultationId(roomId);
+
+        List<ConsultationChatListDto> consultationChatListDtos = new ArrayList<>();
+
+        for(ConsultationChat consultationChat : consultationChats) {
+
+            //2. DTO 그릇에 데이터 차례로 담기
+            ConsultationChatListDto consultationChatListDto = ConsultationChatListDto.from(consultationChat);
+
+           if(consultationChat.getSenderUser() == null) {
+                consultationChatListDto.setSenderType(SenderType.VET);
+                consultationChatListDto.setSenderName(consultationChat.getSenderVet().getVetName());
+           } else {
+               consultationChatListDto.setSenderType(SenderType.USER);
+               consultationChatListDto.setSenderName(consultationChat.getSenderUser().getUserName());
+           }
+
+           consultationChatListDtos.add(consultationChatListDto);
+        }
+        return consultationChatListDtos;
+    }
+
+
+    //채팅 저장
+    public void saveChat(String content, Long consultationId, String name){
+
+        //ConsultationChat 데이터 세팅
+        ConsultationChat consultationChat = new ConsultationChat();
+        Consultation consultation = consultationRepository.findById(consultationId).orElseThrow();
+
+        consultationChat.setConsultation(consultation);
+        consultationChat.setContent(content);
+        consultationChat.setSendAt(LocalDateTime.now());
+        consultationChat.setReadFlag(false);
+
+        //보내는 사람 세팅 (user or vet)
+        if(userRepository.findByUserEmail(name).isEmpty()) {
+            VetInfo vetInfo = vetRepository.findByVetName(name);
+            consultationChat.setSenderVet(vetInfo);
+        }
+        else {
+            User user = userRepository.findByUserEmail(name).orElseThrow();
+            consultationChat.setSenderUser(user);
+        }
+
+        consultationChatRepository.save(consultationChat);
     }
 }

@@ -22,12 +22,13 @@ public class CommentService {
 
 
     // ================ 덧글 저장 ================
-    public void saveComment(CommentForm commentForm) {
+    public void saveComment(CommentForm commentForm, String email) {
 
-        commentForm.setUserId(3L); //입력 체크용 임시
+
+        //회원정보 User에 담아주기
+        User user = userRepository.findByUserEmail(email).orElse(null);
 
         Board board = boardRepository.findById(commentForm.getBoardId()).get();
-        User user = userRepository.findById(commentForm.getUserId()).get(); //입력 체크용 임시
 
         Comment comment = new Comment();
         comment.setBoard(board);

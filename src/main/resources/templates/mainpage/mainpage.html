@@ -1,14 +1,24 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="https://www.thymeleaf.org/extras/spring-security"
       layout:decorate="~{fragment/default}">
 
+<!-- ✅ CSS 파일 연결 -->
+<th:block layout:fragment="css">
+    <link rel="stylesheet" href="/css/ad/adbtn.css" />
+</th:block>
 
-<th:block layout:fragment="css"></th:block>
 <th:block layout:fragment="javascript"></th:block>
 
-
 <main layout:fragment="main">
+
+    <!-- ✅ 관리자 전용 버튼 -->
+    <div class="admin-btn-wrapper" sec:authorize="hasAuthority('ADMIN')">
+        <a href="/ad" class="admin-page-btn">관리자 페이지</a>
+    </div>
+
     <!-- 공지사항 배너 -->
     <section class="notice-banner">
         <h3>📢 공지사항</h3>

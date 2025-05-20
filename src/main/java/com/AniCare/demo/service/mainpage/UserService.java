@@ -23,6 +23,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
+import java.util.Collections;
 
 @Service
 @RequiredArgsConstructor
@@ -91,10 +94,11 @@ public class UserService implements UserDetailsService {
             role=String.valueOf(user.getAuthorization());
         }
 
+        //  권한을 SimpleGrantedAuthority로 설정 (ROLE_ 접두어 없이)
         return org.springframework.security.core.userdetails.User.builder()
-                .username(username)
-                .password(password)
-                .roles(role)
+                .username(user.getUserEmail())
+                .password(user.getUserPassword())
+                .authorities(Collections.singletonList(new SimpleGrantedAuthority(user.getAuthorization().name())))
                 .build();
     }
 
