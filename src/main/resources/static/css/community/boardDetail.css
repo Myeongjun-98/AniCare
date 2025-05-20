@@ -166,7 +166,6 @@
 
 /* 좋아요/댓글 수 박스 */
 .count-box {
-  background-color: #E2E2E2;
   display: flex;
   align-items: center;
   position: absolute;
@@ -176,9 +175,8 @@
   user-select: none;
 }
 .count-box svg {
-    color: #666666;
+    fill: #666666;
     overflow: visible;
-    fill: none;
     width: 24px;
     height: 24px;
     /* stroke: #666666;
